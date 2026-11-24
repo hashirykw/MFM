@@ -195,14 +195,14 @@
         var STEP = 24, H = 0;
         cards.forEach(function (c) { c.style.height = ''; H = Math.max(H, c.offsetHeight); });
         cards.forEach(function (c, i) { c.style.height = H + 'px'; c.style.top = (i * STEP) + 'px'; c.style.zIndex = i + 1; });
-        list.style.height = (H + (n - 1) * STEP) + 'px';
+        list.style.height = (H + (n - 1) * STEP) + 'px'; list.style.setProperty('--pile-h', (H + (n - 1) * STEP) + 'px');
         /* moved with the separate translate / scale properties, which the old stack rules (transform:none !important) cannot block */
         gsap.set(cards, { '--py': '0px', '--ps': 1, '--po': 1 });
         gsap.set(cards.slice(1), { '--py': function () { return Math.round(innerHeight * .9) + 'px'; }, '--po': 0 });
         /* a tall track with the pile stuck inside it: the browser holds it still (no pin jitter) */
         var track = document.createElement('div'); track.className = 'v2-pile-track';
         list.parentNode.insertBefore(track, list); track.appendChild(list);
-        var LEN = function () { return Math.round((n - 1) * innerHeight * .45); };
+        var LEN = function () { return Math.round((n - 1) * innerHeight * .38); };
         var sizeTrack = function () { track.style.height = (list.offsetHeight + LEN()) + 'px'; };
         sizeTrack();
         var tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: {
@@ -424,4 +424,26 @@
     if (window.ResizeObserver) new ResizeObserver(size).observe(stage); else addEventListener('resize', size);
     size(); tick();
   });
+})();
+
+/* photo slots: until the real photos are added, each slot shows the matching artwork, faded softly into its card
+   (no hatching, no "Photo 5" labels). When a photo file exists it simply shows instead. */
+(function () {
+  'use strict';
+  var ART = { 'course-2058': 'art-book.svg', 'course-0493': 'art-star.svg', 'recorded-course': 'art-lanterns.svg', 'in-class': 'art-arches.svg',
+    'online-class': 'art-domes.svg', 'badr-lesson': 'art-domes.svg', 'marked-answer': 'art-book.svg', 'crash-course': 'art-lanterns.svg' };
+  function dress(ph, img) {
+    if (ph.classList.contains('ph-art')) return;
+    var src = (img && img.getAttribute('src')) || '', key = (src.split('/').pop() || '').replace(/\.\w+$/, '');
+    ph.style.setProperty('--art', 'url("' + new URL(ART[key] || 'art-star.svg', location.href).href + '")');
+    ph.classList.add('ph-x', 'ph-art');
+  }
+  function check(img) {
+    var ph = img.closest('.ph'); if (!ph) return;
+    if (ph.classList.contains('ph-x') || (img.complete && !img.naturalWidth && img.getAttribute('src'))) dress(ph, img);
+    img.addEventListener('error', function () { dress(ph, img); }, { once: true });
+  }
+  function run() { document.querySelectorAll('.ph img').forEach(check); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+  addEventListener('load', run, { once: true });
 })();

@@ -22,6 +22,7 @@ A multi-page site for Sir Mohammad Fazil Maniya (MFM): Cambridge O Level Islamiy
 
 - **v3 tones.** Each kind of tool has its own material (`.tn-emerald`, `-mint`, `-silver`, `-clear`, `-paper`, `-ink`, `-sage`, `-ruby`, `-aurora` in `mfm.css`): the "between classes" grid uses them so the crash course, the checker, the portal, papers, notes, the daily term, parents, YouTube and the tracker each read differently at a glance. On phones the grid is a two-column bento with three wide bands.
 - **Register.** Beside the form, what the login opens sits on a turning ring of glass cards (turns on its own, pauses while you point at it, follows a drag or swipe). The silver 3D shapes behind every form are sized and placed so they always show whole around the form.
+- **v3.1.** The zakat picture (home and Lab) is built once and glides: each amount is a bar on one scale, the nisab is a dashed line through them, and the zakat due shows as one square in forty. Photo slots show the matching artwork (arches, domes, lanterns, the book, the star) until real photos are added; the hero shows the mihrab artwork. The footer fades in instead of starting on a hard line. The Arabic font is cut down to the letters the site uses (about 48 KB instead of 108 KB).
 - No intro screen and no page curtain: the page itself is the first thing that paints. Text is never hidden while loading; only content below the fold fades in, once, when reached.
 - When you change anything in `assets/`, bump `?v=2` in the page links (and `VERSION` in `sw.js`) so installed copies refresh.
 
