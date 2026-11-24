@@ -19,10 +19,12 @@
   --f-ar:"Amiri","Noto Naskh Arabic",serif;
 
   /* liquid chrome: a mirror band with a cool/warm refraction, as in polished metal */
-  --chrome-edge:linear-gradient(135deg,#ffffff 0%,#b8bec3 16%,#f6f7f8 30%,#7d858b 46%,#eceff1 58%,#c6d3df 70%,#efe6f2 80%,#9ca3a8 90%,#ffffff 100%);
-  --chrome-text:linear-gradient(180deg,#ffffff 0%,#dfe3e6 24%,#8a9196 46%,#f5f7f8 56%,#aab1b6 74%,#eef1f3 100%);
+  --chrome-edge:linear-gradient(160deg,rgb(255 255 255 / .95) 0%,#dfe2e4 22%,#bcc2c6 48%,#d3d7da 72%,rgb(255 255 255 / .9) 100%);
+  --chrome-text:linear-gradient(180deg,#f3f5f6 0%,#d5d9dc 45%,#b6bcc0 70%,#d9dcdf 100%);
   --chrome-ink:linear-gradient(180deg,#2a3a33 0%,#0b1913 40%,#5f6b66 52%,#0b1913 64%,#33433c 100%);
-  --obsidian:radial-gradient(120% 120% at 30% 12%,#2b3134 0%,#121618 46%,#050607 100%);
+  --obsidian:radial-gradient(120% 120% at 30% 12%,#262b2e 0%,#131719 50%,#0a0c0d 100%);
+  /* frosted grain for glass panes */
+  --frost:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
   --r-ui:9px;      /* buttons, tags, inputs */
   --r-card:16px;
@@ -33,14 +35,14 @@
 :root[data-theme="light"]{
   --bg:#f4f6f5; --tx:#0b1913; --tx-2:#36463f; --tx-3:#6b7a73;
   --em:#0e6b46; --acc:#0e6b46;
-  --glass:linear-gradient(165deg,rgb(255 255 255 / .78) 0%,rgb(255 255 255 / .52) 100%);
+  --glass:var(--frost),linear-gradient(160deg,rgb(255 255 255 / .62) 0%,rgb(255 255 255 / .34) 55%,rgb(240 244 242 / .28) 100%);
   --glass-b:rgb(255 255 255 / .9);
   --glass-sh:0 1px 1px rgb(12 40 28 / .05),0 18px 38px -26px rgb(12 40 28 / .34);
   --edge-alpha:.95;
 }
 :root[data-theme="dark"]{
   --em:#7ee6b9;
-  --glass:linear-gradient(165deg,rgb(32 64 50 / .55),rgb(8 26 18 / .55));
+  --glass:var(--frost),linear-gradient(160deg,rgb(40 76 60 / .42),rgb(8 26 18 / .38));
   --glass-sh:inset 0 1px 0 rgb(255 255 255 / .06),0 24px 48px -28px rgb(0 0 0 / .8);
   --edge-alpha:.45;
 }
@@ -86,9 +88,9 @@ h3,.h3{font-size:clamp(1.18rem,1.05rem + .45vw,1.45rem);font-weight:600;letter-s
 
 /* ------------------------------------------------------------------ the MFM mark: obsidian tile, chrome letters */
 .seal{width:40px!important;height:40px!important;border-radius:12px!important;corner-shape:squircle;background:var(--obsidian)!important;
-  box-shadow:inset 0 1px 0 rgb(255 255 255 / .22),inset 0 0 0 1px rgb(255 255 255 / .08),0 0 0 1px rgb(0 0 0 / .55),0 8px 18px -8px rgb(0 0 0 / .55)!important;overflow:hidden;position:relative}
-.seal::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:var(--chrome-edge);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.55;pointer-events:none}
-.seal b{display:block!important;font:600 12.5px/1 var(--f-display)!important;letter-spacing:-.02em!important;font-variation-settings:"opsz" 11;background:var(--chrome-text)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;filter:drop-shadow(0 1px 0 rgb(0 0 0 / .6))}
+  box-shadow:inset 0 1px 0 rgb(255 255 255 / .1),inset 0 0 0 1px rgb(255 255 255 / .08),0 0 0 1px rgb(0 0 0 / .55),0 8px 18px -8px rgb(0 0 0 / .55)!important;overflow:hidden;position:relative}
+.seal::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:var(--chrome-edge);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.35;pointer-events:none}
+.seal b{display:block!important;font:600 12.5px/1 var(--f-display)!important;letter-spacing:-.02em!important;font-variation-settings:"opsz" 11;background:var(--chrome-text)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;filter:none}
 .seal.has-logo b{display:none!important}
 .app-card .seal,.fab .seal,.ft-brand .seal{width:44px!important;height:44px!important}
 .app-card .seal b,.ft-brand .seal b{font-size:14px!important}
@@ -165,7 +167,7 @@ html[data-theme="dark"] .btn::after{opacity:.5}
 .btn-x .btn-i{width:calc(var(--h) - 12px)!important;height:calc(var(--h) - 12px)!important;border-radius:7px!important;corner-shape:bevel;color:var(--disc-fg)}
 .btn-x .btn-i::before{border-radius:inherit!important;corner-shape:bevel}
 .btn-x{--disc:linear-gradient(160deg,#0b1913,#1d3a2e)!important;--disc-fg:#eef3f1!important}
-.btn-pri.btn-x,.btn-green.btn-x{--disc:var(--chrome-edge)!important;--disc-fg:#0b1913!important}
+.btn-pri.btn-x,.btn-green.btn-x{--disc:linear-gradient(180deg,#eef0f1,#c9ced1)!important;--disc-fg:#0b1913!important}
 .btn-x .btn-fill{border-radius:7px!important;corner-shape:bevel;opacity:.0}
 .btn-x .btn-i svg{width:14px!important;height:14px!important}
 .btn-link{height:auto!important}
@@ -185,7 +187,7 @@ html[data-theme="dark"] :is(.tag,.tool-tab,.chip,.pill){background:rgb(255 255 2
 
 /* ------------------------------------------------------------------ cards: smaller, frosted glass, chrome edge */
 .card{border-radius:var(--r-card)!important;corner-shape:squircle;background:var(--glass)!important;border:0!important;box-shadow:var(--glass-sh)!important;
-  -webkit-backdrop-filter:blur(18px) saturate(150%)!important;backdrop-filter:blur(18px) saturate(150%)!important}
+  -webkit-backdrop-filter:blur(22px) saturate(170%)!important;backdrop-filter:blur(22px) saturate(170%)!important}
 .card::after{content:""!important;position:absolute!important;inset:0!important;z-index:7;border-radius:inherit!important;padding:1px!important;background:var(--chrome-edge)!important;
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)!important;
   box-shadow:none!important;opacity:var(--edge-alpha)!important;transition:opacity .3s!important;pointer-events:none}
@@ -242,18 +244,37 @@ html[data-theme="dark"] .app-card{background:linear-gradient(180deg,rgb(14 36 27
 .dock button,.ibtn,.xbtn{border-radius:9px!important;corner-shape:bevel}
 
 /* ------------------------------------------------------------------ the deck: cards raked in 3D, one over the next */
-/* .v2-on is set by mfm.js when the deck fits the width (3 cards from 700px, 6 cards from 1100px) */
-.v2-deck.v2-on{--cw:clamp(224px,29vw,292px);--lap:.16;--ry:20deg;perspective:1500px;perspective-origin:50% 40%;overflow:visible!important;display:flex!important;justify-content:center;align-items:stretch;
-  padding:18px 0 8px clamp(24px,5vw,80px)!important;gap:0!important;grid-template-columns:none!important;transform-style:preserve-3d;scroll-snap-type:none!important}
-.v2-deck-6.v2-on{--cw:clamp(200px,17.5vw,228px);--lap:.26;--ry:22deg}
-@media (max-width:999px){.v2-deck.v2-on{--cw:clamp(196px,30vw,226px);--lap:.08;--ry:14deg;padding-left:12px!important}}
-.v2-deck.v2-on>.card{flex:0 0 var(--cw)!important;width:var(--cw)!important;max-width:var(--cw)!important;min-width:0!important;
-  transform:translateZ(calc(var(--i) * -40px)) rotateY(var(--ry))!important;transition:transform .7s var(--e-out),box-shadow .5s,opacity .5s!important;z-index:calc(20 - var(--i))}
-.v2-deck.v2-on>.card+.card{margin-left:calc(var(--cw) * -1 * var(--lap))!important}
-.v2-deck.v2-on>.card:hover,.v2-deck.v2-on>.card:focus-within{transform:translateZ(calc(var(--i) * -40px + 46px)) rotateY(calc(var(--ry) - 10deg))!important;z-index:30;box-shadow:0 30px 60px -28px rgb(12 40 28 / .55)!important}
-.v2-deck.v2-on:hover>.card:not(:hover){opacity:.84}
+/* .v2-on is set by mfm.js when the deck fits the width (3 cards from 700px, 6 cards from 1100px).
+   Same geometry as the SMK / Cambridge Online deck: each card turned -24deg, the first one in front,
+   the rest stepping back and sliding under it. Hover lifts a card; a click opens it flat. */
+.v2-deck.v2-on{--cw:clamp(232px,24vw,300px);--sx:-14%;--sz:-74px;--ry:-24deg;perspective:1500px;perspective-origin:50% 46%;overflow:visible!important;display:flex!important;
+  justify-content:center;align-items:center;gap:0!important;grid-template-columns:none!important;transform-style:preserve-3d;scroll-snap-type:none!important;
+  padding:20px 0 10px clamp(60px,13vw,190px)!important;min-height:440px;pointer-events:none}
+.v2-deck-6.v2-on{--cw:clamp(196px,15.5vw,214px);--sx:-16%;--sz:-40px;--ry:-20deg;padding-left:clamp(60px,9vw,140px)!important;min-height:330px}
+@media (max-width:999px){.v2-deck.v2-on{--cw:clamp(210px,30vw,250px);--sx:-22%;padding-left:clamp(48px,9vw,90px)!important}}
+.v2-deck.v2-on>.card{pointer-events:auto;cursor:pointer;flex:0 0 var(--cw)!important;width:var(--cw)!important;max-width:var(--cw)!important;min-width:0!important;margin:0!important;
+  transform:translateX(calc(var(--i) * var(--sx))) translateZ(calc(var(--i) * var(--sz))) rotateY(var(--ry))!important;
+  transition:transform .9s cubic-bezier(.22,.9,.28,1),opacity .6s var(--e-out),box-shadow .5s,filter .5s!important;transition-delay:calc(var(--i) * 110ms)!important;
+  box-shadow:0 26px 60px -20px rgb(8 30 20 / .28)!important}
+.v2-deck.v2-on.set>.card{transition-delay:0s!important}
+.v2-deck.v2-on>.card:hover,.v2-deck.v2-on>.card:focus-visible{transform:translateX(calc(var(--i) * var(--sx))) translateZ(calc(var(--i) * var(--sz) + 40px)) rotateY(calc(var(--ry) + 6deg))!important}
+.v2-deck.v2-on>.card.on{transform:translateX(calc(var(--i) * var(--sx))) translateZ(90px) rotateY(0deg)!important;z-index:5;box-shadow:0 40px 90px -24px rgb(8 30 20 / .4)!important}
+.v2-deck.v2-on.picked>.card:not(.on){opacity:.45;filter:saturate(.6)}
 .v2-deck.v2-on+.rail-ctl{display:none!important}
-html.js .v2-deck.v2-on>.card[data-rv].rv-wait:not(.in){opacity:0;transform:translateX(calc(var(--i) * -18%)) rotateY(32deg) scale(.94)!important}
+html.js .v2-deck.v2-on>.card[data-rv].rv-wait:not(.in){opacity:0;transform:translateX(calc(var(--i) * -46%)) rotateY(var(--ry)) scale(.9)!important}
+/* in the deck the course cards show their face only; the paper-by-paper detail opens with the card */
+.v2-deck.v2-on>.acc .acc-ph{display:none!important}
+.v2-deck.v2-on>.acc .acc-dr{max-height:0;overflow:hidden;opacity:0;margin:0!important;padding:0!important;transition:max-height .6s var(--e-out),opacity .4s!important}
+.v2-deck.v2-on>.acc.on .acc-dr{max-height:420px;opacity:1}
+.v2-deck.v2-on>.acc{display:flex!important;flex-direction:column;min-height:300px}
+.v2-deck.v2-on>.acc .acc-h{padding-top:22px!important;position:static!important}
+.v2-deck.v2-on>.acc .acc-h>div{position:relative;z-index:2}
+.v2-deck.v2-on>.acc .acc-f{margin-top:auto!important}
+.v2-deck.v2-on>.acc .code{position:absolute!important;right:16px;top:14px;bottom:auto!important;left:auto!important;margin:0!important;padding:0!important;box-shadow:none!important;font-size:3rem!important;font-weight:600!important;font-variation-settings:"opsz" 9!important;background:none!important;color:rgb(11 25 19 / .17)!important;-webkit-text-fill-color:rgb(11 25 19 / .17)!important;z-index:0}
+html[data-theme="dark"] .v2-deck.v2-on>.acc .code{color:rgb(230 240 235 / .14)!important}
+.v2-deck.v2-on>.acc .acc-h .tag{margin-bottom:10px}
+.v2-deck-hint{display:none;margin:6px 0 0;text-align:center;font:500 10.5px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--tx-3)}
+.v2-deck.v2-on+.rail-ctl+.v2-deck-hint,.v2-deck.v2-on+.v2-deck-hint{display:block}
 /* phones and narrow windows: a swipe rail of small cards */
 .v2-deck:not(.v2-on)>.card{flex-basis:min(272px,80%)!important;width:min(272px,80%)!important}
 /* small cards everywhere */
@@ -283,3 +304,20 @@ html.js .v2-deck.v2-on>.card[data-rv].rv-wait:not(.in){opacity:0;transform:trans
 html[data-theme="dark"] .hero-fig .portrait:has(img.art),html[data-theme="dark"] .ab-frame:has(img.art){background:repeating-linear-gradient(135deg,rgb(255 255 255 / .035) 0 10px,transparent 10px 20px),linear-gradient(180deg,rgb(20 50 38 / .7),rgb(6 22 15 / .7))!important}
 html[data-theme="dark"] .plate{background:linear-gradient(180deg,rgb(16 40 30 / .92),rgb(6 22 15 / .9))!important;color:#eef4f1}
 html[data-theme="dark"] .hero-codes span{background:rgb(255 255 255 / .06)!important;color:#cfe0d8!important;box-shadow:inset 0 0 0 1px rgb(255 255 255 / .14)!important}
+
+/* v3: glass panes need something to frost — soft silver and emerald light drifting behind the page */
+html[data-theme="light"] .bg-base{background:
+  radial-gradient(900px 620px at 82% 8%,rgb(19 134 90 / .16),transparent 62%),
+  radial-gradient(760px 560px at 8% 46%,rgb(176 186 192 / .38),transparent 64%),
+  radial-gradient(820px 600px at 92% 78%,rgb(190 198 204 / .34),transparent 62%),
+  radial-gradient(700px 520px at 30% 102%,rgb(19 134 90 / .1),transparent 60%),
+  linear-gradient(180deg,#f5f7f6,#eef2f0)!important}
+html[data-theme="light"] .aurora i{opacity:.9!important}
+/* frosted surfaces everywhere the old flat white sat */
+.nav,.menu,.mbar,.app-card,.nav-drop,.modal-box,.bot{background-image:var(--frost),linear-gradient(180deg,rgb(255 255 255 / .62),rgb(255 255 255 / .42))!important}
+html[data-theme="dark"] :is(.nav,.menu,.mbar,.app-card,.nav-drop,.modal-box,.bot){background-image:var(--frost),linear-gradient(180deg,rgb(16 40 30 / .78),rgb(6 22 15 / .7))!important}
+.btn.btn.btn:not(.btn-pri):not(.btn-green){background:var(--frost),linear-gradient(180deg,rgb(255 255 255 / .6),rgb(255 255 255 / .3))!important;-webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%)}
+.tag,.tool-tab,.chip,.pill,.hero-codes span{background:linear-gradient(180deg,rgb(255 255 255 / .55),rgb(255 255 255 / .28))!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.hero-facts>div{background:var(--glass)!important;-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%)}
+/* the silver: a thin matte line, a little brighter on the top edge */
+.card::after,.nav::after,.btn::after,.hero-facts>div::after{opacity:1!important}
