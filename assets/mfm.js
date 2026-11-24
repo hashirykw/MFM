@@ -41,12 +41,41 @@
     ctl.addEventListener('click', function (e) { var b = e.target.closest('[data-d]'); if (b) set(act + +b.dataset.d); });
     dots.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) set(Array.prototype.indexOf.call(dots.children, b)); });
     g.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { set(act + 1); cards[act].focus({ preventScroll: true }); } if (e.key === 'ArrowLeft') { set(act - 1); cards[act].focus({ preventScroll: true }); } });
-    /* swipe / drag */
-    var x0 = null, moved = false;
-    g.addEventListener('pointerdown', function (e) { x0 = e.clientX; moved = false; });
-    g.addEventListener('pointermove', function (e) { if (x0 != null && Math.abs(e.clientX - x0) > 8) moved = true; });
-    addEventListener('pointerup', function (e) { if (x0 == null) return; var dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40) set(act + (dx < 0 ? 1 : -1)); });
-    g.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    /* drag: the curve turns with the finger (or mouse) and settles on the nearest card */
+    var gapPx = function () { var c = cards[act]; return (c.offsetWidth || 260) * (g.classList.contains('v2-flow-words') ? .7 : .62); };
+    var x0 = null, y0 = 0, frac = 0, moved = false, lock = null, base = act;
+    function place(f) {
+      cards.forEach(function (c, i) {
+        var d = i - base - f; if (d > n / 2) d -= n; if (d < -n / 2) d += n;
+        c.style.setProperty('--d', d.toFixed(3)); c.style.setProperty('--ad', Math.abs(d).toFixed(3));
+        c.classList.toggle('is-far', Math.abs(d) > 2.4);
+      });
+    }
+    g.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0 || e.target.closest('a,button,input,select,textarea')) return;
+      x0 = e.clientX; y0 = e.clientY; frac = 0; moved = false; lock = null; base = act;
+    });
+    g.addEventListener('pointermove', function (e) {
+      if (x0 == null) return;
+      var dx = e.clientX - x0, dy = e.clientY - y0;
+      if (lock == null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) { lock = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'; if (lock === 'x') { g.classList.add('dragging'); try { g.setPointerCapture(e.pointerId); } catch (er) { } } }
+      if (lock !== 'x') return;
+      e.preventDefault(); moved = true;
+      frac = -dx / gapPx(); place(frac);
+    });
+    var end = function () {
+      if (x0 == null) return; x0 = null; g.classList.remove('dragging');
+      if (lock === 'x') set(Math.round(base + frac)); lock = null;
+    };
+    g.addEventListener('pointerup', end); g.addEventListener('pointercancel', end); g.addEventListener('lostpointercapture', end);
+    g.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopImmediatePropagation(); moved = false; } }, true);
+    /* trackpads: a sideways two-finger swipe turns it too */
+    var wacc = 0, wt = 0;
+    g.addEventListener('wheel', function (e) {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault(); wacc += e.deltaX; clearTimeout(wt); wt = setTimeout(function () { wacc = 0; }, 180);
+      if (Math.abs(wacc) > 60) { set(act + (wacc > 0 ? 1 : -1)); wacc = 0; }
+    }, { passive: false });
     set(act);
   });
 })();
@@ -148,4 +177,44 @@
     /* keep the form's own reveal on the stage */
     if (f.hasAttribute('data-rv')) { st.setAttribute('data-rv', f.getAttribute('data-rv')); f.removeAttribute('data-rv'); f.classList.add('in'); }
   });
+})();
+
+/* method cards: each one rises from below and settles onto the one before, building a pile (scroll-driven, smooth) */
+(function () {
+  'use strict';
+  function build() {
+    if (!window.gsap || !window.ScrollTrigger) return;
+    var mm = gsap.matchMedia();
+    document.querySelectorAll('.proc[data-stack],.ap-g[data-stack]').forEach(function (list) {
+      mm.add('(min-width: 640px) and (prefers-reduced-motion: no-preference)', function () {
+        var cards = Array.prototype.slice.call(list.children);
+        var n = cards.length; if (n < 2) return;
+        list.classList.add('v2-pile');
+        /* the pile runs its own motion: take the cards out of the fade-in-on-scroll */
+        cards.forEach(function (c) { c.removeAttribute('data-rv'); c.classList.remove('rv-wait'); c.classList.add('in'); });
+        var STEP = 24, H = 0;
+        cards.forEach(function (c) { c.style.height = ''; H = Math.max(H, c.offsetHeight); });
+        cards.forEach(function (c, i) { c.style.height = H + 'px'; c.style.top = (i * STEP) + 'px'; c.style.zIndex = i + 1; });
+        list.style.height = (H + (n - 1) * STEP) + 'px';
+        /* moved with the separate translate / scale properties, which the old stack rules (transform:none !important) cannot block */
+        gsap.set(cards, { '--py': '0px', '--ps': 1, '--po': 1 });
+        gsap.set(cards.slice(1), { '--py': function () { return Math.round(innerHeight * .9) + 'px'; }, '--po': 0 });
+        var tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: {
+          trigger: list, start: 'top ' + Math.min(130, innerHeight * .16) + 'px', end: '+=' + Math.round((n - 1) * innerHeight * .5),
+          pin: true, pinType: 'transform', scrub: .8, anticipatePin: 1, invalidateOnRefresh: true } });
+        cards.forEach(function (c, i) {
+          if (!i) return;
+          tl.to(c, { '--py': '0px', '--po': 1, duration: 1, ease: 'power2.out' }, i - 1)
+            .to(cards.slice(0, i), { '--ps': function (k) { return 1 - (i - k) * .035; }, duration: 1, ease: 'power2.out' }, i - 1);
+        });
+        return function () {
+          list.classList.remove('v2-pile'); list.style.height = '';
+          cards.forEach(function (c) { c.style.height = ''; c.style.top = ''; c.style.zIndex = ''; });
+          cards.forEach(function (c) { c.style.removeProperty('--py'); c.style.removeProperty('--ps'); c.style.removeProperty('--po'); });
+        };
+      });
+    });
+    ScrollTrigger.refresh();
+  }
+  if (document.readyState === 'complete') setTimeout(build, 0); else addEventListener('load', function () { setTimeout(build, 0); }, { once: true });
 })();
