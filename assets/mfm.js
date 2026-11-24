@@ -218,3 +218,61 @@
   }
   if (document.readyState === 'complete') setTimeout(build, 0); else addEventListener('load', function () { setTimeout(build, 0); }, { once: true });
 })();
+/* where he teaches: the centres / affiliations under each place, from config.js */
+(function () {
+  'use strict';
+  var C = window.RA_CONFIG || {}, list = C.campuses || [];
+  document.querySelectorAll('.pl-aff[data-aff]').forEach(function (ul, i) {
+    var cs = (list[i] && list[i].centres) || [];
+    ul.innerHTML = cs.length ? cs.map(function (t) { return '<li>' + String(t).replace(/[<&]/g, function (c) { return c === '<' ? '&lt;' : '&amp;'; }) + '</li>'; }).join('')
+      : '<li class="tbc">Centre list · to be confirmed</li>';
+  });
+})();
+/* curved ribbons: the words flow along the curve, a little faster while you scroll (after the Sir Suhail Aziz ribbon) */
+(function () {
+  'use strict';
+  var tps = Array.prototype.slice.call(document.querySelectorAll('textPath[data-ribbon]'));
+  if (!tps.length) return;
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches, items = [];
+  function setup() {
+    items = tps.map(function (tp) {
+      var chunk = tp.getAttribute('data-chunk'), path = document.getElementById((tp.getAttribute('href') || '').slice(1));
+      var plen = path && path.getTotalLength ? path.getTotalLength() : 1900;
+      tp.textContent = chunk; var clen = tp.getComputedTextLength() || 800;
+      var n = Math.ceil((plen + clen) / clen) + 1; tp.textContent = new Array(n + 1).join(chunk);
+      return { tp: tp, clen: clen, dir: +tp.getAttribute('data-ribbon') || 1, off: Math.random() * clen, svg: tp.ownerSVGElement, vis: false };
+    });
+  }
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () {
+    setup();
+    var lastY = scrollY, vel = 0, t0 = performance.now(), sign = 1, running = false;
+    function start() { if (running || !items.some(function (it) { return it.vis; })) return; running = true; t0 = performance.now(); lastY = scrollY; requestAnimationFrame(frame); }
+    function frame(t) {
+      if (!items.some(function (it) { return it.vis; }) || document.hidden) { running = false; return; }
+      requestAnimationFrame(frame);
+      var dt = Math.min(.05, (t - t0) / 1000); t0 = t;
+      var dy = scrollY - lastY; lastY = scrollY; vel += (dy - vel) * .1;
+      if (Math.abs(vel) > .6) sign = vel > 0 ? 1 : -1;
+      items.forEach(function (it) {
+        if (!it.vis) return;
+        var sp = RM ? 0 : 40 + Math.min(520, Math.abs(vel) * 12);
+        it.off = (((it.off + it.dir * sign * sp * dt) % it.clen) + it.clen) % it.clen;
+        it.tp.setAttribute('startOffset', (-it.off).toFixed(1));
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (en) { items.forEach(function (it) { if (it.svg === en.target) it.vis = en.isIntersecting; }); }); start(); });
+      items.forEach(function (it) { io.observe(it.svg); });
+    } else items.forEach(function (it) { it.vis = true; });
+    document.addEventListener('visibilitychange', start); start();
+  });
+})();
+/* sliders: fill the track up to the thumb */
+(function () {
+  'use strict';
+  function fill(r) { var a = +r.min || 0, b = +r.max || 100, v = +r.value; r.style.setProperty('--fill', ((v - a) / (b - a) * 100).toFixed(1) + '%'); }
+  function all() { document.querySelectorAll('input[type=range]').forEach(fill); }
+  document.addEventListener('input', function (e) { if (e.target.matches && e.target.matches('input[type=range]')) fill(e.target); });
+  document.addEventListener('click', function () { setTimeout(all, 30); });
+  if (document.readyState === 'complete') all(); else addEventListener('load', function () { setTimeout(all, 50); });
+})();

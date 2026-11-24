@@ -326,7 +326,16 @@ RA.Snd = (function () {
   function ensure() {
     if (!on) return null;
     if (!ctx) {
-      try { ctx = new (window.AudioContext || window.webkitAudioContext)(); master = ctx.createGain(); master.gain.value = 0.2; master.connect(ctx.destination); }
+      try {
+        /* v2: a warmer chain — soft low-pass, a little glassy air (short echo) and a gentle limiter */
+        ctx = new (window.AudioContext || window.webkitAudioContext)(); master = ctx.createGain(); master.gain.value = 0.2;
+        const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 5200; lp.Q.value = 0.3;
+        const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 3;
+        const dl = ctx.createDelay(0.5), fb = ctx.createGain(), wet = ctx.createGain(), hp = ctx.createBiquadFilter();
+        dl.delayTime.value = 0.13; fb.gain.value = 0.28; wet.gain.value = 0.22; hp.type = 'highpass'; hp.frequency.value = 700;
+        master.connect(lp); lp.connect(comp); comp.connect(ctx.destination);
+        lp.connect(hp); hp.connect(dl); dl.connect(fb); fb.connect(dl); dl.connect(wet); wet.connect(comp);
+      }
       catch (e) { return null; }
     }
     if (ctx.state === 'suspended') ctx.resume();
@@ -334,11 +343,16 @@ RA.Snd = (function () {
   }
   function tone(f, dur, type, vol, when, slide) {
     const c = ensure(); if (!c) return;
-    const t = c.currentTime + (when || 0), o = c.createOscillator(), g = c.createGain();
-    o.type = type || 'sine'; o.frequency.setValueAtTime(f, t);
-    if (slide) o.frequency.exponentialRampToValueAtTime(f * slide, t + dur);
-    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + 0.03);
+    /* v2: each note is a soft bell — the tone plus quiet upper partials, slightly longer tail; harsh waves become triangles */
+    const t = c.currentTime + (when || 0), g = c.createGain(), d = dur * 1.35;
+    const wave = (type === 'square' || type === 'sawtooth') ? 'triangle' : (type || 'sine');
+    [[1, 1, wave], [2.0, .22, 'sine'], [3.01, .07, 'sine']].forEach(([m, a, w]) => {
+      const o = c.createOscillator(), og = c.createGain(); o.type = w; o.frequency.setValueAtTime(f * m, t);
+      if (slide) o.frequency.exponentialRampToValueAtTime(f * m * slide, t + d);
+      o.detune.value = m === 1 ? 0 : 4; og.gain.value = a; o.connect(og); og.connect(g); o.start(t); o.stop(t + d + 0.05);
+    });
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+    g.connect(master);
   }
   function noise(dur, vol, freq) {
     const c = ensure(); if (!c) return;
@@ -553,6 +567,7 @@ function magnetic() {
   });
 }
 function cursor() {
+  return; /* v2: the normal cursor; no follower ring */
   if (!RA.FINE || RA.RM) return;
   const c = $('.cursor'); if (!c) return;
   const dot = $('.c-dot', c), ring = $('.c-ring', c);
@@ -931,7 +946,7 @@ function motion() {
   });
   /* the ledger tape speeds up with the scroll */
   const tapes = $$('.tape-in').map(t => t.getAnimations ? t.getAnimations()[0] : null).filter(Boolean);
-  if (tapes.length) {
+  if (0 && tapes.length) { /* v2: the ribbons glide at one steady speed (no speed-ups on scroll) */
     let v = 1, last = scrollY, lt = performance.now();
     addEventListener('scroll', () => { const now = performance.now(), dv = Math.abs(scrollY - last) / Math.max(16, now - lt) * 16; last = scrollY; lt = now; v = Math.max(v, 1 + Math.min(dv / 6, 7)); }, { passive: true });
     G.ticker.add(() => { v += (1 - v) * 0.05; tapes.forEach(a => a.playbackRate = v); });

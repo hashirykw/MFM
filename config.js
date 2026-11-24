@@ -31,10 +31,12 @@ window.RA_CONFIG = {
   recordedCourse: 'https://www.learnedguys.com/home/course/islamiyat-2058-o-level-0493-igcse-topical-recorded-course-by-m-fazil-maniya/45',
 
   /* Where he teaches. Remove a line to hide it. */
+  /* centres: the academies / schools for each place, shown as chips on the home page.
+     ADD THE REAL NAMES HERE, e.g. centres: ['ABC Academy · Gulshan', 'XYZ School · DHA']. Empty = "list to be confirmed". */
   campuses: [
-    { name: 'Karachi centres & schools', note: 'In class · 15+ centres', text: 'Classes at more than 15 academic centres and schools across Karachi. Message for this session’s centres and timings.' },
-    { name: 'Live online', note: 'Online classes', text: 'Live online O Level Islamiyat classes for students outside Karachi and abroad.' },
-    { name: 'Recorded course', note: 'LearnedGuys · Urdu', text: 'A 54-hour topical recorded course for 2058 and 0493, to watch at your own pace.' }
+    { name: 'Karachi centres & schools', note: 'In class · 15+ centres', text: 'Classes at more than 15 academic centres and schools across Karachi. Message for this session’s centres and timings.', centres: [] },
+    { name: 'Live online', note: 'Online classes', text: 'Live online O Level Islamiyat classes for students outside Karachi and abroad.', centres: [] },
+    { name: 'Recorded course', note: 'LearnedGuys · Urdu', text: 'A 54-hour topical recorded course for 2058 and 0493, to watch at your own pace.', centres: ['LearnedGuys'] }
   ],
   online: true,
 

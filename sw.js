@@ -1,6 +1,6 @@
 /* Sir Fazil Maniya app: offline copies of the pages a student has opened.
    Bump VERSION to clear every installed copy's cache after a release. */
-const VERSION = 'mfm-v8';
+const VERSION = 'mfm-v9';
 const CORE = ['/', '/portal', '/ai-checker', '/past-papers', '/syllabus', '/lab', '/config.js', '/favicon.svg', '/mfm-arch.svg', '/icons/icon-192.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(CORE).catch(() => {})).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== VERSION).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
