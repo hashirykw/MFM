@@ -1,6 +1,27 @@
 # Sir Fazil Maniya · Islamiyat website
 
-A multi-page site for Sir Mohammad Fazil Maniya (MFM): Cambridge O Level Islamiyat 2058 and IGCSE Islamiyat 0493, Karachi and online. Every page is one self-contained HTML file in one flat folder. The only shared file is `config.js`, which holds the settings.
+A multi-page site for Sir Mohammad Fazil Maniya (MFM): Cambridge O Level Islamiyat 2058 and IGCSE Islamiyat 0493, Karachi and online. Settings live in `config.js`.
+
+## v2 (Nov 2026): how the files fit together
+
+- **`assets/`**: the styles and script every page shares, cached by the browser after the first page. `mfm-1/2/3.css` and `mfm-core.js` are the engine. **`mfm.css` is the v2 look** (fonts, silver/glass finish, buttons, cards, nav, menu, the 3D card deck); tune the design there. `mfm.js` sets up the card decks.
+- **`fonts/`**: self-hosted Bodoni Moda (headings), Manrope (text), DM Mono (labels), Amiri (Arabic). No Google Fonts call.
+- **`vendor/`**: GSAP, ScrollTrigger, Lenis and three.js, self-hosted. three.js loads only after the page is up, so it never delays the text.
+- **`photos/`**: drop the real pictures here with these names (WebP, about 1600 px wide) and they appear on their own:
+
+| File | Where it shows |
+|---|---|
+| `fazil-maniya.webp` (site root) | Portrait cut-out, transparent background, about 856 × 1316: hero and About |
+| `photos/in-class.webp` | Teaching in class in Karachi: home, About, Contact |
+| `photos/online-class.webp` | Live online class: home, About |
+| `photos/recorded-course.webp` | Recorded course: home, About |
+| `photos/course-2058.webp` | O Level 2058 course card: home, Courses |
+| `photos/course-0493.webp` | IGCSE 0493 course card: home |
+| `photos/marked-answer.webp` | A marked answer sheet: AI checker |
+| `photos/crash-course.webp` | Crash course: Crash course page |
+
+- No intro screen and no page curtain: the page itself is the first thing that paints. Text is never hidden while loading; only content below the fold fades in, once, when reached.
+- When you change anything in `assets/`, bump `?v=2` in the page links (and `VERSION` in `sw.js`) so installed copies refresh.
 
 Built by Nexlyr Solutions on the same system as the Sir Sohail Ahmed site: the preloader and page curtain, a 3D particle background that changes shape section by section (an eight-point star, a crescent, the Ka'ba with its tawaf rings, a dome, minarets, zakat coins, the five pillars on one ring, a globe), stacking cards, and the dark black / emerald / silver palette.
 
@@ -8,7 +29,7 @@ The tabs follow the Sir Xahid Anwer Digital Campus: AI checker, student portal, 
 
 **Two themes.** White is the default and Green is the other; the switch sits bottom-left on laptops (with the sound button) and inside the bottom bar on phones, and the choice is remembered. Silver is a matte brushed metal (no shine), surfaces are frosted glass, and charts are flat and quiet. The colour pass for the White theme is generated at build time by `theme.py`; hand-tuned rules live in `src/skin.css`.
 
-**Logo.** When Sir Fazil's logo arrives, drop the file in the site folder and set `logo` in `config.js` (for example `logo: 'mfm-logo.png'`). It replaces the MF monogram in the nav, footer and bot.
+**Logo.** The MFM mark is an obsidian tile with chrome letters (nav, footer, bot, app icons). If Sir Fazil sends his own logo, drop the file in the site folder and set `logo` in `config.js` (for example `logo: 'mfm-logo.png'`).
 
 **Front end only.** Sign-in, the portal, the parent view, the checker queue and fee slips run in the visitor's browser (localStorage) with sample data that is labelled "Preview" on screen. The backend and admin panel (ADMIN-MFM) replace these later; see *Backend to connect* below.
 
