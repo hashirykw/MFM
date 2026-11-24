@@ -116,3 +116,25 @@
   var run = function () { all(); new MutationObserver(function (ms) { ms.forEach(function (m) { m.addedNodes.forEach(function (n) { if (n.nodeType !== 1) return; if (n.tagName === 'SELECT') enhance(n); else if (n.querySelectorAll) all(n); }); }); }).observe(document.body, { childList: true, subtree: true }); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
 })();
+
+/* course cards: the card shows the syllabus; the details open in the site's pop-up */
+(function () {
+  'use strict';
+  document.querySelectorAll('.acc.card').forEach(function (c) {
+    var open = function (e) {
+      if (e && e.target.closest('a')) return;
+      if (!window.RA || !RA.modal) return;
+      var img = c.querySelector('.acc-ph img'), ok = img && img.complete && img.naturalWidth;
+      var tag = c.querySelector('.acc-h .tag'), h = c.querySelector('.acc-h h3'), sub = c.querySelector('.acc-sub'), code = c.querySelector('.code');
+      var body = c.querySelector('.acc-t'), link = c.querySelector('.acc-f a.link');
+      RA.modal('<div class="acc-pop">' + (ok ? '<figure class="acc-pop-ph"><img src="' + img.getAttribute('src') + '" alt=""></figure>' : '') +
+        '<div class="acc-pop-h"><div>' + (tag ? '<span class="tag">' + tag.textContent + '</span>' : '') + '<h2 id="mTitle">' + (h ? h.textContent : '') + '</h2>' + (sub ? '<p class="acc-sub">' + sub.innerHTML + '</p>' : '') + '</div>' + (code ? '<b class="acc-pop-code">' + code.textContent + '</b>' : '') + '</div>' +
+        (body ? '<div class="acc-t">' + body.innerHTML + '</div>' : '') +
+        (link ? '<a class="btn btn-pri" href="' + link.getAttribute('href') + '">Full course page</a>' : '') + '</div>');
+    };
+    c.setAttribute('tabindex', '0'); c.setAttribute('role', 'button');
+    c.setAttribute('aria-label', ((c.querySelector('.acc-sub') || c).textContent || '').trim() + ': view details');
+    c.addEventListener('click', open);
+    c.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target === c) { e.preventDefault(); open(); } });
+  });
+})();

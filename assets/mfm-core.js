@@ -473,11 +473,11 @@ RA.reveal = function (scope) {
     hit.sort((a, b) => { const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect(); return (ra.top - rb.top) || (ra.left - rb.left); });
     let k = 0;
     hit.forEach(t => {
-      if (t.matches('.card[data-rv],.proc-s,[data-rv="scale"]') && !t.style.getPropertyValue('--d')) t.style.setProperty('--d', (Math.min(k++, 6) * 0.09).toFixed(2) + 's');
+      if (t.matches('.card[data-rv],.proc-s,[data-rv="scale"]') && !t.style.getPropertyValue('--d')) t.style.setProperty('--d', (Math.min(k++, 4) * 0.05).toFixed(2) + 's');
       t.classList.add('in'); RA._io.unobserve(t);
       if (t.matches('.folio,.eyebrow')) decode(t); else $$('.folio,.eyebrow', t).forEach(decode);
     });
-  }, { rootMargin: '0px 0px -7% 0px', threshold: 0.06 }));
+  }, { rootMargin: '0px 0px 12% 0px', threshold: 0 }));
   /* a clip-path:inset(100%) photo has zero visible area and Chrome's observer counts that, so watch its parent instead */
   const iow = RA._iow || (RA._iow = new IntersectionObserver(es => es.forEach(en => {
     if (!en.isIntersecting) return; (en.target._wp || []).forEach(w => w.classList.add('in')); en.target._wp = null; RA._iow.unobserve(en.target);
@@ -937,7 +937,8 @@ function motion() {
     G.ticker.add(() => { v += (1 - v) * 0.05; tapes.forEach(a => a.playbackRate = v); });
   }
   /* VERZISH sticky stack: each card pins under the nav; the ones beneath shrink back and dim as the next arrives */
-  $$('[data-stack]').forEach(st => {
+  /* v2: the method cards now sit one below the other; no pinned stack */
+  if (0) $$('[data-stack]').forEach(st => {
     const kids = Array.from(st.children);
     kids.forEach((k, i) => k.style.setProperty('--si', i));
     kids.forEach((k, i) => {
@@ -948,7 +949,7 @@ function motion() {
     });
   });
   /* rails glide in from the right */
-  $$('[data-rail]').forEach(r => G.from(r, { x: 80, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: r, start: 'top 88%', once: true } }));
+  $$('[data-rail]').forEach(r => G.from(r, { x: 32, opacity: 0, duration: .55, ease: 'power3.out', scrollTrigger: { trigger: r, start: 'top 96%', once: true } }));
   /* big section numbers drift */
   /* v2: section titles sit still (no scroll drift) */
 }
