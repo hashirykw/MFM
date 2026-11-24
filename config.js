@@ -40,6 +40,10 @@ window.RA_CONFIG = {
 
   /* Crash courses. { title: 'June 2027 crash course', codes: '2058 · 0493', start: '2027-04-01', where: 'Karachi centres and online', note: '' }
      Past dates drop off on their own. Empty = "dates announced soon". */
+  /* Sir Fazil's logo: put the file in the site folder and write its name here, e.g. 'mfm-logo.png'.
+     It replaces the MF monogram in the nav, footer, loader and bot. */
+  logo: '',
+
   CRASH: [],
 
   /* Fees, shown in the portal's Fees tab. Blank = "your centre will confirm". */

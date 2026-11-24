@@ -6,6 +6,10 @@ Built by Nexlyr Solutions on the same system as the Sir Sohail Ahmed site: the p
 
 The tabs follow the Sir Xahid Anwer Digital Campus: AI checker, student portal, parents, past papers with a side-by-side viewer and a locked exam mode, notes, crash course and reviews. Buttons use the same motion as that site (the label rolls, the arrow slides through, the disc floods the button, ghost buttons get a light that runs round the edge). Nothing follows the cursor any more.
 
+**Two themes.** White is the default and Green is the other; the switch sits bottom-left on laptops (with the sound button) and inside the bottom bar on phones, and the choice is remembered. Silver is a matte brushed metal (no shine), surfaces are frosted glass, and charts are flat and quiet. The colour pass for the White theme is generated at build time by `theme.py`; hand-tuned rules live in `src/skin.css`.
+
+**Logo.** When Sir Fazil's logo arrives, drop the file in the site folder and set `logo` in `config.js` (for example `logo: 'mfm-logo.png'`). It replaces the MF monogram in the nav, footer and bot.
+
 **Front end only.** Sign-in, the portal, the parent view, the checker queue and fee slips run in the visitor's browser (localStorage) with sample data that is labelled "Preview" on screen. The backend and admin panel (ADMIN-MFM) replace these later; see *Backend to connect* below.
 
 ## Files
