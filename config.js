@@ -20,8 +20,8 @@ window.RA_CONFIG = {
   /* 2. CONTACT -------------------------------------------------------------- */
   // ADD HIS WHATSAPP NUMBER HERE. While it is blank, every "message" button copies the
   // ready-written message and opens his Instagram instead, and the WhatsApp cards stay hidden.
-  whatsapp:     '',                // international format, digits only, e.g. '923001234567'
-  phoneDisplay: '',                // how it shows on the site, e.g. '0300 123 4567'
+  whatsapp:     '923332488819',    // international format, digits only, e.g. '923001234567'
+  phoneDisplay: '0333 2488819',    // how it shows on the site, e.g. '0300 123 4567'
   phone2:       '',                // optional second number; blank = hidden
   email:        '',                // blank = hidden
 

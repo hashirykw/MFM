@@ -64,7 +64,7 @@ The tabs follow the Sir Xahid Anwer Digital Campus: AI checker, student portal, 
 
 ## Check these before going live
 
-1. **WhatsApp number.** No public number was found, so `whatsapp` and `phoneDisplay` in `config.js` are blank. Until they are filled, every "message" button copies the ready-written message and opens his Instagram, and the WhatsApp cards stay hidden. Add the number and everything switches to WhatsApp.
+1. **WhatsApp number.** Set to his WhatsApp Business line, 0333 2488819 (`923332488819` in `config.js`). Every "message" button opens a WhatsApp chat with the ready-written message.
 2. **His photo.** Save a portrait cut-out (transparent background, about 856 × 1316) as `fazil-maniya.webp` in this folder. The hero, the About page and the preloader pick it up automatically. Until then they show the mihrab artwork.
 3. **Figures.** "12 years", "15+ centres and schools", "6,000+ students", "IBA gold medalist" and "National Bowling Champion 2023" are from his YouTube channel description. Confirm they are current.
 4. **Instagram and places.** `@m.fazil.maniya` is the handle on file. The recorded course link is his LearnedGuys topical course for 2058 / 0493. Live online classes are described generally; name the platform or centres in `config.js` → `campuses` if he wants them shown.
