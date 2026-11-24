@@ -322,12 +322,29 @@
     var knot = new THREE.Mesh(new THREE.TorusKnotGeometry(.5, .17, 160, 24, 2, 3), mat);
     var small = new THREE.Mesh(new THREE.SphereGeometry(.38, 48, 32), mat);
     var G = new THREE.Group(); G.add(torus, ball, knot, small); S.add(G);
-    var flip = k % 2 ? -1 : 1;
+    if (window.ResizeObserver) new ResizeObserver(function () { layout(); R.render(S, cam); }).observe(st);
+    var ring2 = new THREE.Mesh(new THREE.TorusGeometry(.62, .09, 24, 90), mat); G.add(ring2);
+    var flip = k % 2 ? -1 : 1, phone = false;
+    /* every shape is placed round the form's corners and sized so it always sits whole inside the canvas: nothing is ever cut by an edge */
+    var parts = [
+      { m: torus, r: 1.67, fx: -.92, fy: -.94, z: -.6 },
+      { m: ball, r: .95, fx: .96, fy: .9, z: -.5 },
+      { m: knot, r: .9, fx: 1, fy: -.62, z: .2 },
+      { m: small, r: .38, fx: -1.02, fy: .62, z: .3 },
+      { m: ring2, r: .71, fx: .28, fy: 1.04, z: -.6 }
+    ];
     function layout() {
       var w = cv.clientWidth || 1, h = cv.clientHeight || 1; R.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix();
+      phone = innerWidth <= 760;
       var hh = Math.tan(cam.fov * Math.PI / 360) * cam.position.z, hw = hh * cam.aspect;
-      torus.position.set(-hw * .72 * flip, -hh * .5, -1); ball.position.set(hw * .74 * flip, hh * .56, -.5);
-      knot.position.set(hw * .66 * flip, -hh * .62, .2); small.position.set(-hw * .7 * flip, hh * .62, .3);
+      /* the form fills the middle of the canvas: its half-size in world units */
+      var sw = st.offsetWidth || w, sh = st.offsetHeight || h, fw = hw * sw / w, fh = hh * sh / h;
+      parts.forEach(function (p) {
+        var x = p.fx * fw * flip * (phone ? .8 : 1), y = p.fy * fh * (phone && p.fy > 0 ? .84 : 1);
+        var room = Math.min(hw - Math.abs(x), hh - Math.abs(y)) * .92;
+        var sc = Math.max(.25, Math.min(phone ? .72 : 1, room / p.r));
+        p.m.position.set(x, y, p.z); p.m.scale.setScalar(sc); p.base = { x: x, y: y };
+      });
     }
     layout(); addEventListener('resize', layout);
     var px = 0, py = 0, tx = 0, ty = 0, vis = false, t0 = performance.now();
@@ -338,10 +355,13 @@
       if (!vis || document.hidden) return; requestAnimationFrame(loop);
       var t = (now - t0) / 1000, sp = RM ? 0 : 1;
       px += (tx - px) * .06; py += (ty - py) * .06;
-      torus.rotation.set(1.1 + Math.sin(t * .3) * .25 * sp, t * .35 * sp, .4);
-      ball.position.y += Math.sin(t * .8) * .0025 * sp;
-      knot.rotation.set(t * .5 * sp, t * .3 * sp, 0);
-      small.position.x += Math.cos(t * .7) * .002 * sp;
+      /* always turning: the ring rolls, the knot spins, the spheres drift, a small ring orbits */
+      torus.rotation.set(1.05 + Math.sin(t * .45) * .35 * sp, t * .55 * sp, .35 + t * .12 * sp);
+      knot.rotation.set(t * .7 * sp, t * .45 * sp, t * .2 * sp);
+      ring2.rotation.set(t * .9 * sp, .6 + t * .5 * sp, 0);
+      ball.position.y = parts[1].base.y + Math.sin(t * .8) * .14 * sp;
+      small.position.set(parts[3].base.x + Math.cos(t * .7) * .16 * sp, parts[3].base.y + Math.sin(t * .9) * .12 * sp, .3);
+      ring2.position.y = parts[4].base.y + Math.sin(t * .6 + 1) * .1 * sp;
       G.rotation.set(py * .25, px * .35, 0);
       G.position.set(px * .3, -py * .25, 0);
       R.render(S, cam);
@@ -349,4 +369,59 @@
     R.render(S, cam);
   }
   need3().then(function (THREE) { stages.forEach(function (st, k) { try { build(THREE, st, k); } catch (e) { console.warn('[MFM] 3D shapes off:', e); } }); });
+})();
+
+/* register: what the login opens, on a turning ring of glass cards. It turns by itself, stops while you
+   point at it or read it, and follows a drag or swipe; the arrows and dots step it too. */
+(function () {
+  'use strict';
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.rp').forEach(function (rp) {
+    var stage = rp.querySelector('.rp-stage'), ring = rp.querySelector('.rp-ring');
+    var cards = Array.prototype.slice.call(ring.children), n = cards.length, step = 360 / n;
+    var dots = rp.querySelector('.rp-dots');
+    dots.innerHTML = cards.map(function () { return '<i></i>'; }).join('');
+    var ang = 0, R = 0, hold = false, seen = false, timer = 0;
+    function rel(i) { var r = ((i * step + ang) % 360 + 360) % 360; return r > 180 ? r - 360 : r; }
+    function paint() {
+      ring.style.transform = 'translateZ(' + (-R) + 'px) rotateY(' + ang.toFixed(2) + 'deg)';
+      var now = ((Math.round(-ang / step) % n) + n) % n;
+      cards.forEach(function (c, i) {
+        var a = Math.abs(rel(i)); c.style.setProperty('--far', (a / 180).toFixed(3));
+        c.classList.toggle('on', i === now); c.setAttribute('aria-hidden', i === now ? 'false' : 'true');
+      });
+      Array.prototype.forEach.call(dots.children, function (d, i) { d.classList.toggle('on', i === now); });
+    }
+    function size() {
+      var w = cards[0].offsetWidth || 280;
+      R = Math.round(w / 2 / Math.tan(Math.PI / n)) + 14;
+      cards.forEach(function (c, i) { c.style.transform = 'rotateY(' + (i * step) + 'deg) translateZ(' + R + 'px)'; });
+      stage.style.setProperty('--R', R + 'px'); paint();
+    }
+    function go(d) { ang = Math.round((ang - d * step) / step) * step; paint(); }
+    function to(i) { var t = -i * step; while (t - ang > 180) t -= 360; while (ang - t > 180) t += 360; ang = t; paint(); }
+    function tick() { clearTimeout(timer); timer = setTimeout(function () { if (!hold && seen && !document.hidden && !RM) go(1); tick(); }, 3200); }
+    rp.addEventListener('click', function (e) { var b = e.target.closest('[data-d]'); if (b) { go(+b.dataset.d); tick(); } });
+    dots.addEventListener('click', function (e) { var i = Array.prototype.indexOf.call(dots.children, e.target); if (i > -1) { to(i); tick(); } });
+    rp.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { go(1); tick(); } if (e.key === 'ArrowLeft') { go(-1); tick(); } });
+    rp.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hold = true; });
+    rp.addEventListener('pointerleave', function () { hold = false; });
+    rp.addEventListener('focusin', function () { hold = true; });
+    rp.addEventListener('focusout', function () { hold = false; });
+    /* drag or swipe: the ring follows the finger, then settles on the nearest card */
+    var x0 = null, y0 = 0, a0 = 0, lock = null;
+    stage.addEventListener('pointerdown', function (e) { if (e.button) return; x0 = e.clientX; y0 = e.clientY; a0 = ang; lock = null; });
+    stage.addEventListener('pointermove', function (e) {
+      if (x0 == null) return;
+      var dx = e.clientX - x0, dy = e.clientY - y0;
+      if (lock == null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) { lock = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'; if (lock === 'x') { rp.classList.add('drag'); try { stage.setPointerCapture(e.pointerId); } catch (er) { } } }
+      if (lock !== 'x') return;
+      e.preventDefault(); ang = a0 + dx * (step / (cards[0].offsetWidth * .8)); paint();
+    });
+    var end = function () { if (x0 == null) return; x0 = null; if (lock === 'x') { rp.classList.remove('drag'); ang = Math.round(ang / step) * step; paint(); tick(); } lock = null; };
+    stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', end); stage.addEventListener('lostpointercapture', end);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }, { threshold: .35 }).observe(rp); else seen = true;
+    if (window.ResizeObserver) new ResizeObserver(size).observe(stage); else addEventListener('resize', size);
+    size(); tick();
+  });
 })();

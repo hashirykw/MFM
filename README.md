@@ -20,6 +20,8 @@ A multi-page site for Sir Mohammad Fazil Maniya (MFM): Cambridge O Level Islamiy
 | `photos/marked-answer.webp` | A marked answer sheet: AI checker |
 | `photos/crash-course.webp` | Crash course: Crash course page |
 
+- **v3 tones.** Each kind of tool has its own material (`.tn-emerald`, `-mint`, `-silver`, `-clear`, `-paper`, `-ink`, `-sage`, `-ruby`, `-aurora` in `mfm.css`): the "between classes" grid uses them so the crash course, the checker, the portal, papers, notes, the daily term, parents, YouTube and the tracker each read differently at a glance. On phones the grid is a two-column bento with three wide bands.
+- **Register.** Beside the form, what the login opens sits on a turning ring of glass cards (turns on its own, pauses while you point at it, follows a drag or swipe). The silver 3D shapes behind every form are sized and placed so they always show whole around the form.
 - No intro screen and no page curtain: the page itself is the first thing that paints. Text is never hidden while loading; only content below the fold fades in, once, when reached.
 - When you change anything in `assets/`, bump `?v=2` in the page links (and `VERSION` in `sw.js`) so installed copies refresh.
 
