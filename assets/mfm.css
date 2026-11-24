@@ -803,3 +803,15 @@ html[data-theme] .v2-stage .v2-form .seg{background:rgb(255 255 255 / .3)!import
   .sec-head{margin-bottom:18px!important}
   .title{font-size:clamp(1.8rem,1.4rem + 2.4vw,2.4rem)!important}
 }
+
+/* v13 · ribbons: thin bands, whole curve visible on every screen (no cropping) */
+.v2-ribbon{height:auto!important;aspect-ratio:1440/330;margin:6px 0 clamp(10px,2vw,24px)!important;overflow:visible!important;contain:none!important}
+.v2-ribbon svg{overflow:visible}
+.rb-band{stroke-width:34!important}
+.rb-edge{stroke-width:28!important;stroke-dasharray:1.5 10!important}
+.rb-text{font-size:15px!important;letter-spacing:.09em!important;font-weight:600!important}
+@media (max-width:760px){
+  .v2-ribbon{aspect-ratio:760/330!important;margin:0 0 10px!important}
+  .rb-band{stroke-width:40!important}.rb-edge{stroke-width:33!important}
+  .rb-text{font-size:19px!important}
+}

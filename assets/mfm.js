@@ -243,6 +243,10 @@
       return { tp: tp, clen: clen, dir: +tp.getAttribute('data-ribbon') || 1, off: Math.random() * clen, svg: tp.ownerSVGElement, vis: false };
     });
   }
+  /* phones see the middle of the curve at a larger scale; laptops see all of it */
+  var svgs = document.querySelectorAll('.v2-ribbon svg');
+  function frame_() { var m = innerWidth <= 760; svgs.forEach(function (sv) { sv.setAttribute('viewBox', m ? '340 -15 760 330' : '0 -15 1440 330'); }); }
+  frame_(); var rz = 0; addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(frame_, 150); });
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () {
     setup();
     var lastY = scrollY, vel = 0, t0 = performance.now(), sign = 1, running = false;
