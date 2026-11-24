@@ -25,7 +25,7 @@ window.RA_CONFIG = {
   phone2:       '',                // optional second number; blank = hidden
   email:        '',                // blank = hidden
 
-  instagram: 'https://instagram.com/m.fazil.maniya',
+  instagram: 'https://www.instagram.com/mohammadfazilmaniya',
   facebook:  '',                   // blank = hidden
   youtube:   'https://www.youtube.com/user/mohammadfazilmaniya',
   recordedCourse: 'https://www.learnedguys.com/home/course/islamiyat-2058-o-level-0493-igcse-topical-recorded-course-by-m-fazil-maniya/45',
@@ -34,7 +34,7 @@ window.RA_CONFIG = {
   /* centres: the academies / schools for each place, shown as chips on the home page.
      ADD THE REAL NAMES HERE, e.g. centres: ['ABC Academy · Gulshan', 'XYZ School · DHA']. Empty = "list to be confirmed". */
   campuses: [
-    { name: 'Karachi centres & schools', note: 'In class · 15+ centres', text: 'Classes at more than 15 academic centres and schools across Karachi. Message for this session’s centres and timings.', centres: [] },
+    { name: 'Karachi centres & schools', note: 'In class · 15+ centres', text: 'Morning classes at leading Karachi schools and evening classes at centres across the city. Message for this session’s centres and timings.', centres: ['Beaconhouse School System', 'Froebel’s Education Centre', 'Credo School', 'The Academy', 'Hexis College', 'Highbrow College', 'Falconhouse Grammar School · North'] },
     { name: 'Live online', note: 'Online classes', text: 'Live online O Level Islamiyat classes for students outside Karachi and abroad.', centres: [] },
     { name: 'Recorded course', note: 'LearnedGuys · Urdu', text: 'A 54-hour topical recorded course for 2058 and 0493, to watch at your own pace.', centres: ['LearnedGuys'] }
   ],
@@ -44,7 +44,7 @@ window.RA_CONFIG = {
      Past dates drop off on their own. Empty = "dates announced soon". */
   /* Sir Fazil's logo: put the file in the site folder and write its name here, e.g. 'mfm-logo.png'.
      It replaces the MF monogram in the nav, footer, loader and bot. */
-  logo: '',
+  logo: 'mfm-logo.webp',
 
   CRASH: [],
 

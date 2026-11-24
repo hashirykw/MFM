@@ -185,7 +185,8 @@ const PRODUCTS = [
  {id:"seerah", code:"2058", lvl:"O Level · IGCSE", t:"Seerah Timeline & Battles", d:"The Prophet's life from 570 to 632 in order, with the dates, numbers and names examiners look for.", cc:"var(--c-bad)"},
  {id:"part-b", code:"2058", lvl:"O Level · IGCSE", t:"Part (b) Answer Bank", d:"Model 4-mark answers that explain significance and lessons for Muslims today.", cc:"var(--c-accent)"},
  {id:"top-p1", code:"2058", lvl:"Past papers", t:"Topical Past Papers · Paper 1", d:"Paper 1 questions sorted by topic, with mark-scheme points alongside.", cc:"var(--c-cool)"},
- {id:"top-p2", code:"2058", lvl:"Past papers", t:"Topical Past Papers · Paper 2", d:"Paper 2 questions sorted by topic, with mark-scheme points alongside.", cc:"var(--c-eco)"}
+ {id:"top-p2", code:"2058", lvl:"Past papers", t:"Topical Past Papers · Paper 2", d:"Paper 2 questions sorted by topic, with mark-scheme points alongside.", cc:"var(--c-eco)"},
+ {id:"mfm-book", code:"2058 · 0493", lvl:"New edition 2026–27", t:"O Level & IGCSE Islamiyat — the MFM book", d:"Sir Mohammad Fazil Maniya's own Islamiyat book, new edition for the 2026 and 2027 exams.", cc:"var(--c-eco)", img:"mfm-book.webp"}
 ];
 
 /* Key terms. [term, meaning, topic] */

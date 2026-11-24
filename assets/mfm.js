@@ -447,3 +447,19 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
   addEventListener('load', run, { once: true });
 })();
+
+/* v3.2 — brand emblem: Sir Fazil's round logo in the hero/about badges and the profile card
+   (the engine already swaps every .seal when RA_CONFIG.logo is set). */
+(function () {
+  var C = window.RA_CONFIG || {};
+  if (!C.logo) return;
+  function run() {
+    var img = '<img src="' + C.logo + '" alt="" decoding="async">';
+    document.querySelectorAll('.hb-sa,.pf-end').forEach(function (el) {
+      el.classList.add('has-logo');
+      if (el.classList.contains('pf-end')) { var b = el.querySelector('b'); if (b) b.outerHTML = img; }
+      else el.innerHTML = img;
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+})();

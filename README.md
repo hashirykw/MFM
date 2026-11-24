@@ -67,7 +67,7 @@ The tabs follow the Sir Xahid Anwer Digital Campus: AI checker, student portal, 
 1. **WhatsApp number.** Set to his WhatsApp Business line, 0333 2488819 (`923332488819` in `config.js`). Every "message" button opens a WhatsApp chat with the ready-written message.
 2. **His photo.** Save a portrait cut-out (transparent background, about 856 × 1316) as `fazil-maniya.webp` in this folder. The hero, the About page and the preloader pick it up automatically. Until then they show the mihrab artwork.
 3. **Figures.** "12 years", "15+ centres and schools", "6,000+ students", "IBA gold medalist" and "National Bowling Champion 2023" are from his YouTube channel description. Confirm they are current.
-4. **Instagram and places.** `@m.fazil.maniya` is the handle on file. The recorded course link is his LearnedGuys topical course for 2058 / 0493. Live online classes are described generally; name the platform or centres in `config.js` → `campuses` if he wants them shown.
+4. **Instagram and places.** `@mohammadfazilmaniya` is the handle on file. The recorded course link is his LearnedGuys topical course for 2058 / 0493. Live online classes are described generally; name the platform or centres in `config.js` → `campuses` if he wants them shown.
 5. **Notes titles.** The store lists notes by title only and shows no prices: the order message asks his team to confirm price and availability. Rename or remove items in `RA.DATA.PRODUCTS` inside each page if his range differs.
 6. **Domain.** Canonical links, the sitemap and the share image point to `https://mfm.nexlyr.solutions`. If the live domain is different, change `SITE` and rebuild, or find-and-replace it across the files.
 7. **Results and reviews.** `RESULTS` and `REVIEWS` in `config.js` are empty, so nothing invented appears.
@@ -95,3 +95,12 @@ The tabs follow the Sir Xahid Anwer Digital Campus: AI checker, student portal, 
 - Cambridge IGCSE Islamiyat 0493 syllabus 2028: https://www.cambridgeinternational.org/Images/744793-2028-syllabus.pdf
 - Mohammad Fazil Maniya on YouTube: https://www.youtube.com/user/mohammadfazilmaniya
 - Recorded course: https://www.learnedguys.com/home/course/islamiyat-2058-o-level-0493-igcse-topical-recorded-course-by-m-fazil-maniya/45
+
+## v3.2 — brand material
+- Sir Fazil's round MFM emblem (`mfm-logo.webp`, `mfm-logo.png`) is set as `logo` in config.js: it replaces the monogram in the nav, footer, loader, bot, hero badge and profile card. Favicon, app icons and apple-touch icon are made from it. **Send the original high-resolution logo file to sharpen it** (the current one is cut from a phone screenshot).
+- Instagram now points to @mohammadfazilmaniya (from his QR code).
+- Karachi centres filled in config.js (morning schools: Beaconhouse, Froebel's, Credo, The Academy, Hexis, Highbrow, Falconhouse North; evening classes across Karachi).
+- About page: Cambridge-certified, BSCS gold medal (IBA), Masters in CS and Islamic Studies, CAIE/Edexcel training, schools taught at, National Tenpin Bowling Champion.
+- Notes store: his book "O Level & IGCSE Islamiyat, new edition 2026–2027" (`mfm-book.webp`) as a feature and a cart item.
+- Footer tagline: "When you learn, teach. When you get, give." #IslamiyatWithMFM
+- Still blank (hidden until filled): Facebook and TikTok links in config.js.

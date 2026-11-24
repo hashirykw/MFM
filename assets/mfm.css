@@ -1083,3 +1083,32 @@ html[data-theme="dark"] .xv-steps li{background:rgb(255 255 255 / .04);box-shado
 .xv-steps b.ok{color:#0e6b46!important}
 html[data-theme="dark"] .xv-steps b.ok{color:#7ee6b9!important}
 @media (max-width:760px){.xv-steps{display:none}}
+
+/* ===== v3.2 brand emblem ===== */
+.seal.has-logo{border-radius:50%!important;corner-shape:round;background:transparent!important;box-shadow:0 6px 16px -8px rgb(0 0 0 / .55)!important;overflow:visible}
+.seal.has-logo::after{display:none}
+.seal.has-logo img,.hb-sa.has-logo img{display:block;width:100%;height:100%;object-fit:contain;border-radius:50%}
+.hb-sa.has-logo{background:transparent!important;box-shadow:0 14px 30px -14px rgb(0 0 0 / .6)!important;padding:0!important;overflow:visible}
+.hero-badge .hb-sa.has-logo{width:62%!important}
+.pf-end.has-logo img{width:64px;height:64px;border-radius:50%;display:block;margin-bottom:8px;filter:drop-shadow(0 8px 16px rgb(0 0 0 / .35))}
+.ft-tag{display:block;margin-top:6px;font:italic 500 13px/1.4 var(--f-display);opacity:.8}
+.ft-tag i{font-style:normal;opacity:.7;letter-spacing:.04em;font:600 11px/1 var(--f-body,inherit);margin-left:6px}
+
+/* ===== v3.2 the MFM book ===== */
+.p-book.p-cover{aspect-ratio:738/1044;border-radius:3px 8px 8px 3px;overflow:hidden;box-shadow:0 22px 40px -18px rgb(0 0 0 / .55),0 2px 6px rgb(0 0 0 / .18)}
+.p-book.p-cover img{display:block;width:100%;height:100%;object-fit:cover}
+.p-book.p-cover::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgb(0 0 0 / .32),rgb(255 255 255 / .12) 3%,transparent 7%,transparent 92%,rgb(0 0 0 / .1));pointer-events:none}
+.mbk-sec{padding-block:clamp(28px,5vw,64px)!important}
+.mbk{display:grid;grid-template-columns:minmax(200px,330px) 1fr;gap:clamp(28px,5vw,72px);align-items:center;padding:clamp(24px,4vw,48px)!important;overflow:hidden;isolation:isolate}
+.mbk::before{content:"";position:absolute;inset:auto -10% -40% 30%;height:80%;z-index:-1;background:radial-gradient(closest-side,color-mix(in srgb,var(--c-accent,#2ebe80) 22%,transparent),transparent);filter:blur(10px);pointer-events:none}
+.mbk-cov{margin:0;perspective:1200px}
+.mbk-cov img{display:block;width:100%;height:auto;border-radius:3px 10px 10px 3px;transform:rotateY(-12deg) rotateX(2deg);transform-origin:left center;box-shadow:-2px 0 0 rgb(0 0 0 / .25),18px 30px 50px -20px rgb(0 0 0 / .6),0 2px 8px rgb(0 0 0 / .2);transition:transform .9s cubic-bezier(.16,1,.3,1)}
+.mbk:hover .mbk-cov img{transform:rotateY(-4deg) rotateX(0) translateY(-4px)}
+.mbk-b .title{margin:.3em 0 .35em}
+.mbk-pts{list-style:none;margin:18px 0 26px;padding:0;display:grid;gap:10px}
+.mbk-pts li{position:relative;padding-left:22px;font-size:15px;opacity:.85}
+.mbk-pts li::before{content:"";position:absolute;left:0;top:.5em;width:9px;height:9px;border-radius:50%;background:var(--c-accent,#2ebe80);box-shadow:0 0 0 3px color-mix(in srgb,var(--c-accent,#2ebe80) 22%,transparent)}
+.mbk-cta{display:flex;flex-wrap:wrap;gap:12px}
+@media (max-width:760px){.mbk{grid-template-columns:1fr;text-align:left}.mbk-cov{max-width:230px;margin-inline:auto}.mbk-cov img{transform:rotateY(-8deg)}}
+@media (prefers-reduced-motion:reduce){.mbk-cov img{transition:none}}
+.p-stage .p-book.p-cover{width:49%}
