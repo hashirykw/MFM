@@ -4,20 +4,31 @@ A multi-page site for Sir Mohammad Fazil Maniya (MFM): Cambridge O Level Islamiy
 
 Built by Nexlyr Solutions on the same system as the Sir Sohail Ahmed site: the preloader and page curtain, a 3D particle background that changes shape section by section (an eight-point star, a crescent, the Ka'ba with its tawaf rings, a dome, minarets, zakat coins, the five pillars on one ring, a globe), stacking cards, and the dark black / emerald / silver palette.
 
+The tabs follow the Sir Xahid Anwer Digital Campus: AI checker, student portal, parents, past papers with a side-by-side viewer and a locked exam mode, notes, crash course and reviews. Buttons use the same motion as that site (the label rolls, the arrow slides through, the disc floods the button, ghost buttons get a light that runs round the edge). Nothing follows the cursor any more.
+
+**Front end only.** Sign-in, the portal, the parent view, the checker queue and fee slips run in the visitor's browser (localStorage) with sample data that is labelled "Preview" on screen. The backend and admin panel (ADMIN-MFM) replace these later; see *Backend to connect* below.
+
 ## Files
 
 | File | What it is |
 |---|---|
-| `index.html` | Home: hero, the pinned "mark ladder" (one Badr question climbing from recall to significance), the courses, the six-step method, a live zakat studio, the syllabus map (six areas, two papers), command words, the study tools, where he teaches |
+| `index.html` | Home: hero with two crossing ribbons, an "everything between classes" grid (crash course, AI checker, portal, papers, notes, term of the day, parents, YouTube, tracker), FAQ and a 3-step portal registration form, plus the pinned "mark ladder" (one Badr question climbing from recall to significance), the courses, the six-step method, a live zakat studio, the syllabus map (six areas, two papers), command words, the study tools, where he teaches |
 | `courses.html` | O Level 2058, IGCSE 0493 and the recorded course: papers, questions, marks, timings, assessment objectives, every topic linked to the tracker |
 | `syllabus.html` | Every topic for 2058 / 0493: all 15 passages, all 20 Hadiths, the Seerah, the first community, the Caliphs, the Articles of Faith and the Pillars, with key points, key terms, key dates and a progress tracker |
-| `past-papers.html` | 2058 and 0493 question papers and mark schemes (2020–2026), attempt tracker with scores, exam timer with focus mode |
+| `ai-checker.html` | How the checker works, a fully marked sample answer (tap a highlight for the comment; feedback, model answer, Sir Fazil's note), practice vs test, and the checker itself for signed-in students: task, question, typed answer or photos/PDF |
+| `portal.html` | Student login, a fee-slip login request, and the dashboard: home, checker, notes reader (watermarked with the student ID, blacks out on screenshot keys or when the tab loses focus), lectures, papers, results, rank (Starter to Diamond, privacy switch), fees (status, how to pay, slip upload, history, printable receipt) and profile |
+| `parent.html` | Parent login (P-#### IDs), several children per parent, latest result, position, fees, marks chart, attendance with a warning after 3 missed classes, announcements, message the team |
+| `past-papers.html` | 2058 and 0493 question papers and mark schemes (2020–2026): QP + MS side by side, "Sit it" exam mode (full screen, the clock, leaving the tab is counted, an exit phrase to give up, then mark it yourself or send it to the AI checker), two original MFM practice papers with mark schemes, attempt tracker, exam timer |
+| `crash-course.html` | Next crash course (from `CRASH` in `config.js`, otherwise "announced soon"), what it covers, Karachi and online, FAQ |
+| `reviews.html` | Reviews from `REVIEWS` in `config.js` (empty until real ones are added) and a form to send one |
+| `manifest.webmanifest`, `sw.js`, `icons/` | The installable app (Android, desktop; iPhone via Share → Add to Home Screen). "Get the app" in the footer and the app card use it |
+| `api/paper.js` | Vercel function that fetches a 2058/0493 PDF so it shows inside the side-by-side viewer |
 | `lab.html` | Islamiyat Lab: zakat calculator with what-ifs, Seerah and Caliphate timeline with a "which came first" drill, the 15 passages with a theme quiz, Hadith flashcards and quiz, key-term flashcards and quiz |
 | `notes.html` | Notes store with a cart that writes the order message |
 | `about.html` | His profile, what students get, where he teaches |
 | `contact.html` | Enrolment form that writes a ready message, contacts, FAQ |
 | `404.html` | Not-found page |
-| `config.js` | **The only file you edit**: WhatsApp number, social links, places he teaches, real results and reviews |
+| `config.js` | **The only file you edit**: WhatsApp number, social links, places he teaches, real results and reviews, crash course dates (`CRASH`), fee payment details (`fees`) |
 | `mfm-arch.svg`, `art-*.svg` | Original Islamic-geometry artwork (mihrab, star lattice, arches, domes, lanterns, book, Ka'ba) |
 | `mfm-share.jpg` | The link-preview image |
 | `favicon.svg`, `apple-touch-icon.png` | MF monogram icons |
@@ -32,6 +43,15 @@ Built by Nexlyr Solutions on the same system as the Sir Sohail Ahmed site: the p
 5. **Notes titles.** The store lists notes by title only and shows no prices: the order message asks his team to confirm price and availability. Rename or remove items in `RA.DATA.PRODUCTS` inside each page if his range differs.
 6. **Domain.** Canonical links, the sitemap and the share image point to `https://mfm.nexlyr.solutions`. If the live domain is different, change `SITE` and rebuild, or find-and-replace it across the files.
 7. **Results and reviews.** `RESULTS` and `REVIEWS` in `config.js` are empty, so nothing invented appears.
+8. **Fees.** Fill `fees` in `config.js` (monthly amount, bank, account title and number) so the portal's "How to pay" shows them.
+9. **Crash course.** Add each batch to `CRASH` in `config.js` (title, dates, place, mode) and it appears on the home grid and the crash course page.
+
+## Backend to connect (next phase)
+
+- Student and parent accounts (IDs, passwords, linking children to parents) instead of the browser-only sign-in.
+- The checker: store submissions and photos, run the AI marking, Sir Fazil's approve / change step, results back to the student.
+- Portal data: classes, notes and lecture files, test marks, ranks, attendance, announcements, fee status and slip approval.
+- Admin panel (ADMIN-MFM) to manage all of the above. App store builds can wrap the same pages once the backend is live.
 
 ## Notes on content
 

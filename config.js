@@ -38,6 +38,13 @@ window.RA_CONFIG = {
   ],
   online: true,
 
+  /* Crash courses. { title: 'June 2027 crash course', codes: '2058 · 0493', start: '2027-04-01', where: 'Karachi centres and online', note: '' }
+     Past dates drop off on their own. Empty = "dates announced soon". */
+  CRASH: [],
+
+  /* Fees, shown in the portal's Fees tab. Blank = "your centre will confirm". */
+  fees: { monthly: '', bank: '', account: '', title: '' },
+
   /* 3. REAL MATERIAL ONLY — empty lists hide their sections ---------------- */
   /* { value: 'A*', label: '2058 Islamiyat', note: 'May/June 2027', name: 'Student name' } */
   RESULTS: [],
