@@ -598,3 +598,39 @@ html[data-theme="dark"] .v2-flow-dots button.on{background:#e6ecea}
 .v2-flow+.rail-ctl{display:none!important}
 /* some pages paint their fields from layered rules (--v-ink / --v-glow); point those at the smoked-glass values inside the forms */
 .v2-stage .v2-form{--v-ink:rgb(255 255 255 / .06);--v-glow:#f4f6f7;--v-line-2:rgb(255 255 255 / .14);--v-soft:rgb(238 241 242 / .7);--v-mute:rgb(238 241 242 / .5)}
+
+/* ================================================================== v10 · curvy edges, clear glass
+   All corners are smooth round curves (no cut corners), and glass is see-through. */
+*,*::before,*::after{corner-shape:round!important}
+:root{--r-ui:14px;--r-card:24px;--r-panel:22px}
+.card,.v2-flow>.card,.hero-facts>div{border-radius:24px!important}
+.btn.btn.btn,.btn.btn-sm.btn,.btn.btn-lg.btn,.btn.btn-xs.btn,.nav .btn.btn-enrol.btn{border-radius:14px!important}
+.btn-x .btn-fill,.btn-x .btn-i,.btn-x .btn-i::before{border-radius:10px!important}
+.btn.btn-x:hover .btn-fill,.btn.btn-x:focus-visible .btn-fill{border-radius:14px!important}
+:is(.tag,.chip,.pill,.st,.stage-pill,.status-pill,.fee-st,.pct,.tp,.tmini,.time-it,.toast,.org-ceo,.sy-q,.check-list li,.dl a,.dl-b,.route .stop,.topicline a,.hero-codes span,.fl,.tape i,.seg a,.seg button,.opts button,.wi-btns button,.tool-tab,.acc-more,.acc-papers i){border-radius:10px!important}
+.nav{border-radius:22px!important}
+.menu,.nav-drop,.xsel-list,.cmdk-box,.modal-box,.bot,.app-card,.mbar,.fab,.dock,.v2-flow-ctl{border-radius:22px!important}
+.nav-links a,.nav-more>button,.nav-search,.nav-cart,.burger,.menu nav a,.nav-drop a,.xsel-list li,.v2-flow-b{border-radius:12px!important}
+.field input,.field textarea,.xsel-btn,.seg,.cmdk-in input,.bot-f input{border-radius:14px!important}
+.seal{border-radius:12px!important}
+.fab .seal{border-radius:11px!important}
+
+/* clear glass: barely tinted, edges and blur do the work */
+:root[data-theme="light"]{
+  --glass:linear-gradient(155deg,rgb(255 255 255 / .2) 0%,rgb(255 255 255 / .06) 50%,rgb(255 255 255 / .1) 100%);
+  --glass-sh:inset 0 1px 0 rgb(255 255 255 / .9),inset 0 0 0 1px rgb(255 255 255 / .55),inset 0 -10px 24px -18px rgb(255 255 255 / .6),0 18px 40px -26px rgb(20 24 26 / .28);
+}
+:root[data-theme="dark"]{--glass:linear-gradient(155deg,rgb(255 255 255 / .07),rgb(255 255 255 / .02))}
+.card{-webkit-backdrop-filter:blur(14px) saturate(180%)!important;backdrop-filter:blur(14px) saturate(180%)!important}
+html[data-theme="light"] .card::before{background:linear-gradient(115deg,rgb(255 255 255 / .38),transparent 34%,transparent 70%,rgb(255 255 255 / .16))!important;opacity:1!important}
+html[data-theme="light"] .card::after{background:linear-gradient(160deg,rgb(255 255 255 / 1),rgb(255 255 255 / .4) 35%,rgb(190 196 200 / .7) 70%,rgb(255 255 255 / .9))!important;opacity:1!important}
+html[data-theme="light"] .hero-facts>div{background:var(--glass)!important;box-shadow:var(--glass-sh)!important}
+/* the course card's picture area and text panel stay clear too */
+.v2-flow-courses .acc .acc-ph::before{background:linear-gradient(180deg,transparent,rgb(255 255 255 / .35))!important}
+.ph{background:repeating-linear-gradient(135deg,rgb(11 25 19 / .03) 0 10px,transparent 10px 20px),linear-gradient(180deg,rgb(255 255 255 / .18),rgb(255 255 255 / .06))!important}
+/* bars and panels: lighter, more see-through */
+html[data-theme="light"] :is(.nav,.mbar,.fab,.dock,.v2-flow-ctl){background:linear-gradient(180deg,rgb(255 255 255 / .42),rgb(255 255 255 / .22))!important;-webkit-backdrop-filter:blur(18px) saturate(180%)!important;backdrop-filter:blur(18px) saturate(180%)!important}
+html[data-theme="light"] .nav.solid{background:linear-gradient(180deg,rgb(255 255 255 / .6),rgb(255 255 255 / .4))!important}
+html[data-theme="light"] :is(.menu,.nav-drop,.xsel-list,.app-card){background:linear-gradient(180deg,rgb(255 255 255 / .62),rgb(255 255 255 / .46))!important;-webkit-backdrop-filter:blur(26px) saturate(180%)!important;backdrop-filter:blur(26px) saturate(180%)!important}
+/* smoked forms: clearer smoke, the silver shapes show through */
+.v2-stage .v2-form.card{background:linear-gradient(160deg,rgb(30 34 37 / .34),rgb(10 12 13 / .5))!important;-webkit-backdrop-filter:blur(16px) saturate(150%)!important;backdrop-filter:blur(16px) saturate(150%)!important}
