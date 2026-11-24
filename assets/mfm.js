@@ -1,56 +1,53 @@
-/* MFM v2 · small additions that run before the engine boots.
-   The deck: groups of cards are set one over the next in 3D on laptops (see .v2-deck in mfm.css);
-   on phones they stay a swipe rail. */
+/* MFM v2 · additions that run before the engine boots.
+   The flow: card groups sit on a curve, the middle card facing you and the others turning
+   inward and stepping back (the glass-carousel reference). Prev / next, dots, swipe, arrow keys;
+   a side card clicked slides to the centre. */
 (function () {
   'use strict';
-  var DECKS = ['.acc-grid', '.cw-track'];
-  DECKS.forEach(function (sel) {
-    document.querySelectorAll(sel).forEach(function (g) {
-      var cards = Array.prototype.filter.call(g.children, function (c) { return c.classList.contains('card'); });
-      if (cards.length < 2 || cards.length > 6) return;
-      g.classList.add('v2-deck', 'v2-deck-' + cards.length);
-      cards.forEach(function (c, i) { c.style.setProperty('--i', i); });
+  var CH = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + (d < 0 ? 'M15 5l-7 7 7 7' : 'M9 5l7 7-7 7') + '"/></svg>'; };
+  document.querySelectorAll('.acc-grid,.cw-track').forEach(function (g) {
+    var cards = Array.prototype.filter.call(g.children, function (c) { return c.classList.contains('card'); });
+    if (cards.length < 2) return;
+    if (g.hasAttribute('data-rail')) { g.dataset.railWas = g.getAttribute('data-rail'); g.removeAttribute('data-rail'); }
+    g.classList.add('v2-flow', g.classList.contains('cw-track') ? 'v2-flow-words' : 'v2-flow-courses');
+    g.setAttribute('role', 'region'); g.setAttribute('aria-roledescription', 'carousel');
+    var n = cards.length, act = g.classList.contains('cw-track') ? 2 : 0;
+    var title = function (c) { var h = c.querySelector('h3,b'); return h ? h.textContent.trim() : ''; };
+    var ctl = document.createElement('div'); ctl.className = 'v2-flow-ctl';
+    ctl.innerHTML = '<button type="button" class="v2-flow-b" data-d="-1" aria-label="Previous">' + CH(-1) + '</button>' +
+      '<span class="v2-flow-now" aria-live="polite"><b></b><i></i></span>' +
+      '<button type="button" class="v2-flow-b" data-d="1" aria-label="Next">' + CH(1) + '</button>';
+    var dots = document.createElement('div'); dots.className = 'v2-flow-dots';
+    dots.innerHTML = cards.map(function (c, i) { return '<button type="button" aria-label="' + title(c).replace(/"/g, '') + '"></button>'; }).join('');
+    g.after(ctl); ctl.after(dots);
+    function set(k) {
+      act = (k + n) % n;
+      cards.forEach(function (c, i) {
+        var d = i - act;
+        /* wrap so the curve stays balanced on both sides */
+        if (d > n / 2) d -= n; if (d < -n / 2) d += n;
+        c.style.setProperty('--d', d); c.style.setProperty('--ad', Math.abs(d));
+        c.classList.toggle('is-c', d === 0); c.classList.toggle('is-far', Math.abs(d) > 2);
+        c.setAttribute('aria-hidden', Math.abs(d) > 2 ? 'true' : 'false');
+        c.tabIndex = d === 0 ? 0 : -1;
+      });
+      ctl.querySelector('b').textContent = title(cards[act]);
+      ctl.querySelector('i').textContent = (act + 1) + ' / ' + n;
+      Array.prototype.forEach.call(dots.children, function (b, i) { b.classList.toggle('on', i === act); });
+    }
+    cards.forEach(function (c, i) {
+      c.addEventListener('click', function (e) { if (!c.classList.contains('is-c')) { e.preventDefault(); e.stopImmediatePropagation(); set(i); } }, true);
     });
-  });
-})();
-(function () {
-  'use strict';
-  var fit = function () {
-    document.querySelectorAll('.v2-deck').forEach(function (g) {
-      var n = g.classList.contains('v2-deck-6') ? 1100 : 700;
-      var on = innerWidth >= n;
-      g.classList.toggle('v2-on', on);
-      /* the swipe-rail rules live in a cascade layer with !important, so the deck steps out of them by dropping the attribute */
-      if (on && g.hasAttribute('data-rail')) { g.dataset.railWas = g.getAttribute('data-rail'); g.removeAttribute('data-rail'); }
-      if (!on && g.dataset.railWas != null && !g.hasAttribute('data-rail')) g.setAttribute('data-rail', g.dataset.railWas);
-    });
-  };
-  fit(); addEventListener('resize', fit, { passive: true });
-})();
-/* deck: click (or Enter) opens a card flat and dims the rest; outside click or Escape closes */
-(function () {
-  'use strict';
-  document.querySelectorAll('.v2-deck').forEach(function (g) {
-    var hint = document.createElement('p'); hint.className = 'v2-deck-hint';
-    hint.textContent = g.classList.contains('acc-grid') ? 'Hover a card to lift it · click to open it' : 'Hover a card to lift it · click to read it flat';
-    (g.nextElementSibling && g.nextElementSibling.classList.contains('rail-ctl') ? g.nextElementSibling : g).after(hint);
-    var close = function () { g.classList.remove('picked'); g.querySelectorAll('.card.on').forEach(function (c) { c.classList.remove('on'); }); };
-    g.addEventListener('click', function (e) {
-      if (!g.classList.contains('v2-on')) return;
-      var c = e.target.closest('.card'); if (!c || c.parentElement !== g) return;
-      if (e.target.closest('a,button') && c.classList.contains('on')) return; /* links work once the card is open */
-      if (e.target.closest('a') && !c.classList.contains('on')) e.preventDefault();
-      var was = c.classList.contains('on'); close();
-      if (!was) { c.classList.add('on'); g.classList.add('picked'); }
-    });
-    g.querySelectorAll(':scope > .card').forEach(function (c) {
-      if (!c.hasAttribute('tabindex')) c.setAttribute('tabindex', '0');
-      c.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target === c && g.classList.contains('v2-on')) { e.preventDefault(); c.click(); } });
-    });
-    document.addEventListener('click', function (e) { if (!g.contains(e.target)) close(); });
-    addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
-    /* once the spread has landed, hovers answer at once instead of waiting their stagger */
-    if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { setTimeout(function () { g.classList.add('set'); }, 1600); io.disconnect(); } }); io.observe(g); } else g.classList.add('set');
+    ctl.addEventListener('click', function (e) { var b = e.target.closest('[data-d]'); if (b) set(act + +b.dataset.d); });
+    dots.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) set(Array.prototype.indexOf.call(dots.children, b)); });
+    g.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { set(act + 1); cards[act].focus({ preventScroll: true }); } if (e.key === 'ArrowLeft') { set(act - 1); cards[act].focus({ preventScroll: true }); } });
+    /* swipe / drag */
+    var x0 = null, moved = false;
+    g.addEventListener('pointerdown', function (e) { x0 = e.clientX; moved = false; });
+    g.addEventListener('pointermove', function (e) { if (x0 != null && Math.abs(e.clientX - x0) > 8) moved = true; });
+    addEventListener('pointerup', function (e) { if (x0 == null) return; var dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40) set(act + (dx < 0 ? 1 : -1)); });
+    g.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    set(act);
   });
 })();
 /* themed dropdowns: every native <select> gets a glass list in the site's style (the select stays underneath for forms and scripts) */
@@ -123,6 +120,7 @@
   document.querySelectorAll('.acc.card').forEach(function (c) {
     var open = function (e) {
       if (e && e.target.closest('a')) return;
+      if (c.closest('.v2-flow') && !c.classList.contains('is-c')) return; /* side cards first slide to the centre */
       if (!window.RA || !RA.modal) return;
       var img = c.querySelector('.acc-ph img'), ok = img && img.complete && img.naturalWidth;
       var tag = c.querySelector('.acc-h .tag'), h = c.querySelector('.acc-h h3'), sub = c.querySelector('.acc-sub'), code = c.querySelector('.code');
@@ -136,5 +134,18 @@
     c.setAttribute('aria-label', ((c.querySelector('.acc-sub') || c).textContent || '').trim() + ': view details');
     c.addEventListener('click', open);
     c.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target === c) { e.preventDefault(); open(); } });
+  });
+})();
+/* forms: smoked glass panels floating over matte silver shapes (the reference login forms) */
+(function () {
+  'use strict';
+  document.querySelectorAll('#regForm,#eForm,#paForm,#loginForm,#verifyForm,#rvForm').forEach(function (f, n) {
+    if (f.closest('.v2-stage')) return;
+    var st = document.createElement('div'); st.className = 'v2-stage v2-stage-' + (n % 3);
+    f.parentNode.insertBefore(st, f);
+    st.innerHTML = '<span class="v2-orb v2-orb-a" aria-hidden="true"></span><span class="v2-orb v2-orb-b" aria-hidden="true"></span><span class="v2-orb v2-orb-c" aria-hidden="true"></span>';
+    st.appendChild(f); f.classList.add('v2-form');
+    /* keep the form's own reveal on the stage */
+    if (f.hasAttribute('data-rv')) { st.setAttribute('data-rv', f.getAttribute('data-rv')); f.removeAttribute('data-rv'); f.classList.add('in'); }
   });
 })();
