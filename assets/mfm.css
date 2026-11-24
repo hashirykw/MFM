@@ -815,3 +815,30 @@ html[data-theme] .v2-stage .v2-form .seg{background:rgb(255 255 255 / .3)!import
   .rb-band{stroke-width:40!important}.rb-edge{stroke-width:33!important}
   .rb-text{font-size:19px!important}
 }
+
+/* v14 · hover keeps the glass clear (no white fill); a soft lift and a brighter edge instead */
+html[data-theme] .card.card:hover,html[data-theme] .card.card:focus-within{background:var(--glass)!important;box-shadow:var(--glass-sh),0 26px 50px -30px rgb(20 24 26 / .42)!important}
+html[data-theme] .v2-pile.v2-pile[data-stack]>.card.card:hover{background:linear-gradient(160deg,rgb(255 255 255 / .82),rgb(247 248 249 / .7))!important}
+html[data-theme] .v2-stage .v2-form.card:hover{background:linear-gradient(155deg,rgb(255 255 255 / .34),rgb(255 255 255 / .08) 55%,rgb(255 255 255 / .16))!important}
+.card>.sheen{display:none!important}
+.card{transition:box-shadow .35s var(--e-out),transform .45s var(--e-out)!important}
+.card:not(.v2-flow>.card):not(.v2-pile>.card):hover{transform:translateY(-2px)}
+html[data-theme] .dept:hover,html[data-theme] .faq details:hover{background:var(--glass)!important}
+
+/* v14 · ribbons: the two bands run close together */
+.v2-ribbon{aspect-ratio:1440/200!important}
+@media (max-width:760px){.v2-ribbon{aspect-ratio:760/220!important}}
+
+/* v14 · the pile: held by a sticky frame (native, no shaking) while the cards rise in */
+.v2-pile-track{position:relative}
+.v2-pile-track>.v2-pile.v2-pile[data-stack]{position:sticky!important;top:clamp(84px,12vh,120px)}
+/* v15 · the socials title, set properly */
+.v2-soc{gap:6px 14px!important;padding:12px 14px 12px 22px!important}
+.v2-soc-k{display:grid!important;gap:5px;padding:0 18px 0 0!important;margin-right:6px;border-right:1px solid rgb(20 24 26 / .1);text-transform:none!important;letter-spacing:0!important}
+.v2-soc-k small{font:500 9px/1 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--em)}
+.v2-soc-k b{font:600 1.2rem/1.1 var(--f-display);letter-spacing:-.01em;color:var(--tx);font-variation-settings:"opsz" 14;white-space:nowrap}
+@media (max-width:520px){.v2-soc{padding:14px!important}.v2-soc-k{flex-basis:100%;text-align:center;border-right:0;padding:0 0 10px!important;margin:0 0 4px;border-bottom:1px solid rgb(20 24 26 / .1)}}
+/* v15 · real 3D shapes behind the forms (the CSS spheres stay only as a fallback) */
+.v2-3d{position:absolute;z-index:0;inset:-16% -9%;width:118%;height:132%;pointer-events:none;display:block}
+@media (max-width:640px){.v2-3d{inset:-10% -8%;width:116%;height:120%}}
+.v2-stage.has-3d .v2-orb{display:none}

@@ -199,15 +199,22 @@
         /* moved with the separate translate / scale properties, which the old stack rules (transform:none !important) cannot block */
         gsap.set(cards, { '--py': '0px', '--ps': 1, '--po': 1 });
         gsap.set(cards.slice(1), { '--py': function () { return Math.round(innerHeight * .9) + 'px'; }, '--po': 0 });
+        /* a tall track with the pile stuck inside it: the browser holds it still (no pin jitter) */
+        var track = document.createElement('div'); track.className = 'v2-pile-track';
+        list.parentNode.insertBefore(track, list); track.appendChild(list);
+        var LEN = function () { return Math.round((n - 1) * innerHeight * .45); };
+        var sizeTrack = function () { track.style.height = (list.offsetHeight + LEN()) + 'px'; };
+        sizeTrack();
         var tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: {
-          trigger: list, start: 'top ' + Math.min(130, innerHeight * .16) + 'px', end: '+=' + Math.round((n - 1) * innerHeight * .5),
-          pin: true, pinType: 'transform', scrub: .8, anticipatePin: 1, invalidateOnRefresh: true } });
+          trigger: track, start: function () { return 'top ' + (parseFloat(getComputedStyle(list).top) || 100) + 'px'; },
+          end: function () { return '+=' + LEN(); }, scrub: .4, invalidateOnRefresh: true, onRefreshInit: sizeTrack } });
         cards.forEach(function (c, i) {
           if (!i) return;
           tl.to(c, { '--py': '0px', '--po': 1, duration: 1, ease: 'power2.out' }, i - 1)
             .to(cards.slice(0, i), { '--ps': function (k) { return 1 - (i - k) * .035; }, duration: 1, ease: 'power2.out' }, i - 1);
         });
         return function () {
+          if (track.parentNode) { track.parentNode.insertBefore(list, track); track.remove(); }
           list.classList.remove('v2-pile'); list.style.height = '';
           cards.forEach(function (c) { c.style.height = ''; c.style.top = ''; c.style.zIndex = ''; });
           cards.forEach(function (c) { c.style.removeProperty('--py'); c.style.removeProperty('--ps'); c.style.removeProperty('--po'); });
@@ -245,7 +252,7 @@
   }
   /* phones see the middle of the curve at a larger scale; laptops see all of it */
   var svgs = document.querySelectorAll('.v2-ribbon svg');
-  function frame_() { var m = innerWidth <= 760; svgs.forEach(function (sv) { sv.setAttribute('viewBox', m ? '340 -15 760 330' : '0 -15 1440 330'); }); }
+  function frame_() { var m = innerWidth <= 760; svgs.forEach(function (sv) { sv.setAttribute('viewBox', m ? '340 15 760 220' : '0 25 1440 200'); }); }
   frame_(); var rz = 0; addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(frame_, 150); });
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () {
     setup();
@@ -279,4 +286,67 @@
   document.addEventListener('input', function (e) { if (e.target.matches && e.target.matches('input[type=range]')) fill(e.target); });
   document.addEventListener('click', function () { setTimeout(all, 30); });
   if (document.readyState === 'complete') all(); else addEventListener('load', function () { setTimeout(all, 50); });
+})();
+/* forms: real 3D shapes behind the glass — a matte silver torus, a sphere and a knot that turn slowly and lean with the pointer */
+(function () {
+  'use strict';
+  var stages = Array.prototype.slice.call(document.querySelectorAll('.v2-stage'));
+  if (!stages.length) return;
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function need3() {
+    return new Promise(function (res) {
+      if (window.THREE) return res(window.THREE);
+      var t = setInterval(function () { if (window.THREE) { clearInterval(t); res(window.THREE); } }, 300);
+      setTimeout(function () { if (window.THREE) return; var sc = document.createElement('script'); sc.src = 'vendor/three.min.js'; sc.async = true; document.head.appendChild(sc); }, 4000);
+    });
+  }
+  /* a matte silver matcap, drawn once: soft light from the top-left, no hard shine */
+  function matcap(THREE) {
+    var c = document.createElement('canvas'); c.width = c.height = 256; var x = c.getContext('2d');
+    var g = x.createRadialGradient(92, 78, 8, 128, 128, 128);
+    g.addColorStop(0, '#ffffff'); g.addColorStop(.16, '#eef0f1'); g.addColorStop(.42, '#c7ccd0'); g.addColorStop(.7, '#8c9398'); g.addColorStop(.9, '#5c6266'); g.addColorStop(1, '#3f4447');
+    x.fillStyle = g; x.fillRect(0, 0, 256, 256);
+    var r = x.createRadialGradient(170, 196, 4, 170, 196, 70); r.addColorStop(0, 'rgba(255,255,255,.35)'); r.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = r; x.fillRect(0, 0, 256, 256);
+    var t = new THREE.CanvasTexture(c); return t;
+  }
+  function build(THREE, st, k) {
+    var cv = document.createElement('canvas'); cv.className = 'v2-3d'; cv.setAttribute('aria-hidden', 'true');
+    st.insertBefore(cv, st.firstChild); st.classList.add('has-3d');
+    var R = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true, powerPreference: 'low-power' });
+    R.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+    var S = new THREE.Scene(), cam = new THREE.PerspectiveCamera(32, 1, .1, 100); cam.position.z = 12;
+    var mat = new THREE.MeshMatcapMaterial({ matcap: matcap(THREE) });
+    var torus = new THREE.Mesh(new THREE.TorusGeometry(1.25, .42, 48, 120), mat);
+    var ball = new THREE.Mesh(new THREE.SphereGeometry(.95, 64, 48), mat);
+    var knot = new THREE.Mesh(new THREE.TorusKnotGeometry(.5, .17, 160, 24, 2, 3), mat);
+    var small = new THREE.Mesh(new THREE.SphereGeometry(.38, 48, 32), mat);
+    var G = new THREE.Group(); G.add(torus, ball, knot, small); S.add(G);
+    var flip = k % 2 ? -1 : 1;
+    function layout() {
+      var w = cv.clientWidth || 1, h = cv.clientHeight || 1; R.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix();
+      var hh = Math.tan(cam.fov * Math.PI / 360) * cam.position.z, hw = hh * cam.aspect;
+      torus.position.set(-hw * .72 * flip, -hh * .5, -1); ball.position.set(hw * .74 * flip, hh * .56, -.5);
+      knot.position.set(hw * .66 * flip, -hh * .62, .2); small.position.set(-hw * .7 * flip, hh * .62, .3);
+    }
+    layout(); addEventListener('resize', layout);
+    var px = 0, py = 0, tx = 0, ty = 0, vis = false, t0 = performance.now();
+    st.addEventListener('pointermove', function (e) { var r = st.getBoundingClientRect(); tx = ((e.clientX - r.left) / r.width - .5); ty = ((e.clientY - r.top) / r.height - .5); });
+    st.addEventListener('pointerleave', function () { tx = ty = 0; });
+    new IntersectionObserver(function (es) { vis = es[0].isIntersecting; if (vis) requestAnimationFrame(loop); }, { rootMargin: '100px' }).observe(st);
+    function loop(now) {
+      if (!vis || document.hidden) return; requestAnimationFrame(loop);
+      var t = (now - t0) / 1000, sp = RM ? 0 : 1;
+      px += (tx - px) * .06; py += (ty - py) * .06;
+      torus.rotation.set(1.1 + Math.sin(t * .3) * .25 * sp, t * .35 * sp, .4);
+      ball.position.y += Math.sin(t * .8) * .0025 * sp;
+      knot.rotation.set(t * .5 * sp, t * .3 * sp, 0);
+      small.position.x += Math.cos(t * .7) * .002 * sp;
+      G.rotation.set(py * .25, px * .35, 0);
+      G.position.set(px * .3, -py * .25, 0);
+      R.render(S, cam);
+    }
+    R.render(S, cam);
+  }
+  need3().then(function (THREE) { stages.forEach(function (st, k) { try { build(THREE, st, k); } catch (e) { console.warn('[MFM] 3D shapes off:', e); } }); });
 })();
