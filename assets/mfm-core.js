@@ -698,6 +698,26 @@ function bot() {
   const fab = $('.fab'), box = $('#bot'); if (!fab || !box) return;
   const log = $('.bot-log', box), form = $('.bot-f', box), inp = $('input', form), chipsEl = $('.bot-chips', box);
   let hist = []; try { hist = JSON.parse(sessionStorage.getItem('ilm-bot-log') || '[]'); } catch (e) { }
+  /* the frosted panel: a dark header with a live seal, a welcome with topic tiles, a WhatsApp line */
+  const CF = window.RA_CONFIG || {}, IC = p => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + p + '</svg>';
+  $('.bot-h', box).innerHTML = '<span class="bot-av"><span class="seal" aria-hidden="true"><b>MFM</b></span><i class="live" aria-hidden="true"></i></span><div class="bot-id"><b>Ilm bot</b><small>Sir Fazil’s study assistant · replies instantly</small></div><button class="xbtn" type="button" aria-label="Close">' + IC('<path d="M6 6l12 12M18 6 6 18"/>') + '</button>';
+  if (!$('.bot-foot', box)) form.insertAdjacentHTML('afterend', '<a class="bot-foot" target="_blank" rel="noopener" href="' + (CF.waUrl ? CF.waUrl('Assalam o Alaikum Sir, I have a question about Islamiyat') : 'contact.html') + '"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#25d366"/><path d="M7.1 17.2l.75-2.6a5.4 5.4 0 1 1 2 1.95zM9.9 8.7c-.2 0-.45.05-.65.3-.25.3-.85.85-.85 2.05s.9 2.4 1 2.55c.15.15 1.75 2.7 4.3 3.7 2.1.85 2.55.65 3 .6.45-.05 1.5-.6 1.7-1.2.2-.6.2-1.1.15-1.2-.05-.1-.2-.15-.45-.3l-1.5-.75c-.2-.1-.35-.1-.5.1l-.7.85c-.1.15-.25.2-.5.05a6 6 0 0 1-2.95-2.6c-.2-.35.2-.35.6-1.15.05-.15 0-.3 0-.4l-.7-1.65c-.15-.4-.35-.35-.5-.35z" fill="#fff"/></svg>Prefer a person? <b>WhatsApp Sir Fazil’s team</b></a>');
+  inp.placeholder = 'Ask a term, a passage, a Hadith or a date…';
+  const TILES = [
+    ['<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>', 'Class timings', 'timings'],
+    ['<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>', 'Where does Sir teach?', 'where does Sir Fazil teach?'],
+    ['<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20"/>', 'The 15 passages', 'passages'],
+    ['<path d="M7 4h10v16l-5-3.5L7 20z"/>', 'The 20 Hadiths', 'hadiths'],
+    ['<path d="M8 3h8l4 4v14H4V3z"/><path d="M8 12h8M8 16h5"/>', 'Past papers', 'past papers'],
+    ['<path d="M12 3l2.4 5.6L20 11l-5.6 2.4L12 19l-2.4-5.6L4 11l5.6-2.4z"/>', 'Define a key term', 'Define tawhid'],
+    ['<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7h7M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h7"/>', 'Work out zakat', 'zakat'],
+    ['<path d="M20 12.5 12.5 20 4 11.5V4h7.5z"/><circle cx="8" cy="8" r="1.3"/>', 'Fees', 'fees']
+  ];
+  function welcome() {
+    const w = document.createElement('div'); w.className = 'bot-hi';
+    w.innerHTML = '<h4>Assalam o Alaikum!</h4><p>I’m Ilm bot, Sir Fazil’s study assistant. Pick a topic or type your question. For anything I can’t answer, Sir’s team is one tap away on WhatsApp.</p><div class="bot-lv"><button type="button" data-say="I’m in O Level">O Level 2058</button><button type="button" data-say="I’m doing IGCSE">IGCSE 0493</button></div><div class="bot-tiles">' + TILES.map(([ic, t, q]) => '<button type="button" class="bot-tile" data-say="' + RA.esc(q) + '"><span class="ic">' + IC(ic) + '</span><span>' + t + '</span></button>').join('') + '</div>';
+    log.appendChild(w);
+  }
   function say(html, who, keep) {
     const m = document.createElement('div'); m.className = 'msg ' + (who || 'b'); m.innerHTML = html; log.appendChild(m);
     log.scrollTop = log.scrollHeight;
@@ -708,12 +728,12 @@ function bot() {
     const t = say('<i></i><i></i><i></i>', 'b typing', false);
     setTimeout(() => { t.remove(); say(html); Snd.soft(); chips(); }, RA.RM ? 50 : 380 + Math.random() * 300);
   }
-  function ask(q) { q = String(q || '').trim(); if (!q) return; say(RA.esc(q), 'u'); reply(RA.botAnswer ? RA.botAnswer(q) : 'Ask on WhatsApp.'); }
+  function ask(q) { q = String(q || '').trim(); if (!q) return; box.classList.add('talked'); say(RA.esc(q), 'u'); reply(RA.botAnswer ? RA.botAnswer(q) : 'Ask on WhatsApp.'); }
   function chips() { const c = RA.botChips ? RA.botChips() : []; chipsEl.innerHTML = c.map(t => '<button class="chip" type="button">' + RA.esc(t) + '</button>').join(''); }
   let greeted = false;
   function open() {
     box.classList.add('open'); box.setAttribute('aria-hidden', 'false'); fab.setAttribute('aria-expanded', 'true'); Snd.open();
-    if (!greeted) { greeted = true; if (hist.length) hist.forEach(([w, h]) => say(h, w, false)); else reply('Assalam o Alaikum! I’m Ilm bot. I know the key terms, the 15 passages, the 20 Hadiths and the key dates, I can work out zakat from your numbers, and I can open past papers, timers and notes for you. Which course are you on?<div class="mrow"><button class="chip" type="button" data-say="I’m in O Level">O Level 2058</button><button class="chip" type="button" data-say="I’m doing IGCSE">IGCSE 0493</button></div>'); }
+    if (!greeted) { greeted = true; welcome(); if (hist.length) { box.classList.add('talked'); hist.forEach(([w, h]) => say(h, w, false)); } }
     chips(); setTimeout(() => { if (RA.FINE) inp.focus({ preventScroll: true }); }, 120);
   }
   function close() { box.classList.remove('open'); box.setAttribute('aria-hidden', 'true'); fab.setAttribute('aria-expanded', 'false'); Snd.close(); }
