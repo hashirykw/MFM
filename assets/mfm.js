@@ -7,7 +7,7 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
 (function () {
   'use strict';
   var CH = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + (d < 0 ? 'M15 5l-7 7 7 7' : 'M9 5l7 7-7 7') + '"/></svg>'; };
-  document.querySelectorAll('.acc-grid,.cw-track').forEach(function (g) {
+  document.querySelectorAll('.cw-track').forEach(function (g) {
     var cards = Array.prototype.filter.call(g.children, function (c) { return c.classList.contains('card'); });
     if (cards.length < 2) return;
     if (g.hasAttribute('data-rail')) { g.dataset.railWas = g.getAttribute('data-rail'); g.removeAttribute('data-rail'); }
@@ -169,7 +169,7 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
       if (c.closest('.v2-flow') && !c.classList.contains('is-c')) return; /* side cards first slide to the centre */
       if (!window.RA || !RA.modal) return;
       var img = c.querySelector('.acc-ph img'), ok = img && img.complete && img.naturalWidth;
-      var tag = c.querySelector('.acc-h .tag'), h = c.querySelector('.acc-h h3'), sub = c.querySelector('.acc-sub'), code = c.querySelector('.code');
+      var tag = c.querySelector('.acc-h .tag'), h = c.querySelector('.acc-h h3'), sub = c.querySelector('.acc-sub'), code = c.querySelector('.code,.acc-code');
       var body = c.querySelector('.acc-t'), link = c.querySelector('.acc-f a.link');
       RA.modal('<div class="acc-pop">' + (ok ? '<figure class="acc-pop-ph"><img src="' + img.getAttribute('src') + '" alt=""></figure>' : '') +
         '<div class="acc-pop-h"><div>' + (tag ? '<span class="tag">' + tag.textContent + '</span>' : '') + '<h2 id="mTitle">' + (h ? h.textContent : '') + '</h2>' + (sub ? '<p class="acc-sub">' + sub.innerHTML + '</p>' : '') + '</div>' + (code ? '<b class="acc-pop-code">' + code.textContent + '</b>' : '') + '</div>' +
