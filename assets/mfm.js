@@ -2,6 +2,8 @@
    The flow: card groups sit on a curve, the middle card facing you and the others turning
    inward and stepping back (the glass-carousel reference). Prev / next, dots, swipe, arrow keys;
    a side card clicked slides to the centre. */
+/* phones: hero buttons take their short labels so both fit on one line */
+if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-short]').forEach(function (b) { b.setAttribute('aria-label', b.textContent.trim()); var t = Array.prototype.find.call(b.childNodes, function (n) { return n.nodeType === 3 && n.textContent.trim(); }); if (t) t.textContent = b.dataset.short + ' '; });
 (function () {
   'use strict';
   var CH = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + (d < 0 ? 'M15 5l-7 7 7 7' : 'M9 5l7 7-7 7') + '"/></svg>'; };

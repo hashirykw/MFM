@@ -613,7 +613,7 @@ html.js [data-rv].in{opacity:1;transform:none;filter:none}
 
 .mbar{display:none}
 @media (max-width:760px){
-  .dock,.fab{display:none!important}
+  .dock{display:none!important}
   .mbar{position:fixed;z-index:58;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:7px;border-radius:20px;background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 70%,transparent),color-mix(in srgb,var(--bg) 58%,transparent));-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);box-shadow:var(--hi),inset 0 0 0 1px var(--line-w),0 24px 50px -20px rgb(3 8 6 / 0.85);transition:transform .7s var(--e-soft),opacity .5s}
 :where(html[data-theme="light"]) .mbar{box-shadow:var(--hi),inset 0 0 0 1px var(--line-w),0 24px 50px -20px rgb(14 38 28 / 0.22)}
   .mbar::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;background:linear-gradient(100deg,transparent 10%,var(--edge-a) 40%,transparent 70%,var(--edge-b));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);opacity:.6}
