@@ -1663,6 +1663,8 @@ function tdock() {
     vt.ready.then(() => root.animate({ clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + end + 'px at ' + x + 'px ' + y + 'px)'] }, { duration: 650, easing: 'cubic-bezier(.65,0,.35,1)', pseudoElement: '::view-transition-new(root)' })).catch(() => {});
   }));
   snd.addEventListener('click', () => { if (!Snd) return; Snd.set(!Snd.on); sync(); if (Snd.on && Snd.tick) Snd.tick(); });
+  /* the navbar's theme button runs the same switch, with the reveal starting from the button itself */
+  $$('.nav-theme').forEach(b => b.addEventListener('click', () => { const t = root.dataset.theme === 'dark' ? 'light' : 'dark'; const apply = () => { RA.theme(t); sync(); }; if (!document.startViewTransition || RA.RM) return apply(); const r = b.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2; const end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)); const vt = document.startViewTransition(apply); vt.ready.then(() => root.animate({ clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + end + 'px at ' + x + 'px ' + y + 'px)'] }, { duration: 650, easing: 'cubic-bezier(.65,0,.35,1)', pseudoElement: '::view-transition-new(root)' })).catch(() => {}); }));
   sync();
   requestAnimationFrame(() => requestAnimationFrame(() => d.classList.add('in')));
   /* phones: steps aside while you scroll down, back on the way up; drops to the bottom when the quick bar hides */

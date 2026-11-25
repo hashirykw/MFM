@@ -1523,3 +1523,32 @@ html[data-theme="dark"] .spk-l li{background:rgb(255 255 255 / .05);box-shadow:i
 html[data-theme] .place .ph:not(.ph-art):not(.ph-x){margin:10px 10px 0!important;border-radius:16px!important;overflow:hidden;box-shadow:inset 0 0 0 1px rgb(255 255 255 / .12),0 10px 24px -16px rgb(6 30 20 / .6)!important;-webkit-mask-image:none!important;mask-image:none!important}
 html[data-theme] .place .ph:not(.ph-art):not(.ph-x)::before,html[data-theme] .place .ph:not(.ph-art):not(.ph-x)::after{content:none!important}
 html[data-theme] .place .ph:not(.ph-art):not(.ph-x) img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:none!important;opacity:1!important}
+
+/* ================================================================== v25 · hero: Sir Fazil cut out, standing in front of the MFM arch, his head rising past its rim */
+html[data-theme] .hero-fig .portrait.pt-cut{overflow:visible!important;border-radius:0!important;background:none!important;box-shadow:none!important;-webkit-mask-image:linear-gradient(180deg,#000 80%,transparent 100%)!important;mask-image:linear-gradient(180deg,#000 80%,transparent 100%)!important}
+html[data-theme] .hero-fig .portrait.pt-cut::after{content:none!important}
+.pt-arch{position:absolute;left:9%;right:9%;top:15%;bottom:0;border-radius:999px 999px 26px 26px;overflow:hidden;
+  background:radial-gradient(70% 55% at 50% 38%,rgb(62 214 150 / .32),transparent 70%),url(../mfm-arch.svg) center 30%/cover no-repeat,linear-gradient(180deg,#0e2a1f,#06130d);
+  box-shadow:inset 0 0 0 1px rgb(255 255 255 / .14),inset 0 1px 0 rgb(255 255 255 / .25),0 50px 90px -40px rgb(6 30 20 / .7)}
+.pt-arch::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:linear-gradient(160deg,rgb(255 255 255 / .85),#c9ced1 30%,rgb(255 255 255 / .2) 60%,#bcc2c6);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.pt-ring{position:absolute;left:50%;top:9%;width:62%;aspect-ratio:1;translate:-50% 0;border-radius:50%;border:1px dashed rgb(14 107 70 / .28);pointer-events:none;animation:ptspin 60s linear infinite}
+@keyframes ptspin{to{rotate:360deg}}
+html[data-theme] .hero-fig .portrait.pt-cut img.pt-img{position:absolute;left:50%;bottom:0;top:auto;width:auto!important;height:100%!important;max-width:none;translate:-50% 0;object-fit:contain!important;object-position:50% 100%!important;
+  filter:drop-shadow(0 24px 40px rgb(4 14 10 / .45)) drop-shadow(0 0 1px rgb(0 0 0 / .4))!important}
+html[data-theme="dark"] .pt-ring{border-color:rgb(126 230 185 / .25)}
+@media (prefers-reduced-motion:reduce){.pt-ring{animation:none}}
+html[data-theme] .hero-fig :is(.fl,.plate,.hero-badge){z-index:4!important}html[data-theme] .hero-fig .portrait.pt-cut{z-index:2}
+html[data-theme="light"] .hero-fig .fl{background:linear-gradient(180deg,rgb(255 255 255 / .92),rgb(244 247 246 / .86))!important}
+/* navbar theme switch: sun in the White theme, moon in the Green theme */
+html[data-theme] .nav .nav-theme{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:40px;min-width:40px;padding:0 12px 0 10px;border:0;border-radius:12px!important;corner-shape:round;cursor:pointer;
+  background:var(--obsidian);color:#eef1f2;box-shadow:inset 0 1px 0 rgb(255 255 255 / .12),0 0 0 1px rgb(0 0 0 / .5),0 6px 14px -8px rgb(10 14 15 / .6);font:500 10px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;transition:transform .25s var(--e-out),background .25s}
+html[data-theme] .nav .nav-theme:hover{transform:translateY(-1px);background:linear-gradient(180deg,#14805a,#0b5b3b)}
+.nav-theme svg{width:17px;height:17px;flex:none}
+html[data-theme="light"] .nav-theme .nt-moon,html[data-theme="dark"] .nav-theme .nt-sun{display:none}
+html[data-theme="dark"] .nav .nav-theme{background:linear-gradient(180deg,#f3f5f4,#dfe4e2);color:#0b1913}
+@media (max-width:1180px){html[data-theme] .nav .nav-theme{padding:0;width:40px}.nav-theme .nt-l{display:none}}
+@media (max-width:900px){html[data-theme] .nav .nav-theme{width:44px;height:44px;border-radius:13px!important}}
+html[data-theme] .nav .nav-theme{padding:0!important;width:40px}.nav-theme .nt-l{display:none!important}
+@media (max-width:900px){.nav .nav-cart:not(.has){display:none!important}html[data-theme] .nav .nav-theme{width:44px}}
+@media (max-width:480px){html[data-theme] .nav{gap:8px!important}html[data-theme] .nav .nav-r{gap:6px!important}html[data-theme] .nav .brand-t b{font-size:1rem!important}html[data-theme] .nav .nav-theme,html[data-theme] .nav .burger{width:42px!important;height:42px!important}html[data-theme] .nav .brand{gap:9px!important;min-width:0}}
+@media (max-width:380px){html[data-theme] .nav .brand-t b{font-size:.9rem!important}html[data-theme] .nav .brand .seal{width:36px!important;height:36px!important}html[data-theme] .nav .nav-theme,html[data-theme] .nav .burger{width:40px!important;height:40px!important}}
