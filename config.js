@@ -43,7 +43,7 @@ window.RA_CONFIG = {
       { n: 'Maniya’s', a: 'Bahadurabad' }
     ] },
     { name: 'Live online', note: 'Pakistan & abroad', text: 'Live online batches for students across Pakistan and abroad, through three online academies.', centres: [
-      { n: 'Forte', a: 'Online' },
+      { n: 'Forte Institute', a: 'Online', logo: 'logos/forte.webp' },
       { n: 'Gives', a: 'Online', logo: 'logos/gives.webp' },
       { n: 'Max Academy', a: 'Online', logo: 'logos/max.webp' }
     ] },
