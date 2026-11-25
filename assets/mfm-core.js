@@ -397,7 +397,7 @@ function smooth() {
   const ST = window.ScrollTrigger;
   if (window.gsap && ST) gsap.registerPlugin(ST);
   if (!RA.RM && window.Lenis) {
-    const lenis = RA.lenis = new Lenis({ duration: 1.35, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, wheelMultiplier: 0.95 });
+    const lenis = RA.lenis = new Lenis({ lerp: 0.11, smoothWheel: true, wheelMultiplier: 1, touchMultiplier: 1.2 }); /* v5: quick and smooth, no long glide */
     if (window.gsap && ST) { lenis.on('scroll', ST.update); gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(400, 33); }
     else { const raf = t => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }
   }
@@ -1399,8 +1399,8 @@ function init3d() {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' });
   } catch (e) { document.documentElement.classList.add('no3d'); return; }
   const mob = MOB();
-  N = mob ? 6500 : (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4 ? 9000 : 15000);
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, mob ? 1.5 : 1.6));
+  N = mob ? 3800 : (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4 ? 6000 : 9000); /* v5: lighter field, same look */
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, mob ? 1.25 : 1.35));
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 100); camera.position.z = 10;
   group = new THREE.Group(); scene.add(group);
@@ -1513,7 +1513,7 @@ function loop() {
   const u = mat.uniforms; u.uT.value = (now - t0) / 1000;
   if (u.uMix.value < 1) u.uMix.value = Math.min(1, (now - mixStart) / mixDur);
   // adaptive quality
-  if (frames < 120) { frames++; if (dt > 0.03) slow++; if (frames === 120 && slow > 50) { geo.setDrawRange(0, Math.floor(N * 0.55)); u.uSize.value *= 1.15; } }
+  if (frames < 120) { frames++; if (dt > 0.03) slow++; if (frames === 120 && slow > 35) { geo.setDrawRange(0, Math.floor(N * 0.55)); u.uSize.value *= 1.15; } }
   const k = RA.RM ? 1 : 1 - Math.pow(0.002, Math.min(0.5, raw));
   pos.x += (tgt.x - pos.x) * k; pos.y += (tgt.y - pos.y) * k; pos.s += (tgt.s - pos.s) * k; pos.a += (tgt.a - pos.a) * k;
   pos.rx += (tgt.rx - pos.rx) * k; pos.ry += (tgt.ry - pos.ry) * k;
