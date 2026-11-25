@@ -84,7 +84,7 @@ window.RA_CONFIG = {
   REVIEWS: [],
 
   /* 4. SITE ----------------------------------------------------------------- */
-  siteUrl:   'https://mfm.nexlyr.solutions',
+  siteUrl:   'https://mohammadfazilmaniya.com',
   agency:    'Nexlyr Solutions',
   agencyUrl: 'https://nexlyr.solutions'
 };

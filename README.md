@@ -70,7 +70,7 @@ The tabs follow the Sir Xahid Anwer Digital Campus: AI checker, student portal, 
 3. **Figures.** "12 years", "15+ centres and schools", "6,000+ students", "IBA gold medalist" and "National Bowling Champion 2023" are from his YouTube channel description. Confirm they are current.
 4. **Instagram and places.** `@mohammadfazilmaniya` is the handle on file. The recorded course link is his LearnedGuys topical course for 2058 / 0493. Live online classes are described generally; name the platform or centres in `config.js` → `campuses` if he wants them shown.
 5. **Notes titles.** The store lists notes by title only and shows no prices: the order message asks his team to confirm price and availability. Rename or remove items in `RA.DATA.PRODUCTS` inside each page if his range differs.
-6. **Domain.** Canonical links, the sitemap and the share image point to `https://mfm.nexlyr.solutions`. If the live domain is different, change `SITE` and rebuild, or find-and-replace it across the files.
+6. **Domain.** Canonical links, the sitemap and the share image point to `https://mohammadfazilmaniya.com`. If the live domain is different, change `SITE` and rebuild, or find-and-replace it across the files.
 7. **Results and reviews.** `RESULTS` and `REVIEWS` in `config.js` are empty, so nothing invented appears.
 8. **Fees.** Fill `fees` in `config.js` (monthly amount, bank, account title and number) so the portal's "How to pay" shows them.
 9. **Crash course.** Add each batch to `CRASH` in `config.js` (title, dates, place, mode) and it appears on the home grid and the crash course page.

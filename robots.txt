@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mfm.nexlyr.solutions/sitemap.xml
+Sitemap: https://mohammadfazilmaniya.com/sitemap.xml
