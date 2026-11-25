@@ -2476,3 +2476,99 @@ html[data-theme][data-theme] #words .cw-lv{height:5px!important;max-height:5px!i
 html[data-theme][data-theme] #words .cw-lv i{height:5px!important}
 html[data-theme] #words .cw-lv::after{top:-16px!important}
 html[data-theme] #words .cw.hot .cw-lv::after{color:#8EB69B}
+
+/* ==================================================================== v5.4 · logos on proper tiles, the follow band, the FAQ, tracker and portal tiles */
+/* logos: each on a small white tile with a silver rim, in its own colours in both themes */
+html[data-theme] .trio__logos{gap:10px!important;border-top:0!important;padding-top:6px!important}
+html[data-theme] .trio__logos img,html[data-theme] .trio__wm{box-sizing:content-box;height:34px!important;max-width:110px!important;padding:9px 12px;border-radius:12px;
+  background:#FFFFFF;border:1px solid #DDE1E4;box-shadow:inset 0 1px 0 #fff,0 6px 14px -10px rgb(5 31 32 / .35);filter:none!important;opacity:1!important}
+html[data-theme] .trio__wm{display:inline-flex;align-items:center;height:34px!important;font:600 .95rem/1 var(--f-display);color:#051F20!important}
+html[data-theme="dark"] .trio__logos img,html[data-theme="dark"] .trio__wm{border-color:rgb(201 206 210 / .5)}
+html[data-theme][data-theme] .sw-morn .aff-row{justify-content:flex-start!important;gap:14px!important}
+html[data-theme][data-theme] .sw-morn .aff-i{display:grid!important;justify-items:center!important;gap:10px!important}
+html[data-theme][data-theme] .sw-morn .aff-i .lg{height:auto!important;padding:12px 18px!important;border-radius:16px!important;background:#FFFFFF!important;border:1px solid #DDE1E4!important;
+  box-shadow:inset 0 1px 0 #fff,0 10px 22px -16px rgb(5 31 32 / .4)!important;min-width:120px;justify-content:center}
+html[data-theme][data-theme] .sw-morn .aff-i .lg img{height:46px!important;filter:none!important;opacity:1!important}
+html[data-theme="dark"][data-theme] .sw-morn .aff-i .lg{border-color:rgb(201 206 210 / .5)!important}
+html[data-theme="dark"][data-theme] .sw-morn .aff-i .lg img{filter:none!important;opacity:1!important}
+
+/* follow band */
+html[data-theme][data-theme] .v2-soc{display:grid!important;grid-template-columns:minmax(220px,.8fr) repeat(auto-fit,minmax(150px,1fr))!important;align-items:stretch!important;gap:12px!important;
+  width:100%!important;max-width:none!important;margin:clamp(22px,3vw,36px) 0 0!important;padding:14px!important;border-radius:26px!important;
+  background:linear-gradient(180deg,#FFFFFF,#F6F7F8)!important;border:1px solid #CDD2D6!important;box-shadow:inset 0 1px 0 #fff,0 24px 50px -36px rgb(5 31 32 / .45)!important}
+html[data-theme="dark"][data-theme] .v2-soc{background:linear-gradient(180deg,#0F332B,#0B2B26)!important;border-color:rgb(201 206 210 / .2)!important;box-shadow:inset 0 1px 0 rgb(218 241 222 / .08)!important}
+html[data-theme] .v2-soc-k{display:grid!important;align-content:center;gap:6px;padding:12px 14px!important}
+html[data-theme] .v2-soc-k small{font:600 10.5px/1 var(--f-body)!important;letter-spacing:.2em;text-transform:uppercase;color:var(--em)!important}
+html[data-theme] .v2-soc-k b{font:600 1.35rem/1.15 var(--f-display)!important;letter-spacing:-.03em;color:var(--tx)!important}
+html[data-theme][data-theme] .v2-soc-i{position:relative;display:grid!important;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:12px;row-gap:3px;align-items:center;align-content:center;
+  padding:14px 16px!important;border-radius:18px!important;background:#FFFFFF!important;border:1px solid #DDE1E4!important;box-shadow:none!important;text-decoration:none;min-height:72px;transition:transform .3s,border-color .3s,box-shadow .3s}
+html[data-theme="dark"][data-theme] .v2-soc-i{background:rgb(255 255 255 / .04)!important;border-color:rgb(201 206 210 / .16)!important}
+html[data-theme][data-theme] .v2-soc-i:hover{transform:translateY(-2px);border-color:#8EB69B!important;box-shadow:0 16px 30px -20px rgb(5 31 32 / .45)!important}
+html[data-theme][data-theme] .v2-soc-i svg{grid-row:1 / 3;width:38px!important;height:38px!important}
+html[data-theme][data-theme] .v2-soc-i span{font:600 .98rem/1.1 var(--f-display)!important;letter-spacing:-.02em;color:var(--tx)!important;text-transform:none!important}
+html[data-theme] .v2-soc-i::after{font:600 9.5px/1.2 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--tx-3)}
+html[data-theme] .v2-soc-i[data-href="instagram"]::after{content:"@mohammadfazilmaniya";letter-spacing:.04em;text-transform:none;font-size:11px}
+html[data-theme] .v2-soc-i[data-href="youtube"]::after{content:"Lessons & exam tips"}
+html[data-theme] .v2-soc-i[data-href="facebook"]::after{content:"Updates"}
+html[data-theme] .v2-soc-i[data-href="whatsappChannel"]::after{content:"WhatsApp channel"}
+html[data-theme] .v2-soc-i[href*="courses.html"]::after{content:"On LearnedGuys"}
+@media (max-width:900px){html[data-theme][data-theme] .v2-soc{grid-template-columns:1fr 1fr!important}html[data-theme] .v2-soc-k{grid-column:1/-1}}
+
+/* FAQ: numbered question cards, a clear open state, help beside the title */
+html[data-theme] #faq .faq-g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,80px);align-items:start}
+@media (max-width:900px){html[data-theme] #faq .faq-g{grid-template-columns:1fr}}
+html[data-theme] #faq .sec-head{position:sticky;top:110px}
+.faq-cta{margin-top:28px;padding:22px;border-radius:22px;background:linear-gradient(160deg,#235347,#163832 60%,#0B2B26);color:#DAF1DE;box-shadow:0 24px 50px -30px rgb(5 31 32 / .6)}
+.faq-cta p{margin:0 0 16px;font-size:.98rem;line-height:1.55;color:rgb(218 241 222 / .88)}
+.faq-cta-b{display:flex;flex-wrap:wrap;gap:8px}
+html[data-theme] .faq-cta .btn.btn-ghost{background:rgb(255 255 255 / .08)!important;color:#FFFFFF!important;box-shadow:inset 0 0 0 1px rgb(218 241 222 / .3)!important}
+html[data-theme] .faq-cta .btn.btn.btn-pri{background:linear-gradient(180deg,#F3F5F6,#CDD2D6)!important;color:#051F20!important}
+html[data-theme] #faq .faq{counter-reset:fq;display:grid;gap:10px}
+html[data-theme][data-theme] #faq .faq details{counter-increment:fq;margin:0!important;border-radius:20px!important;background:linear-gradient(180deg,#FFFFFF,#F7F8F9)!important;border:1px solid #DDE1E4!important;
+  box-shadow:inset 0 1px 0 #fff!important;transition:border-color .3s,box-shadow .3s;overflow:hidden}
+html[data-theme="dark"][data-theme] #faq .faq details{background:rgb(255 255 255 / .03)!important;border-color:rgb(201 206 210 / .16)!important;box-shadow:none!important}
+html[data-theme][data-theme] #faq .faq details[open]{border-color:#8EB69B!important;box-shadow:0 20px 40px -30px rgb(5 31 32 / .45)!important}
+html[data-theme][data-theme] #faq .faq summary{display:grid!important;grid-template-columns:34px minmax(0,1fr) 30px;align-items:center;gap:12px;padding:18px 20px!important;cursor:pointer;list-style:none;
+  font:600 1.02rem/1.35 var(--f-display)!important;letter-spacing:-.02em;color:var(--tx)!important}
+html[data-theme] #faq .faq summary::-webkit-details-marker{display:none}
+html[data-theme] #faq .faq summary::before{content:counter(fq,decimal-leading-zero);font:600 .82rem/1 var(--f-display);color:var(--tx-3)}
+html[data-theme][data-theme] #faq .faq summary i{position:relative;width:30px!important;height:30px!important;border-radius:50%!important;background:#EEF7F0!important;box-shadow:inset 0 0 0 1px #C3DCCB!important;transition:transform .35s,background .3s}
+html[data-theme="dark"][data-theme] #faq .faq summary i{background:rgb(142 182 155 / .14)!important;box-shadow:inset 0 0 0 1px rgb(142 182 155 / .3)!important}
+html[data-theme] #faq .faq summary i::before,html[data-theme] #faq .faq summary i::after{content:""!important;position:absolute;left:50%;top:50%;width:11px;height:1.6px;margin:-.8px 0 0 -5.5px;border-radius:2px;background:var(--em)!important;transition:transform .35s;display:block!important;border:0!important}
+html[data-theme] #faq .faq summary i::after{transform:rotate(90deg)}
+html[data-theme] #faq .faq details[open] summary i{transform:rotate(180deg);background:#235347!important}
+html[data-theme] #faq .faq details[open] summary i::before,html[data-theme] #faq .faq details[open] summary i::after{background:#DAF1DE!important}
+html[data-theme] #faq .faq details[open] summary i::after{transform:rotate(0)}
+html[data-theme][data-theme] #faq .faq details p{margin:0!important;padding:0 20px 20px 66px!important;font-size:.96rem!important;line-height:1.65!important;color:var(--tx-2)!important}
+
+/* tracker tile: a cleaner grid and a clear figure */
+html[data-theme] #tools .xt-track .tool-viz.tv-grid{gap:30px!important}
+html[data-theme] #tools .xt-track .tgrid-d{display:grid!important;grid-template-columns:repeat(8,16px)!important;gap:5px!important;padding:16px;border-radius:16px;background:#FFFFFF;border:1px solid #DDE1E4;box-shadow:inset 0 1px 0 #fff}
+html[data-theme] #tools .xt-track .tgrid-d i{width:16px!important;height:16px!important;border-radius:5px!important}
+html[data-theme] #tools .xt-track .tg-stat{display:grid!important;gap:8px;min-width:150px}
+html[data-theme] #tools .xt-track .tg-k{font:600 10px/1 var(--f-body)!important;letter-spacing:.18em;text-transform:uppercase;color:var(--tn-s)!important}
+html[data-theme] #tools .xt-track .tg-stat b{font-size:3rem!important}
+html[data-theme] #tools .xt-track .tg-bar{display:block;height:6px;border-radius:6px;background:#E4E7E9;overflow:hidden}
+html[data-theme] #tools .xt-track .tg-bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#235347,#8EB69B)}
+html[data-theme] #tools .xt-track .tg-l{display:flex!important;align-items:center;gap:6px;font:600 10px/1 var(--f-body)!important;letter-spacing:.12em;text-transform:uppercase;color:var(--tn-s)!important}
+/* portal tile: the student ID as a real card */
+html[data-theme][data-theme] #tools .xt .xv-id{position:relative;display:grid!important;grid-template-columns:auto 1fr!important;align-items:center!important;gap:14px!important;
+  width:100%;max-width:260px;justify-self:center;aspect-ratio:1.62;min-height:0!important;padding:16px 18px!important;border-radius:16px!important;
+  background:radial-gradient(90% 80% at 100% 0%,rgb(142 182 155 / .35),transparent 60%),linear-gradient(150deg,#2E6655,#163832 55%,#0B2B26)!important;
+  box-shadow:inset 0 1px 0 rgb(218 241 222 / .18),0 18px 34px -18px rgb(5 31 32 / .6)!important}
+html[data-theme] #tools .xv-id .id-av{width:46px!important;height:46px!important;border-radius:50%!important;display:grid;place-items:center;font:600 .95rem/1 var(--f-display)!important;
+  color:#051F20!important;background:linear-gradient(160deg,#FFFFFF,#C9CED2)!important;box-shadow:0 0 0 3px rgb(255 255 255 / .12)!important}
+html[data-theme] #tools .xv-id .id-t{display:grid;gap:7px}
+html[data-theme] #tools .xv-id .id-t b{font:600 .9rem/1 var(--f-display)!important;letter-spacing:.06em;color:#FFFFFF!important}
+html[data-theme] #tools .xv-id .id-t i{display:block;height:5px;border-radius:5px;background:rgb(218 241 222 / .3)!important;width:90%}
+html[data-theme] #tools .xv-id .id-t i+i{width:60%}
+html[data-theme] #tools .xv-id .id-chip{position:absolute;right:16px;bottom:14px;width:32px!important;height:24px!important;border-radius:6px!important;background:linear-gradient(135deg,#F4F6F7,#A9B0B5 50%,#E4E7E9)!important;box-shadow:inset 0 0 0 1px rgb(5 31 32 / .15)!important}
+html[data-theme] #tools .xv-id::after{content:"Student ID";position:absolute;left:18px;bottom:14px;font:600 9px/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:#8EB69B}
+html[data-theme][data-theme][data-theme] .faq-cta .btn.btn.btn.btn-ghost{background:rgb(255 255 255 / .08)!important;color:#FFFFFF!important;box-shadow:inset 0 0 0 1px rgb(218 241 222 / .35)!important}
+html[data-theme] #tools .xt-track .tool-viz.tv-grid{gap:20px!important;justify-content:flex-end!important;padding-right:4px!important}
+html[data-theme] #tools .xt-track .tgrid-d{grid-template-columns:repeat(6,15px)!important;gap:5px!important;padding:14px!important}
+html[data-theme] #tools .xt-track .tgrid-d i{width:15px!important;height:15px!important}
+html[data-theme] #tools .xt-track .tg-stat{min-width:0!important;max-width:150px}
+html[data-theme] #tools .xt-track .tg-k{white-space:normal!important;line-height:1.3!important}
+html[data-theme] #tools .xt-track .tg-stat b{font-size:2.5rem!important}
+html[data-theme] #tools .xt-track .tg-l{flex-wrap:wrap}
