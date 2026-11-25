@@ -2090,3 +2090,136 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme] .hero-facts>div
   html[data-theme][data-theme][data-theme][data-theme][data-theme] .hero-facts>div+div{padding-left:12px!important}
   html[data-theme][data-theme] .hero-facts dd{font-size:9.5px!important;letter-spacing:.08em!important}
 }
+
+/* ==================================================================== v4.4 · "Between classes": one bento system
+   Grid: 4 x 3 on laptops (two wide tiles, one tall), 2 columns on tablets, 1 on phones.
+   Every tile: tab + icon on one line, the picture in the middle, then title, one line, link.
+   Three materials only: deep green (Crash course, Term of the day), matte silver (Portal, Tracker), white with a silver rim. */
+html[data-theme] #tools .explore{display:grid!important;gap:16px!important;margin-top:clamp(26px,3.4vw,44px)!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-auto-rows:minmax(300px,auto)!important;
+  grid-template-areas:"crash crash ai portal" "papers notes ai term" "parents yt track track"!important}
+html[data-theme] #tools .explore>.xt:nth-child(1){grid-area:crash!important}
+html[data-theme] #tools .explore>.xt:nth-child(2){grid-area:ai!important}
+html[data-theme] #tools .explore>.xt:nth-child(3){grid-area:portal!important}
+html[data-theme] #tools .explore>.xt:nth-child(4){grid-area:papers!important}
+html[data-theme] #tools .explore>.xt:nth-child(5){grid-area:notes!important}
+html[data-theme] #tools .explore>.xt:nth-child(6){grid-area:term!important}
+html[data-theme] #tools .explore>.xt:nth-child(7){grid-area:parents!important}
+html[data-theme] #tools .explore>.xt:nth-child(8){grid-area:yt!important}
+html[data-theme] #tools .explore>.xt:nth-child(9){grid-area:track!important}
+@media (max-width:1100px){
+  html[data-theme] #tools .explore{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(290px,auto)!important;
+    grid-template-areas:"crash crash" "ai portal" "ai term" "papers notes" "parents yt" "track track"!important}
+}
+@media (max-width:640px){
+  html[data-theme] #tools .explore{grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important;
+    grid-template-areas:"crash" "ai" "portal" "term" "papers" "notes" "parents" "yt" "track"!important;gap:12px!important}
+}
+
+/* the tile */
+html[data-theme] #tools .explore>.xt.card.tn{
+  --tn-bg:linear-gradient(180deg,#FFFFFF,#F6F7F8);--tn-t:#051F20;--tn-s:#3C5A51;--tn-ib:#235347;--tn-ic:#DAF1DE;--tn-pill:#FFFFFF;--tn-pt:#235347;--tn-pr:rgb(169 176 181 / .6);
+  --tn-b:rgb(169 176 181 / .5);--tn-sh:inset 0 1px 0 #fff,0 1px 2px rgb(5 31 32 / .04),0 18px 40px -28px rgb(5 31 32 / .35);
+  position:relative;display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:10px!important;
+  padding:22px!important;margin:0!important;min-height:0!important;height:auto!important;border-radius:24px!important;text-align:left!important;
+  background:var(--tn-bg)!important;color:var(--tn-t)!important;border:1px solid var(--tn-b)!important;box-shadow:var(--tn-sh)!important;
+  transform:none;transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s ease!important;overflow:hidden;opacity:1!important;filter:none!important}
+html[data-theme="dark"] #tools .explore>.xt.card.tn{--tn-bg:linear-gradient(180deg,#0E3029,#0A2722);--tn-t:#DAF1DE;--tn-s:rgb(218 241 222 / .74);--tn-ib:#8EB69B;--tn-ic:#051F20;--tn-pill:rgb(255 255 255 / .04);--tn-pt:#DAF1DE;--tn-pr:rgb(201 206 210 / .25);
+  --tn-b:rgb(201 206 210 / .18);--tn-sh:inset 0 1px 0 rgb(255 255 255 / .05),0 22px 44px -28px rgb(0 0 0 / .8)}
+/* deep green */
+html[data-theme] #tools .explore>.xt.card.tn:is(.tn-emerald,.tn-ink){--tn-t:#DAF1DE;--tn-s:rgb(218 241 222 / .8);--tn-ib:linear-gradient(180deg,#F4F6F7,#C9CED2);--tn-ic:#051F20;--tn-pill:rgb(255 255 255 / .08);--tn-pt:#DAF1DE;--tn-pr:rgb(201 206 210 / .35);
+  --tn-b:rgb(218 241 222 / .14);--tn-sh:inset 0 1px 0 rgb(218 241 222 / .12),0 26px 50px -28px rgb(5 31 32 / .7)}
+html[data-theme] #tools .explore>.xt.card.tn-emerald{--tn-bg:radial-gradient(90% 80% at 100% 0%,rgb(142 182 155 / .28),transparent 60%),linear-gradient(160deg,#2E6655 0%,#235347 40%,#163832 100%)}
+html[data-theme] #tools .explore>.xt.card.tn-ink{--tn-bg:radial-gradient(90% 80% at 100% 100%,rgb(142 182 155 / .18),transparent 60%),linear-gradient(160deg,#163832 0%,#0B2B26 55%,#051F20 100%)}
+html[data-theme="dark"] #tools .explore>.xt.card.tn-ink{--tn-b:rgb(201 206 210 / .2)}
+/* matte silver */
+html[data-theme] #tools .explore>.xt.card.tn:is(.tn-silver,.tn-aurora){--tn-bg:radial-gradient(80% 70% at 20% 0%,rgb(255 255 255 / .9),transparent 60%),linear-gradient(180deg,#F1F3F4 0%,#DCE0E3 100%);
+  --tn-t:#051F20;--tn-s:#3C5A51;--tn-ib:#163832;--tn-ic:#DAF1DE;--tn-pill:rgb(255 255 255 / .7);--tn-pt:#163832;--tn-pr:rgb(169 176 181 / .7);
+  --tn-b:#C3C9CD;--tn-sh:inset 0 1px 0 #fff,inset 0 -1px 0 rgb(5 31 32 / .06),0 20px 42px -28px rgb(5 31 32 / .45)}
+html[data-theme] #tools .explore>.xt.card.tn:hover{transform:translateY(-3px)!important;box-shadow:var(--tn-sh),0 30px 56px -30px rgb(5 31 32 / .5)!important}
+
+/* top line: tab left, icon right, on one baseline */
+html[data-theme] #tools .xt .tool-tab{order:0;align-self:flex-start;margin:0!important;padding:7px 12px!important;border-radius:99px!important;
+  font:700 10px/1 var(--f-body)!important;letter-spacing:.16em!important;text-transform:uppercase!important;
+  background:var(--tn-pill)!important;color:var(--tn-pt)!important;box-shadow:inset 0 0 0 1px var(--tn-pr)!important}
+html[data-theme] #tools .xt .xt-ic{position:absolute!important;top:18px!important;right:18px!important;left:auto!important;margin:0!important;
+  width:40px!important;height:40px!important;display:grid!important;place-items:center!important;border-radius:13px!important;
+  background:var(--tn-ib)!important;color:var(--tn-ic)!important;box-shadow:inset 0 1px 0 rgb(255 255 255 / .25),0 6px 14px -8px rgb(5 31 32 / .5)!important}
+html[data-theme] #tools .xt .xt-ic svg{width:19px!important;height:19px!important}
+html[data-theme] #tools .xt .xt-ic.xt-yt{background:#FF0033!important}
+
+/* the picture fills the middle; the words sit at the foot */
+html[data-theme] #tools .xt :is(.xt-viz,.tool-viz){order:1;flex:1 1 auto!important;display:grid!important;place-items:center!important;align-content:center!important;
+  height:auto!important;min-height:110px!important;margin:8px 0 4px!important;padding:0!important;width:100%}
+html[data-theme] #tools .xt :is(h3,.h3){order:2;margin:0!important;font:600 1.22rem/1.18 var(--f-display)!important;letter-spacing:-.02em!important;color:var(--tn-t)!important;min-height:0!important;max-width:22ch}
+html[data-theme] #tools .xt>p{order:3;margin:0!important;font-size:.9rem!important;line-height:1.5!important;color:var(--tn-s)!important;max-width:36ch}
+html[data-theme] #tools .xt .link{order:5;align-self:flex-start;margin-top:6px!important;display:inline-flex!important;align-items:center;gap:7px;
+  font:700 10.5px/1 var(--f-body)!important;letter-spacing:.15em!important;text-transform:uppercase!important;color:var(--tn-t)!important;
+  padding-bottom:6px!important;background:linear-gradient(90deg,#A9B0B5,#E4E7E9) 0 100%/100% 1.5px no-repeat!important;border:0!important;opacity:1!important}
+html[data-theme] #tools .xt .link svg{width:13px;height:13px;transition:transform .3s}
+html[data-theme] #tools .xt:hover .link svg{transform:translateX(3px)}
+
+/* AI checker (tall): score, bars, then the marked steps */
+html[data-theme] #tools .xt .xv-mark{min-height:150px!important;justify-items:start!important;align-content:center!important;gap:10px!important;padding:0 4px!important}
+html[data-theme] #tools .xt .xv-mark b{font:700 3.6rem/.9 var(--f-display)!important;letter-spacing:-.05em!important;color:var(--tn-t)!important}
+html[data-theme] #tools .xt .xv-mark b small{font-size:1.1rem;color:var(--tn-s)}
+html[data-theme] #tools .xt .xv-mark i{display:block;height:6px;width:100%;border-radius:6px;background:linear-gradient(90deg,#235347,#8EB69B) 0 0/var(--w) 100% no-repeat,#E4E7E9!important}
+html[data-theme="dark"] #tools .xt .xv-mark i{background:linear-gradient(90deg,#8EB69B,#DAF1DE) 0 0/var(--w) 100% no-repeat,rgb(255 255 255 / .08)!important}
+html[data-theme] #tools .xt .xv-steps{order:4;display:grid;gap:0;margin:4px 0 0!important;padding:0!important;list-style:none}
+html[data-theme] #tools .xt .xv-steps li{display:flex;justify-content:space-between;align-items:center;padding:10px 0!important;border-bottom:1px solid var(--tn-b);font-size:.86rem}
+html[data-theme] #tools .xt .xv-steps li span{font:700 10px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--tn-s)}
+html[data-theme] #tools .xt .xv-steps li b{font-weight:700;color:var(--tn-t)!important}
+html[data-theme] #tools .xt .xv-steps li b.ok{color:#235347!important}
+html[data-theme="dark"] #tools .xt .xv-steps li b.ok{color:#8EB69B!important}
+
+/* wide tiles: words on the left, the picture on the right */
+@media (min-width:641px){
+  html[data-theme] #tools .explore>.xt.card.tn:is(.xt-wide){display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)!important;
+    grid-template-rows:auto 1fr auto auto!important;column-gap:28px!important;row-gap:10px!important;align-items:start!important}
+  html[data-theme] #tools .xt-wide .tool-tab{grid-column:1;grid-row:1}
+  html[data-theme] #tools .xt-wide :is(h3,.h3){grid-column:1;grid-row:2;align-self:end}
+  html[data-theme] #tools .xt-wide>p{grid-column:1;grid-row:3}
+  html[data-theme] #tools .xt-wide .link{grid-column:1;grid-row:4}
+  html[data-theme] #tools .xt-wide :is(.xt-viz,.tool-viz,.xv-plan){grid-column:2!important;grid-row:1 / -1!important;align-self:stretch!important;margin:44px 0 0!important}
+}
+/* Crash course: the four weeks as a clean numbered run */
+html[data-theme] #tools .xt .xv-plan{order:1;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px;margin:8px 0 0!important;padding:0!important;list-style:none;align-content:center}
+html[data-theme] #tools .xt .xv-plan li{display:flex;align-items:baseline;gap:12px;padding:12px 0!important;border-bottom:1px solid rgb(218 241 222 / .16);opacity:1!important}
+html[data-theme] #tools .xt .xv-plan li b{font:700 1.5rem/1 var(--f-display)!important;letter-spacing:-.04em;
+  background:linear-gradient(180deg,#F4F6F7,#A9B0B5);-webkit-background-clip:text;background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent}
+html[data-theme] #tools .xt .xv-plan li span{font-size:.92rem;font-weight:600;color:var(--tn-t)}
+html[data-theme] #tools .xt-wide :is(h3,.h3){font-size:1.55rem!important;max-width:18ch}
+
+/* Term of the day */
+html[data-theme] #tools .xt-term{cursor:pointer}
+html[data-theme] #tools .xt-term .xt-word{order:1;flex:1 1 auto;display:flex!important;align-items:center;margin:8px 0 0!important;
+  font:700 clamp(2.2rem,1.6rem + 1.4vw,2.9rem)/1 var(--f-display)!important;letter-spacing:-.04em!important;
+  background:linear-gradient(180deg,#FFFFFF,#C9CED2)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+html[data-theme] #tools .xt-term>p{order:3}
+
+/* Portal: the ID card */
+html[data-theme] #tools .xt .xt-id,html[data-theme] #tools .xt .xv-id{order:1}
+/* Tracker: the grid and its figure side by side */
+html[data-theme] #tools .xt-track .tool-viz.tv-grid{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:26px!important}
+html[data-theme] #tools .xt-track .tg-stat b{font:700 2.6rem/1 var(--f-display)!important;letter-spacing:-.04em;color:var(--tn-t)!important}
+@media (max-width:640px){
+  html[data-theme] #tools .explore>.xt.card.tn{padding:20px!important}
+  html[data-theme] #tools .xt :is(.xt-viz,.tool-viz){min-height:96px!important}
+  html[data-theme] #tools .xt .xv-plan{margin-top:6px!important}
+}
+/* v4.4 fixes: visuals sit straight on the tile (no inner boxes), shelf in a row, plain silver numerals */
+html[data-theme] #tools .xt :is(.xt-viz,.tool-viz){background:none!important;box-shadow:none!important;border:0!important;border-radius:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html[data-theme] #tools .xt :is(.xt-viz,.tool-viz):not(.tv-shelf)::before,html[data-theme] #tools .xt :is(.xt-viz,.tool-viz):not(.tv-shelf)::after{display:none!important}
+html[data-theme] #tools .xt .tool-viz.tv-shelf{display:flex!important;flex-direction:row!important;align-items:flex-end!important;justify-content:center!important;gap:6px!important;
+  height:150px!important;min-height:150px!important;flex:1 1 auto!important;place-items:initial!important;position:relative}
+html[data-theme] #tools .xt .tool-viz.tv-shelf::after{display:block!important;bottom:6px!important}
+html[data-theme] #tools .xt .xv-plan::before{display:none!important}
+html[data-theme][data-theme] #tools .xt .xv-plan li b,html[data-theme][data-theme] #tools .xt .xv-plan li:first-child b{display:inline!important;width:auto!important;height:auto!important;border-radius:0!important;
+  box-shadow:none!important;padding:0!important;font:700 1.6rem/1 var(--f-display)!important;letter-spacing:-.04em!important;
+  background:linear-gradient(180deg,#FFFFFF,#A9B0B5)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+html[data-theme] #tools .xt .xv-plan li{display:flex!important;align-items:baseline!important;grid-template-columns:none!important}
+html[data-theme] #tools .xt .xv-plan span{color:#DAF1DE!important;font:600 .95rem/1.25 var(--f-body)!important}
+html[data-theme] #tools .xt-wide .xv-plan{align-self:center!important;margin:30px 0 0!important}
+html[data-theme] #tools .xt .xv-mark{align-self:stretch;justify-content:stretch!important;align-content:center!important;min-height:180px!important}
+html[data-theme] #tools .explore{grid-auto-rows:minmax(290px,auto)!important}
+html[data-theme] #tools .xt .xv-att{gap:10px!important}
