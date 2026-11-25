@@ -15,7 +15,8 @@ window.RA_CONFIG = {
   shortName: 'Fazil Maniya',
   subject:   'Islamiyat',
   city:      'Karachi',
-  yearsTeaching: 12,               // his YouTube channel: "12 years of teaching experience"
+  yearsTeaching: 15,               // teaching since 2012 (Teach For Pakistan, Gizri)
+  studentsMentored: 7000,          // "more than 7000 of his students have been mentored"
 
   /* 2. CONTACT -------------------------------------------------------------- */
   // ADD HIS WHATSAPP NUMBER HERE. While it is blank, every "message" button copies the
@@ -27,16 +28,41 @@ window.RA_CONFIG = {
 
   instagram: 'https://www.instagram.com/mohammadfazilmaniya',
   facebook:  '',                   // blank = hidden
-  youtube:   'https://www.youtube.com/user/mohammadfazilmaniya',
+  youtube:   'https://www.youtube.com/@mohammadfazilmaniya',
+  whatsappChannel: 'https://whatsapp.com/channel/0029VbC5v7R5EjxrJij3JH2V',
   recordedCourse: 'https://www.learnedguys.com/home/course/islamiyat-2058-o-level-0493-igcse-topical-recorded-course-by-m-fazil-maniya/45',
 
-  /* Where he teaches. Remove a line to hide it. */
-  /* centres: the academies / schools for each place, shown as chips on the home page.
-     ADD THE REAL NAMES HERE, e.g. centres: ['ABC Academy · Gulshan', 'XYZ School · DHA']. Empty = "list to be confirmed". */
+  /* Where he teaches. Remove a line to hide it.
+     centres: { n: name, a: area, logo: 'logos/file.webp' or [two files] }. No logo = a lettered tile until one is added.
+     Put a logo file in the logos/ folder and write its name here. */
   campuses: [
-    { name: 'Karachi centres & schools', note: 'In class · 15+ centres', text: 'Morning classes at leading Karachi schools and evening classes at centres across the city. Message for this session’s centres and timings.', centres: ['Beaconhouse School System', 'Froebel’s Education Centre', 'Credo School', 'The Academy', 'Hexis College', 'Highbrow College', 'Falconhouse Grammar School · North'] },
-    { name: 'Live online', note: 'Online classes', text: 'Live online O Level Islamiyat classes for students outside Karachi and abroad.', centres: [] },
-    { name: 'Recorded course', note: 'LearnedGuys · Urdu', text: 'A 54-hour topical recorded course for 2058 and 0493, to watch at your own pace.', centres: ['LearnedGuys'] }
+    { name: 'Evening classes in Karachi', note: 'Evening · 5 areas', text: 'Evening batches at centres in Jauhar, Gulshan, North Nazimabad, Defence and Bahadurabad.', centres: [
+      { n: 'TP Core', a: 'Jauhar & Gulshan', logo: 'logos/tpc.webp' },
+      { n: 'TP Core · TCR', a: 'North Nazimabad', logo: ['logos/tpc.webp', 'logos/tcr.webp'] },
+      { n: 'TP Core · Burraq', a: 'Defence', logo: 'logos/tpc.webp' },
+      { n: 'Maniya’s', a: 'Bahadurabad' }
+    ] },
+    { name: 'Live online', note: 'Pakistan & abroad', text: 'Live online batches for students across Pakistan and abroad, through three online academies.', centres: [
+      { n: 'Forte', a: 'Online' },
+      { n: 'Gives', a: 'Online', logo: 'logos/gives.webp' },
+      { n: 'Max Academy', a: 'Online', logo: 'logos/max.webp' }
+    ] },
+    { name: 'Recorded course', note: 'LearnedGuys · Urdu', text: 'A 54-hour topical recorded course for 2058 and 0493, to watch at your own pace.', centres: [{ n: 'LearnedGuys', a: 'Recorded' }] }
+  ],
+  /* Morning classes at schools, and schools he has taught at before. */
+  morning: [
+    { n: 'Head Start School System' }, { n: 'Froebel’s Education Centre' }, { n: 'Credo School' }, { n: 'The Academy' }
+  ],
+  previously: [
+    { n: 'The Cedar School', logo: 'logos/cedar.webp' }, { n: 'The City School (PAF Chapter)' }, { n: 'Beaconhouse School System', logo: 'logos/bss.webp' },
+    { n: 'The Patriots School' }, { n: 'Hexis College' }, { n: 'Highbrow College' }, { n: 'Falconhouse Grammar School' },
+    { n: 'Yen Academy' }, { n: 'Mama Baby Care School' }, { n: 'Huffaz Exclusive Academy' }
+  ],
+  /* Students each session, from Sir Fazil's own record. [session, where, students] */
+  JOURNEY: [
+    ['2012–13', 'Teach For Pakistan', 200], ['2013–14', 'Teach For Pakistan', 200], ['2014–15', '', 200], ['2015–16', '', 250],
+    ['2016–17', '', 300], ['2017–18', '', 300], ['2018–19', '', 500], ['2019–20', '', 500], ['2020–21', '', 500], ['2021–22', '', 500],
+    ['2022–23', 'SWK', 750], ['2023–24', 'SWK', 750], ['2024–25', 'SWK', 1000], ['2025–26', 'SWK', 1000], ['2026–27', 'TP Core', 1200]
   ],
   online: true,
 

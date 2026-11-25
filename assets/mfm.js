@@ -229,15 +229,64 @@
   }
   if (document.readyState === 'complete') setTimeout(build, 0); else addEventListener('load', function () { setTimeout(build, 0); }, { once: true });
 })();
-/* where he teaches: the centres / affiliations under each place, from config.js */
+/* where he teaches: centres with their logos (or a lettered tile), the about page's school wall and journey chart, all from config.js */
 (function () {
   'use strict';
   var C = window.RA_CONFIG || {}, list = C.campuses || [];
+  var esc = function (t) { return String(t == null ? '' : t).replace(/[<&"]/g, function (c) { return c === '<' ? '&lt;' : c === '&' ? '&amp;' : '&quot;'; }); };
+  var norm = function (c) { return typeof c === 'string' ? { n: c } : (c || {}); };
+  var mono = function (n) { var w = String(n).replace(/[’'`]s\b/g, '').split(/[\s·()\-]+/).filter(function (x) { return x && !/^(the|of|and|&)$/i.test(x); }); return ((w[0] || '?')[0] + (w[1] ? w[1][0] : '')).toUpperCase(); };
+  var logo = function (c) {
+    var L = c.logo ? [].concat(c.logo) : [];
+    return L.length ? '<span class="lg' + (L.length > 1 ? ' lg-2' : '') + '">' + L.map(function (src) { return '<img src="' + esc(src) + '" alt="" loading="lazy" decoding="async">'; }).join('') + '</span>'
+      : '<span class="lg lg-m" aria-hidden="true">' + esc(mono(c.n)) + '</span>';
+  };
+  var item = function (c, tag) { c = norm(c); return '<' + tag + ' class="aff-i">' + logo(c) + '<span class="aff-t"><b>' + esc(c.n) + '</b>' + (c.a ? '<small>' + esc(c.a) + '</small>' : '') + '</span></' + tag + '>'; };
   document.querySelectorAll('.pl-aff[data-aff]').forEach(function (ul, i) {
     var cs = (list[i] && list[i].centres) || [];
-    ul.innerHTML = cs.length ? cs.map(function (t) { return '<li>' + String(t).replace(/[<&]/g, function (c) { return c === '<' ? '&lt;' : '&amp;'; }) + '</li>'; }).join('')
-      : '<li class="tbc">Centre list · to be confirmed</li>';
+    ul.innerHTML = cs.length ? cs.map(function (c) { return item(c, 'li'); }).join('') : '<li class="tbc">Centre list · to be confirmed</li>';
   });
+  var GROUPS = { evening: (list[0] || {}).centres, online: (list[1] || {}).centres, morning: C.morning, previously: C.previously };
+  document.querySelectorAll('[data-aff-group]').forEach(function (ul) {
+    var cs = GROUPS[ul.getAttribute('data-aff-group')] || [];
+    if (!cs.length) { var sec = ul.closest('.sw-g'); if (sec) sec.hidden = true; return; }
+    ul.innerHTML = cs.map(function (c) { return item(c, 'li'); }).join('');
+  });
+
+  /* the journey: students each session, one emerald bar per year, a tooltip on each, a table for screen readers */
+  var host = document.getElementById('jrChart'), J = C.JOURNEY || [];
+  if (host && J.length) {
+    var max = 1200, top = Math.max.apply(null, J.map(function (r) { return r[2]; }));
+    while (max < top) max += 400;
+    var lab = {}; J.forEach(function (r, i) { if (i === 0 || r[2] !== J[i - 1][2]) lab[i] = 1; });
+    var spans = []; J.forEach(function (r, i) { if (!r[1]) return; var l = spans[spans.length - 1]; if (l && l.w === r[1] && l.e === i - 1) l.e = i; else spans.push({ w: r[1], s: i, e: i }); });
+    host.style.setProperty('--n', J.length);
+    host.innerHTML = '<div class="jr-grid" aria-hidden="true">' + [max, max * 2 / 3, max / 3].map(function (v) { return '<i style="--y:' + (v / max * 100) + '%"><span>' + Math.round(v).toLocaleString('en') + '</span></i>'; }).join('') + '</div>' +
+      '<div class="jr-plot">' + J.map(function (r, i) {
+        return '<button type="button" class="jr-b" style="--k:' + i + ';--h:' + (r[2] / max * 100).toFixed(2) + '%" data-i="' + i + '" aria-label="' + esc(r[0] + ': ' + r[2].toLocaleString('en') + ' students' + (r[1] ? ', ' + r[1] : '')) + '">' +
+          (lab[i] ? '<span class="jr-v">' + r[2].toLocaleString('en') + '</span>' : '') + '<i></i><span class="jr-y"><span class="jr-yf">' + esc('’' + r[0].slice(2)) + '</span><span class="jr-ys">' + esc('’' + r[0].slice(2, 4)) + '</span></span></button>';
+      }).join('') + '</div>' +
+      '<div class="jr-band" aria-hidden="true">' + spans.map(function (sp) { var sh = sp.w.split(/\s+/).length > 1 ? sp.w.split(/\s+/).map(function (w) { return w[0]; }).join('').toUpperCase() : sp.w; return '<span style="grid-column:' + (sp.s + 1) + '/' + (sp.e + 2) + '"><b class="jr-bf">' + esc(sp.w) + '</b><b class="jr-bs">' + esc(sh) + '</b></span>'; }).join('') + '</div>' +
+      '<div class="jr-tip" role="status" hidden></div>';
+    var tip = host.querySelector('.jr-tip');
+    var show = function (b) {
+      var r = J[+b.dataset.i], hb = host.getBoundingClientRect(), bb = b.querySelector('i').getBoundingClientRect();
+      tip.innerHTML = '<small>' + esc(r[0]) + '</small><b>' + r[2].toLocaleString('en') + ' students</b>' + (r[1] ? '<em>' + esc(r[1]) + '</em>' : '');
+      tip.hidden = false; tip.style.left = Math.min(Math.max(bb.left + bb.width / 2 - hb.left, 70), hb.width - 70) + 'px'; tip.style.top = (bb.top - hb.top) + 'px';
+      host.querySelectorAll('.jr-b').forEach(function (x) { x.classList.toggle('on', x === b); });
+    };
+    var hide = function () { tip.hidden = true; host.querySelectorAll('.jr-b.on').forEach(function (x) { x.classList.remove('on'); }); };
+    host.addEventListener('pointerover', function (e) { var b = e.target.closest('.jr-b'); if (b) show(b); });
+    host.addEventListener('pointerleave', hide);
+    host.addEventListener('focusin', function (e) { var b = e.target.closest('.jr-b'); if (b) show(b); });
+    host.addEventListener('focusout', hide);
+    var tb = document.getElementById('jrTable');
+    if (tb) tb.innerHTML = J.map(function (r) { return '<tr><td>' + esc(r[0]) + '</td><td>' + esc(r[1] || '—') + '</td><td>' + r[2].toLocaleString('en') + '</td></tr>'; }).join('');
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      host.classList.add('jr-wait');
+      var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { host.classList.remove('jr-wait'); io.disconnect(); } }, { threshold: .25 }); io.observe(host);
+    }
+  }
 })();
 /* curved ribbons: the words flow along the curve, a little faster while you scroll (after the Sir Suhail Aziz ribbon) */
 (function () {
