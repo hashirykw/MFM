@@ -1914,3 +1914,117 @@ html[data-theme][data-theme][data-theme] .v2-form .field :is(input,textarea,sele
   background:var(--surf-2)!important;color:var(--tx)!important;box-shadow:inset 0 0 0 1px var(--line)!important}
 html[data-theme="light"][data-theme][data-theme] .v2-form .field :is(input,textarea,select),html[data-theme="light"][data-theme][data-theme] .v2-form .xsel-btn{box-shadow:inset 0 0 0 1px rgb(169 176 181 / .6),inset 0 1px 2px rgb(5 31 32 / .05)!important}
 html[data-theme][data-theme] .v2-form{--v-ink:var(--surf-2)}
+
+/* ==================================================================== v4.2 · the courses: a raked deck (after Cambridge Online's streams)
+   Three cards arrive gathered, then spread into a raked perspective. Pressing one pulls it forward, square to
+   the reader, and what the course covers unfolds inside. Phones: the rake is dropped and the cards swipe, with dots.
+   MFM cut: solid white / deep-green panes with a silver rim (no heavy blur), greens for the labels. */
+.co-head{text-align:center;justify-items:center;display:grid;max-width:760px;margin-inline:auto}
+.co-head .eyebrow{margin:0 0 14px!important;color:var(--em)!important}
+.co-rule{width:56px;height:1px;margin:0 auto 18px;background:var(--silver-line)}
+.co-head .title{margin:0 0 16px!important}
+.co-head .title em{display:inline-block}
+.co-head .lede{margin-inline:auto!important;max-width:36rem}
+
+.trio{position:relative;perspective:1500px;perspective-origin:50% 46%;padding:8px 0 4px;margin-top:clamp(28px,4vw,48px);--cw:340px;--lap:.08;
+  --trio-face:linear-gradient(180deg,#FFFFFF,#F5F7F8);--trio-rim:#C3C9CD;--trio-ink:#051F20;--trio-ink-2:#3C5A51;--trio-acc:#235347;--trio-line:rgb(22 56 50 / .12);
+  --trio-shadow:0 1px 0 #fff inset,0 30px 60px -34px rgb(5 31 32 / .45),0 12px 24px -18px rgb(5 31 32 / .2)}
+html[data-theme="dark"] .trio{--trio-face:linear-gradient(180deg,#0E3029,#0A2722);--trio-rim:rgb(201 206 210 / .38);--trio-ink:#DAF1DE;--trio-ink-2:rgb(218 241 222 / .72);--trio-acc:#8EB69B;--trio-line:rgb(142 182 155 / .16);
+  --trio-shadow:0 1px 0 rgb(255 255 255 / .06) inset,0 34px 64px -30px rgb(0 0 0 / .8)}
+@media (min-width:1151px) and (max-width:1279px){.trio{--cw:316px}}
+@media (min-width:1001px) and (max-width:1150px){.trio{--cw:290px;--lap:.1}}
+@media (min-width:901px) and (max-width:1000px){.trio{--cw:256px;--lap:.14}}
+.trio__rail{position:relative;display:flex;justify-content:center;align-items:center;min-height:540px;transform-style:preserve-3d;padding-left:clamp(30px,5vw,80px)}
+.trio__c{position:relative;width:min(var(--cw),82vw);flex:0 0 auto;border-radius:24px;overflow:hidden;cursor:pointer;text-align:left;outline:0;
+  background:var(--trio-face) padding-box,linear-gradient(140deg,#FFFFFF,#BFC5CA 30%,#F2F4F5 52%,#A9B0B5 78%,#E6E9EB) border-box;border:1.5px solid transparent;
+  box-shadow:var(--trio-shadow);transform-style:preserve-3d;
+  transform:translateX(calc(var(--i) * -32%)) rotateY(22deg) scale(.9);opacity:0;
+  transition:transform .9s cubic-bezier(.22,.9,.28,1),opacity .6s ease,box-shadow .5s ease,filter .45s ease}
+html[data-theme="dark"] .trio__c{background:var(--trio-face) padding-box,linear-gradient(140deg,#8D959A,#3E474B 30%,#C9CED2 52%,#4A5357 78%,#7E868B) border-box}
+.trio__c:focus-visible{box-shadow:var(--trio-shadow),0 0 0 3px rgb(142 182 155 / .55)}
+.trio.in .trio__c{opacity:1;transform:translateZ(calc(var(--i) * -44px)) rotateY(22deg);transition-delay:calc(var(--i) * 115ms)}
+.trio.set .trio__c{transition-delay:0s!important}
+.trio__glass{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.8;transition:opacity .5s ease;
+  background:linear-gradient(112deg,rgb(255 255 255 / .7),transparent 40%,rgb(218 241 222 / .25) 78%,transparent)}
+html[data-theme="dark"] .trio__glass{background:linear-gradient(112deg,rgb(218 241 222 / .08),transparent 40%,rgb(201 206 210 / .06) 78%,transparent)}
+.trio__mark{position:absolute;right:-18px;bottom:-18px;z-index:0;pointer-events:none;width:160px;height:160px;color:var(--trio-acc);opacity:.14;transition:opacity .5s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+.trio__mark svg{width:100%;height:100%;display:block}
+.trio__c:hover .trio__mark{opacity:.24;transform:translate(-5px,-5px) rotate(-4deg)}
+.trio__c.on .trio__mark{opacity:.06;transform:translate(6px,6px) scale(.94)}
+.trio__in{position:relative;z-index:2;padding:24px 22px 22px;display:flex;flex-direction:column;min-height:490px;min-width:0}
+.trio__in>*{min-width:0}
+.trio__t,.trio__d{overflow-wrap:anywhere}
+.trio__top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:2px}
+.trio__code{font:700 10px/1 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--trio-acc);border:1px solid var(--trio-rim);border-radius:99px;padding:7px 12px;
+  background:linear-gradient(180deg,rgb(255 255 255 / .9),rgb(236 238 240 / .6));white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto}
+html[data-theme="dark"] .trio__code{background:rgb(255 255 255 / .04)}
+.trio__n{font:700 2.7rem/.82 var(--f-display);letter-spacing:-.05em;flex:0 0 auto;pointer-events:none;
+  background:linear-gradient(180deg,#E4E7E9 0%,#A9B0B5 55%,#CDD2D6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+html[data-theme="dark"] .trio__n{background:linear-gradient(180deg,#F4F6F7 0%,#8D959A 60%,#C9CED2 100%);-webkit-background-clip:text;background-clip:text}
+.trio__t{font:700 1.6rem/1.08 var(--f-display)!important;letter-spacing:-.03em!important;margin:18px 0 10px!important;color:var(--trio-ink)!important}
+.trio__d{font-size:.9rem;line-height:1.6;color:var(--trio-ink-2);margin:0 0 16px;max-width:34ch}
+.trio__chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:14px}
+.trio__chip{font:700 10px/1 var(--f-body);letter-spacing:.13em;text-transform:uppercase;color:var(--trio-ink-2);border:1px solid var(--trio-rim);border-radius:99px;padding:8px 12px;white-space:nowrap}
+.trio__chip--acc{color:#0B2B26;font-size:10.5px;padding:8px 14px;border-color:#8EB69B;
+  background:linear-gradient(180deg,#E6F5E9,#C6E2CD);box-shadow:inset 0 1px 0 rgb(255 255 255 / .7),0 4px 12px -6px rgb(35 83 71 / .45);transition:box-shadow .42s ease,transform .42s cubic-bezier(.16,1,.3,1)}
+html[data-theme="dark"] .trio__chip--acc{color:#DAF1DE;background:linear-gradient(180deg,rgb(142 182 155 / .3),rgb(142 182 155 / .16));box-shadow:inset 0 1px 0 rgb(218 241 222 / .2),0 4px 12px -6px rgb(0 0 0 / .5)}
+.trio__c:hover .trio__chip--acc,.trio__c.on .trio__chip--acc{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgb(255 255 255 / .75),0 7px 16px -6px rgb(35 83 71 / .55)}
+.trio__more{max-height:0;overflow:hidden;opacity:0;min-width:0;padding-bottom:4px;transition:max-height .6s ease,opacity .4s ease}
+.trio__list{display:grid;gap:0;margin:4px 0 14px;min-width:0}
+.trio__list a{display:grid;gap:3px;padding:10px 0;min-width:0;color:var(--trio-ink);border-bottom:1px solid var(--trio-line);text-decoration:none;transition:color .2s}
+.trio__list a:last-child{border-bottom:0}
+.trio__list a:hover{color:var(--trio-acc)}
+.trio__list em{font-style:normal;font-size:.86rem;font-weight:600;line-height:1.3;min-width:0}
+.trio__meta{font:700 9.5px/1.35 var(--f-body);letter-spacing:.12em;text-transform:uppercase}
+.trio__meta b{color:var(--trio-acc);font-weight:700}
+.trio__btns{display:flex;gap:8px;flex-wrap:wrap}
+@media (min-width:901px){
+  .trio,.trio__rail{pointer-events:none}
+  .trio__c{pointer-events:auto}
+  .trio__c+.trio__c{margin-left:calc(var(--cw) * -1 * var(--lap))}
+  .trio.in .trio__c:hover{transform:translateZ(calc(var(--i) * -44px + 40px)) rotateY(16deg)}
+  .trio.in .trio__c.on{transform:translateX(calc((1 - var(--i)) * 24%)) translateZ(90px) rotateY(0deg);z-index:5;
+    box-shadow:var(--trio-shadow),0 50px 90px -40px rgb(5 31 32 / .55)}
+  .trio.in .trio__c.on .trio__glass{opacity:.3}
+  .trio.in .trio__c.on .trio__more{max-height:460px;opacity:1}
+  .trio.in .trio__c.on .trio__list{grid-template-columns:1fr 1fr;gap:0 18px}
+  .trio.in.picked .trio__c:not(.on){opacity:.42;filter:saturate(.7)}
+  .trio__dots{display:none}
+}
+@media (max-width:900px){
+  .trio{perspective:none;padding:4px 0}
+  .trio__rail{display:flex;gap:12px;min-height:0;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;cursor:grab;justify-content:flex-start;
+    padding:14px max(12px,calc((100% - min(352px,88vw)) / 2 + 14px)) 20px;margin-inline:-16px;scrollbar-width:none}
+  .trio__rail.is-drag{scroll-snap-type:none;cursor:grabbing;scroll-behavior:auto}
+  .trio__rail::-webkit-scrollbar{display:none}
+  .trio__c{width:min(352px,88vw);scroll-snap-align:center;transform:translateY(16px);opacity:0;
+    transition:transform .55s cubic-bezier(.22,.9,.28,1),opacity .5s ease,box-shadow .45s ease,filter .45s ease}
+  .trio.in .trio__c{transform:none;opacity:1;transition-delay:calc(var(--i) * 90ms)}
+  .trio__in{min-height:min(440px,118vw);padding:22px 20px 20px}
+  .trio__t{font-size:1.45rem!important;margin:14px 0 9px!important}
+  .trio__d{font-size:.86rem}
+  .trio__n{font-size:2.4rem}
+  .trio__mark{width:134px;height:134px;right:-14px;bottom:-14px}
+  .trio.in .trio__c.on{transform:translateY(-6px) scale(1.02);z-index:5}
+  .trio__c.on .trio__more{max-height:640px;opacity:1}
+  .trio__c.on .trio__glass{opacity:.3}
+  .trio.in.picked .trio__c:not(.on){opacity:.5;filter:saturate(.7);transform:scale(.965)}
+  .trio__dots{display:flex;justify-content:center;gap:2px;margin-top:4px}
+  .trio__dots button{width:32px;height:32px;display:grid;place-items:center;border:0;padding:0;cursor:pointer;background:none}
+  .trio__dots button::after{content:"";display:block;width:6px;height:6px;border-radius:50%;background:#A9B0B5;transition:.3s ease}
+  .trio__dots button.on::after{background:var(--em);width:18px;border-radius:99px}
+}
+@media (min-width:901px) and (max-width:1180px){
+  .trio__in{padding:20px 18px;min-height:466px}
+  .trio.in .trio__c.on .trio__list{grid-template-columns:1fr}
+  .trio.in .trio__c.on .trio__more{max-height:560px}
+}
+@media (prefers-reduced-motion:reduce){
+  .trio__c,.trio.in .trio__c{transition:none;opacity:1;transform:none}
+  .trio.in .trio__c.on,.trio.in.picked .trio__c:not(.on){transform:none;transition:none}
+}
+html:not(.js) .trio__c{opacity:1;transform:none}
+html[data-theme] #courses .sec-head.co-head{display:grid!important;grid-template-columns:minmax(0,1fr)!important;justify-items:center!important;text-align:center!important;max-width:820px!important;margin-inline:auto!important;gap:0!important}
+html[data-theme] #courses .co-head>*{grid-column:1!important;grid-row:auto!important;justify-self:center!important;text-align:center!important}
+html[data-theme] #courses .co-head .eyebrow{display:block}
+html[data-theme] #courses .co-head .title{font-size:clamp(2.2rem,1.4rem + 3vw,4rem)!important;line-height:1.02!important}

@@ -556,3 +556,83 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
   }, { threshold: .45 });
   cards.forEach(function (c) { io.observe(c); });
 })();
+
+/* v4.2 · the courses deck (after Cambridge Online's streams): spreads when it comes into view, holds one card
+   forward at a time; phones swipe with dots. "View details" opens the course pop-up. */
+(function () {
+  'use strict';
+  var trio = document.getElementById('trio');
+  if (!trio) return;
+  var cards = [].slice.call(trio.querySelectorAll('.trio__c'));
+  if (!cards.length) return;
+  var dots = document.getElementById('trioDots');
+  var phone = window.matchMedia('(max-width:900px)');
+  var dragged = false;
+  function settle() { setTimeout(function () { trio.classList.add('set'); }, 1500); }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (rows) {
+      rows.forEach(function (r) { if (r.isIntersecting) { trio.classList.add('in'); settle(); io.disconnect(); } });
+    }, { threshold: .22 });
+    io.observe(trio);
+  } else { trio.classList.add('in'); settle(); }
+
+  function close() { cards.forEach(function (c) { c.classList.remove('on'); }); trio.classList.remove('picked'); }
+  function choose(card) {
+    trio.classList.add('set');
+    var already = card.classList.contains('on');
+    close();
+    if (already) return;
+    trio.classList.add('picked'); card.classList.add('on');
+    if (phone.matches) card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+  function details(card) {
+    var d = card.querySelector('.trio__data'); if (!d || !window.RA || !RA.modal) return;
+    var a = d.dataset, body = d.innerHTML;
+    RA.modal('<div class="acc-pop"><div class="acc-pop-h"><div><span class="tag">' + a.tag + '</span><h2 id="mTitle">' + a.h + '</h2><p class="acc-sub">' + a.sub + '</p></div><b class="acc-pop-code">' + a.big + '</b></div>' +
+      body + '<a class="btn btn-pri" href="' + a.href + '">Full course page</a></div>');
+  }
+  cards.forEach(function (c) {
+    c.addEventListener('click', function (e) {
+      if (dragged) return;
+      if (e.target.closest('[data-jump]')) { e.preventDefault(); e.stopPropagation(); details(c); return; }
+      if (e.target.closest('a')) return;
+      choose(c);
+    });
+    c.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target === c) { e.preventDefault(); choose(c); } });
+  });
+  document.addEventListener('click', function (e) { if (trio.classList.contains('picked') && !e.target.closest('.trio__c')) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && trio.classList.contains('picked')) close(); });
+
+  var rail = trio.querySelector('.trio__rail');
+  if (!dots || !rail) return;
+  function centreOf(j) { var c = cards[j]; return c.offsetLeft + c.offsetWidth / 2 - rail.clientWidth / 2; }
+  function nearest() {
+    var mid = rail.scrollLeft + rail.clientWidth / 2, best = 0, bd = Infinity;
+    cards.forEach(function (c, j) { var d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < bd) { bd = d; best = j; } });
+    return best;
+  }
+  cards.forEach(function (c, j) {
+    var b = document.createElement('button'); b.type = 'button';
+    b.setAttribute('aria-label', 'Show ' + ((c.querySelector('.trio__t') || {}).textContent || 'course ' + (j + 1)));
+    b.addEventListener('click', function () { rail.scrollTo({ left: centreOf(j), behavior: 'smooth' }); });
+    dots.appendChild(b);
+  });
+  var dEls = [].slice.call(dots.querySelectorAll('button'));
+  function mark() { var n = nearest(); dEls.forEach(function (e, j) { e.classList.toggle('on', j === n); e.setAttribute('aria-current', j === n ? 'true' : 'false'); }); }
+  var raf = null;
+  rail.addEventListener('scroll', function () { if (raf) return; raf = requestAnimationFrame(function () { raf = null; mark(); }); }, { passive: true });
+  mark();
+  var down = false, startX = 0, startLeft = 0, moved = 0;
+  rail.addEventListener('pointerdown', function (e) { if (e.pointerType === 'touch' || e.button !== 0) return; down = true; moved = 0; startX = e.clientX; startLeft = rail.scrollLeft; rail.classList.add('is-drag'); });
+  rail.addEventListener('pointermove', function (e) {
+    if (!down) return; var dx = e.clientX - startX; if (Math.abs(dx) > moved) moved = Math.abs(dx);
+    if (moved > 3) { if (!rail.hasPointerCapture(e.pointerId)) rail.setPointerCapture(e.pointerId); rail.scrollLeft = startLeft - dx; }
+  });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) {
+    rail.addEventListener(ev, function (e) {
+      if (!down) return; down = false; rail.classList.remove('is-drag');
+      if (rail.hasPointerCapture && rail.hasPointerCapture(e.pointerId)) rail.releasePointerCapture(e.pointerId);
+      if (moved > 6) { dragged = true; setTimeout(function () { dragged = false; }, 0); rail.scrollTo({ left: centreOf(nearest()), behavior: 'smooth' }); }
+    });
+  });
+})();
