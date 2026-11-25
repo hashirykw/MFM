@@ -3749,3 +3749,16 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] #wo
   html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] #words .cw.card:not(.hot):hover::after{background:linear-gradient(180deg,#5E8A73,#235347)!important;-webkit-background-clip:text!important;background-clip:text!important}
   html[data-theme="dark"][data-theme][data-theme][data-theme][data-theme][data-theme] #words .cw.card:not(.hot):hover::after{background:linear-gradient(180deg,#FFFFFF,#8EB69B)!important;-webkit-background-clip:text!important;background-clip:text!important}
 }
+
+/* ===== v54 · dark theme: tracker readable, plan tiles even, tabs as glass ===== */
+html[data-theme="dark"][data-theme][data-theme] #tools .xt-track .tg-stat b{color:#DAF1DE!important;-webkit-text-fill-color:#DAF1DE!important;background:none!important;opacity:1!important}
+html[data-theme="dark"][data-theme][data-theme] #tools .xt-track .tg-k,html[data-theme="dark"][data-theme][data-theme] #tools .xt-track .tg-l{color:rgb(218 241 222 / .62)!important}
+html[data-theme="dark"][data-theme][data-theme] #tools .xt-track .tg-bar{background:rgb(255 255 255 / .1)!important}
+html[data-theme="dark"][data-theme][data-theme] #tools .xt.card>p{color:rgb(218 241 222 / .7)!important}
+html[data-theme="dark"][data-theme][data-theme] #tools .xt.card .tool-tab{background:rgb(255 255 255 / .07)!important;color:#DAF1DE!important;border:1px solid rgb(218 241 222 / .22)!important;box-shadow:inset 0 1px 0 rgb(255 255 255 / .08)!important}
+/* crash plan: every tile has its number on top and its label on the bottom line */
+@media (min-width:641px){
+  html[data-theme][data-theme] #tools .xt-wide .xv-plan li{grid-template-rows:auto 1fr!important;align-content:stretch!important;min-height:104px!important}
+  html[data-theme][data-theme] #tools .xt-wide .xv-plan li span{align-self:end;line-height:1.2!important}
+  html[data-theme][data-theme] #tools .xt-wide .xv-plan li b{opacity:.5}
+}
