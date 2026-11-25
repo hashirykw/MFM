@@ -5,7 +5,8 @@ A multi-page site for Sir Mohammad Fazil Maniya (MFM): Cambridge O Level Islamiy
 ## v2 (Nov 2026): how the files fit together
 
 - **`assets/`**: the styles and script every page shares, cached by the browser after the first page. `mfm-1/2/3.css` and `mfm-core.js` are the engine. **`mfm.css` is the v2 look** (fonts, silver/glass finish, buttons, cards, nav, menu, the 3D card deck); tune the design there. `mfm.js` sets up the card decks.
-- **`fonts/`**: self-hosted Bodoni Moda (headings), Manrope (text), DM Mono (labels), Amiri (Arabic). No Google Fonts call.
+- **`fonts/`**: self-hosted Outfit (headings), Urbanist (text and labels), Amiri (Arabic). No Google Fonts call. (The old Bodoni Moda, Manrope and DM Mono files are no longer used.)
+- **v4 (Nov 2026)**: palette #051F20 #0B2B26 #163832 #235347 #8EB69B #DAF1DE; white + brushed silver base in White mode; burgundy for the conversion buttons (Register, Enrol, hero); glass blur removed except a light blur on the nav and bottom bar; method cards redesigned with a filling step number. All v4 rules sit at the end of `assets/mfm.css`.
 - **`vendor/`**: GSAP, ScrollTrigger, Lenis and three.js, self-hosted. three.js loads only after the page is up, so it never delays the text.
 - **`photos/`**: drop the real pictures here with these names (WebP, about 1600 px wide) and they appear on their own:
 

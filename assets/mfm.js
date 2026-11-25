@@ -230,7 +230,18 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
           tl.to(c, { '--py': '0px', '--po': 1, duration: 1, ease: 'power2.out' }, i - 1)
             .to(cards.slice(0, i), { '--ps': function (k) { return 1 - (i - k) * .035; }, duration: 1, ease: 'power2.out' }, i - 1);
         });
+        /* v4: each step number fills, and its heading inks in, as its card lands; the first fills on the way in */
+        var ease = function (x) { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); };
+        tl.eventCallback('onUpdate', function () {
+          var at = tl.time();
+          for (var i = 1; i < n; i++) cards[i].style.setProperty('--fl', ease((at - (i - 1) - .2) / .75).toFixed(3));
+        });
+        var first = ScrollTrigger.create({ trigger: list, start: 'top 88%', end: 'top 40%',
+          onUpdate: function (s) { cards[0].style.setProperty('--fl', ease(s.progress).toFixed(3)); },
+          onRefresh: function (s) { cards[0].style.setProperty('--fl', ease(s.progress).toFixed(3)); } });
         return function () {
+          if (first) first.kill();
+          cards.forEach(function (c) { c.style.removeProperty('--fl'); });
           if (track.parentNode) { track.parentNode.insertBefore(list, track); track.remove(); }
           list.classList.remove('v2-pile'); list.style.height = '';
           cards.forEach(function (c) { c.style.height = ''; c.style.top = ''; c.style.zIndex = ''; });
@@ -528,4 +539,20 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+})();
+
+/* v4 · method cards: the step number carries its own copy for the fill; outside the pile (phones) the fill plays once in view */
+(function () {
+  'use strict';
+  var cards = document.querySelectorAll('#method .proc-s');
+  cards.forEach(function (c) { var b = c.querySelector('.pn b'); if (b) b.setAttribute('data-n', b.textContent.trim()); });
+  if (!('IntersectionObserver' in window)) { cards.forEach(function (c) { c.classList.add('fl-on'); }); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      if (e.target.parentNode && e.target.parentNode.classList.contains('v2-pile')) return;
+      e.target.classList.add('fl-on'); io.unobserve(e.target);
+    });
+  }, { threshold: .45 });
+  cards.forEach(function (c) { io.observe(c); });
 })();

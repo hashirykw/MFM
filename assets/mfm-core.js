@@ -386,7 +386,7 @@ const Snd = RA.Snd;
 /* ---------------------------------------------------------------- theme */
 RA.theme = function (t) {
   root.dataset.theme = t; RA.store.set('ra-theme', t);
-  const m = $('meta[name="theme-color"]'); if (m) m.content = t === 'light' ? '#f4f7f5' : '#04110c';
+  const m = $('meta[name="theme-color"]'); if (m) m.content = t === 'light' ? '#f2faf4' : '#051f20';
   $$('[data-theme-btn]').forEach(b => b.setAttribute('aria-pressed', String(t === 'light')));
   if (RA.BG) RA.BG.theme(t);
   document.dispatchEvent(new CustomEvent('ra:theme', { detail: t }));
@@ -1202,8 +1202,9 @@ const cache = {};
 const MOB = () => innerWidth < 760;
 
 const PAL = {
-  dark: [[0.80, 0.85, 0.83], [0.26, 0.82, 0.57], [0.16, 0.62, 0.42], [0.93, 0.96, 0.95]],
-  light: [[0.05, 0.40, 0.26], [0.09, 0.52, 0.34], [0.42, 0.47, 0.45], [0.03, 0.22, 0.15]]
+  /* palette: #051F20 #0B2B26 #163832 #235347 #8EB69B #DAF1DE */
+  dark: [[0.855, 0.945, 0.871], [0.557, 0.714, 0.608], [0.137, 0.325, 0.278], [0.80, 0.90, 0.83]],
+  light: [[0.137, 0.325, 0.278], [0.086, 0.220, 0.196], [0.557, 0.714, 0.608], [0.043, 0.169, 0.149]]
 };
 
 /* ------------------------------------------------------------ shape kit */
