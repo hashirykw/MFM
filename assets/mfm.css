@@ -3705,3 +3705,6 @@ html[data-theme][data-theme] #method .proc-s .pn .tag::before{content:"";width:7
 }
 /* a covered card hands the stage over: its words fade so only its edge shows behind the new one */
 html[data-theme][data-theme] #method .v2-pile>.proc-s.card>:is(.pn,h3,ul){opacity:clamp(0,calc(1 - var(--pd,0) * 5),1);transition:none}
+@media (max-width:900px){html[data-theme][data-theme] #method .proc-s .pn .tag{max-width:none!important;width:auto!important;overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important;flex:none!important}}
+html[data-theme][data-theme] #method .proc-s .pn{overflow:visible!important}
+html[data-theme][data-theme] #method .proc-s .pn .tag{padding-right:3px!important}
