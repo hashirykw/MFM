@@ -47,11 +47,11 @@ window.RA_CONFIG = {
       { n: 'Gives', a: 'Online', logo: 'logos/gives.webp' },
       { n: 'Max Academy', a: 'Online', logo: 'logos/max.webp' }
     ] },
-    { name: 'Recorded course', note: 'LearnedGuys · Urdu', text: 'A 54-hour topical recorded course for 2058 and 0493, to watch at your own pace.', centres: [{ n: 'LearnedGuys', a: 'Recorded' }] }
+    { name: 'Recorded course', note: 'LearnedGuys · Urdu', text: 'A 54-hour topical recorded course for 2058 and 0493, to watch at your own pace.', centres: [{ n: 'LearnedGuys', a: 'Recorded', logo: 'logos/learnedguys.webp' }] }
   ],
   /* Morning classes at schools, and schools he has taught at before. */
   morning: [
-    { n: 'Head Start School System' }, { n: 'Froebel’s Education Centre' }, { n: 'Credo School' }, { n: 'The Academy' }
+    { n: 'Head Start School System', logo: 'logos/hss.webp' }, { n: 'Froebel’s Education Centre', logo: 'logos/fec.webp' }, { n: 'Credo School', logo: 'logos/credo.webp' }, { n: 'The Academy', logo: 'logos/academy.webp' }
   ],
   previously: [
     { n: 'The Cedar School', logo: 'logos/cedar.webp' }, { n: 'The City School (PAF Chapter)' }, { n: 'Beaconhouse School System', logo: 'logos/bss.webp' },
