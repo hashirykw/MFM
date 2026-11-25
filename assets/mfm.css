@@ -2572,3 +2572,22 @@ html[data-theme] #tools .xt-track .tg-stat{min-width:0!important;max-width:150px
 html[data-theme] #tools .xt-track .tg-k{white-space:normal!important;line-height:1.3!important}
 html[data-theme] #tools .xt-track .tg-stat b{font-size:2.5rem!important}
 html[data-theme] #tools .xt-track .tg-l{flex-wrap:wrap}
+
+/* ==================================================================== v5.5 · Sir Fazil's Assistant: the floating button */
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab{display:inline-flex!important;flex-direction:row!important;align-items:center!important;gap:12px!important;height:auto!important;
+  padding:7px 20px 7px 7px!important;border-radius:999px!important;border:0!important;cursor:pointer;
+  background:radial-gradient(120% 140% at 0% 0%,rgb(142 182 155 / .35),transparent 55%),linear-gradient(160deg,#2E6655 0%,#163832 55%,#0B2B26 100%)!important;
+  box-shadow:inset 0 1px 0 rgb(218 241 222 / .22),0 0 0 1px rgb(201 206 210 / .55),0 18px 40px -16px rgb(5 31 32 / .65)!important;color:#FFFFFF!important;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab:hover{transform:translateY(-2px)!important;box-shadow:inset 0 1px 0 rgb(218 241 222 / .25),0 0 0 1px #E4E7E9,0 24px 50px -16px rgb(5 31 32 / .7)!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab .seal{position:relative;width:44px!important;height:44px!important;flex:none;border-radius:50%!important;padding:0!important;background:none!important;box-shadow:0 6px 14px -6px rgb(0 0 0 / .6)!important;border:0!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab .seal img{width:100%!important;height:100%!important;border-radius:50%;object-fit:cover;display:block}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab .seal::after{content:""!important;position:absolute!important;right:-1px;bottom:1px;top:auto!important;left:auto!important;width:11px!important;height:11px!important;border-radius:50%!important;
+  background:#4ADE80!important;box-shadow:0 0 0 2.5px #163832,0 0 10px rgb(74 222 128 / .7)!important;display:block!important;animation:none!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab .t{display:grid!important;gap:4px!important;text-align:left;font:600 .98rem/1 var(--f-display)!important;letter-spacing:-.02em!important;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;white-space:nowrap}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab .t::after{content:"Ask about any topic"!important;font:600 9px/1 var(--f-body)!important;letter-spacing:.18em!important;text-transform:uppercase;color:#8EB69B!important;-webkit-text-fill-color:#8EB69B!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab::before,html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab::after{display:none!important}
+@media (max-width:760px){html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab{padding:5px 14px 5px 5px!important;gap:9px!important}html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab .seal{width:36px!important;height:36px!important}html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab .t{font-size:.86rem!important}}
+
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab .seal::before{display:none!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab>i,html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .fab .dot{display:none!important}
