@@ -636,3 +636,26 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
     });
   });
 })();
+
+/* v4.3 · hero figures count up once, when they come into view (15+, 7,000+, 20+) */
+(function () {
+  'use strict';
+  var els = document.querySelectorAll('.hero-facts [data-count]');
+  if (!els.length) return;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fmt = function (n) { return Math.round(n).toLocaleString('en-US'); };
+  function run(el) {
+    var end = parseFloat(el.getAttribute('data-count')) || 0, dur = end > 999 ? 2000 : 1500, t0 = performance.now();
+    (function step(t) {
+      var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 4);
+      el.textContent = fmt(end * e);
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+  if (reduce || !('IntersectionObserver' in window)) return;
+  els.forEach(function (el) { el.textContent = '0'; });
+  var io = new IntersectionObserver(function (rows) {
+    rows.forEach(function (r) { if (r.isIntersecting) { run(r.target); io.unobserve(r.target); } });
+  }, { threshold: .5 });
+  els.forEach(function (el) { io.observe(el); });
+})();
