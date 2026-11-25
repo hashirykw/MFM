@@ -29,7 +29,7 @@
         var d = i - act;
         /* wrap so the curve stays balanced on both sides */
         if (d > n / 2) d -= n; if (d < -n / 2) d += n;
-        c.style.setProperty('--d', d); c.style.setProperty('--ad', Math.abs(d));
+        c.style.setProperty('--d', d); c.style.setProperty('--ad', Math.abs(d)); c.style.zIndex = 20 - Math.abs(d);
         c.classList.toggle('is-c', d === 0); c.classList.toggle('is-far', Math.abs(d) > 2);
         c.setAttribute('aria-hidden', Math.abs(d) > 2 ? 'true' : 'false');
         c.tabIndex = d === 0 ? 0 : -1;
@@ -53,7 +53,7 @@
     function place(f) {
       cards.forEach(function (c, i) {
         var d = i - base - f; if (d > n / 2) d -= n; if (d < -n / 2) d += n;
-        c.style.setProperty('--d', d.toFixed(3)); c.style.setProperty('--ad', Math.abs(d).toFixed(3));
+        c.style.setProperty('--d', d.toFixed(3)); c.style.setProperty('--ad', Math.abs(d).toFixed(3)); c.style.zIndex = 20 - Math.round(Math.abs(d));
         c.classList.toggle('is-far', Math.abs(d) > 2.4);
       });
     }
@@ -83,6 +83,9 @@
       if (Math.abs(wacc) > 60) { set(act + (wacc > 0 ? 1 : -1)); wacc = 0; }
     }, { passive: false });
     set(act);
+    /* the curve is as tall as its tallest card, so nothing is cut off and the controls never slide under a card */
+    var fit = function () { g.style.removeProperty('--ch'); var base = parseFloat(getComputedStyle(cards[0]).height) || 0, need = 0; cards.forEach(function (c) { need = Math.max(need, c.scrollHeight); }); if (need > base + 1) g.style.setProperty('--ch', Math.ceil(need) + 'px'); };
+    fit(); if (document.fonts) document.fonts.ready.then(fit); addEventListener('load', fit); var fz = 0; addEventListener('resize', function () { clearTimeout(fz); fz = setTimeout(fit, 150); });
     /* it revolves on its own while in view; a hover, a touch, a drag or keyboard focus pauses it */
     var RMq = matchMedia('(prefers-reduced-motion: reduce)').matches, vis = false, hold = false, tmr = 0;
     var tick = function () { clearTimeout(tmr); if (RMq) return; tmr = setTimeout(function () { if (vis && !hold && !document.hidden) set(act + 1); tick(); }, 3800); };

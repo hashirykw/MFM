@@ -1479,3 +1479,7 @@ html[data-theme] .place .pl-b>.link{margin-top:auto!important;padding-top:10px;a
   html[data-theme] .org-panel li a .lv{display:none}
   html[data-theme] .org-panel .h3{font-size:clamp(1.35rem,1.9vw,1.85rem)!important;line-height:1.08!important}
 }
+/* phones: the side cards of the curve stay readable */
+@media (max-width:640px){html[data-theme] .v2-flow>.card{opacity:calc(1 - var(--ad) * .28)!important}html[data-theme] .v2-flow>.card:not(.is-c)>*{opacity:.7!important}}
+.v2-flow>.card>*{flex-shrink:0}
+.v2-flow-courses .acc.card{padding-bottom:8px!important}
