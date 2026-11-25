@@ -3775,3 +3775,14 @@ html[data-theme][data-theme][data-theme] #tools .xt .xv-steps li b.ok{display:in
 html[data-theme][data-theme][data-theme] #tools .xt .xv-steps li b.ok::before{content:"";width:16px;height:16px;border-radius:50%;flex:none;
   background:currentColor url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.6l4.6-5' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
 html[data-theme="dark"][data-theme][data-theme] #tools .xt .xv-steps li b.ok::before{background-color:#8EB69B;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.6l4.6-5' fill='none' stroke='%23051F20' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+
+/* ===== v56 · "Get the app" card: Install and close sit side by side, never on top of each other ===== */
+html[data-theme][data-theme] .app-card{display:flex!important;align-items:center!important;gap:12px!important;padding:12px 12px 12px 14px!important}
+html[data-theme][data-theme] .app-card>div{flex:1 1 auto;min-width:0}
+html[data-theme][data-theme] .app-card #appYes{flex:none;margin:0!important;white-space:nowrap}
+html[data-theme][data-theme] .app-card .xbtn{position:static!important;inset:auto!important;transform:none!important;flex:none!important;display:grid!important;place-items:center;
+  width:36px!important;height:36px!important;margin:0!important;padding:0!important;border-radius:50%!important;font:400 20px/1 var(--f-body)!important;
+  background:rgb(5 31 32 / .06)!important;color:var(--tx-2,#3C5A51)!important;border:1px solid rgb(5 31 32 / .1)!important;box-shadow:none!important;cursor:pointer;transition:background .2s,color .2s}
+html[data-theme][data-theme] .app-card .xbtn:hover{background:rgb(5 31 32 / .12)!important;color:var(--tx,#051F20)!important}
+html[data-theme="dark"][data-theme] .app-card .xbtn{background:rgb(255 255 255 / .06)!important;color:rgb(218 241 222 / .75)!important;border-color:rgb(218 241 222 / .16)!important}
+html[data-theme="dark"][data-theme] .app-card .xbtn:hover{background:rgb(255 255 255 / .12)!important;color:#DAF1DE!important}
