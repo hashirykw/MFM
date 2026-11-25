@@ -1593,7 +1593,7 @@ function appCard() {
   let until = 0; try { until = +localStorage.getItem('mfm-app-later') || 0; } catch (e) { }
   if (Date.now() < until) return;
   const card = document.createElement('div'); card.className = 'app-card'; card.id = 'appCard'; card.setAttribute('role', 'dialog'); card.setAttribute('aria-label', 'Get the app');
-  card.innerHTML = '<span class="seal" aria-hidden="true"><b>MFM</b></span><div><b>Get the app</b><small>Portal, papers and the checker on your home screen</small></div><button class="btn btn-sm btn-pri" type="button" id="appYes">Install</button><button class="xbtn" type="button" id="appNo" aria-label="Not now">×</button>';
+  card.innerHTML = '<span class="seal" aria-hidden="true"><b>MFM</b></span><div><b>Get the app</b><small>On your home screen</small></div><button class="btn btn-sm btn-pri" type="button" id="appYes">Install</button><button class="xbtn" type="button" id="appNo" aria-label="Not now">×</button>';
   document.body.appendChild(card);
   $('#appYes').addEventListener('click', () => RA.installApp());
   $('#appNo').addEventListener('click', () => { hideCard(); try { localStorage.setItem('mfm-app-later', String(Date.now() + 7 * 864e5)); } catch (e) { } });
