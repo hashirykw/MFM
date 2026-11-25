@@ -1483,3 +1483,10 @@ html[data-theme] .place .pl-b>.link{margin-top:auto!important;padding-top:10px;a
 @media (max-width:640px){html[data-theme] .v2-flow>.card{opacity:calc(1 - var(--ad) * .28)!important}html[data-theme] .v2-flow>.card:not(.is-c)>*{opacity:.7!important}}
 .v2-flow>.card>*{flex-shrink:0}
 .v2-flow-courses .acc.card{padding-bottom:8px!important}
+
+/* ================================================================== v23 · course card level tag: a small frosted plate on the artwork, not a pill */
+html[data-theme] .v2-flow-courses .acc .acc-h .tag,html[data-theme] .acc .acc-h .tag{display:inline-flex!important;align-items:center;gap:7px;height:auto!important;padding:6px 10px 6px 9px!important;border:0!important;border-radius:9px!important;corner-shape:round!important;
+  background:linear-gradient(180deg,rgb(10 20 16 / .55),rgb(10 20 16 / .35))!important;-webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);
+  box-shadow:inset 0 1px 0 rgb(255 255 255 / .18),inset 0 0 0 1px rgb(255 255 255 / .14),0 6px 14px -8px rgb(0 0 0 / .6)!important;
+  font:500 9.5px/1 var(--f-mono)!important;letter-spacing:.18em!important;text-transform:uppercase;color:#e9eef0!important}
+html[data-theme] .acc .acc-h .tag::before{content:"";width:5px;height:5px;border-radius:50%;background:#3ddc97;box-shadow:0 0 6px #3ddc97}
