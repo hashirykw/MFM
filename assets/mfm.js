@@ -203,7 +203,7 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
     if (!window.gsap || !window.ScrollTrigger) return;
     var mm = gsap.matchMedia();
     document.querySelectorAll('.proc[data-stack],.ap-g[data-stack]').forEach(function (list) {
-      mm.add('(min-width: 640px) and (prefers-reduced-motion: no-preference)', function () {
+      mm.add('(prefers-reduced-motion: no-preference)', function () { /* v5.8: phones get the same rise-and-stack as laptops */
         var cards = Array.prototype.slice.call(list.children);
         var n = cards.length; if (n < 2) return;
         list.classList.add('v2-pile');

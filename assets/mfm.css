@@ -2721,3 +2721,105 @@ html[data-theme][data-theme] #regForm .xsel-btn .ph{color:var(--tx-3)}
 html[data-theme][data-theme] #regForm .rf-seg span{text-transform:none!important;letter-spacing:-.005em!important;font:600 .92rem/1.2 var(--f-body)!important}
 html[data-theme][data-theme] #regForm .rf-seg label{text-transform:none!important;letter-spacing:0!important}
 html[data-theme][data-theme] #regForm .rf-check span:last-child{text-transform:none;letter-spacing:0}
+
+/* ==================================================================== v5.7 · AI checker page */
+/* hero: Sir Fazil at his desk, framed in silver, with the marks as clean chips */
+html[data-theme] .phero-art{position:relative}
+html[data-theme][data-theme] .phero-art .ph{position:relative;aspect-ratio:4/4.6!important;border-radius:30px!important;overflow:hidden;padding:0!important;
+  background:#0B2B26!important;border:0!important;box-shadow:0 0 0 1px #CDD2D6,0 0 0 8px rgb(255 255 255 / .7),0 0 0 9px rgb(169 176 181 / .4),0 40px 80px -40px rgb(5 31 32 / .55)!important}
+html[data-theme="dark"][data-theme] .phero-art .ph{box-shadow:0 0 0 1px rgb(201 206 210 / .3),0 0 0 8px rgb(18 58 50 / .8),0 0 0 9px rgb(201 206 210 / .15),0 40px 80px -36px rgb(0 0 0 / .8)!important}
+html[data-theme][data-theme] .phero-art .ph img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 22%!important;filter:none!important;opacity:1!important}
+html[data-theme][data-theme] .phero-art .ph::after{content:"";position:absolute;inset:auto 0 0;height:42%;background:linear-gradient(180deg,transparent,rgb(5 31 32 / .82));pointer-events:none}
+html[data-theme][data-theme] .phero-art .ph-c{position:absolute;left:22px;bottom:20px;z-index:2;display:grid;gap:6px;background:none!important;padding:0!important;box-shadow:none!important;border:0!important}
+html[data-theme] .phero-art .ph-cap{font:600 10.5px/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:#8EB69B}
+html[data-theme] .phero-art .ph-c b{font:600 1.3rem/1.15 var(--f-display);letter-spacing:-.03em;color:#FFFFFF}
+html[data-theme][data-theme] .phero-art .float{position:absolute!important;z-index:3;display:grid!important;gap:3px!important;padding:12px 16px!important;border-radius:16px!important;min-width:170px;animation:none!important;
+  background:linear-gradient(180deg,#FFFFFF,#F4F6F7)!important;border:1px solid #CDD2D6!important;box-shadow:inset 0 1px 0 #fff,0 18px 40px -18px rgb(5 31 32 / .45)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html[data-theme="dark"][data-theme] .phero-art .float{background:linear-gradient(180deg,#123A32,#0B2B26)!important;border-color:rgb(201 206 210 / .22)!important}
+html[data-theme] .phero-art .float span{font:600 9.5px/1 var(--f-body)!important;letter-spacing:.16em!important;text-transform:uppercase;color:var(--em)!important}
+html[data-theme] .phero-art .float b{font:600 1.7rem/1 var(--f-display)!important;letter-spacing:-.04em!important;color:var(--tx)!important;background:none!important;-webkit-text-fill-color:currentColor!important}
+html[data-theme] .phero-art .float small{font-size:12px;color:var(--tx-3)}
+html[data-theme][data-theme] .phero-art .f-a{top:12%!important;left:-9%!important;right:auto!important;bottom:auto!important}
+html[data-theme][data-theme] .phero-art .f-b{top:40%!important;right:-8%!important;left:auto!important;bottom:auto!important}
+html[data-theme][data-theme] .phero-art .f-c{bottom:22%!important;left:-7%!important;top:auto!important;right:auto!important;background:linear-gradient(160deg,#2E6655,#163832)!important;border-color:transparent!important}
+html[data-theme] .phero-art .f-c span{color:#8EB69B!important}
+html[data-theme] .phero-art .f-c b{color:#FFFFFF!important;font-size:1.25rem!important;display:flex!important;align-items:center;gap:8px}
+html[data-theme] .phero-art .f-c b::before{content:"";width:18px;height:18px;border-radius:50%;background:#8EB69B url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.5 3.5 7.5-8' fill='none' stroke='%23051F20' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+html[data-theme] .phero-art .f-c small{color:rgb(218 241 222 / .75)!important}
+@media (max-width:760px){html[data-theme][data-theme] .phero-art .f-a{left:-2%!important}html[data-theme][data-theme] .phero-art .f-b{right:-2%!important}html[data-theme][data-theme] .phero-art .f-c{left:-2%!important}html[data-theme][data-theme] .phero-art .float{min-width:0;padding:9px 12px!important}html[data-theme] .phero-art .float b{font-size:1.3rem!important}}
+
+/* how it works: a numbered track, five steps, one line through them */
+html[data-theme] #how .ai-steps{position:relative;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:16px!important;margin:clamp(26px,3.4vw,44px) 0 0!important;padding:0!important;list-style:none;counter-reset:none}
+html[data-theme] #how .ai-steps::before{content:"";position:absolute;left:4%;right:4%;top:27px;height:2px;background:linear-gradient(90deg,#235347,#8EB69B 50%,#C9CED2);border-radius:2px;z-index:0}
+html[data-theme][data-theme] #how .ai-steps li.card{position:relative;z-index:1;display:grid!important;align-content:start;gap:10px;padding:0 4px!important;background:none!important;border:0!important;box-shadow:none!important;min-height:0!important}
+html[data-theme][data-theme] #how .ai-n{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;font:600 1.05rem/1 var(--f-display)!important;letter-spacing:-.02em;
+  color:#235347!important;background:linear-gradient(180deg,#FFFFFF,#EEF1F2)!important;box-shadow:0 0 0 1px #CDD2D6,0 0 0 6px var(--bg),0 12px 24px -14px rgb(5 31 32 / .4)!important;-webkit-text-fill-color:currentColor!important;-webkit-text-stroke:0!important}
+html[data-theme="dark"][data-theme] #how .ai-n{color:#DAF1DE!important;background:linear-gradient(180deg,#163832,#0B2B26)!important;box-shadow:0 0 0 1px rgb(201 206 210 / .3),0 0 0 6px #051F20!important}
+html[data-theme][data-theme] #how li:nth-child(4) .ai-n{color:#FFFFFF!important;background:linear-gradient(160deg,#2E6655,#163832)!important}
+html[data-theme][data-theme] #how .ai-steps h3{margin:12px 0 0!important;font:600 1.15rem/1.2 var(--f-display)!important;letter-spacing:-.025em!important;color:var(--tx)!important}
+html[data-theme][data-theme] #how .ai-steps p{margin:0!important;font-size:.92rem!important;line-height:1.55!important;color:var(--tx-2)!important;max-width:26ch}
+@media (max-width:900px){
+  html[data-theme] #how .ai-steps{grid-template-columns:1fr!important;gap:22px!important;padding-left:76px!important}
+  html[data-theme] #how .ai-steps::before{left:27px;right:auto;top:10px;bottom:10px;width:2px;height:auto;background:linear-gradient(180deg,#235347,#8EB69B 50%,#C9CED2)}
+  html[data-theme][data-theme] #how .ai-n{position:absolute;left:-76px;top:0}
+  html[data-theme][data-theme] #how .ai-steps h3{margin-top:4px!important}
+}
+
+/* what it can check: a clean three-column list with ticks */
+html[data-theme][data-theme] #modes .checks{padding:clamp(22px,2.6vw,32px)!important;border-radius:26px!important;background:linear-gradient(180deg,#FFFFFF,#F6F7F8)!important;border:1px solid #CDD2D6!important;box-shadow:inset 0 1px 0 #fff,0 24px 50px -36px rgb(5 31 32 / .4)!important}
+html[data-theme="dark"][data-theme] #modes .checks{background:linear-gradient(180deg,#0F332B,#0B2B26)!important;border-color:rgb(201 206 210 / .2)!important;box-shadow:none!important}
+html[data-theme] #modes .checks .h4{font:600 1.35rem/1.2 var(--f-display)!important;letter-spacing:-.03em;margin:0 0 18px!important;color:var(--tx)!important}
+html[data-theme][data-theme] #modes .check-list{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0 28px!important;margin:0!important;padding:0!important;list-style:none}
+@media (max-width:900px){html[data-theme][data-theme] #modes .check-list{grid-template-columns:1fr 1fr!important}}
+@media (max-width:560px){html[data-theme][data-theme] #modes .check-list{grid-template-columns:1fr!important}}
+html[data-theme][data-theme] #modes .check-list li{display:flex!important;align-items:center;gap:12px;padding:13px 0!important;margin:0!important;border:0!important;border-bottom:1px solid #E4E7E9!important;border-radius:0!important;
+  background:none!important;box-shadow:none!important;font:500 .95rem/1.35 var(--f-body)!important;color:var(--tx)!important}
+html[data-theme="dark"][data-theme] #modes .check-list li{border-bottom-color:rgb(201 206 210 / .12)!important}
+html[data-theme][data-theme] #modes .check-list li::before{content:""!important;flex:none;width:22px;height:22px;border-radius:50%;border:0!important;transform:none!important;position:static!important;
+  background:#235347 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.5 3.5 7.5-8' fill='none' stroke='%23DAF1DE' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/15px no-repeat!important}
+html[data-theme][data-theme] #modes .check-list li:nth-last-child(-n+2){font-weight:600!important}
+
+/* ==================================================================== v5.8 · phones: the method stack, a tidier hero, slim figures */
+/* the stack on phones: same rise and pile as on laptops, cards sized for the screen */
+@media (max-width:760px){
+  html[data-theme] #method .v2-pile.v2-pile[data-stack]{margin-inline:0!important;padding:0!important;overflow:visible!important;grid-auto-columns:auto!important}
+  html[data-theme] #method .v2-pile.v2-pile[data-stack]>.proc-s.card{width:auto!important;min-width:0!important;scroll-snap-align:none!important}
+  html[data-theme] #method .proc-s.card{padding:22px 20px 20px!important;border-radius:24px!important;gap:10px!important}
+  html[data-theme] #method .proc-s .pn{flex-direction:row!important;align-items:flex-end!important;justify-content:space-between!important;min-height:0!important;padding:0!important}
+  html[data-theme] #method .proc-s .pn b{font-size:4.6rem!important}
+  html[data-theme] #method .proc-s h3{font-size:1.45rem!important;line-height:1.1!important;margin:6px 0 0!important}
+  html[data-theme] #method .proc-s>p{font-size:.92rem!important;margin:0!important}
+  html[data-theme] #method .proc-s ul li{padding:10px 0!important;font-size:.86rem!important}
+  html[data-theme] #method .v2-pile-track>.v2-pile.v2-pile[data-stack]{top:max(84px,calc(50vh - var(--pile-h,300px) / 2 + 30px))!important}
+}
+
+/* figures: a slimmer panel on laptops */
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .hero-facts{border-radius:16px!important;padding:2px!important;box-shadow:inset 0 1px 0 #fff,0 14px 30px -26px rgb(5 31 32 / .35)!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .hero-facts>div{padding:13px 16px 12px!important}
+html[data-theme][data-theme] .hero-facts dt{font-size:clamp(1.8rem,1.3rem + 1.1vw,2.3rem)!important}
+html[data-theme][data-theme] .hero-facts dd{margin-top:6px!important;font-size:10px!important}
+
+/* the hero on phones: everything a size smaller and on one clean rhythm */
+@media (max-width:560px){
+  html[data-theme] .hero-copy .display{font-size:clamp(2.5rem,11.5vw,3.1rem)!important;line-height:1!important;letter-spacing:-.048em!important}
+  html[data-theme] .hero-copy .eyebrow{font-size:10px!important;letter-spacing:.18em!important}
+  html[data-theme] .hero-copy .lede{font-size:.98rem!important;line-height:1.6!important;margin-top:16px!important}
+  html[data-theme] .hero-cta{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;margin-top:22px!important}
+  html[data-theme] .hero-cta .btn{width:100%!important;min-width:0!important;height:48px!important;padding:0 6px 0 14px!important;font-size:10.5px!important;letter-spacing:.06em!important;justify-content:space-between!important}
+  html[data-theme] .hero-cta .btn>svg,html[data-theme] .hero-cta .btn .arr{flex:none}
+  /* figures: no box, a row between silver hairlines */
+  html[data-theme][data-theme][data-theme][data-theme][data-theme] .hero-facts{margin-top:22px!important;border:0!important;border-radius:0!important;padding:0!important;background:none!important;box-shadow:none!important;
+    border-top:1px solid #D5DADD!important;border-bottom:1px solid #D5DADD!important}
+  html[data-theme="dark"][data-theme][data-theme][data-theme][data-theme] .hero-facts{border-top-color:rgb(201 206 210 / .2)!important;border-bottom-color:rgb(201 206 210 / .2)!important}
+  html[data-theme][data-theme][data-theme][data-theme][data-theme] .hero-facts>div{padding:12px 6px 11px 0!important}
+  html[data-theme][data-theme][data-theme][data-theme][data-theme] .hero-facts>div+div{padding-left:12px!important}
+  html[data-theme][data-theme] .hero-facts dt{font-size:1.5rem!important;letter-spacing:-.045em!important}
+  html[data-theme][data-theme] .hero-facts dd{font-size:8.5px!important;letter-spacing:.1em!important;line-height:1.35!important;margin-top:5px!important}
+  html[data-theme][data-theme][data-theme] .hcodes{margin-top:16px!important;gap:10px!important}
+  html[data-theme][data-theme] .hcodes .hcp b{font-size:1.3rem!important}
+  html[data-theme][data-theme] .hcodes .hcp small{font-size:9px!important}
+  html[data-theme] .hcodes .hbis{font-size:1.3rem!important;padding:12px!important;border-radius:14px!important}
+}
+html[data-theme][data-theme][data-theme] .phero-art .ph::after{height:50%!important;background:linear-gradient(180deg,transparent,rgb(5 31 32 / .55) 40%,rgb(5 31 32 / .92))!important;z-index:1!important;opacity:1!important}
+html[data-theme][data-theme][data-theme] .phero-art .ph-c{z-index:2!important;opacity:1!important;color:#fff}
+html[data-theme][data-theme][data-theme] .phero-art .ph::before{display:none!important}
