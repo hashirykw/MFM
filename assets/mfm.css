@@ -1329,14 +1329,14 @@ html[data-theme="dark"] .tg-l i.on{background:#2ec27e}
 
 /* ================================================================== v19 · navbar: all the options on laptops, slimmer; on phones bolder and without search */
 @media (min-width:901px){
-  html[data-theme] .nav{padding-top:6px!important;padding-bottom:6px!important;min-height:0!important}
-  html[data-theme] .nav .brand .seal{width:38px!important;height:38px!important}
-  html[data-theme] .nav .brand-t b{font-size:1.02rem!important}
+  html[data-theme] .nav{padding-top:8px!important;padding-bottom:8px!important;min-height:0!important}
+  html[data-theme] .nav .brand .seal{width:42px!important;height:42px!important}
+  html[data-theme] .nav .brand-t b{font-size:1.06rem!important}
   html[data-theme] .nav .brand-t span{font-size:8.5px!important}
-  html[data-theme] .nav .nav-links a,html[data-theme] .nav .nav-more>button{padding-top:9px!important;padding-bottom:9px!important}
-  html[data-theme] .nav .nav-search,html[data-theme] .nav .nav-cart{height:37px!important}
-  html[data-theme] .nav .nav-cart{width:37px!important}
-  html[data-theme] .nav .btn.btn-enrol.btn{--h:37px!important}
+  html[data-theme] .nav .nav-links a,html[data-theme] .nav .nav-more>button{padding-top:10px!important;padding-bottom:10px!important}
+  html[data-theme] .nav .nav-search,html[data-theme] .nav .nav-cart{height:40px!important}
+  html[data-theme] .nav .nav-cart{width:40px!important}
+  html[data-theme] .nav .btn.btn-enrol.btn{--h:40px!important}
 }
 /* phones: a bolder bar, no search buttons */
 @media (max-width:900px){
