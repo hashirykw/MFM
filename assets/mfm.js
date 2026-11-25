@@ -10,6 +10,8 @@
     if (cards.length < 2) return;
     if (g.hasAttribute('data-rail')) { g.dataset.railWas = g.getAttribute('data-rail'); g.removeAttribute('data-rail'); }
     g.classList.add('v2-flow', g.classList.contains('cw-track') ? 'v2-flow-words' : 'v2-flow-courses');
+    /* the curve is always whole: no scroll fade on its cards (rotated cards can miss the reveal) */
+    cards.forEach(function (c) { c.removeAttribute('data-rv'); c.classList.remove('rv-wait'); });
     g.setAttribute('role', 'region'); g.setAttribute('aria-roledescription', 'carousel');
     var n = cards.length, act = g.classList.contains('cw-track') ? 2 : 0;
     var title = function (c) { var h = c.querySelector('h3,b'); return h ? h.textContent.trim() : ''; };
@@ -81,6 +83,12 @@
       if (Math.abs(wacc) > 60) { set(act + (wacc > 0 ? 1 : -1)); wacc = 0; }
     }, { passive: false });
     set(act);
+    /* it revolves on its own while in view; a hover, a touch, a drag or keyboard focus pauses it */
+    var RMq = matchMedia('(prefers-reduced-motion: reduce)').matches, vis = false, hold = false, tmr = 0;
+    var tick = function () { clearTimeout(tmr); if (RMq) return; tmr = setTimeout(function () { if (vis && !hold && !document.hidden) set(act + 1); tick(); }, 3800); };
+    ['pointerenter', 'focusin', 'pointerdown'].forEach(function (ev) { g.addEventListener(ev, function () { hold = true; }); ctl.addEventListener(ev, function () { hold = true; }); });
+    ['pointerleave', 'focusout'].forEach(function (ev) { g.addEventListener(ev, function () { hold = false; tick(); }); ctl.addEventListener(ev, function () { hold = false; tick(); }); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; if (vis) tick(); }, { threshold: .45 }).observe(g);
   });
 })();
 /* themed dropdowns: every native <select> gets a glass list in the site's style (the select stays underneath for forms and scripts) */
