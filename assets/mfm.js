@@ -209,13 +209,14 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
         list.classList.add('v2-pile');
         /* the pile runs its own motion: take the cards out of the fade-in-on-scroll */
         cards.forEach(function (c) { c.removeAttribute('data-rv'); c.classList.remove('rv-wait'); c.classList.add('in'); });
-        var STEP = 24, H = 0;
+        var STEP = 18, H = 0;
         cards.forEach(function (c) { c.style.height = ''; H = Math.max(H, c.offsetHeight); });
         cards.forEach(function (c, i) { c.style.height = H + 'px'; c.style.top = (i * STEP) + 'px'; c.style.zIndex = i + 1; });
         list.style.height = (H + (n - 1) * STEP) + 'px'; list.style.setProperty('--pile-h', (H + (n - 1) * STEP) + 'px');
         /* moved with the separate translate / scale properties, which the old stack rules (transform:none !important) cannot block */
         gsap.set(cards, { '--py': '0px', '--ps': 1, '--po': 1 });
-        gsap.set(cards.slice(1), { '--py': function () { return Math.round(innerHeight * .9) + 'px'; }, '--po': 0 });
+        gsap.set(cards.slice(1), { '--py': function () { return Math.round(innerHeight * .9) + 'px'; }, '--po': 0, '--ps': .92 });
+        cards.forEach(function (c, i) { c.style.setProperty('--step', ((i + 1) / n).toFixed(3)); });
         /* a tall track with the pile stuck inside it: the browser holds it still (no pin jitter) */
         var track = document.createElement('div'); track.className = 'v2-pile-track';
         list.parentNode.insertBefore(track, list); track.appendChild(list);
@@ -227,8 +228,8 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
           end: function () { return '+=' + LEN(); }, scrub: .4, invalidateOnRefresh: true, onRefreshInit: sizeTrack } });
         cards.forEach(function (c, i) {
           if (!i) return;
-          tl.to(c, { '--py': '0px', '--po': 1, duration: 1, ease: 'power2.out' }, i - 1)
-            .to(cards.slice(0, i), { '--ps': function (k) { return 1 - (i - k) * .035; }, duration: 1, ease: 'power2.out' }, i - 1);
+          tl.to(c, { '--py': '0px', '--po': 1, '--ps': 1, duration: 1, ease: 'power3.out' }, i - 1)
+            .to(cards.slice(0, i), { '--ps': function (k) { return 1 - (i - k) * .04; }, '--py': function (k) { return (-(i - k) * 8) + 'px'; }, '--pd': function (k) { return Math.min(.5, (i - k) * .18); }, duration: 1, ease: 'power2.out' }, i - 1);
         });
         /* v4: each step number fills, and its heading inks in, as its card lands; the first fills on the way in */
         var ease = function (x) { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); };
@@ -245,7 +246,7 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
           if (track.parentNode) { track.parentNode.insertBefore(list, track); track.remove(); }
           list.classList.remove('v2-pile'); list.style.height = '';
           cards.forEach(function (c) { c.style.height = ''; c.style.top = ''; c.style.zIndex = ''; });
-          cards.forEach(function (c) { c.style.removeProperty('--py'); c.style.removeProperty('--ps'); c.style.removeProperty('--po'); });
+          cards.forEach(function (c) { c.style.removeProperty('--py'); c.style.removeProperty('--ps'); c.style.removeProperty('--po'); c.style.removeProperty('--pd'); c.style.removeProperty('--step'); });
         };
       });
     });

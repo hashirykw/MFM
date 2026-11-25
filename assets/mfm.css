@@ -3645,3 +3645,63 @@ html[data-theme="dark"][data-theme] .sw-morn{background:linear-gradient(160deg,r
   html[data-theme][data-theme] .sw-morn .aff-row .aff-i{height:88px!important;padding:12px 14px!important}
   html[data-theme][data-theme] .sw-morn .aff-row .aff-i .lg img{max-height:58px!important}
 }
+
+/* ===== v50 · course cards: calmer label, real preview in the middle, clean spec footer ===== */
+/* label: a dot and quiet letters instead of a bordered pill */
+html[data-theme][data-theme] .trio .trio__code{display:inline-flex!important;align-items:center;gap:9px;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;
+  font:600 10.5px/1 var(--f-body)!important;letter-spacing:.2em!important;color:var(--trio-acc)!important}
+html[data-theme][data-theme] .trio .trio__code::before{content:"";width:7px;height:7px;border-radius:50%;flex:none;background:var(--trio-acc);box-shadow:0 0 0 4px color-mix(in srgb,var(--trio-acc) 18%,transparent)}
+html[data-theme][data-theme] .trio .trio__top{align-items:center!important}
+
+@media (min-width:901px){
+  /* the papers show while the card is closed, so the middle is never empty */
+  html[data-theme][data-theme] .trio .trio__c:not(.on) .trio__more{max-height:none!important;opacity:1!important;overflow:visible}
+  html[data-theme][data-theme] .trio .trio__c:not(.on) .trio__list a:nth-child(n+3),
+  html[data-theme][data-theme] .trio .trio__c:not(.on) .trio__btns{display:none!important}
+  html[data-theme][data-theme] .trio .trio__c:not(.on) .trio__list a{border-bottom:0!important}
+  html[data-theme][data-theme] .trio .trio__list{column-gap:14px!important;margin:6px 0 16px!important;padding-top:14px;border-top:1px solid var(--trio-line)}
+  html[data-theme][data-theme] .trio .trio__list a{gap:6px!important;padding:6px 0 12px!important;align-content:start}
+  html[data-theme][data-theme] .trio .trio__list em{font:600 .9rem/1.32 var(--f-display)!important;letter-spacing:-.01em}
+  html[data-theme][data-theme] .trio .trio__meta{font:500 11.5px/1.35 var(--f-body)!important;letter-spacing:0!important;text-transform:none!important}
+  html[data-theme][data-theme] .trio .trio__meta b{font-weight:600!important;color:var(--trio-acc)!important}
+
+  /* buttons side by side, quieter */
+  html[data-theme][data-theme] .trio .trio__btns{display:grid;grid-template-columns:1fr 1fr;gap:8px!important;margin-bottom:14px}
+  html[data-theme][data-theme] .trio .trio__btns .btn{width:100%;justify-content:center;min-height:42px!important;padding:0 10px 0 14px!important;font-size:10.5px!important;white-space:nowrap}
+
+  /* footer: two lines of facts under a hairline, no stacked pills */
+  html[data-theme][data-theme] .trio .trio__chips{display:grid!important;gap:9px!important;margin-top:auto!important;padding:14px 0 0!important;border:0!important;border-top:1px solid var(--trio-line)!important;border-radius:0!important;background:none!important;box-shadow:none!important}
+  html[data-theme][data-theme] .trio .trio__chip{display:flex!important;align-items:center;gap:10px;padding:0!important;margin:0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;transform:none!important;
+    font:500 12.5px/1.25 var(--f-body)!important;letter-spacing:0!important;text-transform:none!important;color:var(--trio-ink-2)!important;white-space:normal!important}
+  html[data-theme][data-theme] .trio .trio__chip::before{content:"";width:6px;height:6px;border-radius:50%;flex:none;border:1.5px solid currentColor;opacity:.7}
+  html[data-theme][data-theme] .trio .trio__chip--acc{font-weight:600!important;color:var(--trio-ink)!important}
+  html[data-theme][data-theme] .trio .trio__chip--acc::before{border:0;opacity:1;background:var(--trio-acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--trio-acc) 22%,transparent)}
+}
+
+/* ===== v51 · the method stack: cards rise from below and gather in the middle; less text, live numbers ===== */
+html[data-theme][data-theme] #method .proc-s.card>p{display:none!important}
+html[data-theme][data-theme] #method .proc-s.card{overflow:hidden;filter:brightness(calc(1 - var(--pd,0) * .5))}
+/* the live bar: fills as the card lands, longer for each later step */
+html[data-theme][data-theme] #method .proc-s.card::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:calc(var(--step,1) * var(--fl,0) * 100%);
+  background:linear-gradient(90deg,#235347,#8EB69B);border-radius:0 3px 3px 0;pointer-events:none;z-index:2}
+html[data-theme="dark"][data-theme] #method .proc-s.card::after{background:linear-gradient(90deg,#8EB69B,#DAF1DE)}
+/* clean number fill: no glow filter (it drew a box behind the digits on some screens) */
+html[data-theme][data-theme] #method .proc-s .pn b::after{filter:none!important}
+/* the tag: a dot and quiet letters */
+html[data-theme][data-theme] #method .proc-s .pn .tag{display:inline-flex!important;align-items:center;gap:8px;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;
+  font:600 10.5px/1 var(--f-body)!important;letter-spacing:.2em!important;text-transform:uppercase;color:#235347!important}
+html[data-theme="dark"][data-theme] #method .proc-s .pn .tag{color:#8EB69B!important}
+html[data-theme][data-theme] #method .proc-s .pn .tag::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px color-mix(in srgb,currentColor 18%,transparent)}
+@media (min-width:901px){
+  html[data-theme][data-theme] #method .proc-s.card{display:grid!important;grid-template-columns:minmax(200px,.8fr) minmax(0,1.15fr) minmax(0,1.05fr)!important;align-items:center!important;column-gap:clamp(24px,3vw,48px)!important;
+    padding:clamp(26px,2.6vw,36px) clamp(28px,3vw,44px)!important;min-height:0!important}
+  html[data-theme][data-theme] #method .proc-s .pn{grid-column:1;grid-row:1;display:grid!important;align-content:center;gap:16px;height:auto!important;margin:0!important;position:static!important}
+  html[data-theme][data-theme] #method .proc-s .pn b{font-size:clamp(5rem,3.4rem + 3.6vw,7.4rem)!important;line-height:.8!important}
+  html[data-theme][data-theme] #method .proc-s h3{grid-column:2;grid-row:1;margin:0!important;font-size:clamp(1.7rem,1.25rem + 1.2vw,2.35rem)!important;line-height:1.08!important;letter-spacing:-.035em!important;max-width:14ch}
+  html[data-theme][data-theme] #method .proc-s ul{grid-column:3;grid-row:1;margin:0!important;align-self:center}
+}
+@media (max-width:900px){
+  html[data-theme][data-theme] #method .proc-s .pn .tag{font-size:9.5px!important;letter-spacing:.16em!important}
+}
+/* a covered card hands the stage over: its words fade so only its edge shows behind the new one */
+html[data-theme][data-theme] #method .v2-pile>.proc-s.card>:is(.pn,h3,ul){opacity:clamp(0,calc(1 - var(--pd,0) * 5),1);transition:none}
