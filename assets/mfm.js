@@ -15,11 +15,12 @@
     var title = function (c) { var h = c.querySelector('h3,b'); return h ? h.textContent.trim() : ''; };
     var ctl = document.createElement('div'); ctl.className = 'v2-flow-ctl';
     ctl.innerHTML = '<button type="button" class="v2-flow-b" data-d="-1" aria-label="Previous">' + CH(-1) + '</button>' +
-      '<span class="v2-flow-now" aria-live="polite"><b></b><i></i></span>' +
+      '<span class="v2-flow-now"><em class="v2-fn" aria-hidden="true"></em><span class="v2-ft"><b aria-live="polite"></b></span></span>' +
       '<button type="button" class="v2-flow-b" data-d="1" aria-label="Next">' + CH(1) + '</button>';
     var dots = document.createElement('div'); dots.className = 'v2-flow-dots';
     dots.innerHTML = cards.map(function (c, i) { return '<button type="button" aria-label="' + title(c).replace(/"/g, '') + '"></button>'; }).join('');
-    g.after(ctl); ctl.after(dots);
+    g.after(ctl); ctl.querySelector('.v2-ft').appendChild(dots);
+    var pad = function (v) { return (v < 10 ? '0' : '') + v; }, last = -1;
     function set(k) {
       act = (k + n) % n;
       cards.forEach(function (c, i) {
@@ -31,8 +32,11 @@
         c.setAttribute('aria-hidden', Math.abs(d) > 2 ? 'true' : 'false');
         c.tabIndex = d === 0 ? 0 : -1;
       });
-      ctl.querySelector('b').textContent = title(cards[act]);
-      ctl.querySelector('i').textContent = (act + 1) + ' / ' + n;
+      var sb = cards[act].querySelector('.acc-sub'), tb = ctl.querySelector('.v2-ft b');
+      tb.textContent = title(cards[act]); if (sb) { var sm = document.createElement('small'); sm.textContent = sb.textContent.trim().replace(/^Cambridge /i, ''); tb.appendChild(sm); }
+      var fn = ctl.querySelector('.v2-fn'); fn.innerHTML = pad(act + 1) + '<small>/' + pad(n) + '</small>';
+      if (last !== -1 && last !== act && fn.animate) { var up = (act > last) !== (Math.abs(act - last) > 1); fn.animate([{ transform: 'translateY(' + (up ? 8 : -8) + 'px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 320, easing: 'cubic-bezier(.16,1,.3,1)' }); ctl.querySelector('.v2-ft b').animate([{ opacity: 0, transform: 'translateX(' + (up ? 10 : -10) + 'px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(.16,1,.3,1)' }); }
+      last = act;
       Array.prototype.forEach.call(dots.children, function (b, i) { b.classList.toggle('on', i === act); });
     }
     cards.forEach(function (c, i) {
