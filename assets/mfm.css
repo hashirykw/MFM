@@ -1784,7 +1784,7 @@ html[data-theme="light"][data-theme] :is(.fab,.fab *){color:#051F20!important}
    wordmark) as the card lands on the pile; the heading inks in left to right and the points light up one by one.
    --fl runs 0 → 1: on laptops the pile's scroll timeline drives it, on phones it plays once the card is in view. */
 @property --fl{syntax:"<number>";inherits:true;initial-value:0}
-html[data-theme] #method .proc-s.card{
+html[data-theme] :is(#method,.stepdeck) .proc-s.card{
   --fl:0;
   display:grid!important;grid-template-columns:minmax(180px,250px) minmax(0,1.25fr) minmax(0,1fr)!important;grid-template-rows:1fr auto!important;
   column-gap:clamp(22px,3.2vw,48px)!important;row-gap:10px!important;align-items:stretch;
@@ -1792,69 +1792,69 @@ html[data-theme] #method .proc-s.card{
   background:linear-gradient(180deg,#FFFFFF,#F6FBF7)!important;
   box-shadow:0 0 0 1.5px rgb(35 83 71 / .16),0 0 0 8px rgb(218 241 222 / .75),0 0 0 9px rgb(35 83 71 / .08),0 34px 70px -34px rgb(5 31 32 / .5)!important;
 }
-html[data-theme="dark"] #method .proc-s.card{
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s.card{
   background:linear-gradient(180deg,#0B2B26,#082420)!important;
   box-shadow:0 0 0 1.5px rgb(142 182 155 / .2),0 0 0 8px rgb(22 56 50 / .9),0 0 0 9px rgb(142 182 155 / .1),0 34px 70px -30px rgb(0 0 0 / .8)!important;
 }
-html[data-theme] #method .v2-pile>.proc-s.card{background:linear-gradient(180deg,#FFFFFF,#F6FBF7)!important}
-html[data-theme="dark"] #method .v2-pile>.proc-s.card{background:linear-gradient(180deg,#0B2B26,#082420)!important}
+html[data-theme] :is(#method,.stepdeck) .v2-pile>.proc-s.card{background:linear-gradient(180deg,#FFFFFF,#F6FBF7)!important}
+html[data-theme="dark"] :is(#method,.stepdeck) .v2-pile>.proc-s.card{background:linear-gradient(180deg,#0B2B26,#082420)!important}
 
 /* the rail */
-html[data-theme] #method .proc-s .pn{
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn{
   grid-column:1!important;grid-row:1 / -1!important;position:relative;overflow:hidden;
   display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:space-between!important;gap:16px!important;
   padding:clamp(18px,2vw,26px)!important;border-radius:22px;
   background:radial-gradient(120% 90% at 0% 0%,#235347 0%,#163832 45%,#0B2B26 100%)!important;
   box-shadow:inset 0 1px 0 rgb(218 241 222 / .14),inset 0 0 0 1px rgb(142 182 155 / .16);opacity:1!important;transform:none!important}
-html[data-theme="dark"] #method .proc-s .pn{background:radial-gradient(120% 90% at 0% 0%,#163832 0%,#0B2B26 50%,#051F20 100%)!important}
-html[data-theme] #method .proc-s .pn::before{content:"Step";font:600 10.5px/1 var(--f-body);letter-spacing:.24em;text-transform:uppercase;color:#8EB69B}
-html[data-theme] #method .proc-s .pn i{display:block!important;position:absolute;left:clamp(18px,2vw,26px);right:clamp(18px,2vw,26px);top:calc(clamp(18px,2vw,26px) + 18px);height:2px;margin:0!important;border-radius:2px;
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s .pn{background:radial-gradient(120% 90% at 0% 0%,#163832 0%,#0B2B26 50%,#051F20 100%)!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn::before{content:"Step";font:600 10.5px/1 var(--f-body);letter-spacing:.24em;text-transform:uppercase;color:#8EB69B}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn i{display:block!important;position:absolute;left:clamp(18px,2vw,26px);right:clamp(18px,2vw,26px);top:calc(clamp(18px,2vw,26px) + 18px);height:2px;margin:0!important;border-radius:2px;
   background:linear-gradient(90deg,#DAF1DE,#8EB69B) 0 0/calc(var(--fl) * 100%) 100% no-repeat,rgb(142 182 155 / .2)!important;flex:none}
 
 /* the number: an outline with a solid copy that fills from the bottom */
-html[data-theme] #method .proc-s .pn b{position:relative;display:block;margin-top:auto;
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn b{position:relative;display:block;margin-top:auto;
   font:700 clamp(5rem,3.4rem + 4.4vw,8.4rem)/.8 var(--f-display)!important;letter-spacing:-.05em!important;padding:0 .04em .02em 0!important;
   color:transparent!important;-webkit-text-fill-color:transparent!important;-webkit-text-stroke:1.5px rgb(142 182 155 / .55)!important;background:none!important;filter:none!important}
-html[data-theme] #method .proc-s .pn b::after{content:attr(data-n);position:absolute;inset:0;padding:inherit;-webkit-text-stroke:0;
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn b::after{content:attr(data-n);position:absolute;inset:0;padding:inherit;-webkit-text-stroke:0;
   background:linear-gradient(0deg,#8EB69B 0%,#DAF1DE 55%,#FFFFFF 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   clip-path:inset(calc(100% - var(--fl) * 100%) 0 0 0);filter:drop-shadow(0 0 18px rgb(142 182 155 / .35))}
-html[data-theme] #method .proc-s .pn .tag{margin:0!important;background:rgb(218 241 222 / .12)!important;color:#DAF1DE!important;box-shadow:inset 0 0 0 1px rgb(142 182 155 / .3)!important;opacity:1!important;transform:none!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn .tag{margin:0!important;background:rgb(218 241 222 / .12)!important;color:#DAF1DE!important;box-shadow:inset 0 0 0 1px rgb(142 182 155 / .3)!important;opacity:1!important;transform:none!important}
 
 /* the heading inks in, the text and points settle */
-html[data-theme] #method .proc-s h3{grid-column:2!important;grid-row:1!important;align-self:end!important;margin:clamp(14px,2vw,26px) 0 0!important;
+html[data-theme] :is(#method,.stepdeck) .proc-s h3{grid-column:2!important;grid-row:1!important;align-self:end!important;margin:clamp(14px,2vw,26px) 0 0!important;
   font:700 clamp(1.7rem,1.15rem + 1.6vw,2.7rem)/1.02 var(--f-display)!important;letter-spacing:-.035em!important;
   background:linear-gradient(90deg,#051F20 0 calc(var(--fl) * 100%),rgb(5 31 32 / .2) calc(var(--fl) * 100%) 100%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;opacity:1!important;transform:none!important}
-html[data-theme="dark"] #method .proc-s h3{background:linear-gradient(90deg,#DAF1DE 0 calc(var(--fl) * 100%),rgb(218 241 222 / .2) calc(var(--fl) * 100%) 100%);-webkit-background-clip:text;background-clip:text}
-html[data-theme] #method .proc-s>p{grid-column:2!important;grid-row:2!important;align-self:start;margin:0 0 clamp(14px,2vw,26px)!important;max-width:34rem;font-size:1.02rem!important;line-height:1.6;color:var(--tx-2)!important;opacity:1!important;transform:none!important}
-html[data-theme] #method .proc-s ul{grid-column:3!important;grid-row:1 / -1!important;align-self:center!important;display:grid!important;gap:8px!important;margin:0!important;padding:0!important;border:0!important;list-style:none}
-html[data-theme] #method .proc-s ul li{--k:1;position:relative;display:flex;align-items:center;gap:12px;padding:13px 16px!important;border:0!important;border-radius:14px;
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s h3{background:linear-gradient(90deg,#DAF1DE 0 calc(var(--fl) * 100%),rgb(218 241 222 / .2) calc(var(--fl) * 100%) 100%);-webkit-background-clip:text;background-clip:text}
+html[data-theme] :is(#method,.stepdeck) .proc-s>p{grid-column:2!important;grid-row:2!important;align-self:start;margin:0 0 clamp(14px,2vw,26px)!important;max-width:34rem;font-size:1.02rem!important;line-height:1.6;color:var(--tx-2)!important;opacity:1!important;transform:none!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s ul{grid-column:3!important;grid-row:1 / -1!important;align-self:center!important;display:grid!important;gap:8px!important;margin:0!important;padding:0!important;border:0!important;list-style:none}
+html[data-theme] :is(#method,.stepdeck) .proc-s ul li{--k:1;position:relative;display:flex;align-items:center;gap:12px;padding:13px 16px!important;border:0!important;border-radius:14px;
   font-size:.95rem!important;font-weight:600;color:var(--tx)!important;background:#F3FAF4;box-shadow:inset 0 0 0 1px rgb(35 83 71 / .1);
   opacity:clamp(.28,calc((var(--fl) * 1.5 - var(--k) * .3) * 3),1);translate:calc((1 - clamp(0,calc((var(--fl) * 1.5 - var(--k) * .3) * 3),1)) * 14px) 0}
-html[data-theme="dark"] #method .proc-s ul li{background:rgb(5 31 32 / .55);box-shadow:inset 0 0 0 1px rgb(142 182 155 / .14)}
-html[data-theme] #method .proc-s ul li:nth-child(2){--k:2}
-html[data-theme] #method .proc-s ul li:nth-child(3){--k:3}
-html[data-theme] #method .proc-s ul li::before{content:"";position:static!important;flex:none;width:18px;height:18px;border:0!important;border-radius:50%;transform:none!important;
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s ul li{background:rgb(5 31 32 / .55);box-shadow:inset 0 0 0 1px rgb(142 182 155 / .14)}
+html[data-theme] :is(#method,.stepdeck) .proc-s ul li:nth-child(2){--k:2}
+html[data-theme] :is(#method,.stepdeck) .proc-s ul li:nth-child(3){--k:3}
+html[data-theme] :is(#method,.stepdeck) .proc-s ul li::before{content:"";position:static!important;flex:none;width:18px;height:18px;border:0!important;border-radius:50%;transform:none!important;
   background:radial-gradient(circle,#235347 0 4px,transparent 4.5px),#DAF1DE!important;box-shadow:inset 0 0 0 1.5px #8EB69B}
-html[data-theme="dark"] #method .proc-s ul li::before{background:radial-gradient(circle,#DAF1DE 0 4px,transparent 4.5px),#235347!important}
-html[data-theme] #method .proc-s.card::before,html[data-theme] #method .proc-s.card::after{display:none!important}
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s ul li::before{background:radial-gradient(circle,#DAF1DE 0 4px,transparent 4.5px),#235347!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s.card::before,html[data-theme] :is(#method,.stepdeck) .proc-s.card::after{display:none!important}
 
 /* phones: the rail sits on top, the card keeps its weight */
 @media (max-width:760px){
-  html[data-theme] #method .proc-s.card{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;padding:10px 10px 18px!important;border-radius:24px!important}
-  html[data-theme] #method .proc-s .pn{grid-column:1!important;grid-row:auto!important;flex-direction:row!important;align-items:flex-end!important;min-height:120px;padding:16px 18px!important;border-radius:18px}
-  html[data-theme] #method .proc-s .pn::before{position:absolute;top:16px;left:18px}
-  html[data-theme] #method .proc-s .pn i{top:34px;left:18px;right:18px}
-  html[data-theme] #method .proc-s .pn b{font-size:4.6rem!important;margin-top:0}
-  html[data-theme] #method .proc-s h3,html[data-theme] #method .proc-s>p,html[data-theme] #method .proc-s ul{grid-column:1!important;grid-row:auto!important;margin:0!important;padding:0 8px!important}
-  html[data-theme] #method .proc-s h3{font-size:1.55rem!important;margin-top:8px!important}
-  html[data-theme] #method .proc-s ul li{padding:10px 12px!important;font-size:.86rem!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s.card{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;padding:10px 10px 18px!important;border-radius:24px!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s .pn{grid-column:1!important;grid-row:auto!important;flex-direction:row!important;align-items:flex-end!important;min-height:120px;padding:16px 18px!important;border-radius:18px}
+  html[data-theme] :is(#method,.stepdeck) .proc-s .pn::before{position:absolute;top:16px;left:18px}
+  html[data-theme] :is(#method,.stepdeck) .proc-s .pn i{top:34px;left:18px;right:18px}
+  html[data-theme] :is(#method,.stepdeck) .proc-s .pn b{font-size:4.6rem!important;margin-top:0}
+  html[data-theme] :is(#method,.stepdeck) .proc-s h3,html[data-theme] :is(#method,.stepdeck) .proc-s>p,html[data-theme] :is(#method,.stepdeck) .proc-s ul{grid-column:1!important;grid-row:auto!important;margin:0!important;padding:0 8px!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s h3{font-size:1.55rem!important;margin-top:8px!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s ul li{padding:10px 12px!important;font-size:.86rem!important}
 }
 /* outside the pile the fill plays by itself once the card is in view */
-#method .proc:not(.v2-pile) .proc-s{transition:--fl 1.6s cubic-bezier(.16,1,.3,1)}
-#method .proc:not(.v2-pile) .proc-s.fl-on{--fl:1}
-html:not(.js) #method .proc-s,html.rm #method .proc-s{--fl:1}
-@media (prefers-reduced-motion:reduce){html[data-theme] #method .proc-s.card{--fl:1!important}}
+:is(#method,.stepdeck) .proc:not(.v2-pile) .proc-s{transition:--fl 1.6s cubic-bezier(.16,1,.3,1)}
+:is(#method,.stepdeck) .proc:not(.v2-pile) .proc-s.fl-on{--fl:1}
+html:not(.js) :is(#method,.stepdeck) .proc-s,html.rm :is(#method,.stepdeck) .proc-s{--fl:1}
+@media (prefers-reduced-motion:reduce){html[data-theme] :is(#method,.stepdeck) .proc-s.card{--fl:1!important}}
 html[data-theme="light"][data-theme] .fab.fab .t{color:#051F20!important}
 html[data-theme="light"][data-theme] .fab.fab .t::after{color:#41695A!important}
 html[data-theme="dark"][data-theme] .fab.fab .t::after{color:#8EB69B!important}
@@ -1897,19 +1897,19 @@ html[data-theme] .btn.btn.btn-pri:is(.btn-enrol,.mb-enrol,.btn-lg):hover{backgro
 html[data-theme] .btn.btn-pri.btn-x:is(.btn-enrol,.mb-enrol,.btn-lg){--disc:linear-gradient(180deg,#F7F8F9,#C9CED2)!important;--disc-fg:var(--burg)!important}
 
 /* method cards in white mode: white card, silver rim and bezel, the green rail stays */
-html[data-theme="light"] #method .proc-s.card,html[data-theme="light"] #method .v2-pile>.proc-s.card{
+html[data-theme="light"] :is(#method,.stepdeck) .proc-s.card,html[data-theme="light"] :is(#method,.stepdeck) .v2-pile>.proc-s.card{
   border:1.5px solid transparent!important;
   background:linear-gradient(180deg,#FFFFFF,#F7F8F9) padding-box,linear-gradient(135deg,#FFFFFF,#BFC5CA 35%,#F2F4F5 55%,#A9B0B5 80%,#E6E9EB) border-box!important;
   box-shadow:0 0 0 7px rgb(236 238 240 / .9),0 0 0 8px rgb(169 176 181 / .45),0 34px 70px -34px rgb(5 31 32 / .45)!important}
-html[data-theme="dark"] #method .proc-s.card,html[data-theme="dark"] #method .v2-pile>.proc-s.card{
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s.card,html[data-theme="dark"] :is(#method,.stepdeck) .v2-pile>.proc-s.card{
   border:1.5px solid transparent!important;
   background:linear-gradient(180deg,#0B2B26,#082420) padding-box,linear-gradient(135deg,#6F777C,#C9CED2 35%,#4D5559 55%,#A9B0B5 80%,#5C6468) border-box!important}
-html[data-theme] #method .proc-s .pn i{background:linear-gradient(90deg,#F5F6F7,#A9B0B5) 0 0/calc(var(--fl) * 100%) 100% no-repeat,rgb(205 210 214 / .18)!important}
-html[data-theme] #method .proc-s .pn::before{color:#C9CED2}
-html[data-theme] #method .proc-s .pn b::after{background:linear-gradient(0deg,#8EB69B 0%,#DAF1DE 38%,#FFFFFF 58%,#C9CED2 78%,#F4F6F7 100%);-webkit-background-clip:text;background-clip:text}
-html[data-theme] #method .proc-s .pn .tag{background:linear-gradient(180deg,rgb(255 255 255 / .16),rgb(255 255 255 / .05))!important;color:#E4E7E9!important;box-shadow:inset 0 0 0 1px rgb(205 210 214 / .35)!important}
-html[data-theme="light"] #method .proc-s ul li{background:linear-gradient(180deg,#FFFFFF,#F3F5F6);box-shadow:inset 0 0 0 1px rgb(169 176 181 / .45)}
-html[data-theme="light"] #method .proc-s ul li::before{background:radial-gradient(circle,#235347 0 4px,transparent 4.5px),linear-gradient(180deg,#FFFFFF,#DADEE1)!important;box-shadow:inset 0 0 0 1.5px #A9B0B5}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn i{background:linear-gradient(90deg,#F5F6F7,#A9B0B5) 0 0/calc(var(--fl) * 100%) 100% no-repeat,rgb(205 210 214 / .18)!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn::before{color:#C9CED2}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn b::after{background:linear-gradient(0deg,#8EB69B 0%,#DAF1DE 38%,#FFFFFF 58%,#C9CED2 78%,#F4F6F7 100%);-webkit-background-clip:text;background-clip:text}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn .tag{background:linear-gradient(180deg,rgb(255 255 255 / .16),rgb(255 255 255 / .05))!important;color:#E4E7E9!important;box-shadow:inset 0 0 0 1px rgb(205 210 214 / .35)!important}
+html[data-theme="light"] :is(#method,.stepdeck) .proc-s ul li{background:linear-gradient(180deg,#FFFFFF,#F3F5F6);box-shadow:inset 0 0 0 1px rgb(169 176 181 / .45)}
+html[data-theme="light"] :is(#method,.stepdeck) .proc-s ul li::before{background:radial-gradient(circle,#235347 0 4px,transparent 4.5px),linear-gradient(180deg,#FFFFFF,#DADEE1)!important;box-shadow:inset 0 0 0 1.5px #A9B0B5}
 /* form fields: solid, no frosted glass */
 html[data-theme][data-theme][data-theme] .v2-form .field :is(input,textarea,select),html[data-theme][data-theme][data-theme] .v2-form .xsel-btn{
   background:var(--surf-2)!important;color:var(--tx)!important;box-shadow:inset 0 0 0 1px var(--line)!important}
@@ -2057,15 +2057,15 @@ html[data-theme][data-theme] .hcodes .hcp b{font:700 1.7rem/1 var(--f-display)!i
 html[data-theme="dark"][data-theme] .hcodes .hcp+.hcp{border-left-color:rgb(201 206 210 / .3)!important}
 
 /* method steps: the number stands on its own, no green panel */
-html[data-theme] #method .proc-s .pn{background:none!important;box-shadow:none!important;padding:clamp(10px,1.4vw,18px) 0 clamp(10px,1.4vw,18px) clamp(8px,1.2vw,14px)!important}
-html[data-theme] #method .proc-s .pn::before{color:var(--tx-3)!important}
-html[data-theme] #method .proc-s .pn i{left:clamp(8px,1.2vw,14px);right:0;top:calc(clamp(10px,1.4vw,18px) + 18px);background:linear-gradient(90deg,#235347,#8EB69B) 0 0/calc(var(--fl) * 100%) 100% no-repeat,linear-gradient(90deg,#C9CED2,#E4E7E9)!important}
-html[data-theme] #method .proc-s .pn b{-webkit-text-stroke:1.5px rgb(35 83 71 / .4)!important}
-html[data-theme] #method .proc-s .pn b::after{background:linear-gradient(0deg,#051F20 0%,#235347 45%,#5E8A73 75%,#A9B0B5 100%);-webkit-background-clip:text;background-clip:text;filter:none}
-html[data-theme="dark"] #method .proc-s .pn i{background:linear-gradient(90deg,#DAF1DE,#8EB69B) 0 0/calc(var(--fl) * 100%) 100% no-repeat,rgb(201 206 210 / .18)!important}
-html[data-theme="dark"] #method .proc-s .pn b{-webkit-text-stroke:1.5px rgb(142 182 155 / .45)!important}
-html[data-theme="dark"] #method .proc-s .pn b::after{background:linear-gradient(0deg,#8EB69B 0%,#DAF1DE 45%,#FFFFFF 70%,#C9CED2 100%);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 18px rgb(142 182 155 / .3))}
-html[data-theme] #method .proc-s .pn .tag{background:none!important;color:var(--em)!important;box-shadow:inset 0 0 0 1px #C3C9CD!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn{background:none!important;box-shadow:none!important;padding:clamp(10px,1.4vw,18px) 0 clamp(10px,1.4vw,18px) clamp(8px,1.2vw,14px)!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn::before{color:var(--tx-3)!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn i{left:clamp(8px,1.2vw,14px);right:0;top:calc(clamp(10px,1.4vw,18px) + 18px);background:linear-gradient(90deg,#235347,#8EB69B) 0 0/calc(var(--fl) * 100%) 100% no-repeat,linear-gradient(90deg,#C9CED2,#E4E7E9)!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn b{-webkit-text-stroke:1.5px rgb(35 83 71 / .4)!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn b::after{background:linear-gradient(0deg,#051F20 0%,#235347 45%,#5E8A73 75%,#A9B0B5 100%);-webkit-background-clip:text;background-clip:text;filter:none}
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s .pn i{background:linear-gradient(90deg,#DAF1DE,#8EB69B) 0 0/calc(var(--fl) * 100%) 100% no-repeat,rgb(201 206 210 / .18)!important}
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s .pn b{-webkit-text-stroke:1.5px rgb(142 182 155 / .45)!important}
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s .pn b::after{background:linear-gradient(0deg,#8EB69B 0%,#DAF1DE 45%,#FFFFFF 70%,#C9CED2 100%);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 18px rgb(142 182 155 / .3))}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn .tag{background:none!important;color:var(--em)!important;box-shadow:inset 0 0 0 1px #C3C9CD!important}
 
 /* the portrait backdrop: a round halo (matte silver in White, deep green in Green) with a fine silver orbit;
    his head rises past its rim and the figure fades softly into the page at the waist */
@@ -2276,8 +2276,8 @@ html[data-theme] :is(.eyebrow,.folio){font:600 11px/1.3 var(--f-body)!important;
 html[data-theme] .btn{font-family:var(--f-body)!important;font-weight:600!important;letter-spacing:.07em!important}
 html[data-theme] :is(.tag,.chip,.pill,.tool-tab,.trio__code,.trio__chip,.trio__meta){font-family:var(--f-body)!important}
 html[data-theme] .trio__t{font-weight:600!important;letter-spacing:-.035em!important}
-html[data-theme] #method .proc-s h3{font-weight:600!important;letter-spacing:-.04em!important}
-html[data-theme] .hero-facts dt,html[data-theme] .trio__n,html[data-theme] #method .proc-s .pn b{font-variant-numeric:tabular-nums}
+html[data-theme] :is(#method,.stepdeck) .proc-s h3{font-weight:600!important;letter-spacing:-.04em!important}
+html[data-theme] .hero-facts dt,html[data-theme] .trio__n,html[data-theme] :is(#method,.stepdeck) .proc-s .pn b{font-variant-numeric:tabular-nums}
 html[data-theme] p{text-wrap:pretty}
 html[data-theme] :is(h1,h2,h3,.title,.display){text-wrap:balance}
 
@@ -2345,27 +2345,27 @@ html[data-theme] .hb2 .tick::after,html[data-theme] .hb2 .tick::before{display:n
 @media (max-width:760px){html[data-theme][data-theme] .hero-fig :is(.fl-1,.fl-2).hb2{display:none!important}}
 
 /* ==================================================================== v5.2 · method: the original wide card, rising and stacking; hollow numbers that fill as you scroll */
-html[data-theme] #method .proc-s.card,html[data-theme] #method .v2-pile>.proc-s.card{
+html[data-theme] :is(#method,.stepdeck) .proc-s.card,html[data-theme] :is(#method,.stepdeck) .v2-pile>.proc-s.card{
   border:1px solid #CDD2D6!important;border-radius:28px!important;padding:clamp(22px,2.6vw,36px) clamp(24px,3vw,44px)!important;
   background:linear-gradient(180deg,#FFFFFF 0%,#F6F7F8 100%)!important;
   box-shadow:inset 0 1px 0 #fff,0 -10px 30px -24px rgb(5 31 32 / .2),0 30px 60px -36px rgb(5 31 32 / .45)!important}
-html[data-theme="dark"] #method .proc-s.card,html[data-theme="dark"] #method .v2-pile>.proc-s.card{
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s.card,html[data-theme="dark"] :is(#method,.stepdeck) .v2-pile>.proc-s.card{
   border-color:rgb(201 206 210 / .2)!important;background:linear-gradient(180deg,#0F332B 0%,#0B2B26 100%)!important;
   box-shadow:inset 0 1px 0 rgb(218 241 222 / .08),0 -10px 30px -24px rgb(0 0 0 / .5),0 30px 60px -30px rgb(0 0 0 / .8)!important}
-html[data-theme] #method .proc-s .pn{padding:0!important;justify-content:space-between!important}
-html[data-theme] #method .proc-s .pn::before{content:none!important}
-html[data-theme] #method .proc-s .pn i{display:none!important}
-html[data-theme] #method .proc-s .pn b{margin-top:0!important;font:600 clamp(5.4rem,3.6rem + 4.4vw,8.6rem)/.8 var(--f-display)!important;letter-spacing:-.06em!important;
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn{padding:0!important;justify-content:space-between!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn::before{content:none!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn i{display:none!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn b{margin-top:0!important;font:600 clamp(5.4rem,3.6rem + 4.4vw,8.6rem)/.8 var(--f-display)!important;letter-spacing:-.06em!important;
   -webkit-text-stroke:1.4px rgb(35 83 71 / .5)!important}
-html[data-theme] #method .proc-s .pn b::after{background:linear-gradient(0deg,#051F20 0%,#163832 40%,#235347 70%,#5E8A73 100%);-webkit-background-clip:text;background-clip:text}
-html[data-theme="dark"] #method .proc-s .pn b{-webkit-text-stroke:1.4px rgb(201 206 210 / .45)!important}
-html[data-theme="dark"] #method .proc-s .pn b::after{background:linear-gradient(0deg,#8EB69B 0%,#DAF1DE 50%,#FFFFFF 80%,#C9CED2 100%);-webkit-background-clip:text;background-clip:text}
-html[data-theme] #method .proc-s .pn .tag{align-self:flex-start}
-html[data-theme] #method .proc-s ul li{background:none!important;box-shadow:none!important;border-radius:0!important;border-bottom:1px solid #E1E5E7!important;padding:13px 2px!important}
-html[data-theme="dark"] #method .proc-s ul li{border-bottom-color:rgb(201 206 210 / .14)!important}
-html[data-theme] #method .proc-s ul li:last-child{border-bottom:0!important}
-html[data-theme] #method .proc-s ul{border-top:1px solid #E1E5E7!important}
-html[data-theme="dark"] #method .proc-s ul{border-top-color:rgb(201 206 210 / .14)!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn b::after{background:linear-gradient(0deg,#051F20 0%,#163832 40%,#235347 70%,#5E8A73 100%);-webkit-background-clip:text;background-clip:text}
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s .pn b{-webkit-text-stroke:1.4px rgb(201 206 210 / .45)!important}
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s .pn b::after{background:linear-gradient(0deg,#8EB69B 0%,#DAF1DE 50%,#FFFFFF 80%,#C9CED2 100%);-webkit-background-clip:text;background-clip:text}
+html[data-theme] :is(#method,.stepdeck) .proc-s .pn .tag{align-self:flex-start}
+html[data-theme] :is(#method,.stepdeck) .proc-s ul li{background:none!important;box-shadow:none!important;border-radius:0!important;border-bottom:1px solid #E1E5E7!important;padding:13px 2px!important}
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s ul li{border-bottom-color:rgb(201 206 210 / .14)!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s ul li:last-child{border-bottom:0!important}
+html[data-theme] :is(#method,.stepdeck) .proc-s ul{border-top:1px solid #E1E5E7!important}
+html[data-theme="dark"] :is(#method,.stepdeck) .proc-s ul{border-top-color:rgb(201 206 210 / .14)!important}
 
 /* ==================================================================== v5.3 · zakat, syllabus, examiner's vocabulary */
 /* zakat: the full width on laptops — controls left, the result right, every figure shown */
@@ -2782,15 +2782,15 @@ html[data-theme][data-theme] #modes .check-list li:nth-last-child(-n+2){font-wei
 /* ==================================================================== v5.8 · phones: the method stack, a tidier hero, slim figures */
 /* the stack on phones: same rise and pile as on laptops, cards sized for the screen */
 @media (max-width:760px){
-  html[data-theme] #method .v2-pile.v2-pile[data-stack]{margin-inline:0!important;padding:0!important;overflow:visible!important;grid-auto-columns:auto!important}
-  html[data-theme] #method .v2-pile.v2-pile[data-stack]>.proc-s.card{width:auto!important;min-width:0!important;scroll-snap-align:none!important}
-  html[data-theme] #method .proc-s.card{padding:22px 20px 20px!important;border-radius:24px!important;gap:10px!important}
-  html[data-theme] #method .proc-s .pn{flex-direction:row!important;align-items:flex-end!important;justify-content:space-between!important;min-height:0!important;padding:0!important}
-  html[data-theme] #method .proc-s .pn b{font-size:4.6rem!important}
-  html[data-theme] #method .proc-s h3{font-size:1.45rem!important;line-height:1.1!important;margin:6px 0 0!important}
-  html[data-theme] #method .proc-s>p{font-size:.92rem!important;margin:0!important}
-  html[data-theme] #method .proc-s ul li{padding:10px 0!important;font-size:.86rem!important}
-  html[data-theme] #method .v2-pile-track>.v2-pile.v2-pile[data-stack]{top:max(84px,calc(50vh - var(--pile-h,300px) / 2 + 30px))!important}
+  html[data-theme] :is(#method,.stepdeck) .v2-pile.v2-pile[data-stack]{margin-inline:0!important;padding:0!important;overflow:visible!important;grid-auto-columns:auto!important}
+  html[data-theme] :is(#method,.stepdeck) .v2-pile.v2-pile[data-stack]>.proc-s.card{width:auto!important;min-width:0!important;scroll-snap-align:none!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s.card{padding:22px 20px 20px!important;border-radius:24px!important;gap:10px!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s .pn{flex-direction:row!important;align-items:flex-end!important;justify-content:space-between!important;min-height:0!important;padding:0!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s .pn b{font-size:4.6rem!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s h3{font-size:1.45rem!important;line-height:1.1!important;margin:6px 0 0!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s>p{font-size:.92rem!important;margin:0!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s ul li{padding:10px 0!important;font-size:.86rem!important}
+  html[data-theme] :is(#method,.stepdeck) .v2-pile-track>.v2-pile.v2-pile[data-stack]{top:max(84px,calc(50vh - var(--pile-h,300px) / 2 + 30px))!important}
 }
 
 /* figures: a slimmer panel on laptops */
@@ -2902,3 +2902,278 @@ html[data-theme] .cc-next{padding:20px 24px!important}
 html[data-theme][data-theme] .cc-next .cc-date{width:72px;height:72px;border-radius:18px!important;display:grid;place-items:center;align-content:center;background:linear-gradient(160deg,#2E6655,#163832)!important;color:#FFFFFF!important;box-shadow:inset 0 1px 0 rgb(218 241 222 / .2)!important}
 html[data-theme] .cc-next .cc-date b{font:600 1.4rem/1 var(--f-display);color:#FFFFFF}
 html[data-theme] .cc-next .cc-date span{font:600 9px/1 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:#8EB69B}
+
+/* ================================================================== v40 · MOBILE PASS (≤760px) */
+@media (max-width:760px){
+  /* hero: title, then the photo on the first screen, then a short line, small buttons, figures and codes */
+  .hero .m-hide{display:none!important}
+  html[data-theme] .hero{padding-top:84px!important;padding-bottom:10px!important;min-height:0!important}
+  html[data-theme] .hero .hero-g{display:flex!important;flex-direction:column!important;gap:0!important}
+  html[data-theme] .hero .hero-copy{display:contents!important}
+  html[data-theme] .hero .eyebrow{order:1;margin:0 0 8px!important;font-size:9.5px!important}
+  html[data-theme] .hero .display{order:2;margin:0!important;font-size:clamp(2rem,9.6vw,2.5rem)!important;line-height:1.02!important}
+  html[data-theme] .hero .hero-fig{order:3;width:100%!important;height:330px!important;min-height:0!important;margin:6px auto 4px!important;max-width:360px}
+  html[data-theme] .hero .lede{order:4;margin:6px 0 0!important;font-size:.92rem!important;line-height:1.5!important;max-width:none}
+  html[data-theme] .hero .hero-cta{order:5;margin-top:14px!important}
+  html[data-theme] .hero .hero-facts{order:6;margin-top:16px!important}
+  html[data-theme] .hero .hcodes{order:7;margin-top:12px!important}
+  /* photo stage */
+  html[data-theme] .hero-fig .portrait.pt-cut{position:absolute!important;inset:0 6% 0!important;width:auto!important;height:100%!important}
+  html[data-theme] .hero-fig .hero-badge{width:64px!important;height:64px!important;left:2%!important;top:6%!important}
+  html[data-theme] .hero-fig .fl{display:none!important}
+  html[data-theme] .hero-fig .plate.pc{left:50%!important;right:auto!important;bottom:6px!important;top:auto!important;translate:-50% 0;transform:none!important;width:max-content;max-width:92%;padding:7px 12px 7px 7px!important;gap:9px!important}
+  html[data-theme] .hero-fig .plate.pc .pc-av{width:34px!important;height:34px!important}
+  html[data-theme] .hero-fig .plate.pc b{font-size:.92rem!important}
+  html[data-theme] .hero-fig .plate.pc em{font-size:.66rem!important}
+  html[data-theme] .hero-fig .glow{display:none}
+  /* buttons: one row, smaller type */
+  html[data-theme] .hero .hero-cta{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+  html[data-theme] .hero .hero-cta .btn{--h:42px!important;width:100%!important;min-width:0!important;padding:0 5px 0 12px!important;font-size:.64rem!important;letter-spacing:.06em!important}
+  /* figures: compact */
+  html[data-theme] .hero .hero-facts>div{padding:10px 9px!important;gap:4px!important}
+  html[data-theme] .hero .hero-facts dt{font-size:1.35rem!important}
+  html[data-theme] .hero .hero-facts dd{font-size:.6rem!important;line-height:1.3!important}
+  /* codes + Bismillah: one slim row each */
+  html[data-theme] .hero .hcodes{grid-template-columns:1fr 1fr!important;gap:8px!important}
+  html[data-theme] .hero .hcp{padding:8px 11px!important;gap:3px!important}
+  html[data-theme] .hero .hcp b{font-size:1.05rem!important}
+  html[data-theme] .hero .hcp small{font-size:7.5px!important}
+  html[data-theme] .hero .hbis{grid-column:1/-1;min-height:0!important;padding:6px 12px!important;font-size:1.05rem!important;line-height:1.7!important}
+}
+@media (max-width:760px){
+  html[data-theme] .hero-fig .plate.pc{translate:none!important}
+  html[data-theme] .hero-fig .fl{scale:0!important;visibility:hidden!important}
+  html[data-theme] .hero :is(.eyebrow,.display){align-self:flex-start!important;max-width:none!important;width:100%!important;text-align:left!important;justify-content:flex-start!important;margin-inline:0!important}
+}
+@media (max-width:760px){
+  html[data-theme] .hero :is(.lede,.hero-cta,.hero-facts,.hcodes){align-self:stretch!important;max-width:none!important;width:auto!important;margin-inline:0!important}
+  /* the assistant: just the logo in a round button */
+  html[data-theme] .fab.fab{width:54px!important;height:54px!important;min-width:0!important;padding:0!important;border-radius:50%!important;justify-content:center!important;gap:0!important}
+  html[data-theme] .fab.fab .t{display:none!important}
+  html[data-theme] .fab.fab .seal{width:46px!important;height:46px!important;border-radius:50%!important}
+}
+@media (max-width:760px){html[data-theme] .fab.fab{overflow:hidden!important}html[data-theme] .fab.fab .t{position:absolute!important;width:1px!important;height:1px!important;clip-path:inset(50%)!important;overflow:hidden!important}}
+.r-lv{display:none}
+@media (max-width:760px){
+  /* f.02: the example card trimmed, the four answers as neat swipe cards */
+  html[data-theme] .ladder .case-ph{display:none!important}
+  html[data-theme] .ladder .case.card{padding:16px!important}
+  html[data-theme] .ladder .case-b p{font-size:.86rem!important;line-height:1.6!important}
+  html[data-theme] .ladder .case-b .h3{font-size:1.25rem!important;margin-bottom:6px!important}
+  html[data-theme] .ladder .meter{display:grid!important;grid-template-columns:repeat(4,1fr);gap:6px!important;padding:10px!important;border-radius:14px!important}
+  html[data-theme] .ladder .mt-row{display:grid!important;grid-template-columns:1fr!important;gap:5px!important;text-align:center}
+  html[data-theme] .ladder .mt-row>span:first-child{font:600 8.5px/1 var(--f-mono);letter-spacing:.1em;color:var(--tx-3)}
+  html[data-theme] .ladder .mt-row .mt-bar{height:4px!important;border-radius:4px;width:100%!important}
+  html[data-theme] .ladder .mt-row small{font:600 9.5px/1 var(--f-body)!important;color:var(--tx-2)!important}
+  html[data-theme] .ans{grid-auto-columns:82%!important;padding:4px 2px 14px!important;margin-top:14px!important}
+  html[data-theme] .ans .rung{display:flex!important;flex-direction:column;gap:10px;min-height:0!important;padding:16px!important;border-radius:20px!important;background:#fff!important;border:0!important;box-shadow:0 0 0 1px rgb(14 30 24 / .08),0 14px 30px -22px rgb(14 30 24 / .35)!important}
+  html[data-theme] .ans .rung .r-n{order:-1;display:inline-flex;align-self:flex-start;padding:5px 9px;border-radius:8px;background:rgb(14 107 70 / .08);font:600 9.5px/1 var(--f-mono)!important;letter-spacing:.12em;text-transform:uppercase;color:#0e6b46!important}
+  html[data-theme] .ans .rung .r-lv{display:grid;gap:6px;order:0;font:600 8.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--tx-3)}
+  html[data-theme] .ans .rung .r-lv i{display:block;height:4px;border-radius:4px;background:linear-gradient(90deg,#0e6b46 0 calc(var(--l) * 25%),rgb(14 30 24 / .08) 0)}
+  html[data-theme] .ans .rung p{margin:0!important;font-size:.88rem!important;line-height:1.55!important;color:var(--tx)!important}
+  html[data-theme] .ans .rung small{display:block;margin-top:auto;padding:9px 11px;border-radius:12px;background:#f3f5f4;font-size:.76rem!important;line-height:1.45!important;color:var(--tx-2)!important}
+  html[data-theme="dark"] .ans .rung{background:rgb(255 255 255 / .05)!important;box-shadow:0 0 0 1px rgb(255 255 255 / .1)!important}
+  html[data-theme="dark"] .ans .rung small{background:rgb(255 255 255 / .06)}
+  html[data-theme] .ladder .sec-head .lede{font-size:.9rem!important}
+}
+@media (max-width:760px){
+  /* courses: shorter card text, one tidy chip strip */
+  html[data-theme] #courses .notice{display:none!important}
+  html[data-theme] .trio__d{display:-webkit-box!important;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  html[data-theme] .trio__chips{display:flex!important;flex-wrap:nowrap!important;gap:0!important;padding:0!important;border-radius:12px!important;overflow:hidden;background:#f3f5f4!important;box-shadow:inset 0 0 0 1px rgb(14 30 24 / .08)!important;width:100%}
+  html[data-theme] .trio__chip,html[data-theme] .trio__chip--acc{flex:1;display:flex!important;align-items:center;justify-content:center;min-height:36px;padding:8px 6px!important;margin:0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;font:600 9px/1.2 var(--f-mono)!important;letter-spacing:.08em!important;text-transform:uppercase;color:var(--tx-2)!important;text-align:center;white-space:normal}
+  html[data-theme] .trio__chip--acc{border-left:1px solid rgb(14 30 24 / .1)!important;color:#0e6b46!important}
+  html[data-theme="dark"] .trio__chips{background:rgb(255 255 255 / .06)!important}
+  html[data-theme] .trio__mark{opacity:.35!important;scale:.7;transform-origin:100% 100%}
+  /* method: less text — title and the three points, a frosted card */
+  html[data-theme] :is(#method,.stepdeck) .proc-s>p{display:none!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s.card{background:linear-gradient(180deg,rgb(255 255 255 / .86),rgb(246 250 248 / .78))!important;-webkit-backdrop-filter:blur(14px) saturate(150%)!important;backdrop-filter:blur(14px) saturate(150%)!important;box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgb(14 30 24 / .07),0 24px 44px -28px rgb(14 30 24 / .45)!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s ul li{padding:9px 12px!important;font-size:.84rem!important}
+  html[data-theme] :is(#method,.stepdeck) .proc-s h3{font-size:1.3rem!important;line-height:1.15!important}
+  html[data-theme] #method .sec-head .lede{display:none!important}
+}
+@media (max-width:760px){
+  html[data-theme] .trio__c{height:auto!important;min-height:0!important}
+  html[data-theme] .trio__in{height:auto!important;gap:12px!important}
+  html[data-theme] .trio__more{display:grid!important;gap:10px;max-height:none!important;opacity:1!important;visibility:visible!important;transform:none!important}
+  html[data-theme] .trio__list{display:grid!important;gap:6px!important}
+  html[data-theme] .trio__list a:nth-child(n+3){display:none!important}
+  html[data-theme] .trio__list a{display:grid!important;gap:3px;padding:9px 11px!important;border-radius:12px!important;background:#f6f8f7!important;box-shadow:inset 0 0 0 1px rgb(14 30 24 / .07)!important}
+  html[data-theme] .trio__list em{font:600 .8rem/1.3 var(--f-body)!important;font-style:normal!important;color:var(--tx)!important}
+  html[data-theme] .trio__list .trio__meta b{font:500 9px/1 var(--f-mono)!important;letter-spacing:.08em;color:var(--tx-3)!important}
+  html[data-theme] .trio__btns{display:flex!important}
+  html[data-theme] .trio__btns .btn-ghost{display:none!important}
+  html[data-theme] .trio__btns .btn{--h:38px!important;font-size:.64rem!important}
+  html[data-theme] .trio__d{-webkit-line-clamp:2}
+  html[data-theme] .trio__rail{height:auto!important}
+  html[data-theme="dark"] .trio__list a{background:rgb(255 255 255 / .05)!important}
+}
+@media (max-width:760px){html[data-theme] .trio__mark{display:none!important}}
+.zk-tog{display:none}
+@media (max-width:760px){
+  /* zakat: an example and its answer; the sliders only when asked for */
+  html[data-theme] #zakat .sec-head .lede{display:none!important}
+  html[data-theme] .be-studio.card{padding:14px!important;gap:12px!important;border-radius:22px!important}
+  html[data-theme] .be-studio .be-ctrl{gap:10px!important}
+  html[data-theme] .be-studio .seg button{font-size:.72rem!important;padding:8px 4px!important}
+  html[data-theme] .be-studio .be-out,html[data-theme] .be-studio .be-say,html[data-theme] .be-studio .note-sm,html[data-theme] .be-studio .zf-40{display:none!important}
+  html[data-theme] .be-studio:not(.zk-open) .sl{display:none!important}
+  html[data-theme] .be-studio .sl:has(#sNisab){display:none!important}
+  .zk-tog{display:flex;align-items:center;justify-content:center;gap:6px;height:38px;border:0;border-radius:12px;background:#f3f5f4;box-shadow:inset 0 0 0 1px rgb(14 30 24 / .08);font:600 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--tx-2);cursor:pointer}
+  .zk-tog svg{width:14px;height:14px;transition:rotate .3s}
+  .zk-open .zk-tog svg{rotate:180deg}
+  html[data-theme="dark"] .zk-tog{background:rgb(255 255 255 / .06);color:#cfe0d6}
+  html[data-theme] .be-studio .zf-row:not(.zf-net){display:none!important}
+  html[data-theme] .be-studio .zf{padding:0 0 26px!important;gap:0!important}
+  html[data-theme] .be-studio .zf-due{display:flex!important;align-items:center;justify-content:space-between;gap:10px;min-height:0!important;padding:14px 16px!important;border-radius:16px!important}
+  html[data-theme] .be-studio .zf-dt{display:grid!important;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;width:100%}
+  html[data-theme] .be-studio .zf-dt small{grid-column:1/-1}
+  html[data-theme] .be-studio .zf-dt b{font-size:1.6rem!important;line-height:1!important}
+  html[data-theme] .be-studio .zf-dt span{font-size:.7rem!important;line-height:1.3!important;text-align:right;max-width:120px}
+}
+@media (max-width:760px){
+  html[data-theme][data-theme] #zakat .be-studio:not(.zk-open) .be-ctrl .sl{display:none!important}
+  html[data-theme][data-theme] #zakat .be-ctrl .sl:has(#sNisab){display:none!important}
+  html[data-theme][data-theme] #zakat .zf-row:not(.zf-net){display:none!important}
+  html[data-theme][data-theme] #zakat .zf-row.zf-net{grid-template-columns:auto minmax(0,1fr) auto!important;gap:10px}
+  html[data-theme] #zakat .be-ctrl{gap:10px!important}
+  html[data-theme] #zakat .be-fig{border-left:0!important;padding-left:0!important;gap:10px!important}
+  html[data-theme] #zakat .be-studio{grid-template-columns:1fr!important}
+}
+@media (max-width:760px){html[data-theme] #zakat .zf-dt b{white-space:nowrap;font-size:1.5rem!important}html[data-theme] #zakat .be-studio.card{padding:12px!important}}
+@media (max-width:760px){
+  /* syllabus: six small tiles, two per row; a tap opens the topics */
+  html[data-theme] #org .sec-head .lede,html[data-theme] #org .org-count,html[data-theme][data-theme] #org .org-panel{display:none!important}
+  html[data-theme] #org .org.card{padding:14px!important}
+  html[data-theme] #org .org-top{display:flex!important;flex-wrap:wrap;align-items:center;gap:10px!important;margin-bottom:10px!important}
+  html[data-theme] #org .sm-code{padding:8px 12px!important}
+  html[data-theme] #org .sm-code b{font-size:1.05rem!important}
+  html[data-theme] #org .org-top .seg{width:100%;margin:0!important}
+  html[data-theme] #org .org-top .seg button{flex:1;font-size:.72rem!important;padding:8px 4px!important}
+  html[data-theme] #org .sm-trays{gap:12px!important}
+  html[data-theme] #org .sm-th{margin-bottom:6px!important}
+  html[data-theme] #org .sm-row{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+  html[data-theme][data-theme] #org .dept.dept{display:grid!important;grid-template-rows:auto auto auto!important;gap:6px!important;min-height:0!important;padding:12px!important;border-radius:16px!important}
+  html[data-theme] #org .dept>b{display:none!important}
+  html[data-theme] #org .dept .dh{align-items:center!important}
+  html[data-theme] #org .dept .dk{font:600 .82rem/1.2 var(--f-body)!important;letter-spacing:0!important;text-transform:none!important;color:var(--tx)!important;padding:0!important}
+  html[data-theme] #org .dept .dk i{display:none!important}
+  html[data-theme] #org .dept .dn{font-size:1.35rem!important;margin:0!important}
+  html[data-theme] #org .dept .dm{grid-template-columns:1fr!important;gap:6px!important}
+  html[data-theme] #org .dept .dm small{font-size:8.5px!important}
+  html[data-theme] #org .dept::after{content:"Topics →"!important;font:600 8.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--em)}
+  html[data-theme] #org .sm-row .dept:last-child:nth-child(odd){grid-column:1/-1}
+}
+.cw-step{display:none}
+@media (max-width:760px){
+  html[data-theme] #words .sec-head .lede{display:none!important}
+  html[data-theme][data-theme] #words .cw-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;perspective:none!important}
+  html[data-theme][data-theme] #words .cw.card{position:relative!important;display:flex!important;flex-direction:column;gap:8px;min-height:0!important;height:auto!important;padding:12px!important;margin:0!important;transform:none!important;translate:none!important;border-radius:16px!important;cursor:pointer;top:auto!important}
+  html[data-theme] #words .cw p{display:none!important}
+  html[data-theme] #words .cw .cw-m{order:-1;position:static!important;font:600 8px/1.2 var(--f-mono)!important;letter-spacing:.1em!important;text-transform:uppercase;color:var(--em)!important;padding:0!important;background:none!important;box-shadow:none!important;border:0!important}
+  html[data-theme] #words .cw b{font:600 1rem/1.15 var(--f-display)!important;color:var(--tx)!important;margin:0!important}
+  html[data-theme][data-theme] #words .cw .cw-lv{position:static!important;display:flex!important;align-items:center;gap:8px;width:100%!important;height:auto!important;margin-top:auto!important;padding:0!important;background:none!important;border:0!important}
+  html[data-theme][data-theme] #words .cw .cw-lv::before{content:"";display:none}
+  html[data-theme][data-theme] #words .cw .cw-lv i{position:relative!important;flex:1;display:block!important;height:4px!important;border-radius:4px;background:rgb(14 30 24 / .09)!important;overflow:hidden;inset:auto!important;width:auto!important}
+  html[data-theme][data-theme] #words .cw .cw-lv i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--h);border-radius:inherit;background:linear-gradient(90deg,#0e6b46,#3a9a6e)}
+  html[data-theme] #words .cw .cw-step{display:inline;font:600 8.5px/1 var(--f-mono);font-style:normal;color:var(--tx-3)}
+  html[data-theme] #words .cw.hot .cw-lv i::after{background:linear-gradient(90deg,#0b4f34,#2ec27e)}
+  html[data-theme] #words .cw::after{content:none!important}
+  .cw-pop{display:grid;gap:12px}
+  .cw-pop-m{font:600 9.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--em)}
+  .cw-pop .h3{margin:0;font:600 1.6rem/1.1 var(--f-display)}
+  .cw-pop p{margin:0;font-size:.95rem;line-height:1.6;color:var(--tx-2)}
+  .cw-pop-lv{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:12px;border-radius:14px;background:#f3f5f4}
+  .cw-pop-lv span,.cw-pop-lv em{font:600 9px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;font-style:normal;color:var(--tx-3)}
+  .cw-pop-lv i{display:block;height:5px;border-radius:5px;background:rgb(14 30 24 / .1);overflow:hidden}
+  .cw-pop-lv b{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#0e6b46,#3a9a6e)}
+  html[data-theme="dark"] .cw-pop-lv{background:rgb(255 255 255 / .06)}
+}
+@media (max-width:760px){html[data-theme] #words .cw.hot .cw-step{color:#b8d8c6}html[data-theme][data-theme] #words .cw.hot .cw-lv i{background:rgb(255 255 255 / .15)!important}html[data-theme] #words .cw.hot b{color:#fff!important}html[data-theme] #words .cw.hot .cw-m{color:#9fd6b8!important}}
+@media (max-width:760px){
+  /* between classes: a tidy two-column grid of small tiles */
+  html[data-theme] #tools .sec-head .lede{display:none!important}
+  html[data-theme][data-theme] #tools .explore{display:grid!important;grid-template-columns:1fr 1fr!important;grid-auto-rows:auto!important;grid-auto-flow:row dense!important;gap:8px!important}
+  html[data-theme][data-theme] #tools .xt.card{grid-column:auto!important;grid-row:auto!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:8px!important;min-height:132px!important;height:auto!important;padding:12px!important;border-radius:18px!important}
+  html[data-theme][data-theme] #tools .xt.xt-wide,html[data-theme][data-theme] #tools .xt.xt-tall{grid-column:1/-1!important;min-height:0!important}
+  html[data-theme] #tools .xt>p,html[data-theme] #tools .xt .xv-steps{display:none!important}
+  html[data-theme] #tools .xt:not(.xt-wide):not(.xt-tall) :is(.xt-viz,.tool-viz){display:none!important}
+  html[data-theme] #tools .xt .h3{margin:auto 0 0!important;font-size:1rem!important;line-height:1.2!important}
+  html[data-theme] #tools .xt.xt-wide .h3,html[data-theme] #tools .xt.xt-tall .h3{font-size:1.15rem!important;margin-top:0!important}
+  html[data-theme] #tools .xt .tool-tab{margin:0!important;font-size:8.5px!important;padding:5px 8px!important}
+  html[data-theme] #tools .xt .xt-ic{width:30px!important;height:30px!important;top:10px!important;right:10px!important;border-radius:9px!important}
+  html[data-theme] #tools .xt .xt-ic svg{width:15px!important;height:15px!important}
+  html[data-theme] #tools .xt .link{font-size:9px!important;margin-top:0!important}
+  html[data-theme] #tools .xt .xv-plan{display:grid!important;grid-template-columns:1fr 1fr;gap:6px 10px!important;margin:2px 0 0!important;width:100%}
+  html[data-theme] #tools .xt .xv-plan li{display:flex!important;align-items:center;gap:8px}
+  html[data-theme] #tools .xt .xv-plan b{width:26px!important;height:26px!important;font-size:9px!important}
+  html[data-theme] #tools .xt .xv-plan span{font-size:.8rem!important}
+  html[data-theme] #tools .xt.xt-tall .xv-mark{display:flex!important;align-items:baseline;gap:12px;width:100%;min-height:0!important;padding:0!important}
+  html[data-theme] #tools .xt.xt-tall .xv-mark b{font-size:2rem!important}
+  html[data-theme] #tools .xt.xt-tall .xv-mark i{flex:1}
+  html[data-theme] #tools .xt.xt-track .tool-viz,html[data-theme] #tools .xt.xt-track .xt-viz{display:none!important}
+}
+@media (max-width:760px){
+  /* mornings: four equal logo tiles, two per row */
+  html[data-theme] .sw-morn{display:grid!important;grid-template-columns:1fr!important;gap:12px!important;padding:16px!important;border-radius:22px!important;text-align:left}
+  html[data-theme] .sw-morn .sw-mk{border:0!important;padding:0!important;text-align:center}
+  html[data-theme][data-theme] .sw-morn .aff-row{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;margin:0!important;padding:0!important}
+  html[data-theme][data-theme] .sw-morn .aff-i{display:grid!important;grid-template-rows:64px auto;justify-items:center;align-items:center;gap:6px;padding:10px 8px!important;border-radius:16px!important;background:#fff!important;box-shadow:0 0 0 1px rgb(14 30 24 / .07)!important;text-align:center;margin:0!important;width:auto!important}
+  html[data-theme][data-theme] .sw-morn .aff-i .lg{width:100%!important;height:64px!important;border:0!important;min-width:0!important;padding:0!important;background:none!important;box-shadow:none!important;border-radius:0!important}
+  html[data-theme][data-theme] .sw-morn .aff-i .lg img{width:auto!important;height:54px!important;max-width:100%!important;object-fit:contain}
+  html[data-theme] .sw-morn .aff-t b{font:600 8.5px/1.25 var(--f-mono)!important;letter-spacing:.08em!important;text-transform:uppercase;white-space:normal!important;color:var(--tx-2)!important}
+  html[data-theme] .sw-morn>.link{justify-self:center;margin:0!important}
+  html[data-theme="dark"] .sw-morn .aff-i{background:rgb(255 255 255 / .05)!important}
+  /* follow band: four equal buttons, icon then label */
+  html[data-theme][data-theme] .v2-soc{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;padding:16px!important;border-radius:22px!important}
+  html[data-theme] .v2-soc .v2-soc-k{grid-column:1/-1;text-align:center;border:0!important;padding:0 0 4px!important;margin:0!important}
+  html[data-theme][data-theme] .v2-soc .v2-soc-i{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;min-height:54px;padding:10px 12px!important;border-radius:14px!important;background:#fff!important;box-shadow:0 0 0 1px rgb(14 30 24 / .07)!important;text-align:left}
+  html[data-theme][data-theme] .v2-soc .v2-soc-i>svg,html[data-theme][data-theme] .v2-soc .v2-soc-i>img{flex:none;width:30px!important;height:30px!important;display:block!important}
+  html[data-theme][data-theme] .v2-soc .v2-soc-i span{display:block!important;font:600 .85rem/1.15 var(--f-body)!important;letter-spacing:0!important;text-transform:none!important;color:var(--tx)!important}
+  html[data-theme] .v2-soc .v2-soc-i span small,html[data-theme] .v2-soc .v2-soc-i span em{display:none!important}
+  html[data-theme] .v2-soc .v2-soc-i::after,html[data-theme] .v2-soc .v2-soc-i span::after{content:none!important}
+  html[data-theme="dark"] .v2-soc .v2-soc-i{background:rgb(255 255 255 / .05)!important}
+}
+@media (max-width:760px){
+  /* FAQ: the help box sits after the questions, never on top of them */
+  html[data-theme][data-theme] #faq .faq-g{display:flex!important;flex-direction:column!important;gap:14px!important}
+  html[data-theme][data-theme] #faq .sec-head{display:contents!important}
+  html[data-theme][data-theme] #faq .faq{order:5}
+  html[data-theme][data-theme] #faq .faq-cta{order:6;position:relative!important;top:auto!important;inset:auto!important;transform:none!important;margin:0!important;padding:16px!important;border-radius:20px!important;z-index:auto!important}
+  html[data-theme] #faq .faq-cta p{font-size:.85rem!important;margin:0 0 10px!important}
+  html[data-theme] #faq .faq-cta-b{display:flex!important;gap:8px!important;flex-wrap:nowrap}
+  html[data-theme] #faq .faq-cta-b .btn{--h:38px!important;font-size:.62rem!important;flex:1;min-width:0}
+}
+/* logos stand alone: no repeated names */
+.trio__list a:has(.trio__lg){display:flex!important;align-items:center;gap:10px}
+.trio__lg{flex:none;display:flex;align-items:center;gap:4px;height:30px}
+.trio__lg img{height:28px;width:auto;max-width:70px;object-fit:contain}
+.aff-logo .aff-t small{display:block;margin-top:2px}
+html[data-theme][data-theme] .sw-morn .aff-logo{grid-template-rows:72px!important;padding:12px 8px!important}
+html[data-theme][data-theme] .sw-morn .aff-logo .lg{height:72px!important}
+html[data-theme][data-theme] .sw-morn .aff-logo .lg img{height:60px!important}
+@media (max-width:760px){
+  html[data-theme][data-theme] .sw-morn .aff-row{width:100%!important;justify-self:stretch}
+  html[data-theme][data-theme] .sw-morn .aff-logo{width:100%!important}
+  html[data-theme] .trio__list a:has(.trio__lg){flex-direction:row!important;align-items:center!important}
+  html[data-theme] .trio__list a:has(.trio__lg) em{font-size:.78rem!important}
+}
+/* the logo strip on the place cards already shows them: keep the list text-only (areas) */
+.trio__list .trio__lg{display:none}
+/* register form: clearer glass so the silver shapes behind it show */
+html[data-theme="light"] #register .reg.card{background:linear-gradient(160deg,rgb(255 255 255 / .42),rgb(255 255 255 / .22))!important;-webkit-backdrop-filter:blur(10px) saturate(150%)!important;backdrop-filter:blur(10px) saturate(150%)!important;box-shadow:inset 0 1px 0 rgb(255 255 255 / .9),inset 0 0 0 1px rgb(255 255 255 / .55),0 30px 60px -36px rgb(14 30 24 / .4)!important}
+html[data-theme="light"] #register .reg.card :is(input,select,textarea){background:rgb(255 255 255 / .7)!important}
+@media (max-width:760px){
+  /* shorter page: drop the repeated intro lines and the feature slider above the form */
+  html[data-theme] #register .reg-copy .lede,html[data-theme] #register .rp{display:none!important}
+  html[data-theme] .sec{padding-top:56px!important;padding-bottom:56px!important}
+  html[data-theme] .sec-head{margin-bottom:18px!important}
+  html[data-theme] .sec-head .title{font-size:clamp(1.7rem,7.6vw,2.1rem)!important}
+  /* silver as a hairline accent, not a fill */
+  html[data-theme] .btn.btn-pri{transition:transform .25s var(--e-out),box-shadow .25s!important}
+  html[data-theme] .btn:active{transform:scale(.97)!important}
+}
+@media (max-width:760px){
+  html[data-theme] :is(#ladder,#courses,#where,#tools) .sec-head .lede{display:none!important}
+  html[data-theme] .ladder .case-q{font-size:.84rem!important}
+}

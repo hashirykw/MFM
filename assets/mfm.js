@@ -265,7 +265,8 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
     return L.length ? '<span class="lg' + (L.length > 1 ? ' lg-2' : '') + '">' + L.map(function (src) { return '<img src="' + esc(src) + '" alt="" loading="lazy" decoding="async">'; }).join('') + '</span>'
       : '<span class="lg lg-m" aria-hidden="true">' + esc(mono(c.n)) + '</span>';
   };
-  var item = function (c, tag) { c = norm(c); return '<' + tag + ' class="aff-i">' + logo(c) + '<span class="aff-t"><b>' + esc(c.n) + '</b>' + (c.a ? '<small>' + esc(c.a) + '</small>' : '') + '</span></' + tag + '>'; };
+  /* the name is already in the logo, so a logo stands alone (the area stays, if there is one) */
+  var item = function (c, tag) { c = norm(c); var hl = !!c.logo; return '<' + tag + ' class="aff-i' + (hl ? ' aff-logo' : '') + '"' + (hl ? ' aria-label="' + esc(c.n) + '"' : '') + '>' + logo(c) + ((!hl || c.a) ? '<span class="aff-t">' + (hl ? '' : '<b>' + esc(c.n) + '</b>') + (c.a ? '<small>' + esc(c.a) + '</small>' : '') + '</span>' : '') + '</' + tag + '>'; };
   document.querySelectorAll('.pl-aff[data-aff]').forEach(function (ul, i) {
     var cs = (list[i] && list[i].centres) || [];
     ul.innerHTML = cs.length ? cs.map(function (c) { return item(c, 'li'); }).join('') : '<li class="tbc">Centre list · to be confirmed</li>';
@@ -544,7 +545,7 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
 /* v4 · method cards: the step number carries its own copy for the fill; outside the pile (phones) the fill plays once in view */
 (function () {
   'use strict';
-  var cards = document.querySelectorAll('#method .proc-s');
+  var cards = document.querySelectorAll('#method .proc-s,.stepdeck .proc-s');
   cards.forEach(function (c) { var b = c.querySelector('.pn b'); if (b) b.setAttribute('data-n', b.textContent.trim()); });
   if (!('IntersectionObserver' in window)) { cards.forEach(function (c) { c.classList.add('fl-on'); }); return; }
   var io = new IntersectionObserver(function (es) {
@@ -570,7 +571,7 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
     cs.forEach(function (c) { [].concat(c.logo || []).forEach(function (src) { if (!seen[src]) { seen[src] = 1; logos.push('<img src="' + esc(src) + '" alt="" loading="lazy" decoding="async">'); } });
       if (!c.logo) logos.push('<span class="trio__wm">' + esc(c.n) + '</span>'); });
     var lg = card.querySelector('[data-logos]'); if (lg) lg.innerHTML = logos.join('');
-    var ls = card.querySelector('.trio__list'); if (ls) ls.innerHTML = cs.map(function (c) { return '<a href="contact.html#enrol"><em>' + esc(c.n) + '</em><span class="trio__meta"><b>' + esc(c.a || '') + '</b></span></a>'; }).join('');
+    var ls = card.querySelector('.trio__list'); if (ls) ls.innerHTML = cs.map(function (c) { var L = c.logo ? [].concat(c.logo) : []; return '<a href="contact.html#enrol" aria-label="' + esc(c.n + (c.a ? ', ' + c.a : '')) + '">' + (L.length ? '<span class="trio__lg">' + L.map(function (x) { return '<img src="' + esc(x) + '" alt="" loading="lazy" decoding="async">'; }).join('') + '</span><em>' + esc(c.a || c.n) + '</em>' : '<em>' + esc(c.n) + '</em><span class="trio__meta"><b>' + esc(c.a || '') + '</b></span>') + '</a>'; }).join('');
     var ch = card.querySelector('[data-count-chip]'); if (ch) ch.textContent = cs.length + (cs.length === 1 ? ' centre' : ' centres');
   });
   document.querySelectorAll('.trio').forEach(function (trio) {
@@ -669,4 +670,21 @@ if (matchMedia('(max-width:560px)').matches) document.querySelectorAll('[data-sh
     rows.forEach(function (r) { if (r.isIntersecting) { run(r.target); io.unobserve(r.target); } });
   }, { threshold: .5 });
   els.forEach(function (el) { io.observe(el); });
+})();
+
+/* v40 · examiner's vocabulary on phones: small tiles; a tap opens the full meaning in a pop-up */
+(function () {
+  'use strict';
+  var cards = document.querySelectorAll('#words .cw');
+  cards.forEach(function (c, i) {
+    c.setAttribute('tabindex', '0'); c.setAttribute('role', 'button');
+    var lv = c.querySelector('.cw-lv'); if (lv && !c.querySelector('.cw-step')) lv.insertAdjacentHTML('beforeend', '<em class="cw-step">' + (i + 1) + '/' + cards.length + '</em>');
+    var open = function () {
+      if (!matchMedia('(max-width:760px)').matches || !window.RA || !RA.modal) return;
+      var t = c.querySelector('b'), p = c.querySelector('p'), m = c.querySelector('.cw-m'), h = (c.querySelector('.cw-lv i') || {}).style;
+      RA.modal('<div class="cw-pop"><span class="cw-pop-m">' + (m ? m.innerHTML : '') + '</span><h3 class="h3">' + (t ? t.innerHTML : '') + '</h3><p>' + (p ? p.innerHTML : '') + '</p><div class="cw-pop-lv"><span>Depth</span><i><b style="width:' + (h ? h.getPropertyValue('--h') : '50%') + '"></b></i><em>' + (i + 1) + ' of ' + cards.length + '</em></div></div>');
+    };
+    c.addEventListener('click', open);
+    c.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  });
 })();
