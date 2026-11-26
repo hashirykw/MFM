@@ -105,3 +105,12 @@ The tabs follow the Sir Xahid Anwer Digital Campus: AI checker, student portal, 
 - Notes store: his book "O Level & IGCSE Islamiyat, new edition 2026–2027" (`mfm-book.webp`) as a feature and a cart item.
 - Footer tagline: "When you learn, teach. When you get, give." #IslamiyatWithMFM
 - Still blank (hidden until filled): Facebook and TikTok links in config.js.
+
+## V2 design (Nov 2026): `/v2`
+
+A second design lives beside the current one so both can be compared on the same domain: **`/v2`** (home), **`/v2/about`** and **`/v2/courses`**. Deep emerald and gold from the MFM logo and study-pack covers, glass cards, Bricolage Grotesque headings, a 3D gold eight-point star behind the portrait and a 3D study-pack book you can drag to turn. The tool pages (portal, AI checker, past papers, notes, lab, parents) are shared with V1.
+
+- Each V2 page is one self-contained HTML file (styles and scripts inlined); three.js comes from `/vendor` and loads after the page paints.
+- Edit the sources in `tools/v2/` (`pages/` for each page, `parts/` for the shared nav, footer, CSS and 3D), then run `python3 tools/v2/build.py` to rebuild `/v2`. `tools/` is not deployed (`.vercelignore`).
+- V2 pages are `noindex` so search engines keep the live design until one is chosen.
+- **V1 / V2 switch.** V2 pages show it on the left edge. V1 pages show it too once someone has opened `/v2`, or add `?compare` to any address. It lives at the end of `config.js`.
