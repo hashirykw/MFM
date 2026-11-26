@@ -31,7 +31,7 @@ def build():
         for k, v in {'{{NAV}}': nav, '{{FOOTER}}': P('footer.html'), '{{BASE_CSS}}': P('base.css'),
                      '{{BASE_JS}}': P('base.js'), '{{THREE_SCENES}}': P('three-scenes.js'),
                      '{{NEXLYR}}': P('nexlyr.svg'), '{{RIB_A}}': RIB_A, '{{RIB_B}}': RIB_B, '{{ZK}}': ZK,
-                     '{{V1}}': v1, '{{V2}}': v2, '{{V3}}': v3}.items():
+                     '{{V1}}': v1, '{{V2}}': v2, '{{V3}}': v3, '{{V4}}': v3.replace('/v3', '/v4')}.items():
             s = s.replace(k, v)
         s = s.replace('{{ARROW}}', ARROW).replace('{{WA}}', WA)
         left = re.findall(r'\{\{[A-Z0-9_]+\}\}', s)

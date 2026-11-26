@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sir Fazil Maniya · O Level &amp; IGCSE Islamiyat, Karachi</title>
+<meta name="description" content="Sir Mohammad Fazil Maniya teaches Cambridge O Level 2058 and IGCSE 0493 Islamiyat in Karachi and live online: the Qur'an, the Seerah and the Hadiths, with the detail and references that earn the top band.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://mohammadfazilmaniya.com/">
+<meta name="theme-color" content="#FBFAF7">
+<link rel="icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/v4/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/v4/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Newsreader';src:url(/v4/fonts/newsreader.woff2) format('woff2');font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:'Newsreader';src:url(/v4/fonts/newsreader-italic.woff2) format('woff2');font-weight:200 800;font-style:italic;font-display:swap}
+@font-face{font-family:'Inter';src:url(/v4/fonts/inter.woff2) format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Amiri';src:url(/fonts/amiri-700.woff2) format('woff2');font-weight:700;font-display:swap}
+
+:root{
+  --paper:#FBFAF7;--paper-2:#F2F1EB;--white:#FFFFFF;
+  --ink:#15191A;--ink-2:#394140;--mute:#6A7370;--rule:rgba(21,25,26,.12);--rule-2:rgba(21,25,26,.22);
+  --em:#0F4A3A;--em-2:#16634E;--em-tint:#E6EEEA;--brass:#9C7A2E;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;--sans:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
+  --wrap:1200px;--ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;font-family:var(--sans);font-size:16.5px;line-height:1.65;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+h1,h2,h3,h4{margin:0;font-family:var(--serif);font-weight:400;letter-spacing:-.015em;line-height:1.08;text-wrap:balance;font-optical-sizing:auto}
+h1 em,h2 em,h3 em{font-style:italic;color:var(--em)}
+p{margin:0}
+.wrap{width:min(var(--wrap),100% - 48px);margin-inline:auto}
+.skip{position:fixed;left:12px;top:-60px;z-index:200;background:var(--em);color:#fff;padding:10px 16px;border-radius:6px;font-weight:600}
+.skip:focus{top:12px}
+:focus-visible{outline:2px solid var(--em-2);outline-offset:3px;border-radius:4px}
+::selection{background:var(--em);color:#fff}
+
+/* ---------- type ---------- */
+.h2{font-size:clamp(34px,4.2vw,56px)}
+.lead{font-size:clamp(17px,1.35vw,19px);color:var(--ink-2);max-width:58ch;line-height:1.6}
+.mute{color:var(--mute)}
+.sec{padding:clamp(72px,9vw,128px) 0;position:relative}
+.sec.alt{background:var(--paper-2)}
+.label{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--mute);margin-bottom:22px}
+.label::after{content:"";flex:1;height:1px;background:var(--rule)}
+.sec-h{display:grid;grid-template-columns:1fr 1fr;gap:20px 60px;align-items:end;margin-bottom:clamp(36px,5vw,56px)}
+.sec-h .lead{justify-self:end}
+.ar{font-family:'Amiri',serif;font-weight:700}
+.ul{text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:4px;transition:text-decoration-color .3s}
+.ul:hover{text-decoration-color:currentColor}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 22px;border-radius:6px;font-weight:600;font-size:15.5px;white-space:nowrap;background:var(--em);color:#fff;transition:background .25s,transform .25s var(--ease)}
+.btn:hover{background:var(--em-2)}
+.btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule-2)}
+.btn.line:hover{box-shadow:inset 0 0 0 1px var(--ink);background:transparent}
+.btn.light{background:#fff;color:var(--em)}
+.btn.light:hover{background:var(--em-tint)}
+.more{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--em)}
+.more svg{width:15px;height:15px;transition:transform .3s var(--ease)}
+.more:hover svg{transform:translateX(4px)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:90;background:rgba(251,250,247,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
+.nav-in{height:74px;display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;flex:none}
+.brand img{width:40px;height:40px;border-radius:8px}
+.brand b{display:block;font-family:var(--serif);font-weight:500;font-size:20px;letter-spacing:-.01em;line-height:1.1}
+.brand small{display:block;font-size:12.5px;color:var(--mute)}
+.nav-l{display:flex;gap:4px;margin-left:auto}
+.nav-l a{padding:8px 11px;font-size:15px;color:var(--ink-2);border-radius:4px;transition:color .2s}
+.nav-l a:hover{color:var(--em)}
+.nav-l a[aria-current]{color:var(--em);box-shadow:inset 0 -2px 0 var(--em)}
+.nav .btn{height:44px;padding:0 18px;font-size:14.5px}
+.burger{display:none;width:44px;height:44px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--rule-2);place-items:center;margin-left:auto}
+.burger i{display:block;width:18px;height:1.6px;background:currentColor;position:relative;transition:background .3s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:18px;height:1.6px;background:currentColor;transition:transform .35s var(--ease)}
+.burger i::before{top:-6px}.burger i::after{top:6px}
+.menu-open .burger i{background:transparent}
+.menu-open .burger i::before{transform:translateY(6px) rotate(45deg)}
+.menu-open .burger i::after{transform:translateY(-6px) rotate(-45deg)}
+.sheet{position:fixed;inset:74px 0 0;z-index:80;background:var(--paper);padding:10px 22px 30px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .35s var(--ease);overflow:auto}
+.menu-open .sheet{opacity:1;visibility:visible;transform:none}
+.sheet a:not(.btn){font-family:var(--serif);font-size:26px;padding:12px 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:baseline}
+.sheet a small{font-family:var(--sans);font-size:13px;color:var(--mute)}
+.sheet .btn{margin-top:22px;height:54px}
+@media (max-width:1080px){.nav-l{display:none}.burger{display:grid}.nav-in>.btn{display:none}}
+
+/* ---------- reveal ---------- */
+.js [data-rv]{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js [data-rv].in{opacity:1;transform:none}
+.js [data-rv="2"]{transition-delay:.08s}.js [data-rv="3"]{transition-delay:.16s}
+
+/* ---------- footer ---------- */
+.ft{background:var(--paper-2);border-top:1px solid var(--rule);padding:64px 0 26px}
+.ft-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px}
+.ft h4{font-family:var(--sans);font-size:13.5px;font-weight:600;letter-spacing:0;margin-bottom:14px}
+.ft ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
+.ft ul a{color:var(--ink-2)}
+.ft ul a:hover{color:var(--em)}
+.ft-b .brand{margin-bottom:14px}
+.ft-b p{color:var(--mute);max-width:34ch;font-size:15px}
+.ft-b .ar{font-size:22px;color:var(--em);margin-top:14px;direction:rtl;text-align:left}
+.soc{display:flex;gap:8px;margin-top:18px}
+.soc a{width:40px;height:40px;border-radius:6px;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--rule-2);color:var(--ink-2);transition:all .25s}
+.soc a:hover{background:var(--em);color:#fff;box-shadow:none}
+.soc svg{width:18px;height:18px}
+.nx{margin-top:48px;display:flex;align-items:center;gap:14px;padding:14px 14px 14px 18px;border-radius:10px;background:linear-gradient(100deg,#04121a,#06202c);color:#fff}
+.nx-mk svg{height:36px;width:auto;display:block}
+.nx-t small{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+.nx-t b{font-weight:700;color:#01D4FF;font-size:16px}
+.nx-mid{margin-left:auto;font-size:13.5px;opacity:.6}
+.nx-go{display:inline-flex;align-items:center;gap:8px;background:#01D4FF;color:#03141b;font-weight:700;padding:10px 15px;border-radius:8px;font-size:14px}
+.nx-go svg{width:16px;height:16px}
+.ft-meta{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:20px;font-size:13px;color:var(--mute)}
+@media (max-width:900px){.ft-top{grid-template-columns:1fr 1fr}.ft-b{grid-column:1/-1}.nx-mid{display:none}}
+@media (max-width:520px){.nx{flex-wrap:wrap}.nx-go{margin-left:auto}}
+
+/* ---------- version switch + WhatsApp ---------- */
+.vsw{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:95;display:flex;flex-direction:column;gap:2px;padding:6px 5px;border-radius:0 10px 10px 0;background:#fff;box-shadow:0 0 0 1px var(--rule),0 12px 30px -14px rgba(0,0,0,.3);font-size:13px;font-weight:600}
+.vsw span{writing-mode:vertical-rl;transform:rotate(180deg);padding:4px 0 6px;color:var(--mute);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;align-self:center}
+.vsw a{width:36px;height:32px;display:grid;place-items:center;border-radius:6px;color:var(--ink-2)}
+.vsw a:hover{background:var(--paper-2)}
+.vsw a[aria-current]{background:var(--em);color:#fff}
+.wa{position:fixed;right:18px;bottom:18px;z-index:95;display:flex;align-items:center;gap:10px;padding:6px 16px 6px 6px;border-radius:999px;background:#fff;box-shadow:0 0 0 1px var(--rule),0 16px 34px -16px rgba(0,0,0,.35);transition:transform .3s var(--ease)}
+.wa:hover{transform:translateY(-2px)}
+.wa i{width:38px;height:38px;border-radius:50%;background:#25D366;display:grid;place-items:center}
+.wa i svg{width:20px;height:20px;color:#fff}
+.wa b{display:block;font-size:14px;line-height:1.2;font-weight:600}
+.wa small{display:block;font-size:12px;color:var(--mute)}
+@media (max-width:640px){.wa{padding:6px}.wa span{display:none}.vsw{top:auto;bottom:18px;left:14px;transform:none;flex-direction:row;border-radius:10px;padding:4px}.vsw span{display:none}.vsw a{width:38px;height:36px}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js [data-rv]{opacity:1;transform:none}}
+@media (max-width:760px){.sec-h{grid-template-columns:1fr}.sec-h .lead{justify-self:start}}
+
+/* ================= HOME · V4 ================= */
+.hero{padding:clamp(48px,6vw,84px) 0 0}
+.hero-g{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(32px,5vw,72px);align-items:end}
+.kick{font-size:14px;color:var(--mute);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.kick i{width:6px;height:6px;border-radius:50%;background:var(--em)}
+.h1{font-size:clamp(46px,6.4vw,92px);line-height:1.02;letter-spacing:-.025em;margin:22px 0 26px;font-weight:400}
+.hero .lead{font-size:clamp(17.5px,1.45vw,20px)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.fig{position:relative;margin:0}
+.fig .pic{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:4px;background:var(--paper-2)}
+.fig .pic img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+.fig figcaption{margin-top:12px;font-size:13.5px;color:var(--mute);display:flex;justify-content:space-between;gap:12px}
+.orn{position:absolute;right:-36px;top:-36px;width:150px;height:150px;color:var(--em);opacity:.14;z-index:-1}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
+.facts div{padding:24px 24px 26px 0}
+.facts div+div{padding-left:24px;border-left:1px solid var(--rule)}
+.facts b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(32px,3.4vw,46px);letter-spacing:-.02em;line-height:1.05}
+.facts span{display:block;margin-top:6px;font-size:14.5px;color:var(--mute)}
+
+/* method */
+.meth{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule)}
+.meth article{padding:30px 32px 6px 0}
+.meth article+article{padding-left:32px;border-left:1px solid var(--rule)}
+.meth .n{font-family:var(--serif);font-style:italic;font-size:44px;color:var(--em);line-height:1}
+.meth h3{font-size:28px;margin:18px 0 10px}
+.meth p{color:var(--ink-2)}
+
+/* worked example */
+.wx{background:var(--em);color:#fff}
+.wx .label{color:rgba(255,255,255,.7)}.wx .label::after{background:rgba(255,255,255,.2)}
+.wx h2 em{color:#E9D7A6}
+.wx .lead{color:rgba(255,255,255,.78)}
+.wx-g{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+.script{background:#FBFAF7;color:var(--ink);border-radius:4px;padding:34px 34px 30px;box-shadow:0 30px 60px -30px rgba(0,0,0,.5);position:relative}
+.script::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--brass);border-radius:4px 0 0 4px}
+.script small{font-size:13px;color:var(--mute)}
+.script h3{font-size:30px;margin:8px 0 16px}
+.script p{font-family:var(--serif);font-size:19px;line-height:1.6;color:var(--ink-2)}
+.script mark{background:none;color:inherit;box-shadow:inset 0 -.45em 0 rgba(156,122,46,.0);transition:box-shadow .5s var(--ease)}
+.script mark.on{box-shadow:inset 0 -.45em 0 rgba(156,122,46,.32)}
+.script .qq{margin-top:22px;border-top:1px solid var(--rule);display:grid}
+.script .qq div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--rule);font-size:15.5px}
+.script .qq b{font-weight:600}
+.ladder{display:grid;gap:10px}
+.rung{all:unset;box-sizing:border-box;display:block;cursor:pointer;border-radius:4px;border:1px solid rgba(255,255,255,.22);padding:18px 22px;transition:background .3s,border-color .3s}
+.rung:hover{border-color:rgba(255,255,255,.5)}
+.rung:focus-visible{outline:2px solid #E9D7A6;outline-offset:2px}
+.rung .top{display:flex;align-items:baseline;gap:14px}
+.rung .lv{font-size:13px;color:rgba(255,255,255,.65);min-width:84px}
+.rung .t{font-family:var(--serif);font-size:23px;color:#fff;line-height:1.1}
+.rung .mk{margin-left:auto;font-size:14px;color:#E9D7A6;font-weight:600}
+.rung .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.rung .body>.in{overflow:hidden;display:block}
+.rung .body .p{display:block;font-family:var(--serif);font-size:18px;line-height:1.6;color:rgba(255,255,255,.92);padding-top:12px}
+.rung .body .p u{text-decoration:none;box-shadow:inset 0 -.4em 0 rgba(233,215,166,.35)}
+.rung .body .p.why{font-family:var(--sans);font-size:14.5px;color:rgba(255,255,255,.7);padding-top:10px;border-top:1px solid rgba(255,255,255,.15);margin-top:12px}
+.rung[aria-expanded=true]{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.45)}
+.rung[aria-expanded=true] .body{grid-template-rows:1fr}
+
+/* courses catalogue */
+.cat{border-top:1px solid var(--ink)}
+.row{display:grid;grid-template-columns:150px 1.4fr 1fr 44px;gap:28px;align-items:center;padding:30px 0;border-bottom:1px solid var(--rule);transition:background .3s}
+.row:hover{background:linear-gradient(90deg,transparent,var(--paper-2) 20%,var(--paper-2) 80%,transparent)}
+.row .code{font-family:var(--serif);font-size:48px;letter-spacing:-.02em;line-height:1;color:var(--em)}
+.row h3{font-size:26px}
+.row p{color:var(--ink-2);font-size:15.5px;margin-top:6px}
+.row dl{margin:0;display:grid;gap:6px;font-size:14.5px}
+.row dl div{display:flex;gap:10px}
+.row dt{color:var(--mute);min-width:68px}
+.row dd{margin:0}
+.row .go{width:44px;height:44px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--rule-2);display:grid;place-items:center;color:var(--em);transition:all .3s}
+.row:hover .go{background:var(--em);color:#fff;box-shadow:none}
+.row .go svg{width:18px;height:18px}
+
+/* tools index */
+.idx{display:grid;grid-template-columns:1fr 1fr;column-gap:56px;border-top:1px solid var(--rule)}
+.idx a{display:grid;grid-template-columns:1fr auto;gap:6px 20px;align-items:start;padding:24px 0;border-bottom:1px solid var(--rule)}
+.idx h3{font-size:25px;transition:color .25s}
+.idx p{grid-column:1;color:var(--ink-2);font-size:15.5px}
+.idx svg{grid-row:1/3;grid-column:2;width:20px;height:20px;color:var(--mute);margin-top:6px;transition:transform .3s var(--ease),color .3s}
+.idx a:hover h3{color:var(--em)}
+.idx a:hover svg{transform:translateX(4px);color:var(--em)}
+.idx .tag{display:inline-block;margin-left:10px;font-family:var(--sans);font-size:12.5px;font-weight:600;color:var(--brass);vertical-align:4px}
+
+/* where */
+.where{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule)}
+.where div{padding:26px 28px 6px 0}
+.where div+div{padding-left:28px;border-left:1px solid var(--rule)}
+.where h3{font-size:24px;margin-bottom:12px}
+.where ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;color:var(--ink-2);font-size:15.5px}
+.where li span{color:var(--mute)}
+.logos{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:44px}
+.logos span{background:var(--white);height:104px;display:grid;place-items:center;padding:18px}
+.logos img{max-height:50px;max-width:100%;width:auto;filter:grayscale(1) contrast(1.15) brightness(.85);opacity:.9;transition:filter .4s,opacity .4s}
+.logos span:hover img{filter:none;opacity:1}
+.prev{margin-top:18px;font-size:14.5px;color:var(--mute)}
+
+/* study pack */
+.pk{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);align-items:center}
+.pk-img{position:relative}
+.pk-img img{width:100%;max-height:600px;object-fit:contain;object-position:left center;border-radius:4px;box-shadow:0 40px 70px -40px rgba(21,25,26,.45)}
+.spec{margin:26px 0 30px;border-top:1px solid var(--ink)}
+.spec div{display:grid;grid-template-columns:130px 1fr;gap:20px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:15.5px}
+.spec dt{color:var(--mute)}
+.spec dd{margin:0}
+
+/* hall */
+.hall{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:18px}
+.hall figure{margin:0}
+.hall .ph{overflow:hidden;border-radius:4px;aspect-ratio:4/3;background:var(--paper-2)}
+.hall figure:first-child .ph{aspect-ratio:auto;height:100%}
+.hall figure:first-child{display:grid;grid-template-rows:1fr auto}
+.hall img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.hall figure:hover img{transform:scale(1.03)}
+.hall figcaption{margin-top:10px;font-size:13.5px;color:var(--mute)}
+.hall .stack{display:grid;gap:18px}
+
+/* reviews */
+.rv{max-width:880px;margin:0 auto;text-align:center}
+.rv blockquote{margin:0;font-family:var(--serif);font-size:clamp(26px,3vw,38px);line-height:1.3;letter-spacing:-.01em}
+.rv .who{margin-top:20px;color:var(--mute);font-size:15px}
+.rv .dots{display:flex;justify-content:center;gap:8px;margin-top:22px}
+.rv .dots button{width:40px;height:40px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--rule-2);font-weight:600;font-size:14px;color:var(--ink-2)}
+.rv .dots button[aria-pressed=true]{background:var(--em);color:#fff;box-shadow:none}
+.rv .btn{margin-top:28px}
+
+/* admissions */
+.adm{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,80px);align-items:start}
+.steps{list-style:none;padding:0;margin:28px 0 0;counter-reset:s;border-top:1px solid var(--rule)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:6px 14px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(s);grid-row:1/3;font-family:var(--serif);font-style:italic;font-size:30px;color:var(--em);line-height:1}
+.steps b{font-weight:600}
+.steps span{color:var(--ink-2);font-size:15px}
+.contact{margin-top:24px;font-size:15px;color:var(--ink-2);display:grid;gap:6px}
+.contact a{color:var(--em);font-weight:600}
+.form{background:var(--white);border:1px solid var(--rule);border-radius:6px;padding:clamp(22px,3vw,36px);box-shadow:0 30px 60px -40px rgba(21,25,26,.35)}
+.form h3{font-size:28px}
+.form>p{color:var(--mute);font-size:15px;margin:6px 0 22px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f{display:grid;gap:6px}.f.full{grid-column:1/-1}
+.f label,.f .lb{font-size:14px;font-weight:600}
+.f input,.f select{height:50px;border-radius:6px;border:1px solid var(--rule-2);background:var(--paper);color:var(--ink);padding:0 14px;font:inherit;font-size:16px;outline:none;transition:border-color .25s,box-shadow .25s}
+.f input:focus,.f select:focus{border-color:var(--em);box-shadow:0 0 0 3px var(--em-tint)}
+.f input::placeholder{color:#9aa19e}
+.seg{display:flex;border:1px solid var(--rule-2);border-radius:6px;overflow:hidden}
+.seg label{flex:1;text-align:center;padding:12px 6px;font-size:15px;font-weight:600;cursor:pointer;color:var(--ink-2);transition:all .25s;border-left:1px solid var(--rule)}
+.seg label:first-child{border-left:0}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){background:var(--em);color:#fff}
+.seg label:has(input:focus-visible){outline:2px solid var(--em-2);outline-offset:-4px}
+.form .btn{width:100%;margin-top:22px;height:54px}
+.fnote{font-size:13.5px;color:var(--mute);margin-top:12px;text-align:center}
+.ferr{min-height:20px;font-size:14px;color:#a3402b;margin-top:8px;text-align:center}
+
+@media (max-width:1000px){
+  .hero-g,.wx-g,.pk,.adm{grid-template-columns:1fr}
+  .fig{max-width:520px}
+  .facts{grid-template-columns:1fr 1fr}.facts div:nth-child(3){padding-left:0;border-left:0}.facts div:nth-child(n+3){border-top:1px solid var(--rule)}
+  .meth,.where{grid-template-columns:1fr}.meth article,.where div{padding:24px 0}.meth article+article,.where div+div{padding-left:0;border-left:0;border-top:1px solid var(--rule)}
+  .row{grid-template-columns:110px 1fr 44px}.row dl{display:none}
+  .idx{grid-template-columns:1fr}
+  .logos{grid-template-columns:repeat(3,1fr)}
+  .hall{grid-template-columns:1fr 1fr}.hall figure:first-child{grid-column:1/-1}.hall figure:first-child .ph{aspect-ratio:16/9}
+}
+@media (max-width:640px){
+  .wrap{width:calc(100% - 32px)}
+  .ctas .btn{width:100%}
+  .facts div{padding:18px 14px 18px 0}.facts div+div{padding-left:14px}
+  .row{grid-template-columns:1fr 44px;gap:10px 16px}.row .code{grid-column:1/-1;font-size:40px}
+  .script{padding:26px 22px}
+  .fg{grid-template-columns:1fr}
+  .seg label{font-size:14px;padding:12px 4px}
+  .hall{grid-template-columns:1fr}
+  .spec div{grid-template-columns:1fr;gap:2px}
+  .orn{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="/v4" aria-label="Sir Fazil Maniya, home">
+      <img src="/mfm-logo.webp" alt="" width="40" height="40">
+      <span><b>Sir Fazil Maniya</b><small>O Level &amp; IGCSE Islamiyat</small></span>
+    </a>
+    <nav class="nav-l" aria-label="Main">
+      <a href="/v4/about" data-k="about">About</a>
+      <a href="/v4/courses" data-k="courses">Courses</a>
+      <a href="/ai-checker">AI Checker</a>
+      <a href="/portal">Portal</a>
+      <a href="/past-papers">Past papers</a>
+      <a href="/notes">Notes</a>
+      <a href="/crash-course">Crash course</a>
+    </nav>
+    <a class="btn" href="/v4#enrol">Register</a>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="sheet"><i></i></button>
+  </div>
+</header>
+<div class="sheet" id="sheet" aria-label="Menu">
+  <a href="/v4">Home <small>Start</small></a>
+  <a href="/v4/about">About Sir Fazil <small>Profile</small></a>
+  <a href="/v4/courses">Courses <small>2058 · 0493</small></a>
+  <a href="/ai-checker">AI Checker <small>Marking</small></a>
+  <a href="/portal">Student portal <small>Login</small></a>
+  <a href="/past-papers">Past papers <small>2020–26</small></a>
+  <a href="/notes">Notes <small>Store</small></a>
+  <a href="/parent">Parents <small>Progress</small></a>
+  <a class="btn" href="/v4#enrol">Register for the portal</a>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="h1">
+  <div class="wrap">
+    <div class="hero-g">
+      <div>
+        <p class="kick"><i></i>O Level 2058 · IGCSE 0493 · Karachi and online</p>
+        <h1 class="h1" id="h1">Islamiyat, taught the way it is <em>marked.</em></h1>
+        <p class="lead">Since 2012, Sir Mohammad Fazil Maniya has prepared more than 7,000 students for Cambridge Islamiyat: the Qur'an, the Seerah and the Hadiths, with the detail and references that earn the top band.</p>
+        <div class="ctas"><a class="btn" href="#enrol">Register for the portal <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn line" href="/v4/courses">See the courses</a></div>
+      </div>
+      <figure class="fig">
+        <div class="pic"><img src="/fazil-desk-1280.webp" alt="Sir Fazil Maniya at his desk" width="856" height="1316" fetchpriority="high"></div>
+        <figcaption><span>Sir Mohammad Fazil Maniya</span><span>Karachi</span></figcaption>
+      </figure>
+    </div>
+    <div class="facts" data-rv>
+      <div><b>2012</b><span>Teaching Islamiyat since</span></div>
+      <div><b>7,000+</b><span>Students mentored</span></div>
+      <div><b>IBA</b><span>Gold medalist, BSCS</span></div>
+      <div><b>20+</b><span>Schools and academies</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="sec" aria-labelledby="m-h">
+  <div class="wrap">
+    <p class="label">The method</p>
+    <div class="sec-h" data-rv><h2 class="h2" id="m-h">Three things the mark scheme <em>rewards.</em></h2><p class="lead">Every class, whether in Karachi, online or recorded, is built around how Cambridge awards marks in Paper 1 and Paper 2.</p></div>
+    <div class="meth">
+      <article data-rv><span class="n">i.</span><h3>Know it in order</h3><p>The 15 passages by theme, the Seerah from Makka to Madina, the Caliphs and the Pillars, with the dates, numbers and names examiners look for.</p></article>
+      <article data-rv="2"><span class="n">ii.</span><h3>Back it with evidence</h3><p>The right verse or Hadith for each point, quoted briefly and accurately. A reference turns a good answer into a top-level one.</p></article>
+      <article data-rv="3"><span class="n">iii.</span><h3>Explain why it matters</h3><p>Part (b) is four marks for understanding: what an event or teaching means for a Muslim today, with a real example, not more history.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- WORKED EXAMPLE -->
+<section class="sec wx" aria-labelledby="wx-h">
+  <div class="wrap">
+    <p class="label">A worked example</p>
+    <div class="sec-h" data-rv><h2 class="h2" id="wx-h">One question, <em>four answers.</em></h2><p class="lead">Each answer climbs one level. Open them in turn and watch which facts the examiner is looking for.</p></div>
+    <div class="wx-g">
+      <div class="script" data-rv>
+        <small>Paper 1 style · Question 3</small>
+        <h3>The Battle of Badr</h3>
+        <p>Fought on <mark data-f="1">17 Ramadan, 2 AH</mark> near the wells of Badr. About <mark data-f="1">313 Muslims</mark> faced about <mark data-f="1">1,000 Makkans</mark>. Allah promised help with <mark data-f="2">a thousand angels (8:9)</mark>. Prisoners earned their freedom by <mark data-f="2">teaching ten Muslims to read</mark>. The lesson: <mark data-f="3">faith and obedience count for more than numbers</mark>.</p>
+        <div class="qq"><div><span>(a) Write an account of the Battle of Badr.</span><b>[10]</b></div><div><span>(b) What can Muslims today learn from it?</span><b>[4]</b></div></div>
+      </div>
+      <div class="ladder" id="ladder" data-rv="2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="sec" aria-labelledby="c-h">
+  <div class="wrap">
+    <p class="label">Courses</p>
+    <div class="sec-h" data-rv><h2 class="h2" id="c-h">Choose your <em>course.</em></h2><p class="lead">O Level 2058 and IGCSE 0493 share the same two papers and the same content. Your school or exam centre decides which one you sit.</p></div>
+    <div class="cat">
+      <a class="row" href="/v4/courses#ol" data-rv><span class="code">2058</span><span><h3>O Level Islamiyat</h3><p>All 15 passages and 20 Hadiths, the Seerah and the Caliphs, and part (a) and (b) technique.</p></span><dl><div><dt>Papers</dt><dd>2 × 1h 30m · 100 marks</dd></div><div><dt>Grades</dt><dd>A* to E</dd></div><div><dt>Format</dt><dd>Karachi and online</dd></div></dl><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="row" href="/v4/courses#ig" data-rv><span class="code">0493</span><span><h3>IGCSE Islamiyat</h3><p>The same papers, content and classes as O Level, graded on a wider scale.</p></span><dl><div><dt>Papers</dt><dd>2 × 1h 30m · 100 marks</dd></div><div><dt>Grades</dt><dd>A* to G</dd></div><div><dt>Format</dt><dd>Karachi and online</dd></div></dl><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="row" href="/v4/courses#rec" data-rv><span class="code">54h</span><span><h3>Recorded course</h3><p>Topical lectures for every Paper 1 and Paper 2 topic, to watch at your own pace.</p></span><dl><div><dt>Language</dt><dd>Urdu</dd></div><div><dt>Host</dt><dd>LearnedGuys</dd></div><div><dt>Best for</dt><dd>Outside Karachi, revision</dd></div></dl><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="sec alt" aria-labelledby="t-h">
+  <div class="wrap">
+    <p class="label">Between classes</p>
+    <div class="sec-h" data-rv><h2 class="h2" id="t-h">Everything a student needs, <em>in one login.</em></h2><p class="lead">Practise, get marked and keep track without leaving the site. Parents get their own read-only view.</p></div>
+    <nav class="idx" aria-label="Student tools" data-rv>
+      <a href="/ai-checker"><h3>AI checker <span class="tag">For registered students</span></h3><p>Type or photograph an answer; it comes back marked against the levels, then approved by Sir Fazil.</p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="/portal"><h3>Student portal</h3><p>Notes, recorded lectures, results, your rank and your fees, in one place.</p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="/past-papers"><h3>Past papers</h3><p>2058 and 0493 papers from 2020 to 2026, with mark schemes side by side and an exam timer.</p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="/notes"><h3>Notes</h3><p>Sir Fazil's notes for both papers, with key points, key terms and key dates.</p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="/lab"><h3>Islamiyat Lab</h3><p>A zakat calculator, a Seerah timeline drill, and flashcards for the passages and Hadiths.</p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="/parent"><h3>Parents</h3><p>Marks, position, attendance and fees for each child, read-only.</p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </nav>
+  </div>
+</section>
+
+<!-- WHERE -->
+<section class="sec" aria-labelledby="w-h">
+  <div class="wrap">
+    <p class="label">Where he teaches</p>
+    <div class="sec-h" data-rv><h2 class="h2" id="w-h">Mornings in schools, evenings <em>across Karachi.</em></h2><p class="lead">More than twenty schools and academies, and live online batches for students across Pakistan and abroad.</p></div>
+    <div class="where" data-rv>
+      <div><h3>Mornings</h3><ul><li>Head Start School System</li><li>Froebel's Education Centre</li><li>Credo School</li><li>The Academy</li></ul></div>
+      <div><h3>Evenings in Karachi</h3><ul><li>TP Core <span>· Jauhar, Gulshan</span></li><li>TP Core / TCR <span>· North Nazimabad</span></li><li>TP Core / Burraq <span>· Defence</span></li><li>Maniya's <span>· Bahadurabad</span></li></ul></div>
+      <div><h3>Online</h3><ul><li>Forte Institute</li><li>Gives</li><li>Max Academy</li><li>LearnedGuys <span>· recorded course</span></li></ul></div>
+    </div>
+    <div class="logos" data-rv>
+      <span><img src="/logos/hss.webp" alt="Head Start School System" loading="lazy"></span><span><img src="/logos/fec.webp" alt="Froebel’s Education Centre" loading="lazy"></span><span><img src="/logos/credo.webp" alt="Credo School" loading="lazy"></span><span><img src="/logos/academy.webp" alt="The Academy" loading="lazy"></span><span><img src="/logos/tpc.webp" alt="TP Core" loading="lazy"></span><span><img src="/logos/tcr.webp" alt="The Classroom" loading="lazy"></span>
+      <span><img src="/logos/forte.webp" alt="Forte Institute" loading="lazy"></span><span><img src="/logos/gives.webp" alt="Gives" loading="lazy"></span><span><img src="/logos/max.webp" alt="Max Academy" loading="lazy"></span><span><img src="/logos/learnedguys.webp" alt="LearnedGuys" loading="lazy"></span><span><img src="/logos/cedar.webp" alt="The Cedar School" loading="lazy"></span><span><img src="/logos/bss.webp" alt="Beaconhouse School System" loading="lazy"></span>
+    </div>
+    <p class="prev">Also taught at The City School (PAF Chapter), The Patriots School, Hexis College, Highbrow College, Falconhouse Grammar School, Yen Academy and Huffaz Exclusive Academy.</p>
+  </div>
+</section>
+
+<!-- STUDY PACK -->
+<section class="sec alt" aria-labelledby="p-h">
+  <div class="wrap pk">
+    <div class="pk-img" data-rv><img src="/photos/study-pack.webp" alt="The MFM Islamiyat study pack: workbooks and notes booklets" loading="lazy"></div>
+    <div data-rv="2">
+      <p class="label">Study material</p>
+      <h2 class="h2" id="p-h">The MFM <em>study pack.</em></h2>
+      <p class="lead" style="margin-top:16px">Sir Fazil's own workbooks and notes, written around the syllabus and checked against the mark scheme.</p>
+      <dl class="spec">
+        <div><dt>Edition</dt><dd>2026–2027</dd></div>
+        <div><dt>Contents</dt><dd>Paper 1 and Paper 2 workbooks with marking schemes; notes booklets for both papers</dd></div>
+        <div><dt>For</dt><dd>O Level 2058 and IGCSE 0493</dd></div>
+        <div><dt>Ordering</dt><dd>Through the notes store; price and delivery confirmed by his team</dd></div>
+      </dl>
+      <a class="btn" href="/notes">See the notes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- HALL -->
+<section class="sec" aria-labelledby="h-h">
+  <div class="wrap">
+    <p class="label">In the hall</p>
+    <div class="sec-h" data-rv><h2 class="h2" id="h-h">Full halls, <em>every session.</em></h2><p class="lead">Seminars, crash courses and evening batches in Karachi. Free lessons are on <a class="ul" href="https://www.youtube.com/@mohammadfazilmaniya" target="_blank" rel="noopener">his YouTube channel</a>.</p></div>
+    <div class="hall" data-rv>
+      <figure><div class="ph"><img src="/photos/crash-course.webp" alt="A packed hall at one of Sir Fazil's crash courses" loading="lazy"></div><figcaption>A crash course session, Karachi</figcaption></figure>
+      <div class="stack">
+        <figure><div class="ph"><img src="/photos/in-class.webp" alt="Sir Fazil teaching a seminar" loading="lazy"></div><figcaption>At the lectern</figcaption></figure>
+        <figure><div class="ph"><img src="/photos/sir-fazil-event.webp" alt="Sir Fazil at an event" loading="lazy" style="object-position:50% 25%"></div><figcaption>At an event</figcaption></figure>
+      </div>
+      <figure class="tall"><div class="ph" style="aspect-ratio:auto;height:100%"><img src="/photos/sir-fazil-formal.webp" alt="Sir Fazil Maniya" loading="lazy" style="object-position:50% 20%"></div><figcaption>Sir Fazil Maniya</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec alt" aria-label="Student reviews">
+  <div class="wrap rv" id="rv" data-rv>
+    <p class="label" style="justify-content:center">From students</p>
+    <blockquote id="rq"></blockquote>
+    <p class="who" id="rwho"></p>
+    <div class="dots" id="rdots"></div>
+    <a class="btn line" href="/reviews">Write a review</a>
+  </div>
+</section>
+
+<!-- ADMISSIONS -->
+<section class="sec" id="enrol" aria-labelledby="e-h">
+  <div class="wrap adm">
+    <div data-rv>
+      <p class="label">Admissions</p>
+      <h2 class="h2" id="e-h">Join the <em>class.</em></h2>
+      <p class="lead" style="margin-top:16px">Register once and Sir Fazil's team will place you in a batch and send your portal login.</p>
+      <ol class="steps">
+        <li><b>Send your details</b><span>Name, number, course and how you'll study.</span></li>
+        <li><b>The team confirms your batch</b><span>A Karachi centre, an online batch or the recorded course.</span></li>
+        <li><b>Your login arrives on WhatsApp</b><span>Notes, lectures, the AI checker and your results.</span></li>
+      </ol>
+      <div class="contact"><span>WhatsApp: <a href="https://wa.me/923332488819" target="_blank" rel="noopener">0333 2488819</a></span><span>Instagram: <a href="https://www.instagram.com/mohammadfazilmaniya" target="_blank" rel="noopener">@mohammadfazilmaniya</a></span></div>
+    </div>
+    <form class="form" id="enrolForm" novalidate data-rv="2">
+      <h3>Registration</h3>
+      <p>Takes under a minute. Sends a ready message to his team on WhatsApp.</p>
+      <div class="fg">
+        <div class="f"><label for="eName">Student's name</label><input id="eName" autocomplete="name" placeholder="Ayesha Khan" required></div>
+        <div class="f"><label for="ePhone">WhatsApp number</label><input id="ePhone" inputmode="tel" autocomplete="tel" placeholder="03xx xxxxxxx" required></div>
+        <div class="f full"><span class="lb" id="cl">Course</span><div class="seg" role="radiogroup" aria-labelledby="cl"><label><input type="radio" name="eCourse" value="O Level 2058" checked>O Level 2058</label><label><input type="radio" name="eCourse" value="IGCSE 0493">IGCSE 0493</label><label><input type="radio" name="eCourse" value="Recorded course">Recorded</label></div></div>
+        <div class="f"><label for="eMode">How you'll study</label><select id="eMode"><option>Evening class in Karachi</option><option>At my school</option><option>Live online</option><option>Recorded course</option></select></div>
+        <div class="f"><label for="eYear">Exam session</label><select id="eYear"><option>May/June 2027</option><option>Oct/Nov 2027</option><option>May/June 2028</option></select></div>
+        <div class="f full"><label for="eArea">Area or school <span class="mute" style="font-weight:400">(optional)</span></label><input id="eArea" placeholder="Gulshan, Credo School"></div>
+      </div>
+      <button class="btn" type="submit">Send registration <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <p class="ferr" id="eErr" role="alert"></p>
+      <p class="fnote">Nothing is charged online. Fees are confirmed by the team.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-b">
+        <a class="brand" href="/v4"><img src="/mfm-logo.webp" alt="" width="38" height="38"><span><b>Sir Fazil Maniya</b><small>O Level 2058 · IGCSE 0493 Islamiyat</small></span></a>
+        <p>Islamiyat for the top band, in classrooms across Karachi and live online.</p>
+        <p class="ar" lang="ar">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+        <div class="soc">
+          <a href="https://www.instagram.com/mohammadfazilmaniya" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor"/></svg></a>
+          <a href="https://www.youtube.com/@mohammadfazilmaniya" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.6 2.6 0 0 0 2.4 7.2 27 27 0 0 0 2 12a27 27 0 0 0 .4 4.8 2.6 2.6 0 0 0 1.8 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8A27 27 0 0 0 22 12a27 27 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+          <a href="https://wa.me/923332488819" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.14 6.44 2.14 11.9c0 1.75.46 3.45 1.32 4.95L2.05 22l5.28-1.38a9.86 9.86 0 0 0 4.71 1.2c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2zm5.8 14.06c-.24.68-1.4 1.3-1.94 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.17-4.95-4.37-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.58-.36.77-.36l.55.01c.18.01.42-.07.65.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.09.2-.14.32-.28.49l-.42.49c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.23 2.23 1.37.28.15.44.12.6-.07.17-.2.7-.81.88-1.09.19-.29.37-.24.63-.14.25.09 1.62.76 1.9.9.28.15.46.22.53.34.07.12.07.68-.17 1.34z"/></svg></a>
+          <a href="https://whatsapp.com/channel/0029VbC5v7R5EjxrJij3JH2V" target="_blank" rel="noopener" aria-label="WhatsApp channel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 11a8 8 0 0 1 16 0M7.5 11a4.5 4.5 0 0 1 9 0"/><circle cx="12" cy="11" r="1.4" fill="currentColor"/><path d="M12 13v7"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Learn</h4><ul><li><a href="/v4/courses">Courses</a></li><li><a href="/syllabus">Syllabus</a></li><li><a href="/crash-course">Crash course</a></li><li><a href="/lab">Islamiyat Lab</a></li><li><a href="/notes">Notes</a></li></ul></div>
+      <div><h4>Practise</h4><ul><li><a href="/ai-checker">AI Checker</a></li><li><a href="/past-papers">Past papers</a></li><li><a href="/portal">Student portal</a></li><li><a href="/parent">Parents</a></li></ul></div>
+      <div><h4>Sir Fazil</h4><ul><li><a href="/v4/about">About</a></li><li><a href="/reviews">Reviews</a></li><li><a href="/v4#enrol">Register</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    </div>
+    <div class="nx">
+      <span class="nx-mk" aria-hidden="true"><svg viewBox="0 0 631 1011" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" role="img" aria-label="Nexlyr Solutions logo"><defs><linearGradient id="nxbLogoG" gradientUnits="userSpaceOnUse" x1="277.4" y1="43.9" x2="724.3" y2="114.7"><stop offset="0" stop-color="#01C2F4"/><stop offset="1" stop-color="#0169B3"/></linearGradient></defs><g fill="url(#nxbLogoG)"><rect x="2.5" y="1" width="27.2" height="6.8"/><rect x="70.5" y="1" width="27.2" height="6.8"/><rect x="124.9" y="1" width="88.4" height="6.8"/><rect x="233.7" y="1" width="27.2" height="6.8"/><rect x="294.9" y="1" width="27.2" height="6.8"/><rect x="342.5" y="1" width="27.2" height="6.8"/><rect x="430.9" y="1" width="27.2" height="6.8"/><rect x="492.1" y="1" width="27.2" height="6.8"/><rect x="539.7" y="1" width="74.8" height="6.8"/><rect x="2.5" y="7.8" width="34" height="6.8"/><rect x="70.5" y="7.8" width="27.2" height="6.8"/><rect x="124.9" y="7.8" width="88.4" height="6.8"/><rect x="233.7" y="7.8" width="27.2" height="6.8"/><rect x="294.9" y="7.8" width="27.2" height="6.8"/><rect x="342.5" y="7.8" width="27.2" height="6.8"/><rect x="430.9" y="7.8" width="27.2" height="6.8"/><rect x="492.1" y="7.8" width="27.2" height="6.8"/><rect x="539.7" y="7.8" width="81.6" height="6.8"/><rect x="2.5" y="14.6" width="34" height="6.8"/><rect x="70.5" y="14.6" width="27.2" height="6.8"/><rect x="124.9" y="14.6" width="27.2" height="6.8"/><rect x="233.7" y="14.6" width="34" height="6.8"/><rect x="288.1" y="14.6" width="34" height="6.8"/><rect x="342.5" y="14.6" width="27.2" height="6.8"/><rect x="430.9" y="14.6" width="27.2" height="6.8"/><rect x="492.1" y="14.6" width="27.2" height="6.8"/><rect x="539.7" y="14.6" width="27.2" height="6.8"/><rect x="600.9" y="14.6" width="27.2" height="6.8"/><rect x="2.5" y="21.4" width="40.8" height="6.8"/><rect x="70.5" y="21.4" width="27.2" height="6.8"/><rect x="124.9" y="21.4" width="27.2" height="6.8"/><rect x="240.5" y="21.4" width="34" height="6.8"/><rect x="281.3" y="21.4" width="34" height="6.8"/><rect x="342.5" y="21.4" width="27.2" height="6.8"/><rect x="430.9" y="21.4" width="27.2" height="6.8"/><rect x="492.1" y="21.4" width="27.2" height="6.8"/><rect x="539.7" y="21.4" width="27.2" height="6.8"/><rect x="600.9" y="21.4" width="27.2" height="6.8"/><rect x="2.5" y="28.2" width="47.6" height="6.8"/><rect x="70.5" y="28.2" width="27.2" height="6.8"/><rect x="124.9" y="28.2" width="27.2" height="6.8"/><rect x="247.3" y="28.2" width="61.2" height="6.8"/><rect x="342.5" y="28.2" width="27.2" height="6.8"/><rect x="437.7" y="28.2" width="27.2" height="6.8"/><rect x="485.3" y="28.2" width="27.2" height="6.8"/><rect x="539.7" y="28.2" width="27.2" height="6.8"/><rect x="600.9" y="28.2" width="27.2" height="6.8"/><rect x="2.5" y="35" width="54.4" height="6.8"/><rect x="70.5" y="35" width="27.2" height="6.8"/><rect x="124.9" y="35" width="27.2" height="6.8"/><rect x="254.1" y="35" width="47.6" height="6.8"/><rect x="342.5" y="35" width="27.2" height="6.8"/><rect x="444.5" y="35" width="27.2" height="6.8"/><rect x="478.5" y="35" width="27.2" height="6.8"/><rect x="539.7" y="35" width="27.2" height="6.8"/><rect x="600.9" y="35" width="27.2" height="6.8"/><rect x="2.5" y="41.8" width="27.2" height="6.8"/><rect x="36.5" y="41.8" width="27.2" height="6.8"/><rect x="70.5" y="41.8" width="27.2" height="6.8"/><rect x="124.9" y="41.8" width="81.6" height="6.8"/><rect x="260.9" y="41.8" width="34" height="6.8"/><rect x="342.5" y="41.8" width="27.2" height="6.8"/><rect x="451.3" y="41.8" width="47.6" height="6.8"/><rect x="539.7" y="41.8" width="27.2" height="6.8"/><rect x="600.9" y="41.8" width="27.2" height="6.8"/><rect x="2.5" y="48.6" width="27.2" height="6.8"/><rect x="36.5" y="48.6" width="27.2" height="6.8"/><rect x="70.5" y="48.6" width="27.2" height="6.8"/><rect x="124.9" y="48.6" width="81.6" height="6.8"/><rect x="260.9" y="48.6" width="34" height="6.8"/><rect x="342.5" y="48.6" width="27.2" height="6.8"/><rect x="458.1" y="48.6" width="34" height="6.8"/><rect x="539.7" y="48.6" width="27.2" height="6.8"/><rect x="600.9" y="48.6" width="27.2" height="6.8"/><rect x="2.5" y="55.4" width="27.2" height="6.8"/><rect x="43.3" y="55.4" width="54.4" height="6.8"/><rect x="124.9" y="55.4" width="27.2" height="6.8"/><rect x="254.1" y="55.4" width="47.6" height="6.8"/><rect x="342.5" y="55.4" width="27.2" height="6.8"/><rect x="464.9" y="55.4" width="27.2" height="6.8"/><rect x="539.7" y="55.4" width="81.6" height="6.8"/><rect x="2.5" y="62.2" width="27.2" height="6.8"/><rect x="43.3" y="62.2" width="54.4" height="6.8"/><rect x="124.9" y="62.2" width="27.2" height="6.8"/><rect x="247.3" y="62.2" width="61.2" height="6.8"/><rect x="342.5" y="62.2" width="27.2" height="6.8"/><rect x="464.9" y="62.2" width="27.2" height="6.8"/><rect x="539.7" y="62.2" width="74.8" height="6.8"/><rect x="2.5" y="69" width="27.2" height="6.8"/><rect x="50.1" y="69" width="47.6" height="6.8"/><rect x="124.9" y="69" width="27.2" height="6.8"/><rect x="240.5" y="69" width="34" height="6.8"/><rect x="281.3" y="69" width="34" height="6.8"/><rect x="342.5" y="69" width="27.2" height="6.8"/><rect x="464.9" y="69" width="27.2" height="6.8"/><rect x="539.7" y="69" width="27.2" height="6.8"/><rect x="580.5" y="69" width="34" height="6.8"/><rect x="2.5" y="75.8" width="27.2" height="6.8"/><rect x="56.9" y="75.8" width="40.8" height="6.8"/><rect x="124.9" y="75.8" width="27.2" height="6.8"/><rect x="233.7" y="75.8" width="34" height="6.8"/><rect x="288.1" y="75.8" width="34" height="6.8"/><rect x="342.5" y="75.8" width="27.2" height="6.8"/><rect x="464.9" y="75.8" width="27.2" height="6.8"/><rect x="539.7" y="75.8" width="27.2" height="6.8"/><rect x="587.3" y="75.8" width="34" height="6.8"/><rect x="2.5" y="82.6" width="27.2" height="6.8"/><rect x="63.7" y="82.6" width="34" height="6.8"/><rect x="124.9" y="82.6" width="88.4" height="6.8"/><rect x="233.7" y="82.6" width="27.2" height="6.8"/><rect x="294.9" y="82.6" width="27.2" height="6.8"/><rect x="342.5" y="82.6" width="88.4" height="6.8"/><rect x="464.9" y="82.6" width="27.2" height="6.8"/><rect x="539.7" y="82.6" width="27.2" height="6.8"/><rect x="594.1" y="82.6" width="34" height="6.8"/><rect x="2.5" y="89.4" width="27.2" height="6.8"/><rect x="70.5" y="89.4" width="27.2" height="6.8"/><rect x="124.9" y="89.4" width="88.4" height="6.8"/><rect x="233.7" y="89.4" width="27.2" height="6.8"/><rect x="294.9" y="89.4" width="27.2" height="6.8"/><rect x="342.5" y="89.4" width="88.4" height="6.8"/><rect x="464.9" y="89.4" width="27.2" height="6.8"/><rect x="539.7" y="89.4" width="27.2" height="6.8"/><rect x="600.9" y="89.4" width="27.2" height="6.8"/><rect x="0" y="128" width="98.5" height="883"/><rect x="133.25" y="128" width="98.5" height="883"/><rect x="266.5" y="128" width="98.5" height="883"/><rect x="399.75" y="128" width="98.5" height="630"/><rect x="533" y="128" width="98.5" height="630"/></g></svg></span>
+      <a class="nx-t" href="https://nexlyr.solutions/" target="_blank" rel="noopener"><small>Designed &amp; built by</small><b>Nexlyr Solutions</b></a>
+      <span class="nx-mid">Websites · Apps · Student portals</span>
+      <a class="nx-go" href="https://wa.me/923053687680?text=Hi%20Nexlyr%21%20I%20saw%20Sir%20Fazil%20Maniya%27s%20website%20and%20I%27d%20like%20a%20site%20like%20it." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.14 6.44 2.14 11.9c0 1.75.46 3.45 1.32 4.95L2.05 22l5.28-1.38a9.86 9.86 0 0 0 4.71 1.2c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2zm5.8 14.06c-.24.68-1.4 1.3-1.94 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.17-4.95-4.37-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.58-.36.77-.36l.55.01c.18.01.42-.07.65.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.09.2-.14.32-.28.49l-.42.49c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.23 2.23 1.37.28.15.44.12.6-.07.17-.2.7-.81.88-1.09.19-.29.37-.24.63-.14.25.09 1.62.76 1.9.9.28.15.46.22.53.34.07.12.07.68-.17 1.34z"/></svg><span>Connect</span></a>
+    </div>
+    <div class="ft-meta"><span>© <span data-year>2026</span> Sir Fazil Maniya · Islamiyat</span><span>Syllabus codes and past papers belong to Cambridge University Press &amp; Assessment.</span></div>
+  </div>
+</footer>
+<nav class="vsw" aria-label="Site version"><span>Design</span><a href="/">V1</a><a href="/v2">V2</a><a href="/v3">V3</a><a href="/v4" aria-current="page">V4</a></nav>
+<a class="wa" href="https://wa.me/923332488819?text=Assalam%20o%20Alaikum%20Sir%2C%20I%27d%20like%20to%20ask%20about%20Islamiyat%20classes." target="_blank" rel="noopener" aria-label="Message Sir Fazil on WhatsApp"><i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.14 6.44 2.14 11.9c0 1.75.46 3.45 1.32 4.95L2.05 22l5.28-1.38a9.86 9.86 0 0 0 4.71 1.2c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2zm5.8 14.06c-.24.68-1.4 1.3-1.94 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.17-4.95-4.37-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.58-.36.77-.36l.55.01c.18.01.42-.07.65.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.09.2-.14.32-.28.49l-.42.49c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.23 2.23 1.37.28.15.44.12.6-.07.17-.2.7-.81.88-1.09.19-.29.37-.24.63-.14.25.09 1.62.76 1.9.9.28.15.46.22.53.34.07.12.07.68-.17 1.34z"/></svg></i><span><b>Message Sir Fazil</b><small>Classes, timings, notes</small></span></a>
+
+<script>
+(function(){
+  var d=document,h=d.documentElement;h.classList.add('js');
+  var nav=d.getElementById('nav'),solidAt=+(nav&&nav.dataset.solid||60);
+  function onS(){if(nav)nav.classList.toggle('solid',scrollY>solidAt)}
+  addEventListener('scroll',onS,{passive:true});onS();
+  var bg=d.querySelector('.burger');
+  if(bg)bg.addEventListener('click',function(){var o=!d.body.classList.contains('menu-open');d.body.classList.toggle('menu-open',o);bg.setAttribute('aria-expanded',o)});
+  d.querySelectorAll('.sheet a').forEach(function(a){a.addEventListener('click',function(){d.body.classList.remove('menu-open')})});
+  addEventListener('keydown',function(e){if(e.key==='Escape')d.body.classList.remove('menu-open')});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  d.querySelectorAll('[data-rv]').forEach(function(el){io.observe(el)});
+  d.querySelectorAll('[data-year]').forEach(function(el){el.textContent=new Date().getFullYear()});
+  /* counters */
+  var co=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;co.unobserve(e.target);var el=e.target,to=+el.dataset.count,t0=performance.now(),dur=1400;
+    (function f(t){var p=Math.min(1,(t-t0)/dur),v=Math.round(to*(1-Math.pow(1-p,3)));el.textContent=v.toLocaleString('en-US');if(p<1)requestAnimationFrame(f)})(t0)})},{threshold:.6});
+  d.querySelectorAll('[data-count]').forEach(function(el){co.observe(el)});
+  try{localStorage.setItem('mfm-compare','1')}catch(e){}
+})();
+
+</script>
+<script>
+{
+  /* worked example: one rung open at a time */
+  const R=[
+    {lv:'Low level',t:'Recall',mk:'2–3 / 10',f:0,txt:'The Battle of Badr was the first major battle between the Muslims and the Quraysh of Makka. The Muslims were few, but they won.',why:'True, but general. A short story with no detail stays in the low levels.'},
+    {lv:'Mid level',t:'Detail',mk:'5–6 / 10',f:1,txt:'It was fought on <u>17 Ramadan, 2 AH</u>. The Makkans marched to protect Abu Sufyan’s caravan, and <u>about 313 Muslims</u> met an army of <u>about 1,000</u> at the wells of Badr, where Abu Jahl was killed.',why:'Dates, numbers and names move a part (a) answer up the levels.'},
+    {lv:'Top level',t:'Evidence',mk:'9–10 / 10',f:2,txt:'The Prophet prayed through the night, and Allah answered that He would help with <u>a thousand angels (8:9)</u>. After the victory, prisoners who could read were freed for <u>teaching ten Muslims</u>, showing his mercy and his value for knowledge.',why:'A detailed, well-ordered account backed by the Qur’an reaches the top level.'},
+    {lv:'Part (b)',t:'Significance',mk:'4 / 4',f:3,txt:'Badr shows that <u>faith and obedience count for more than numbers</u>. A Muslim today who faces a struggle, such as standing up for what is right when friends disagree, prepares fully and then trusts Allah, as the Prophet did.',why:'Part (b) wants a lesson for Muslims now, with an example from life today.'}];
+  const lad=document.getElementById('ladder'),marks=[...document.querySelectorAll('.script mark')];
+  lad.innerHTML=R.map((r,i)=>'<button class="rung" type="button" aria-expanded="false" data-i="'+i+'"><span class="top"><span class="lv">'+r.lv+'</span><span class="t">'+r.t+'</span><span class="mk">'+r.mk+'</span></span><span class="body"><span class="in"><span class="p">'+r.txt+'</span><span class="p why">'+r.why+'</span></span></span></button>').join('');
+  const rungs=[...lad.querySelectorAll('.rung')];
+  function open(i){rungs.forEach((b,j)=>b.setAttribute('aria-expanded',j===i));const f=R[i].f;marks.forEach(m=>m.classList.toggle('on',f>0&&+m.dataset.f<=f))}
+  rungs.forEach(b=>b.addEventListener('click',()=>open(+b.dataset.i)));open(0);
+
+  /* hall layout helper: the third figure only on wide screens */
+  const tall=document.querySelector('.hall .tall');
+  const mq=matchMedia('(max-width:1000px)');const fit=()=>{tall.style.display=mq.matches?'none':''};fit();mq.addEventListener('change',fit);
+
+  /* reviews from config.js; an honest invitation until there are some */
+  function reviews(){const C=window.RA_CONFIG||{},L=(C.REVIEWS||[]).filter(r=>r&&r.text),q=document.getElementById('rq'),w=document.getElementById('rwho'),d=document.getElementById('rdots');
+    if(!L.length){q.textContent='Studied with Sir Fazil? Your words could be the first on this page.';w.textContent='Reviews appear here as students send them, word for word.';return}
+    const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    d.innerHTML=L.slice(0,8).map((r,i)=>'<button type="button" aria-pressed="false" data-i="'+i+'" aria-label="Review by '+esc(r.name||'a student')+'">'+esc((r.name||'S').trim()[0])+'</button>').join('');
+    const pick=i=>{const r=L[i];q.textContent='“'+r.text+'”';w.textContent=[r.name,r.meta].filter(Boolean).join(' · ');d.querySelectorAll('button').forEach((b,j)=>b.setAttribute('aria-pressed',j===i))};
+    d.addEventListener('click',e=>{const b=e.target.closest('button');if(b)pick(+b.dataset.i)});pick(0)}
+  document.addEventListener('DOMContentLoaded',reviews);
+
+  /* registration → WhatsApp message */
+  const fm=document.getElementById('enrolForm'),er=document.getElementById('eErr');
+  fm.addEventListener('submit',e=>{e.preventDefault();const n=fm.eName.value.trim(),p=fm.ePhone.value.replace(/\D/g,'');
+    if(n.length<2){er.textContent='Please add the student’s name.';fm.eName.focus();return}
+    if(p.length<10){er.textContent='Please add a WhatsApp number we can reach.';fm.ePhone.focus();return}
+    er.textContent='';const c=fm.querySelector('[name=eCourse]:checked').value;
+    const msg='Assalam o Alaikum Sir, I’d like to register for the portal.\n\nName: '+n+'\nWhatsApp: '+fm.ePhone.value.trim()+'\nCourse: '+c+'\nStudy: '+fm.eMode.value+(fm.eArea.value.trim()?'\nArea / school: '+fm.eArea.value.trim():'')+'\nExam: '+fm.eYear.value;
+    const wa=(window.RA_CONFIG&&RA_CONFIG.waUrl)?RA_CONFIG.waUrl(msg):'https://wa.me/923332488819?text='+encodeURIComponent(msg);window.open(wa,'_blank','noopener')});
+}
+</script>
+<script src="/config.js?v=5" defer></script>
+</body>
+</html>

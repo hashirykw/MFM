@@ -121,3 +121,9 @@ Chosen section by section from the design board: midnight emerald with gold kept
 
 - Sources in `tools/v3/` (same layout as V2); rebuild with `python3 tools/v3/build.py`. Fonts in `v3/fonts/` (Inter, self-hosted).
 - The V1 / V2 / V3 switch sits on the left edge of every V2 and V3 page; V1 shows it once someone has opened V2 or V3, or with `?compare`.
+
+## V4 design (Nov 2026): `/v4`
+
+A calm, editorial "scholar's edition": warm paper white, Newsreader serif headings with Inter for text, deep emerald as the one institutional colour with a brass accent, fine rule lines, real photographs, no 3D. A worked Badr example on an emerald band, a course catalogue, a tools index, logos, the study pack, the hall, reviews from `REVIEWS`, and a plain registration form. Pages: **`/v4`**, **`/v4/about`**, **`/v4/courses`**. Sources in `tools/v4/`; rebuild with `python3 tools/v4/build.py`. Fonts in `v4/fonts/`.
+
+The V1–V4 switch is on every V2, V3 and V4 page (and on V1 once someone has opened any of them).
