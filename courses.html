@@ -15,7 +15,7 @@
 <script>(function(){var d=document.documentElement,t="light";try{t=(localStorage.getItem("ra-theme")||"light").replace(/"/g,"");}catch(e){}d.dataset.theme=t==="dark"?"dark":"light";})();</script>
 <link rel="preload" href="/assets/folio/fonts/font-archivo-wide-900.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/folio/fonts/font-archivo-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>@layer fpbridge, base;</style>
-<link rel="stylesheet" href="/assets/folio/legacy-1.css?v=5a08604b">
+<link rel="stylesheet" href="/assets/folio/legacy-1.css?v=8126bf1a">
 <style>@layer base{
 .c-switch{position:sticky;top:86px;z-index:20;display:flex;justify-content:center;padding:0 var(--gut);margin-bottom:-20px;pointer-events:none}
 .c-switch .seg{pointer-events:auto;background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 70%,transparent),color-mix(in srgb,var(--bg) 55%,transparent));-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);box-shadow:var(--hi),0 18px 40px -22px rgb(5 31 32 / 0.8);flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none}
@@ -110,7 +110,7 @@
 }</style>
 <link rel="stylesheet" href="/assets/folio/legacy-2.css?v=ebb83dcb">
 <link rel="stylesheet" href="/assets/folio/base.css?v=160327fe">
-<link rel="stylesheet" href="/assets/folio/bridge.css?v=0e60af81">
+<link rel="stylesheet" href="/assets/folio/bridge.css?v=3410cfc3">
 </head>
 <body data-page="courses" class="fp fp-courses">
 <a class="skip" href="#main">Skip to content</a>
@@ -335,10 +335,10 @@
 </nav>
 <button class="fab chat-fab" type="button" aria-controls="bot" aria-expanded="false" aria-label="Ask Sir Fazil’s Assistant"><svg><use href="#i-chat"/></svg><span class="fab-t">Ask Sir Fazil’s Assistant</span></button>
 <div class="bot" id="bot" role="dialog" aria-label="Sir Fazil’s Assistant" aria-hidden="true"><div class="bot-h"><span class="seal" aria-hidden="true"><b>MFM</b></span><div><b>Sir Fazil’s Assistant</b><small><i></i>Passages · Hadiths · key terms · classes</small></div><button class="xbtn" type="button" aria-label="Close">×</button></div><div class="bot-log" aria-live="polite"></div><div class="bot-chips"></div><form class="bot-f" autocomplete="off"><input type="text" placeholder="Define a term, ask a passage, a Hadith or a date…" aria-label="Your question"><button type="submit" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form></div><aside class="cart" id="cart" aria-hidden="true" aria-label="Notes cart"><div class="cart-h"><b>Your notes</b><button class="xbtn" type="button" id="cartX" aria-label="Close">×</button></div><div class="cart-b" id="cartBody"></div><form class="cart-f" id="cartFoot" hidden novalidate><p class="cart-note">Prices, delivery and payment are confirmed by Sir Fazil’s team before you pay anything.</p><div class="field"><label for="coName">Name</label><input id="coName" autocomplete="name"></div><div class="field"><label for="coPhone">WhatsApp number</label><input id="coPhone" inputmode="tel" autocomplete="tel"></div><div class="field"><label for="coCity">City</label><input id="coCity" autocomplete="address-level2"></div><div class="field"><label for="coAddr">Address (for printed copies)</label><input id="coAddr" autocomplete="street-address"></div><p class="ferr" id="coErr" role="alert"></p><button class="btn btn-pri btn-block" type="submit">Send my order</button></form></aside><div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Search" aria-hidden="true"><div class="scrim"></div><div class="cmdk-box"><div class="cmdk-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="cmdkIn" placeholder="Jump to a page, topic, passage, Hadith or date…" autocomplete="off" aria-label="Search"><kbd>esc</kbd></div><div class="cmdk-list" id="cmdkList" role="listbox"></div><div class="cmdk-foot"><span>↑↓ move</span><span>↵ open</span><span>/ or ⌘K</span></div></div></div><div class="modal" id="modal" aria-hidden="true"><div class="scrim" data-close></div><div class="modal-box" role="dialog" aria-modal="true"><button class="xbtn" type="button" data-close aria-label="Close">×</button><div id="modalBody"></div></div></div>
-<script src="/config.js?v=5"></script>
+<script src="/config.js?v=6"></script>
 <script src="/assets/folio/mfm.js?v=193a869e"></script>
 <script src="/assets/folio/core.js?v=698d1f9a"></script>
-<script src="/assets/folio/shell.js?v=67e76a90"></script>
+<script src="/assets/folio/shell.js?v=72e2084b"></script>
 <script>RA.page(function () {
 const { $, $$, esc } = RA, D = RA.DATA;
 
@@ -351,12 +351,43 @@ if (ao) {
   else { const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { go(); io.disconnect(); } }, { threshold: .3 }); io.observe(ao); }
 }
 
-/* every topic, linked into the syllabus tracker (passages and Hadiths by number to keep the line short) */
+/* every topic: eight area cards; a card opens its topics, a topic opens its key points (all in a pop-up, no page change) */
 $$('.topicline').forEach(el => {
   const key = el.dataset.syl, d = D.SYL[key];
-  const label = t => t.u === 1 ? 'Sura ' + t.ref : t.u === 5 ? t.t.replace(/^Hadith \d+: /, '') : t.t;
-  el.innerHTML = '<span class="tl-h"><span class="folio">' + esc(d.label) + '</span><small>' + d.topics.length + ' topics &middot; tap one to open it</small></span>' +
-    d.topics.map(t => '<a class="g-' + D.deptOf(key, t) + '" href="syllabus.html#' + key + '-' + t.n + '"><b>' + t.n + '</b>' + esc(label(t)) + '</a>').join('');
+  const units = [...new Set(d.topics.map(t => t.u))];
+  const label = t => t.u === 1 ? 'Sura ' + t.ref + ' · ' + t.t.replace(/^Passage \d+: Sura [^·]+· /, '') : t.u === 5 ? t.t.replace(/^Hadith \d+: /, '') : t.t;
+  el.classList.add('tl-units');
+  el.innerHTML = '<div class="tl-top"><span class="folio">' + esc(d.label) + ' &middot; every topic</span><small>' + d.topics.length + ' topics in ' + units.length + ' areas &middot; tap an area</small></div>'
+    + '<div class="tl-grid">' + units.map(u => {
+      const ts = d.topics.filter(t => t.u === u), g = D.deptOf(key, ts[0]);
+      return '<button type="button" class="tl-u g-' + g + '" data-u="' + u + '"><span class="tl-n">' + u + '</span><span class="tl-b"><small>Paper ' + D.DPAPER[g] + ' &middot; ' + esc(D.DNAME[g]) + '</small><b>' + esc(d.units[u]) + '</b><em>' + ts.length + ' topics</em></span><span class="tl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>';
+    }).join('') + '</div>';
+  const head = (u, g) => '<span class="lbl tl-k g-' + g + '">Unit ' + u + ' &middot; Paper ' + D.DPAPER[g] + ' &middot; ' + esc(D.DNAME[g]) + '</span>';
+  function area(u) {
+    const ts = d.topics.filter(t => t.u === u), g = D.deptOf(key, ts[0]);
+    RA.modal('<div class="tl-pop">' + head(u, g) + '<h2 id="mTitle">' + esc(d.units[u]) + '</h2><p class="small muted">' + ts.length + ' topics. Open one for its key points.</p>'
+      + '<ol class="tl-list">' + ts.map(t => '<li><button type="button" class="g-' + g + '" data-t="' + t.n + '"><b>' + t.n + '</b><span>' + esc(label(t)) + '</span><i aria-hidden="true">›</i></button></li>').join('') + '</ol>'
+      + '<div class="tl-act"><a class="btn btn-sm" href="/syllabus#' + key + '-' + ts[0].n + '">Track this area</a></div></div>');
+    $('#modal .modal-box').classList.add('wide');
+  }
+  function topic(n) {
+    const t = d.topics.find(x => x.n === n); if (!t) return;
+    const g = D.deptOf(key, t), terms = (D.DEFS || []).filter(x => x[2] === t.n), dates = (D.DATES || []).filter(x => x[3] === t.n);
+    RA.modal('<div class="tl-pop">' + '<button type="button" class="tl-back" data-back="' + t.u + '">‹ ' + esc(d.units[t.u]) + '</button>' + head(t.u, g)
+      + '<h2 id="mTitle">' + t.n + ' &middot; ' + esc(label(t)) + '</h2>'
+      + (t.u === 1 ? '<p class="small muted">Sura ' + esc(t.ref) + ' &middot; ' + esc(t.grp) + '</p>' : '')
+      + '<span class="lbl">' + (t.u === 1 ? 'Themes and importance' : t.u === 5 ? 'Teaching and lesson' : 'Key points') + '</span><ul class="tl-pts">' + t.k.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>'
+      + (dates.length ? '<span class="lbl">Key dates</span><ul class="tl-dates">' + dates.map(x => '<li><b>' + esc(x[0]) + '</b>' + esc(x[2]) + '</li>').join('') + '</ul>' : '')
+      + (terms.length ? '<span class="lbl">Key terms</span><dl class="tl-terms">' + terms.map(x => '<div><dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd></div>').join('') + '</dl>' : '')
+      + '<div class="tl-act"><a class="btn btn-sm" href="/syllabus#' + key + '-' + t.n + '">Tick it in the tracker</a><a class="btn btn-sm btn-ghost" href="/past-papers">Practise it</a></div></div>');
+    $('#modal .modal-box').classList.add('wide');
+  }
+  el.addEventListener('click', e => { const b = e.target.closest('[data-u]'); if (b) area(+b.dataset.u); });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#modalBody .tl-pop')) return;
+    const t = e.target.closest('[data-t]'); if (t) { topic(t.dataset.t); return; }
+    const bk = e.target.closest('[data-back]'); if (bk) area(+bk.dataset.back);
+  });
 });
 
 /* sticky switcher follows the section in view */

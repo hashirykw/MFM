@@ -7,6 +7,29 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const root = document.documentElement;
 
+/* ---------- back / forward: land where you were, never at the top ---------- */
+(() => {
+  const K = 'fp-scroll:' + location.pathname + location.search;
+  try { history.scrollRestoration = 'manual'; } catch (e) {}
+  const save = () => { try { sessionStorage.setItem(K, String(Math.round(scrollY))); } catch (e) {} };
+  addEventListener('pagehide', save);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') save(); });
+  document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('a[href]'); if (a) save(); }, true);
+  let nav = 'navigate';
+  try { nav = (performance.getEntriesByType('navigation')[0] || {}).type || 'navigate'; } catch (e) {}
+  if (nav !== 'back_forward' && nav !== 'reload') return;
+  let y = 0; try { y = +sessionStorage.getItem(K) || 0; } catch (e) {}
+  if (!y) return;
+  const to = () => { if (Math.abs(scrollY - y) > 2 && document.documentElement.scrollHeight - innerHeight >= y - 2) scrollTo({ top: y, behavior: 'instant' }); };
+  to(); requestAnimationFrame(to);
+  addEventListener('DOMContentLoaded', to); addEventListener('load', () => { to(); setTimeout(to, 120); setTimeout(to, 450); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(to);
+  let stop = false; const quit = () => { stop = true; };
+  ['wheel', 'touchstart', 'keydown'].forEach(ev => addEventListener(ev, quit, { once: true, passive: true }));
+  const t0 = performance.now();
+  (function hold() { if (stop || performance.now() - t0 > 1600) return; to(); requestAnimationFrame(hold); })();
+})();
+
 $$('[data-year],#yr').forEach(el => { el.textContent = new Date().getFullYear(); });
 
 /* ---------- theme (paper / ink, circular reveal from the switch) ---------- */
@@ -76,6 +99,7 @@ $$('[data-year],#yr').forEach(el => { el.textContent = new Date().getFullYear();
     top.classList.toggle('solid', y > 30);
     if (!document.body.classList.contains('menu-open')) top.classList.toggle('hide', y > 400 && y > lastY + 4);
     if (y < lastY - 4) top.classList.remove('hide');
+    document.documentElement.classList.toggle('top-away', top.classList.contains('hide'));
     lastY = y;
   };
   addEventListener('scroll', upd, { passive: true }); upd();

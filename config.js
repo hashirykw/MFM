@@ -108,8 +108,9 @@ window.RA_CONFIG = {
    to any address), a small V1 / V2 switch shows here too, so both designs can be compared. */
 (function () {
   try {
-    if (/[?&]compare/.test(location.search)) localStorage.setItem('mfm-compare', '1');
-    if (/^\/v\d/.test(location.pathname) || localStorage.getItem('mfm-compare') !== '1') return;
+    /* the folio (V5) is now the whole site: the comparison rail is retired */
+    localStorage.removeItem('mfm-compare');
+    if (!/[?&]compare/.test(location.search) || /^\/v\d/.test(location.pathname)) return;
   } catch (e) { return; }
   var p = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
   var v2 = { '/': '/v2', '/index': '/v2', '/about': '/v2/about', '/courses': '/v2/courses' }[p] || '/v2';

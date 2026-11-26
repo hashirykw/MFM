@@ -240,12 +240,43 @@ if (ao) {
   else { const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { go(); io.disconnect(); } }, { threshold: .3 }); io.observe(ao); }
 }
 
-/* every topic, linked into the syllabus tracker (passages and Hadiths by number to keep the line short) */
+/* every topic: eight area cards; a card opens its topics, a topic opens its key points (all in a pop-up, no page change) */
 $$('.topicline').forEach(el => {
   const key = el.dataset.syl, d = D.SYL[key];
-  const label = t => t.u === 1 ? 'Sura ' + t.ref : t.u === 5 ? t.t.replace(/^Hadith \d+: /, '') : t.t;
-  el.innerHTML = '<span class="tl-h"><span class="folio">' + esc(d.label) + '</span><small>' + d.topics.length + ' topics &middot; tap one to open it</small></span>' +
-    d.topics.map(t => '<a class="g-' + D.deptOf(key, t) + '" href="syllabus.html#' + key + '-' + t.n + '"><b>' + t.n + '</b>' + esc(label(t)) + '</a>').join('');
+  const units = [...new Set(d.topics.map(t => t.u))];
+  const label = t => t.u === 1 ? 'Sura ' + t.ref + ' · ' + t.t.replace(/^Passage \d+: Sura [^·]+· /, '') : t.u === 5 ? t.t.replace(/^Hadith \d+: /, '') : t.t;
+  el.classList.add('tl-units');
+  el.innerHTML = '<div class="tl-top"><span class="folio">' + esc(d.label) + ' &middot; every topic</span><small>' + d.topics.length + ' topics in ' + units.length + ' areas &middot; tap an area</small></div>'
+    + '<div class="tl-grid">' + units.map(u => {
+      const ts = d.topics.filter(t => t.u === u), g = D.deptOf(key, ts[0]);
+      return '<button type="button" class="tl-u g-' + g + '" data-u="' + u + '"><span class="tl-n">' + u + '</span><span class="tl-b"><small>Paper ' + D.DPAPER[g] + ' &middot; ' + esc(D.DNAME[g]) + '</small><b>' + esc(d.units[u]) + '</b><em>' + ts.length + ' topics</em></span><span class="tl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>';
+    }).join('') + '</div>';
+  const head = (u, g) => '<span class="lbl tl-k g-' + g + '">Unit ' + u + ' &middot; Paper ' + D.DPAPER[g] + ' &middot; ' + esc(D.DNAME[g]) + '</span>';
+  function area(u) {
+    const ts = d.topics.filter(t => t.u === u), g = D.deptOf(key, ts[0]);
+    RA.modal('<div class="tl-pop">' + head(u, g) + '<h2 id="mTitle">' + esc(d.units[u]) + '</h2><p class="small muted">' + ts.length + ' topics. Open one for its key points.</p>'
+      + '<ol class="tl-list">' + ts.map(t => '<li><button type="button" class="g-' + g + '" data-t="' + t.n + '"><b>' + t.n + '</b><span>' + esc(label(t)) + '</span><i aria-hidden="true">›</i></button></li>').join('') + '</ol>'
+      + '<div class="tl-act"><a class="btn btn-sm" href="/syllabus#' + key + '-' + ts[0].n + '">Track this area</a></div></div>');
+    $('#modal .modal-box').classList.add('wide');
+  }
+  function topic(n) {
+    const t = d.topics.find(x => x.n === n); if (!t) return;
+    const g = D.deptOf(key, t), terms = (D.DEFS || []).filter(x => x[2] === t.n), dates = (D.DATES || []).filter(x => x[3] === t.n);
+    RA.modal('<div class="tl-pop">' + '<button type="button" class="tl-back" data-back="' + t.u + '">‹ ' + esc(d.units[t.u]) + '</button>' + head(t.u, g)
+      + '<h2 id="mTitle">' + t.n + ' &middot; ' + esc(label(t)) + '</h2>'
+      + (t.u === 1 ? '<p class="small muted">Sura ' + esc(t.ref) + ' &middot; ' + esc(t.grp) + '</p>' : '')
+      + '<span class="lbl">' + (t.u === 1 ? 'Themes and importance' : t.u === 5 ? 'Teaching and lesson' : 'Key points') + '</span><ul class="tl-pts">' + t.k.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>'
+      + (dates.length ? '<span class="lbl">Key dates</span><ul class="tl-dates">' + dates.map(x => '<li><b>' + esc(x[0]) + '</b>' + esc(x[2]) + '</li>').join('') + '</ul>' : '')
+      + (terms.length ? '<span class="lbl">Key terms</span><dl class="tl-terms">' + terms.map(x => '<div><dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd></div>').join('') + '</dl>' : '')
+      + '<div class="tl-act"><a class="btn btn-sm" href="/syllabus#' + key + '-' + t.n + '">Tick it in the tracker</a><a class="btn btn-sm btn-ghost" href="/past-papers">Practise it</a></div></div>');
+    $('#modal .modal-box').classList.add('wide');
+  }
+  el.addEventListener('click', e => { const b = e.target.closest('[data-u]'); if (b) area(+b.dataset.u); });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#modalBody .tl-pop')) return;
+    const t = e.target.closest('[data-t]'); if (t) { topic(t.dataset.t); return; }
+    const bk = e.target.closest('[data-back]'); if (bk) area(+bk.dataset.back);
+  });
 });
 
 /* sticky switcher follows the section in view */

@@ -504,6 +504,60 @@ html:root body.fp.fp{padding:0!important;margin:0!important;min-height:0!importa
 :root:root:root:root:root body.fp.fp :is(.pp-zone,.lab-main,.n-main,.sy-main){padding-top:clamp(72px,8vw,104px)!important}
 html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(20% .045 163 / .55),oklch(16% .035 163 / .6)),var(--sheet)!important;background-size:28px 28px,28px 28px,100% 100%,1024px 1024px!important;background-attachment:scroll,scroll,fixed,scroll!important}
 
+/* ---------- courses: every topic as eight area cards ---------- */
+:root:root:root:root:root body.fp.fp .tl-units{display:block!important;margin-top:clamp(36px,5vw,56px)!important}
+:root:root:root:root:root body.fp.fp .tl-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding-bottom:14px;margin-bottom:16px;border-bottom:1.5px solid var(--rule-2)}
+:root:root:root:root:root body.fp.fp .tl-top small{font:400 1.05rem/1.2 var(--f-hand);color:var(--royal)}
+:root:root:root:root:root body.fp.fp .tl-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+:root:root:root:root:root body.fp.fp .tl-u{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;min-height:132px;padding:16px 16px 14px;text-align:left;background:var(--card);border:1px solid var(--rule-2);border-top:4px solid var(--gc);border-radius:16px;color:var(--text);
+  transition:transform var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out),border-color var(--dur-2)}
+:root:root:root:root:root body.fp.fp .tl-u:hover{transform:translateY(-4px);border-color:var(--text-3);border-top-color:var(--gc);box-shadow:0 22px 40px -26px oklch(19% .03 163 / .55)}
+:root:root:root:root:root body.fp.fp .tl-u:active{transform:translateY(-1px) scale(.99)}
+:root:root:root:root:root body.fp.fp .tl-n{font:900 2.6rem/.8 var(--f-display);color:transparent;-webkit-text-stroke:1.3px var(--gc)}
+:root:root:root:root:root body.fp.fp .tl-b{display:grid;gap:6px;padding-right:22px}
+:root:root:root:root:root body.fp.fp .tl-b small{font:700 .54rem/1.3 var(--f-display);letter-spacing:.12em;text-transform:uppercase;color:var(--gc)}
+:root:root:root:root:root body.fp.fp .tl-b b{font:900 .86rem/1.18 var(--f-display);text-transform:uppercase}
+:root:root:root:root:root body.fp.fp .tl-b em{font:400 1rem/1 var(--f-hand);font-style:normal;color:var(--text-3);margin-top:2px}
+:root:root:root:root:root body.fp.fp .tl-go{position:absolute;right:12px;top:12px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--rule-2);color:var(--text-2);transition:background-color var(--dur-2),color var(--dur-2),transform var(--dur-2) var(--ease-out)}
+:root:root:root:root:root body.fp.fp .tl-go svg{width:14px;height:14px}
+:root:root:root:root:root body.fp.fp .tl-u:hover .tl-go{background:var(--saffron);border-color:transparent;color:oklch(19% .03 163);transform:rotate(45deg)}
+@media (max-width:1000px){:root:root:root:root:root body.fp.fp .tl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){:root:root:root:root:root body.fp.fp .tl-grid{grid-template-columns:minmax(0,1fr)}:root:root:root:root:root body.fp.fp .tl-u{min-height:0}}
+
+/* ---------- the pop-up (all pages) ---------- */
+:root:root:root:root:root body.fp.fp .modal-box{width:min(560px,calc(100vw - 24px))!important;max-height:min(86vh,760px)!important;overflow:auto!important;padding:clamp(22px,3vw,34px)!important;overscroll-behavior:contain}
+:root:root:root:root:root body.fp.fp .modal-box.wide{width:min(720px,calc(100vw - 24px))!important}
+:root:root:root:root:root body.fp.fp .modal-box>.xbtn{position:sticky!important;float:right;top:0;right:0;margin:-6px -6px 0 12px;z-index:3}
+:root:root:root:root:root body.fp.fp .tl-pop{display:grid;gap:12px}
+:root:root:root:root:root body.fp.fp .tl-pop h2{font:900 clamp(1.3rem,2.6vw,1.9rem)/1.02 var(--f-display)!important;letter-spacing:0!important;text-transform:uppercase;margin:0 52px 2px 0!important}
+:root:root:root:root:root body.fp.fp .tl-pop .lbl{font:700 .6rem/1.3 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-top:6px}
+:root:root:root:root:root body.fp.fp .tl-pop .tl-k{color:var(--gc);margin-top:0}
+:root:root:root:root:root body.fp.fp .tl-back{justify-self:start;font:700 .62rem/1 var(--f-display);letter-spacing:.1em;text-transform:uppercase;color:var(--royal);padding:6px 0}
+:root:root:root:root:root body.fp.fp .tl-back:hover{color:var(--text)}
+:root:root:root:root:root body.fp.fp .tl-list{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:6px}
+:root:root:root:root:root body.fp.fp .tl-list button{width:100%;display:grid;grid-template-columns:54px minmax(0,1fr) 16px;gap:12px;align-items:center;padding:12px 14px;border-radius:12px;background:var(--card);border:1px solid var(--rule);text-align:left;color:var(--text);font-size:.94rem;line-height:1.35;transition:border-color var(--dur-2),background-color var(--dur-2),transform var(--dur-2) var(--ease-out)}
+:root:root:root:root:root body.fp.fp .tl-list button:hover{border-color:var(--gc);transform:translateX(3px)}
+:root:root:root:root:root body.fp.fp .tl-list b{font:900 .8rem/1 var(--f-display);color:var(--gc)}
+:root:root:root:root:root body.fp.fp .tl-list i{font-style:normal;font-size:1.3rem;color:var(--text-3)}
+:root:root:root:root:root body.fp.fp .tl-pts,:root:root:root:root:root body.fp.fp .tl-dates{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+:root:root:root:root:root body.fp.fp .tl-pts li{display:flex;gap:12px;line-height:1.55;color:var(--text-2)}
+:root:root:root:root:root body.fp.fp .tl-pts li::before{content:"";flex:none;width:8px;height:8px;margin-top:.55em;transform:rotate(45deg);background:var(--saffron);border-radius:1px}
+:root:root:root:root:root body.fp.fp .tl-dates li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;color:var(--text-2);font-size:.92rem}
+:root:root:root:root:root body.fp.fp .tl-dates b{font:900 .86rem/1.5 var(--f-display);color:var(--sand)}
+:root:root:root:root:root body.fp.fp .tl-terms{margin:0;display:grid;gap:8px}
+:root:root:root:root:root body.fp.fp .tl-terms div{padding:10px 14px;border-radius:12px;background:var(--paper-2)}
+:root:root:root:root:root body.fp.fp .tl-terms dt{font:900 .74rem/1.2 var(--f-display);text-transform:uppercase}
+:root:root:root:root:root body.fp.fp .tl-terms dd{margin:4px 0 0;font-size:.9rem;color:var(--text-2)}
+:root:root:root:root:root body.fp.fp .tl-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;padding-top:14px;border-top:1px dashed var(--rule-2)}
+
+/* ---------- course switcher: a solid pill that tucks under the top bar ---------- */
+:root:root:root:root:root body.fp.fp .c-switch{top:88px!important;margin:0 0 clamp(8px,2vw,20px)!important;transition:top .5s var(--ease-out)}
+html.top-away body.fp .c-switch{top:14px!important}
+:root:root:root:root:root body.fp.fp .c-switch .seg{background:var(--paper)!important;border:1px solid var(--rule-2)!important;box-shadow:0 16px 34px -18px oklch(19% .03 163 / .45)!important}
+:root:root:root:root:root body.fp.fp .modal-box::before,:root:root:root:root:root body.fp.fp .modal-box::after{display:none!important;content:none!important}
+:root:root:root:root:root body.fp.fp .modal-box h2#mTitle{font-family:var(--f-display)!important;font-weight:900!important;text-transform:uppercase!important;letter-spacing:0!important}
+:root:root:root:root:root body.fp.fp .topicline.tl-units{max-height:none!important;overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important;padding-bottom:0!important}
+
 @layer fpbridge{
 /* =========================================================================
    BRIDGE · the V1 pages (all their tools and data) dressed in the folio design.
@@ -927,5 +981,59 @@ html:root body.fp.fp{padding:0!important;margin:0!important;min-height:0!importa
 /* ---------- tool zones right under the tape get room to breathe ---------- */
 :root:root:root:root:root body.fp.fp :is(.pp-zone,.lab-main,.n-main,.sy-main){padding-top:clamp(72px,8vw,104px)!important}
 html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(20% .045 163 / .55),oklch(16% .035 163 / .6)),var(--sheet)!important;background-size:28px 28px,28px 28px,100% 100%,1024px 1024px!important;background-attachment:scroll,scroll,fixed,scroll!important}
+
+/* ---------- courses: every topic as eight area cards ---------- */
+:root:root:root:root:root body.fp.fp .tl-units{display:block!important;margin-top:clamp(36px,5vw,56px)!important}
+:root:root:root:root:root body.fp.fp .tl-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding-bottom:14px;margin-bottom:16px;border-bottom:1.5px solid var(--rule-2)}
+:root:root:root:root:root body.fp.fp .tl-top small{font:400 1.05rem/1.2 var(--f-hand);color:var(--royal)}
+:root:root:root:root:root body.fp.fp .tl-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+:root:root:root:root:root body.fp.fp .tl-u{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;min-height:132px;padding:16px 16px 14px;text-align:left;background:var(--card);border:1px solid var(--rule-2);border-top:4px solid var(--gc);border-radius:16px;color:var(--text);
+  transition:transform var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out),border-color var(--dur-2)}
+:root:root:root:root:root body.fp.fp .tl-u:hover{transform:translateY(-4px);border-color:var(--text-3);border-top-color:var(--gc);box-shadow:0 22px 40px -26px oklch(19% .03 163 / .55)}
+:root:root:root:root:root body.fp.fp .tl-u:active{transform:translateY(-1px) scale(.99)}
+:root:root:root:root:root body.fp.fp .tl-n{font:900 2.6rem/.8 var(--f-display);color:transparent;-webkit-text-stroke:1.3px var(--gc)}
+:root:root:root:root:root body.fp.fp .tl-b{display:grid;gap:6px;padding-right:22px}
+:root:root:root:root:root body.fp.fp .tl-b small{font:700 .54rem/1.3 var(--f-display);letter-spacing:.12em;text-transform:uppercase;color:var(--gc)}
+:root:root:root:root:root body.fp.fp .tl-b b{font:900 .86rem/1.18 var(--f-display);text-transform:uppercase}
+:root:root:root:root:root body.fp.fp .tl-b em{font:400 1rem/1 var(--f-hand);font-style:normal;color:var(--text-3);margin-top:2px}
+:root:root:root:root:root body.fp.fp .tl-go{position:absolute;right:12px;top:12px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--rule-2);color:var(--text-2);transition:background-color var(--dur-2),color var(--dur-2),transform var(--dur-2) var(--ease-out)}
+:root:root:root:root:root body.fp.fp .tl-go svg{width:14px;height:14px}
+:root:root:root:root:root body.fp.fp .tl-u:hover .tl-go{background:var(--saffron);border-color:transparent;color:oklch(19% .03 163);transform:rotate(45deg)}
+@media (max-width:1000px){:root:root:root:root:root body.fp.fp .tl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){:root:root:root:root:root body.fp.fp .tl-grid{grid-template-columns:minmax(0,1fr)}:root:root:root:root:root body.fp.fp .tl-u{min-height:0}}
+
+/* ---------- the pop-up (all pages) ---------- */
+:root:root:root:root:root body.fp.fp .modal-box{width:min(560px,calc(100vw - 24px))!important;max-height:min(86vh,760px)!important;overflow:auto!important;padding:clamp(22px,3vw,34px)!important;overscroll-behavior:contain}
+:root:root:root:root:root body.fp.fp .modal-box.wide{width:min(720px,calc(100vw - 24px))!important}
+:root:root:root:root:root body.fp.fp .modal-box>.xbtn{position:sticky!important;float:right;top:0;right:0;margin:-6px -6px 0 12px;z-index:3}
+:root:root:root:root:root body.fp.fp .tl-pop{display:grid;gap:12px}
+:root:root:root:root:root body.fp.fp .tl-pop h2{font:900 clamp(1.3rem,2.6vw,1.9rem)/1.02 var(--f-display)!important;letter-spacing:0!important;text-transform:uppercase;margin:0 52px 2px 0!important}
+:root:root:root:root:root body.fp.fp .tl-pop .lbl{font:700 .6rem/1.3 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-top:6px}
+:root:root:root:root:root body.fp.fp .tl-pop .tl-k{color:var(--gc);margin-top:0}
+:root:root:root:root:root body.fp.fp .tl-back{justify-self:start;font:700 .62rem/1 var(--f-display);letter-spacing:.1em;text-transform:uppercase;color:var(--royal);padding:6px 0}
+:root:root:root:root:root body.fp.fp .tl-back:hover{color:var(--text)}
+:root:root:root:root:root body.fp.fp .tl-list{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:6px}
+:root:root:root:root:root body.fp.fp .tl-list button{width:100%;display:grid;grid-template-columns:54px minmax(0,1fr) 16px;gap:12px;align-items:center;padding:12px 14px;border-radius:12px;background:var(--card);border:1px solid var(--rule);text-align:left;color:var(--text);font-size:.94rem;line-height:1.35;transition:border-color var(--dur-2),background-color var(--dur-2),transform var(--dur-2) var(--ease-out)}
+:root:root:root:root:root body.fp.fp .tl-list button:hover{border-color:var(--gc);transform:translateX(3px)}
+:root:root:root:root:root body.fp.fp .tl-list b{font:900 .8rem/1 var(--f-display);color:var(--gc)}
+:root:root:root:root:root body.fp.fp .tl-list i{font-style:normal;font-size:1.3rem;color:var(--text-3)}
+:root:root:root:root:root body.fp.fp .tl-pts,:root:root:root:root:root body.fp.fp .tl-dates{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+:root:root:root:root:root body.fp.fp .tl-pts li{display:flex;gap:12px;line-height:1.55;color:var(--text-2)}
+:root:root:root:root:root body.fp.fp .tl-pts li::before{content:"";flex:none;width:8px;height:8px;margin-top:.55em;transform:rotate(45deg);background:var(--saffron);border-radius:1px}
+:root:root:root:root:root body.fp.fp .tl-dates li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;color:var(--text-2);font-size:.92rem}
+:root:root:root:root:root body.fp.fp .tl-dates b{font:900 .86rem/1.5 var(--f-display);color:var(--sand)}
+:root:root:root:root:root body.fp.fp .tl-terms{margin:0;display:grid;gap:8px}
+:root:root:root:root:root body.fp.fp .tl-terms div{padding:10px 14px;border-radius:12px;background:var(--paper-2)}
+:root:root:root:root:root body.fp.fp .tl-terms dt{font:900 .74rem/1.2 var(--f-display);text-transform:uppercase}
+:root:root:root:root:root body.fp.fp .tl-terms dd{margin:4px 0 0;font-size:.9rem;color:var(--text-2)}
+:root:root:root:root:root body.fp.fp .tl-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;padding-top:14px;border-top:1px dashed var(--rule-2)}
+
+/* ---------- course switcher: a solid pill that tucks under the top bar ---------- */
+:root:root:root:root:root body.fp.fp .c-switch{top:88px!important;margin:0 0 clamp(8px,2vw,20px)!important;transition:top .5s var(--ease-out)}
+html.top-away body.fp .c-switch{top:14px!important}
+:root:root:root:root:root body.fp.fp .c-switch .seg{background:var(--paper)!important;border:1px solid var(--rule-2)!important;box-shadow:0 16px 34px -18px oklch(19% .03 163 / .45)!important}
+:root:root:root:root:root body.fp.fp .modal-box::before,:root:root:root:root:root body.fp.fp .modal-box::after{display:none!important;content:none!important}
+:root:root:root:root:root body.fp.fp .modal-box h2#mTitle{font-family:var(--f-display)!important;font-weight:900!important;text-transform:uppercase!important;letter-spacing:0!important}
+:root:root:root:root:root body.fp.fp .topicline.tl-units{max-height:none!important;overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important;padding-bottom:0!important}
 
 }

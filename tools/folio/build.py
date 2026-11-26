@@ -500,7 +500,7 @@ def build_v1(slug, v):
 {dock(slug)}
 {fab}
 {post.strip()}
-<script src="/config.js?v=5"></script>
+<script src="/config.js?v=6"></script>
 <script src="/assets/folio/mfm.js?v={v['mfm']}"></script>
 <script src="/assets/folio/core.js?v={v['core']}"></script>
 <script src="/assets/folio/shell.js?v={v['shell']}"></script>
