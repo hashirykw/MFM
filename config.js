@@ -116,7 +116,7 @@ window.RA_CONFIG = {
   function add() {
     var n = document.createElement('nav');
     n.setAttribute('aria-label', 'Site version');
-    n.innerHTML = '<a aria-current="page">V1</a><a href="' + v2 + '">V2</a><a href="' + v2.replace('/v2', '/v3') + '">V3</a><a href="' + v2.replace('/v2', '/v4') + '">V4</a>';
+    n.innerHTML = '<a aria-current="page">V1</a><a href="' + v2 + '">V2</a><a href="' + v2.replace('/v2', '/v3') + '">V3</a><a href="' + v2.replace('/v2', '/v4') + '">V4</a><a href="/v5">V5</a>';
     n.style.cssText = 'position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:2147483000;display:flex;flex-direction:column;gap:4px;padding:6px 5px;border-radius:0 14px 14px 0;background:rgba(11,17,15,.88);border:1px solid rgba(255,255,255,.14);border-left:0;font:700 13px/1 system-ui,sans-serif;box-shadow:0 14px 30px -14px rgba(0,0,0,.6)';
     [].forEach.call(n.children, function (a, i) { a.style.cssText = 'display:grid;place-items:center;width:36px;height:34px;border-radius:10px;text-decoration:none;' + (i ? 'color:#F8F4EA' : 'background:#E8B547;color:#0B110F'); });
     document.body.appendChild(n);

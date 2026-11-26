@@ -1,0 +1,107 @@
+/* ---------- V5 · Sir Fazil additions ---------- */
+.brand img.vmark{width:38px;height:38px;border-radius:50%;object-fit:cover;background:oklch(98% .01 85);box-shadow:0 0 0 1px var(--rule)}
+.verge-badge img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+.trust-row{grid-template-columns:repeat(8,minmax(0,1fr))}
+@media (max-width:860px){.trust-row{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:420px){.trust-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.tile img{filter:saturate(.9)}
+[data-theme="dark"] .tile img{filter:saturate(.9) brightness(1.05)}
+.tile{background:oklch(97% .012 85)}
+[data-theme="dark"] .tile{background:oklch(93% .015 85)}
+[data-theme="dark"] .tile small{color:oklch(30% .03 163)}
+
+/* stage: mosque sits on a soft emerald dusk disc */
+.stage .stage-bg{background:radial-gradient(circle at 50% 58%,oklch(88% .05 163 / .55),oklch(91% .03 85 / .2) 58%,transparent 72%)}
+[data-theme="dark"] .stage .stage-bg{background:radial-gradient(circle at 50% 58%,oklch(36% .07 163 / .7),oklch(22% .04 163 / .3) 58%,transparent 72%)}
+
+/* about photo: portrait crop keeps the face */
+.about-photo .ph img{object-position:50% 18%}
+
+/* study pack */
+.pack{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(32px,6vw,80px);align-items:center}
+.pack-art{position:relative;aspect-ratio:1/1.06;max-width:560px}
+.pack-art img{position:absolute;width:64%;height:auto;border-radius:6px;box-shadow:0 30px 60px -26px oklch(15% .05 40 / .75),0 2px 0 oklch(15% .05 40 / .2)}
+.pack-art .pk-a{left:0;top:2%;transform:rotate(-5deg);z-index:2}
+.pack-art .pk-b{right:0;top:20%;transform:rotate(6deg)}
+.pack-art .pk-tag{position:absolute;left:30%;bottom:2%;z-index:3;padding:8px 16px;background:var(--saffron);color:oklch(19% .03 163);border-radius:4px;transform:rotate(-3deg);font-size:1.3rem;box-shadow:0 10px 24px -12px oklch(0% 0 0 / .6)}
+.pack-list{display:grid;gap:1px;margin:var(--space-xl) 0 0;background:var(--rule);border:1px solid var(--rule);border-radius:var(--radius-md);overflow:hidden}
+.pack-list div{display:grid;grid-template-columns:64px minmax(0,1fr);background:var(--paper-2)}
+.pack-list dt{display:grid;place-items:center;font:900 1.2rem/1 var(--f-display);color:var(--saffron);border-right:1px solid var(--rule)}
+.pack-list dd{margin:0;padding:14px 18px}
+.pack-list b{display:block;font:900 .82rem/1.2 var(--f-display);text-transform:uppercase}
+.pack-list span{display:block;margin-top:4px;font-size:.9rem;color:var(--text-2)}
+@media (max-width:900px){.pack{grid-template-columns:minmax(0,1fr)}.pack-art{max-width:420px;width:100%;margin-inline:auto}}
+
+/* answer-builder meter */
+.ab-guide{display:grid;gap:14px;align-content:start}
+.ab-meter{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;height:44px;padding:0 14px;border-radius:12px;background:var(--paper-2);border:1px solid var(--rule);overflow:hidden;--v:0}
+.ab-meter i{position:absolute;inset:0 auto 0 0;width:calc(var(--v) * 100%);background:linear-gradient(90deg,var(--emerald-soft),oklch(80% .145 80 / .45));transition:width .5s var(--ease-out)}
+.ab-meter b{position:relative;margin-left:auto;font:900 .9rem/1 var(--f-display)}
+.ab-meter::before{content:"Checklist";position:relative;z-index:1;font:700 .62rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+
+/* checker CTA card */
+.ck-go .portal-list{margin-top:var(--space-lg)}
+
+/* where he teaches */
+.mfm-card img{width:132px;height:132px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 6px oklch(80% .145 80 / .35)}
+.where{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);margin-top:var(--space-xl)}
+.where ul{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px}
+.where li{display:flex;gap:10px;font-weight:600;line-height:1.4}
+.where li::before{content:"";flex:none;width:8px;height:8px;margin-top:.5em;transform:rotate(45deg);background:var(--saffron)}
+@media (max-width:560px){.where{grid-template-columns:minmax(0,1fr)}}
+.lapis .fine{color:var(--text-3)}
+
+/* photo wall */
+.wall{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,32px);margin-top:clamp(40px,6vw,64px)}
+.wall button{position:relative;padding:10px 10px 44px;background:oklch(97% .012 85);border-radius:2px;box-shadow:0 22px 40px -22px oklch(0% 0 0 / .8);transform:rotate(var(--r));transition:transform var(--dur-3) var(--ease-out);cursor:zoom-in}
+.wall button:hover{transform:rotate(0) translateY(-6px) scale(1.02);z-index:2}
+.wall img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.wall .hand{position:absolute;left:14px;bottom:10px;color:oklch(30% .05 163);font-size:1.15rem}
+@media (max-width:760px){.wall{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* footer meta + version switch */
+.foot-meta{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;margin-top:18px}
+.foot-meta p{max-width:70ch;color:var(--text-3)}
+.vsw{display:inline-flex;align-items:center;gap:2px;padding:4px;border-radius:999px;border:1px solid var(--rule-2)}
+.vsw span{padding:0 10px 0 8px;font:700 .58rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+.vsw a{display:grid;place-items:center;min-width:38px;height:30px;padding:0 8px;border-radius:999px;font:900 .66rem/1 var(--f-display);color:var(--text-2)}
+.vsw a:hover{color:var(--text);background:var(--paper-2)}
+.vsw a[aria-current]{background:var(--saffron);color:oklch(19% .03 163)}
+.foot-big{font-size:clamp(2.1rem,7.6vw,7rem)}
+
+/* ink and lapis: emerald-tinted ink with a faint khatam (eight-point star) lattice */
+.ink{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23f3ecdc' stroke-opacity='.05' stroke-width='1'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3Cpath d='M0 42h12M72 42h12M42 0v12M42 72v12'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(oklch(22% .05 163 / .62),oklch(14% .035 163 / .7)),url(/v5/assets/img/paper/paper-dark.webp);background-size:84px 84px,100% 100%,1024px 1024px}
+.lapis{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23f3ecdc' stroke-opacity='.06' stroke-width='1'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3Cpath d='M0 42h12M72 42h12M42 0v12M42 72v12'/%3E%3C/g%3E%3C/svg%3E"),radial-gradient(120% 80% at 80% 0%,oklch(40% 0.096 163),transparent 60%);background-size:84px 84px,100% 100%}
+.sheet h4{padding-right:84px}
+.course .code .lbl{text-align:right}
+@media (max-width:560px){
+  .verge-badge{display:none}
+  .about-photo .seal{right:-4px;width:104px;height:104px}
+  .polaroid{width:34%;left:0;bottom:4%;padding:7px 7px 30px}
+  .polaroid figcaption{font-size:.72rem;bottom:8px;white-space:nowrap;left:9px}
+  .stage-note{max-width:130px}
+  .lab-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(18px * -1);padding-inline:18px;scroll-snap-type:x proximity}
+  .lab-tabs::-webkit-scrollbar{display:none}
+  .lab-tab{flex:none;scroll-snap-align:start}
+  .trust-row{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .tile{padding:8px}
+  .tile small{font-size:.5rem}
+}
+@media (max-width:480px){
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .stat{padding:14px 6px 0 0}
+  .stat+.stat{padding-left:12px;border-left:1px solid var(--rule-2);border-top:0}
+  .stat b{font-size:1.3rem}
+  .stat>span{font-size:.72rem}
+}
+.sheet>.lbl{display:block;padding-right:84px}
+@media (max-width:560px){.app-body .w:not(.w4):not(.w6){grid-column:span 1}.sheet .verdict{width:60px;height:60px;font-size:1.1rem}}
+.wall .hand{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;right:12px}
+[data-theme="dark"] .paper{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(20% .045 163 / .55),oklch(16% .035 163 / .6)),var(--sheet);background-size:28px 28px,28px 28px,100% 100%,1024px 1024px}
+
+/* MFM card as a mihrab arch */
+.mfm-card{position:relative;border-radius:999px 999px 22px 22px;padding:clamp(56px,7vw,84px) clamp(28px,4vw,48px) clamp(32px,4vw,44px);background:oklch(97% .012 85) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%230f5a43' stroke-opacity='.08' stroke-width='1.2'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3C/g%3E%3C/svg%3E");color:oklch(22% .05 163);max-width:420px;margin-inline:auto;width:100%;box-shadow:0 0 0 10px oklch(80% .145 80 / .22),0 40px 70px -36px oklch(0% 0 0 / .7)}
+.mfm-card::before{content:"";position:absolute;inset:12px;border:1.5px solid oklch(72% .13 75 / .7);border-radius:999px 999px 14px 14px;pointer-events:none}
+.mfm-card b{color:oklch(30% .08 163)}
+#abQ{text-transform:none;font:600 1.02rem/1.45 var(--f-body);letter-spacing:0;color:var(--text)}
+.mfm-card{aspect-ratio:3/4;max-width:340px;align-content:center;padding-top:clamp(40px,5vw,64px)}
