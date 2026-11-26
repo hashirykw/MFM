@@ -86,7 +86,7 @@
 .rvf-g{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .switch{display:flex;align-items:flex-start;gap:14px;cursor:pointer}
 .switch input{position:absolute;opacity:0}
-.switch .sw{position:relative;flex:none;width:46px;height:26px;border-radius:999px;background:rgb(255 255 255 / .12);transition:background .3s}
+.switch .sw{position:relative;flex:none;width:46px;height:26px;border-radius:var(--r-ui,10px);background:rgb(255 255 255 / .12);transition:background .3s}
 :where(html[data-theme="light"]) .switch .sw{background:rgb(5 31 32 / 0.12)}
 .switch .sw::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:var(--v-glow);transition:transform .35s var(--e-out)}
 .switch input:checked+.sw{background:#67927c}
@@ -98,9 +98,9 @@
 .rv-write .sec-head>*{justify-self:start!important}.rv-write .sec-head .title{margin-top:6px!important}
 
 </style>
-<link rel="stylesheet" href="/assets/folio/legacy-2.css?v=ebb83dcb">
-<link rel="stylesheet" href="/assets/folio/base.css?v=755edadc">
-<link rel="stylesheet" href="/assets/folio/bridge.css?v=f61edba6">
+<link rel="stylesheet" href="/assets/folio/legacy-2.css?v=41049376">
+<link rel="stylesheet" href="/assets/folio/base.css?v=ca0410f5">
+<link rel="stylesheet" href="/assets/folio/bridge.css?v=18c8ffad">
 </head>
 <body data-page="reviews" class="fp fp-reviews">
 <a class="skip" href="#main">Skip to content</a>
@@ -226,7 +226,7 @@
 <script src="/config.js?v=6"></script>
 <script src="/assets/folio/mfm.js?v=193a869e"></script>
 <script src="/assets/folio/core.js?v=698d1f9a"></script>
-<script src="/assets/folio/shell.js?v=72e2084b"></script>
+<script src="/assets/folio/shell.js?v=4fef3210"></script>
 <script>/* reviews · the list comes from config.REVIEWS (real messages only) */
 RA.page(function () {
 const { $, Snd } = RA, C = RA.C;
@@ -238,5 +238,6 @@ $('#rvForm').addEventListener('submit', e => { e.preventDefault(); const n = $('
   RA.send('Assalam o Alaikum Sir Fazil, here is my review:\n\n“' + t + '”\n\n' + n + ($('#rvMeta').value.trim() ? ' · ' + $('#rvMeta').value.trim() : '') + '\n' + ($('#rvOk').checked ? 'It is fine to show this on the website.' : 'Please keep this private.'), 'review'); Snd.chime(); });
 });
 </script>
+
 </body>
 </html>

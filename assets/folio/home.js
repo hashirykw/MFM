@@ -175,20 +175,49 @@ INIT['p-cmd'] = () => {
 inited['p-time'] = true;
 new IntersectionObserver(([e], o) => { if (e.isIntersecting) { INIT['p-time'](); o.disconnect(); } }, { rootMargin: '300px' }).observe($('#lab'));
 
-/* ---------- era track: drag, buttons, progress ---------- */
+/* ---------- era track: scrolling down moves the eras sideways (laptops), native swipe on phones ---------- */
 (() => {
   const tr = $('#eraTrack'); if (!tr) return;
-  const fill = $('#eraFill'), step = () => ($('.era', tr) || { offsetWidth: 320 }).offsetWidth + 16;
-  const upd = () => { const m = tr.scrollWidth - tr.clientWidth; fill.style.transform = `scaleX(${m > 0 ? .12 + .88 * tr.scrollLeft / m : 1})`; };
-  tr.addEventListener('scroll', upd, { passive: true }); upd();
-  $('#eraPrev').onclick = () => tr.scrollBy({ left: -step(), behavior: reduced ? 'auto' : 'smooth' });
-  $('#eraNext').onclick = () => tr.scrollBy({ left: step(), behavior: reduced ? 'auto' : 'smooth' });
-  tr.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); $('#eraNext').click(); } if (e.key === 'ArrowLeft') { e.preventDefault(); $('#eraPrev').click(); } });
-  let down = false, sx = 0, sl = 0, moved = 0;
+  const pin = $('#eraPin'), sticky = $('#eraSticky'), rail = $('.era-rail', tr), fill = $('#eraFill');
+  const step = () => ($('.era', tr) || { offsetWidth: 320 }).offsetWidth + 16;
+  const mq = matchMedia('(min-width: 861px) and (hover: hover) and (pointer: fine)');
+  let pinned = false, max = 0, top0 = 0, x = 0, tx = 0, raf = 0;
+  const bar = p => { fill.style.transform = `scaleX(${.12 + .88 * Math.max(0, Math.min(1, p))})`; };
+  function layout() {
+    pinned = mq.matches && !reduced;
+    pin.classList.toggle('on', pinned);
+    if (!pinned) { pin.style.height = ''; sticky.style.top = ''; rail.style.transform = ''; tr.scrollLeft = tr.scrollLeft; return; }
+    max = Math.max(0, rail.scrollWidth - tr.clientWidth);
+    const h = sticky.offsetHeight;
+    sticky.style.top = Math.min(0, innerHeight - h) + 'px';
+    pin.style.height = (h + max) + 'px';
+    top0 = pin.getBoundingClientRect().top + scrollY;
+    onScroll();
+  }
+  function onScroll() {
+    if (!pinned) return;
+    const p = max ? (scrollY - top0) / max : 0;
+    tx = Math.max(0, Math.min(1, p)) * max;
+    if (!raf) raf = requestAnimationFrame(paint);
+    bar(max ? tx / max : 1);
+  }
+  function paint() { raf = 0; x += (tx - x) * .22; if (Math.abs(tx - x) < .4) x = tx; rail.style.transform = `translate3d(${-x.toFixed(1)}px,0,0)`; if (x !== tx) raf = requestAnimationFrame(paint); }
+  const move = dx => { if (pinned) scrollBy({ top: dx, behavior: 'smooth' }); else tr.scrollBy({ left: dx, behavior: reduced ? 'auto' : 'smooth' }); };
+  $('#eraPrev').onclick = () => move(-step());
+  $('#eraNext').onclick = () => move(step());
+  tr.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); move(step()); } if (e.key === 'ArrowLeft') { e.preventDefault(); move(-step()); } });
+  /* sideways trackpad swipes and drags move the page too, so both directions stay in step */
+  tr.addEventListener('wheel', e => { if (!pinned || Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return; e.preventDefault(); scrollBy(0, e.deltaX); }, { passive: false });
+  let down = false, sx = 0, moved = 0, sl = 0;
   tr.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; moved = 0; sx = e.clientX; sl = tr.scrollLeft; tr.classList.add('drag'); });
-  addEventListener('pointermove', e => { if (!down) return; const d = e.clientX - sx; moved = Math.abs(d); tr.scrollLeft = sl - d; });
+  addEventListener('pointermove', e => { if (!down) return; const d = e.clientX - sx; moved = Math.abs(d); if (pinned) { scrollBy(0, -(e.movementX || 0)); } else tr.scrollLeft = sl - d; });
   addEventListener('pointerup', () => { if (!down) return; down = false; tr.classList.remove('drag'); });
   tr.addEventListener('click', e => { if (moved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
+  tr.addEventListener('scroll', () => { if (!pinned) { const m = tr.scrollWidth - tr.clientWidth; bar(m > 0 ? tr.scrollLeft / m : 1); } }, { passive: true });
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', layout); mq.addEventListener && mq.addEventListener('change', layout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+  addEventListener('load', layout); layout(); bar(0);
 })();
 
 /* ---------- checker sample: tap a marked line ---------- */

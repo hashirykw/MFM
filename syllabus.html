@@ -32,7 +32,7 @@
 :where(html[data-theme="light"]) .sy-bar{background:var(--card)}
 .sy-bar #sylFilter{flex-basis:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;justify-content:flex-start;width:max-content;max-width:100%}
 .sy-bar #sylFilter::-webkit-scrollbar{display:none}
-.sy-q{flex:1;min-width:220px;display:flex;align-items:center;gap:10px;height:46px;padding:0 16px;border-radius:999px;border:1px solid var(--v-line-2);background:var(--v-ink)}
+.sy-q{flex:1;min-width:220px;display:flex;align-items:center;gap:10px;height:46px;padding:0 16px;border-radius:var(--r-ui,10px);border:1px solid var(--v-line-2);background:var(--v-ink)}
 .sy-q svg{width:17px;height:17px;color:var(--v-mute);flex:none}
 .sy-q input{flex:1;min-width:0;height:100%;border:0;background:none;color:var(--v-glow);font:400 .92rem var(--f-body);outline:none}
 .sy-note{margin:22px 0 8px;font:500 .72rem/1.6 var(--f-mono);letter-spacing:.06em;color:var(--v-mute)}
@@ -51,7 +51,7 @@
 .tn{font:500 .74rem/1 var(--f-mono);color:var(--gc)}
 .topic h3{font:600 1.3rem/1 var(--f-display);color:var(--v-glow);letter-spacing:.005em}
 .tm{display:flex;justify-content:space-between;align-items:center;font:500 .66rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--v-mute)}
-.tp{padding:5px 9px;border-radius:999px;border:1px solid var(--v-line-2)}
+.tp{padding:5px 9px;border-radius:var(--r-ui,10px);border:1px solid var(--v-line-2)}
 .tk{position:absolute;top:14px;right:14px;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--v-line-2);font-size:12px;color:transparent;transition:background .3s,color .3s,border-color .3s}
 .topic.done{border-color:color-mix(in srgb,var(--gc) 40%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--gc) 9%,var(--v-ink-2)),var(--v-ink))}
 .topic.done .tk{background:var(--gc);border-color:var(--gc);color:var(--v-disc)}
@@ -64,9 +64,9 @@
 @media (max-width:900px){.sy-card{justify-self:start}.sy-foot{grid-template-columns:none}.sy-bar{top:84px}}
 @media (max-width:760px){.sy-bar{position:relative;top:auto}.sy-bar .seg[role=tablist]{width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}.u-grid{grid-template-columns:1fr}.topic{min-height:0}}
 }</style>
-<link rel="stylesheet" href="/assets/folio/legacy-2.css?v=ebb83dcb">
-<link rel="stylesheet" href="/assets/folio/base.css?v=755edadc">
-<link rel="stylesheet" href="/assets/folio/bridge.css?v=f61edba6">
+<link rel="stylesheet" href="/assets/folio/legacy-2.css?v=41049376">
+<link rel="stylesheet" href="/assets/folio/base.css?v=ca0410f5">
+<link rel="stylesheet" href="/assets/folio/bridge.css?v=18c8ffad">
 </head>
 <body data-page="syllabus" class="fp fp-syllabus">
 <a class="skip" href="#main">Skip to content</a>
@@ -207,7 +207,7 @@
 <script src="/config.js?v=6"></script>
 <script src="/assets/folio/mfm.js?v=193a869e"></script>
 <script src="/assets/folio/core.js?v=698d1f9a"></script>
-<script src="/assets/folio/shell.js?v=72e2084b"></script>
+<script src="/assets/folio/shell.js?v=4fef3210"></script>
 <script>/* syllabus tracker */
 RA.page(function(){
 const {$,$$,SYL,DNAME,DPAPER,deptOf,DEFS,DATES,esc,store,Snd,toast}=BIZ;
@@ -253,5 +253,6 @@ render();
 if(m&&m[2]) setTimeout(()=>open(m[2]),500);
 });
 </script>
+
 </body>
 </html>

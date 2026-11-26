@@ -42,7 +42,7 @@
 .whatif{display:grid;gap:10px;padding:16px;border-radius:18px;border:1px dashed var(--v-line-2)}
 .whatif .lbl{font:500 .66rem/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--v-mute)}
 .wi-btns{display:flex;flex-wrap:wrap;gap:8px}
-.wi-btns button{height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--v-line-2);background:transparent;font:500 .8rem/1 var(--f-body);color:var(--v-soft);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.wi-btns button{height:36px;padding:0 14px;border-radius:var(--r-ui,10px);border:1px solid var(--v-line-2);background:transparent;font:500 .8rem/1 var(--f-body);color:var(--v-soft);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
 .wi-btns button:hover{background:var(--v-glow);color:var(--v-disc);border-color:var(--v-glow)}
 .wi-btns button[data-w="reset"]{border-style:dashed}
 .wi-out{font-size:.9rem;color:var(--v-soft)}.wi-out b{color:var(--v-glow)}
@@ -124,7 +124,7 @@ table.cf.iv{min-width:520px}
 .qz .lbl{font:500 .66rem/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--v-mute)}
 .qd{font-size:1.1rem;line-height:1.55;color:var(--v-glow)}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.opts button{min-height:48px;padding:10px 16px;border-radius:999px;border:1px solid var(--v-line-2);background:transparent;font:500 .88rem/1.2 var(--f-body);color:var(--v-soft);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.opts button{min-height:48px;padding:10px 16px;border-radius:var(--r-ui,10px);border:1px solid var(--v-line-2);background:transparent;font:500 .88rem/1.2 var(--f-body);color:var(--v-soft);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
 .opts button:hover{border-color:var(--v-glow);color:var(--v-glow)}
 .opts button.right{background:var(--v-pur);border-color:var(--v-pur);color:var(--v-disc)}
 .opts button.wrong{border-color:var(--red);color:var(--red)}
@@ -183,7 +183,7 @@ table.cf.iv{min-width:520px}
 .big-ring{--p:60;width:110px;height:110px;flex:none;border-radius:50%;display:grid;place-items:center;background:radial-gradient(closest-side,#051f20 78%,transparent 80% 100%),conic-gradient(#a3c7ae calc(var(--p) * 1%),rgb(255 255 255 / .08) 0)}
 :where(html[data-theme="light"]) .big-ring{background:radial-gradient(closest-side,#f1f4f3 78%,transparent 80% 100%),conic-gradient(#608c77 calc(var(--p) * 1%),rgb(5 31 32 / 0.08) 0)}
 .big-ring span{font:600 2.2rem/1 var(--f-display);color:var(--v-glow)}.big-ring small{font-size:.45em;color:var(--v-mute)}
-.status-pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font:500 .66rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--v-line-2);color:var(--v-soft);white-space:nowrap}
+.status-pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:var(--r-ui,10px);font:500 .66rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--v-line-2);color:var(--v-soft);white-space:nowrap}
 .status-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
 .status-pill.ok{color:#a3c7ae;border-color:rgb(163 199 174 / .5)}
 :where(html[data-theme="light"]) .status-pill.ok{color:var(--text-3);border-color:rgb(96 140 119 / 0.5)}
@@ -214,7 +214,7 @@ table.cf.iv{min-width:520px}
 .mode-time{font:500 .7rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--v-mute)}
 .mode p{margin:0;color:var(--v-soft);font-size:.92rem;line-height:1.6}
 .route{display:flex;align-items:center;gap:6px;margin-top:6px}
-.route .stop{flex:none;padding:7px 12px;border-radius:999px;border:1px solid var(--v-line-2);font:500 .7rem/1 var(--f-mono);letter-spacing:.06em;color:var(--v-soft)}
+.route .stop{flex:none;padding:7px 12px;border-radius:var(--r-ui,10px);border:1px solid var(--v-line-2);font:500 .7rem/1 var(--f-mono);letter-spacing:.06em;color:var(--v-soft)}
 .route .stop.end{background:var(--chrome-x);color:var(--text);border-color:transparent}
 :where(html[data-theme="light"]) .route .stop.end{color:#f2f5f4}
 .route .stop.sir{border-color:var(--v-pur);color:var(--v-pur)}
@@ -224,7 +224,7 @@ table.cf.iv{min-width:520px}
 @keyframes lane{from{transform:translateX(-100%)}to{transform:translateX(250%)}}
 .checks{margin-top:16px;padding:24px}
 .check-list{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.check-list li{padding:8px 14px;border-radius:999px;border:1px solid var(--v-line-2);font-size:.85rem;color:var(--v-soft)}
+.check-list li{padding:8px 14px;border-radius:var(--r-ui,10px);border:1px solid var(--v-line-2);font-size:.85rem;color:var(--v-soft)}
 .check-list li::before{content:"✓ ";color:#a3c7ae}
 :where(html[data-theme="light"]) .check-list li::before{color:var(--text-3)}
 @media (max-width:760px){.mode-grid{grid-template-columns:1fr}}
@@ -277,9 +277,9 @@ table.cf.iv{min-width:520px}
 .route .lane{min-width:10px}@media (max-width:480px){.route{gap:4px}.route .stop{padding:6px 8px;font-size:.62rem;letter-spacing:.02em}}
 
 </style>
-<link rel="stylesheet" href="/assets/folio/legacy-2.css?v=ebb83dcb">
-<link rel="stylesheet" href="/assets/folio/base.css?v=755edadc">
-<link rel="stylesheet" href="/assets/folio/bridge.css?v=f61edba6">
+<link rel="stylesheet" href="/assets/folio/legacy-2.css?v=41049376">
+<link rel="stylesheet" href="/assets/folio/base.css?v=ca0410f5">
+<link rel="stylesheet" href="/assets/folio/bridge.css?v=18c8ffad">
 </head>
 <body data-page="ai-checker" class="fp fp-ai-checker">
 <a class="skip" href="#main">Skip to content</a>
@@ -349,7 +349,7 @@ table.cf.iv{min-width:520px}
       <p class="lede" data-rv>Write an Islamiyat answer, type it or photograph your pages, and get it marked against Cambridge’s levels: 10 marks for knowledge in part (a), 4 for understanding in part (b). Comments on every line, a model answer, and Sir Fazil’s approval on tests.</p>
       <div class="hero-cta" data-rv style="display:flex;flex-wrap:wrap;gap:12px;margin-top:30px"><a class="btn btn-pri btn-lg" href="#workspace">Open the checker</a><a class="btn btn-ghost btn-lg" href="#sample">See a marked answer</a></div>
     </div>
-    <aside class="fp-panel s-ink" aria-label="At a glance"><div class="fpp-head"><img src="/mfm-logo.webp" alt="" width="72" height="72"><span class="lbl">Sir Fazil’s red pen</span><b>Every test answer, approved by him.</b></div><dl class="fpp-facts"><div><dt>Part (a) &middot; knowledge</dt><dd><b>7 / 10</b><small>Level 3 of 4</small></dd></div><div><dt>Part (b) &middot; understanding</dt><dd><b>2 / 4</b><small>Develop the example</small></dd></div><div><dt>Sir Fazil</dt><dd><b>Approved</b><small>Test · returned with the class</small></dd></div></dl><p class="fpp-foot"><span>MFM</span>Islamiyat · 2058 · 0493</p></aside>
+    <aside class="fp-panel s-ink" aria-label="At a glance"><div class="fpp-head"><span class="fpp-orb"><img src="/mfm-logo.webp" alt="" width="72" height="72"></span><span class="lbl">Sir Fazil’s red pen</span><b>Every test answer, approved by him.</b></div><dl class="fpp-facts"><div><dt>Part (a) &middot; knowledge</dt><dd><b>7 / 10</b><small>Level 3 of 4</small></dd></div><div><dt>Part (b) &middot; understanding</dt><dd><b>2 / 4</b><small>Develop the example</small></dd></div><div><dt>Sir Fazil</dt><dd><b>Approved</b><small>Test · returned with the class</small></dd></div></dl><p class="fpp-foot"><span>MFM</span>Islamiyat · 2058 · 0493</p></aside>
   </div>
 </section>
 <div class="fp-tape s-ink tear-tb" aria-hidden="true"><div class="fp-tape-in"><span>Write it<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Snap or type<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Marked in levels<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Sir Fazil approves<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Fix and resend<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Level 1 to Level 4<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Write it<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Snap or type<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Marked in levels<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Sir Fazil approves<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Fix and resend<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Level 1 to Level 4<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Write it<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Snap or type<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Marked in levels<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Sir Fazil approves<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Fix and resend<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Level 1 to Level 4<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Write it<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Snap or type<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Marked in levels<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Sir Fazil approves<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Fix and resend<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span><span>Level 1 to Level 4<svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span></div></div>
@@ -530,7 +530,7 @@ table.cf.iv{min-width:520px}
 <script src="/config.js?v=6"></script>
 <script src="/assets/folio/mfm.js?v=193a869e"></script>
 <script src="/assets/folio/core.js?v=698d1f9a"></script>
-<script src="/assets/folio/shell.js?v=72e2084b"></script>
+<script src="/assets/folio/shell.js?v=4fef3210"></script>
 <script>/* AI checker · front end. Answers are kept on this device until the backend
    (Supabase + a marking function) is connected; then submit() posts instead. */
 RA.page(function () {
@@ -605,5 +605,6 @@ via(); hint(); session(RA.auth.get());
 if (location.hash === '#workspace' && !RA.auth.get()) setTimeout(() => RA.signIn(session), 900);
 });
 </script>
+<script type="module" src="/assets/folio/ornament3d.js?v=d51cebe8"></script>
 </body>
 </html>

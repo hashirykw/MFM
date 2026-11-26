@@ -42,7 +42,7 @@
 .whatif{display:grid;gap:10px;padding:16px;border-radius:18px;border:1px dashed var(--v-line-2)}
 .whatif .lbl{font:500 .66rem/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--v-mute)}
 .wi-btns{display:flex;flex-wrap:wrap;gap:8px}
-.wi-btns button{height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--v-line-2);background:transparent;font:500 .8rem/1 var(--f-body);color:var(--v-soft);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.wi-btns button{height:36px;padding:0 14px;border-radius:var(--r-ui,10px);border:1px solid var(--v-line-2);background:transparent;font:500 .8rem/1 var(--f-body);color:var(--v-soft);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
 .wi-btns button:hover{background:var(--v-glow);color:var(--v-disc);border-color:var(--v-glow)}
 .wi-btns button[data-w="reset"]{border-style:dashed}
 .wi-out{font-size:.9rem;color:var(--v-soft)}.wi-out b{color:var(--v-glow)}
@@ -124,7 +124,7 @@ table.cf.iv{min-width:520px}
 .qz .lbl{font:500 .66rem/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--v-mute)}
 .qd{font-size:1.1rem;line-height:1.55;color:var(--v-glow)}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.opts button{min-height:48px;padding:10px 16px;border-radius:999px;border:1px solid var(--v-line-2);background:transparent;font:500 .88rem/1.2 var(--f-body);color:var(--v-soft);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.opts button{min-height:48px;padding:10px 16px;border-radius:var(--r-ui,10px);border:1px solid var(--v-line-2);background:transparent;font:500 .88rem/1.2 var(--f-body);color:var(--v-soft);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
 .opts button:hover{border-color:var(--v-glow);color:var(--v-glow)}
 .opts button.right{background:var(--v-pur);border-color:var(--v-pur);color:var(--v-disc)}
 .opts button.wrong{border-color:var(--red);color:var(--red)}
@@ -163,9 +163,9 @@ table.cf.tl{min-width:560px}
 .cf.tl thead th:nth-child(3){text-align:left}
 
 </style>
-<link rel="stylesheet" href="/assets/folio/legacy-2.css?v=ebb83dcb">
-<link rel="stylesheet" href="/assets/folio/base.css?v=755edadc">
-<link rel="stylesheet" href="/assets/folio/bridge.css?v=f61edba6">
+<link rel="stylesheet" href="/assets/folio/legacy-2.css?v=41049376">
+<link rel="stylesheet" href="/assets/folio/base.css?v=ca0410f5">
+<link rel="stylesheet" href="/assets/folio/bridge.css?v=18c8ffad">
 </head>
 <body data-page="lab" class="fp fp-lab">
 <a class="skip" href="#main">Skip to content</a>
@@ -363,7 +363,7 @@ table.cf.tl{min-width:560px}
 <script src="/config.js?v=6"></script>
 <script src="/assets/folio/mfm.js?v=193a869e"></script>
 <script src="/assets/folio/core.js?v=698d1f9a"></script>
-<script src="/assets/folio/shell.js?v=72e2084b"></script>
+<script src="/assets/folio/shell.js?v=4fef3210"></script>
 <script>/* Islamiyat Lab */
 RA.page(function(){
 const {$,$$,Snd,RM,DEFS,DATES,PASSAGES,HADITHS,SYL,esc,store,toast,money}=BIZ;
@@ -487,5 +487,6 @@ const h=location.hash.slice(1); if(TABS.includes(h)) show(h);
 addEventListener("hashchange",()=>{ const k=location.hash.slice(1); if(TABS.includes(k)){ show(k); RA.go("#labTabs",-110); } });
 });
 </script>
+
 </body>
 </html>

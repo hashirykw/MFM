@@ -124,3 +124,17 @@ const cntIO = new IntersectionObserver(es => es.forEach(e => {
 }), { threshold: .6 });
 $$('[data-count]').forEach(el => { if (!el.closest('[data-cnt-legacy]')) cntIO.observe(el); });
 })();
+
+/* ---------- 3D tilt: cards lean towards the pointer (laptops only) ---------- */
+(() => {
+  if (!matchMedia('(hover:hover) and (pointer:fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const SEL = '.fp-panel,.salah-panel,.course,.plate-mat,.tl-u,.mfm-card,.form-card,.fp-plate-mat,.sheet';
+  let el = null;
+  document.addEventListener('pointermove', e => {
+    const c = e.target.closest && e.target.closest(SEL);
+    if (el && el !== c) { el.style.removeProperty('--rx'); el.style.removeProperty('--ry'); el.classList.remove('tilt'); }
+    el = c; if (!c) return;
+    const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    c.classList.add('tilt'); c.style.setProperty('--rx', (-y * 6).toFixed(2) + 'deg'); c.style.setProperty('--ry', (x * 8).toFixed(2) + 'deg');
+  }, { passive: true });
+})();

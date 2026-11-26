@@ -431,3 +431,13 @@ html{scrollbar-color:oklch(47% .12 163) oklch(91.5% .028 82);scrollbar-width:thi
 :is(.menu-in,.modal-box,.cart-b,.bot-log,.cmdk-list,.chat-b,.xsel-list,.era-track,.dash *)::-webkit-scrollbar{width:8px;height:8px}
 :is(.menu-in,.modal-box,.cart-b,.bot-log,.cmdk-list,.chat-b,.xsel-list,.dash *)::-webkit-scrollbar-track{background:transparent;border:0}
 :is(.menu-in,.modal-box,.cart-b,.bot-log,.cmdk-list,.chat-b,.xsel-list,.dash *)::-webkit-scrollbar-thumb{border-width:2px;border-color:transparent;background-clip:padding-box}
+
+/* ---------- shapes: crafted corners, not pills ---------- */
+:root{--r-ui:10px}
+.tsw-knob,.tsw .crater,.tsw .sk{border-radius:50%!important}
+.tsw{border-radius:14px}
+.tsw-knob{border-radius:50%}
+.dock{border-radius:18px}
+.dock a,.dock button{border-radius:12px}
+.btn{letter-spacing:.12em}
+.tilt{transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-3px)!important;transition:transform .25s var(--ease-out)!important}

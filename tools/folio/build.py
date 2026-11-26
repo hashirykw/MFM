@@ -299,6 +299,11 @@ def remap_fg(css):
     return re.sub(r'((?<![\w-])color\s*:\s*)([^;}]+)', fix, css)
 
 
+def squarer(css):
+    """Pill shapes become crafted rounded rectangles (small dots and circles stay round)."""
+    return re.sub(r'border-radius\s*:\s*(?:999|9999|100|200|500)px(?=\s*[;}!])', 'border-radius:var(--r-ui,10px)', css)
+
+
 def remap_bg(css):
     """V1 hard-coded light panels (mint glass, white) become folio cards, in every band and theme."""
     def fix(m):
@@ -306,7 +311,7 @@ def remap_bg(css):
         for pat, rep in BG_MAP:
             v = re.sub(pat, rep, v)
         return m.group(1) + v
-    return remap_fg(re.sub(r'(background(?:-color)?\s*:\s*)([^;}]+)', fix, css))
+    return squarer(remap_fg(re.sub(r'(background(?:-color)?\s*:\s*)([^;}]+)', fix, css)))
 
 
 def legacy_css():
@@ -409,7 +414,7 @@ ABOUT_FACTS = [('Teaching since', '2012', '15+ years in the classroom'), ('Stude
 
 def panel(cap, head, facts):
     rows = ''.join(f'<div><dt>{a}</dt><dd>{b}<small>{c}</small></dd></div>' for a, b, c in facts)
-    return (f'<aside class="fp-panel s-ink" aria-label="At a glance"><div class="fpp-head"><img src="/mfm-logo.webp" alt="" width="72" height="72">'
+    return (f'<aside class="fp-panel s-ink" aria-label="At a glance"><div class="fpp-head"><span class="fpp-orb"><img src="/mfm-logo.webp" alt="" width="72" height="72"></span>'
             f'<span class="lbl">{cap}</span><b>{head}</b></div><dl class="fpp-facts">{rows}</dl>'
             f'<p class="fpp-foot"><span>MFM</span>Islamiyat · 2058 · 0493</p></aside>')
 
@@ -537,6 +542,7 @@ def build_v1(slug, v):
 <script src="/assets/folio/core.js?v={v['core']}"></script>
 <script src="/assets/folio/shell.js?v={v['shell']}"></script>
 {''.join('<script>' + s + '</script>' for s in inline)}
+{f'<script type="module" src="/assets/folio/ornament3d.js?v={v["orn"]}"></script>' if 'fpp-orb' in main else ''}
 </body>
 </html>
 '''
@@ -548,6 +554,14 @@ def build_v1(slug, v):
 def build_home(v):
     s = R('index.html')
     s = s.replace('<meta name="robots" content="noindex, follow">\n', '')
+    og = ('<meta property="og:type" content="website"><meta property="og:site_name" content="Sir Fazil Maniya · Islamiyat">'
+          '<meta property="og:url" content="https://mohammadfazilmaniya.com/"><meta property="og:title" content="Sir Fazil Maniya · O Level & IGCSE Islamiyat, Karachi & online">'
+          '<meta property="og:description" content="Cambridge O Level Islamiyat 2058 and IGCSE 0493 with Sir Mohammad Fazil Maniya: 15+ years, 7,000+ students, an Islamiyat Lab, AI checker and student portal.">'
+          '<meta property="og:image" content="https://mohammadfazilmaniya.com/og/index.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
+          '<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://mohammadfazilmaniya.com/og/index.jpg">'
+          '<link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.webmanifest">'
+          '<link rel="modulepreload" href="/assets/folio/js/three.module.min.js">')
+    s = s.replace('<link rel="canonical"', og + '\n<link rel="canonical"', 1)
     s = re.sub(r'<title>(.*?) · V5</title>', r'<title>\1</title>', s)
     s = s.replace("<script>try{var t=localStorage.getItem('mfmTheme5');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>", THEME)
     s = s.replace('<style>\n{{CSS}}\n</style>', f'<link rel="stylesheet" href="/assets/folio/base.css?v={v["base"]}">\n<link rel="stylesheet" href="/assets/folio/home.css?v={v["home"]}">')
@@ -584,9 +598,9 @@ def build_home(v):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / 'base.css').write_text(R('base.css'))
-    (OUT / 'home.css').write_text(R('home.css'))
-    br = boost(R('bridge.css'))
+    (OUT / 'base.css').write_text(squarer(R('base.css')))
+    (OUT / 'home.css').write_text(squarer(R('home.css')))
+    br = squarer(boost(R('bridge.css')))
     # V1 wraps mfm-1.css and each page's own CSS in @layer base, and !important inside a layer beats
     # unlayered !important. So the bridge is written twice: in a layer ordered before base (its
     # !important rules win) and unlayered (its normal rules win).
@@ -597,11 +611,12 @@ def main():
     (OUT / 'mosque3d.js').write_text(R('mosque3d.js'))
     (OUT / 'prayer.js').write_text(R('prayer.js'))
     (OUT / 'prayer3d.js').write_text(R('prayer3d.js'))
+    (OUT / 'ornament3d.js').write_text(R('ornament3d.js'))
     (OUT / 'core.js').write_text(R('core.js'))
     (OUT / 'mfm.js').write_text(R('mfm.js'))
     legacy_css()
     v = {'l1': ver('legacy-1.css'), 'l2': ver('legacy-2.css'), 'base': ver('base.css'), 'bridge': ver('bridge.css'), 'home': ver('home.css'),
-         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('prayer3d.js')}
+         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('prayer3d.js'), 'orn': ver('ornament3d.js')}
     print('index.html', build_home(v) // 1024, 'KB')
     for slug in PAGES:
         if slug == 'index':
