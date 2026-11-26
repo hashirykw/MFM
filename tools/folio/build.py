@@ -27,7 +27,7 @@ PAGES = {
     'courses':      ('Courses', 'O Level 2058, IGCSE 0493, recorded', 'i-book', 'pplpi'),
     'syllabus':     ('Syllabus', 'Every topic, ticked as you learn it', 'i-paper', 'ppi'),
     'lab':          ('Islamiyat Lab', 'Zakat, timeline, passages, Hadiths', 'i-lab', 'ppl'),
-    'ai-checker':   ('AI Checker', 'Your answer, marked against the levels', 'i-ai', 'ppippl p'),
+    'ai-checker':   ('AI Checker', 'Answers marked against the levels', 'i-ai', 'ppippl p'),
     'portal':       ('Student portal', 'Notes, lectures, results, fees', 'i-portal', 'ppp'),
     'parent':       ('Parents', 'Marks, position, attendance, fees', 'i-users', 'pp'),
     'past-papers':  ('Past papers', '2020–2026, side by side, timed', 'i-paper', 'ppip'),

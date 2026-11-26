@@ -557,6 +557,8 @@ html.top-away body.fp .c-switch{top:14px!important}
 :root:root:root:root:root body.fp.fp .modal-box::before,:root:root:root:root:root body.fp.fp .modal-box::after{display:none!important;content:none!important}
 :root:root:root:root:root body.fp.fp .modal-box h2#mTitle{font-family:var(--f-display)!important;font-weight:900!important;text-transform:uppercase!important;letter-spacing:0!important}
 :root:root:root:root:root body.fp.fp .topicline.tl-units{max-height:none!important;overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important;padding-bottom:0!important}
+:root:root:root:root:root body.fp.fp .mf-act .btn--line{--fb:transparent;--ff:var(--on-dark);box-shadow:inset 0 0 0 1.5px oklch(95% .02 85 / .35)!important}
+:root:root:root:root:root body.fp.fp .mf-act .btn--line:hover{--ff:oklch(19% .03 163)}
 
 @layer fpbridge{
 /* =========================================================================
@@ -1035,5 +1037,7 @@ html.top-away body.fp .c-switch{top:14px!important}
 :root:root:root:root:root body.fp.fp .modal-box::before,:root:root:root:root:root body.fp.fp .modal-box::after{display:none!important;content:none!important}
 :root:root:root:root:root body.fp.fp .modal-box h2#mTitle{font-family:var(--f-display)!important;font-weight:900!important;text-transform:uppercase!important;letter-spacing:0!important}
 :root:root:root:root:root body.fp.fp .topicline.tl-units{max-height:none!important;overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important;padding-bottom:0!important}
+:root:root:root:root:root body.fp.fp .mf-act .btn--line{--fb:transparent;--ff:var(--on-dark);box-shadow:inset 0 0 0 1.5px oklch(95% .02 85 / .35)!important}
+:root:root:root:root:root body.fp.fp .mf-act .btn--line:hover{--ff:oklch(19% .03 163)}
 
 }
