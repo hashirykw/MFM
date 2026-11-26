@@ -1,7 +1,7 @@
 /* A small low-poly mosque built in code for Sir Fazil's site (Three.js r187, local file).
    Green dome, two minarets, a courtyard with a fountain and an arcade, date palms,
    and a rehal holding an open Qur'an. Drag to turn; lamps glow in the ink theme. */
-import * as THREE from '/v5/assets/js/three.min.js';
+import * as THREE from '/assets/folio/js/three.module.min.js';
 
 const stage = document.getElementById('stage');
 const canvas = document.getElementById('mosque');

@@ -2,6 +2,25 @@
 
 A multi-page site for Sir Mohammad Fazil Maniya (MFM): Cambridge O Level Islamiyat 2058 and IGCSE Islamiyat 0493, Karachi and online. Settings live in `config.js`.
 
+## The live design: the folio (Nov 2026)
+
+The whole site now uses the paper-and-ink **folio** design (formerly `/v5`, in the style of the Hamza Polani, Hashir portfolio and Clarus sites): crumpled paper and emerald-ink bands with torn edges, Archivo Wide caps with a handwritten accent, the Paper / Ink theme switch, the contents menu and the bottom dock. `/v5` now redirects to `/`.
+
+Every page is its own page, with all the V1 data, tools and forms:
+
+| Page | What it is |
+|---|---|
+| `/` | The folio home: the 3D masjid hero, Seerah marquee, about, the six plates, courses, era track, study pack, a short Lab, checker sample, portal preview, where he teaches, FAQ and WhatsApp registration. Each section links to its full page. |
+| `/courses` `/syllabus` `/lab` `/ai-checker` `/portal` `/parent` `/past-papers` `/notes` `/crash-course` `/reviews` `/about` `/contact` `/404` | The full V1 pages (tracker, zakat studio, checker workspace, portal and parent dashboards, past-paper viewer and timer, notes cart, enrolment form…) in the folio design. |
+
+**How it is built.** Run `python3 tools/folio/build.py` from the repo root after any change.
+
+- `tools/folio/src/`: the folio home (`index.html`, `home.css`, `home.js`, `data.js`, `mosque3d.js`), the shared shell (`base.css`, `shell.js`), and `bridge.css`, which dresses the V1 pages in the folio design.
+- `tools/folio/v1src/`: the V1 page sources (all content and scripts). Edit these for page content; the build adds the shared top bar, menu, dock, footer and Nexlyr strip, gives each section its paper or ink band, and puts a word tape under every hero.
+- `tools/folio/plates.py` draws the six pencil plates.
+- Output: the pages in the site root, and the shared files in `assets/folio/` (cached by the browser after the first page; file links carry a content hash so updates show at once). `legacy-1.css` / `legacy-2.css` are the V1 layout rules, pruned to what the pages use.
+- The silver 3D shapes behind forms, the particle background and GSAP are not loaded any more, so pages paint straight away.
+
 ## v2 (Nov 2026): how the files fit together
 
 - **`assets/`**: the styles and script every page shares, cached by the browser after the first page. `mfm-1/2/3.css` and `mfm-core.js` are the engine. **`mfm.css` is the v2 look** (fonts, silver/glass finish, buttons, cards, nav, menu, the 3D card deck); tune the design there. `mfm.js` sets up the card decks.
@@ -126,8 +145,6 @@ Chosen section by section from the design board: midnight emerald with gold kept
 
 A calm, editorial "scholar's edition": warm paper white, Newsreader serif headings with Inter for text, deep emerald as the one institutional colour with a brass accent, fine rule lines, real photographs, no 3D. A worked Badr example on an emerald band, a course catalogue, a tools index, logos, the study pack, the hall, reviews from `REVIEWS`, and a plain registration form. Pages: **`/v4`**, **`/v4/about`**, **`/v4/courses`**. Sources in `tools/v4/`; rebuild with `python3 tools/v4/build.py`. Fonts in `v4/fonts/`.
 
-## V5 design (Nov 2026): `/v5`
-
-A paper-and-ink folio in the style of the Hamza Polani, Hashir and Clarus sites: crumpled paper and emerald ink sections with torn edges, Archivo Wide caps with a handwritten accent, a faint eight-point-star lattice on the dark bands, and a bottom dock. The hero is a live three.js masjid (green onion dome, four minarets, iwan, arcades, fountain, rehal and date palms) that turns on drag and relights for the ink theme. Six hand-tinted pencil plates (the Ka'ba, Hira, the Qur'an on a rehal, the wells of Badr, a mihrab, Masjid an-Nabawi) are drawn in code by `tools/v5/plates.py`. Sections: Seerah date marquee, school and academy logos, about, the folio, courses and method, a 570–661 era track, the study pack, an Islamiyat Lab (which-came-first, key figures, part (a)/(b) answer builder, faith and Pillars quiz, command words), a marked Badr sample for the AI checker, a portal preview, where he teaches, free resources, the hall, FAQ and WhatsApp registration. One page, **`/v5`**, fully self-contained (`noindex`). Sources in `tools/v5/src/`; rebuild with `python3 tools/v5/build.py`. Fonts, plates, paper textures and three.js in `v5/assets/`.
+## V5 design: now the live site (see the top of this file).
 
 The V1–V5 switch is on every V2–V5 page (and on V1 once someone has opened any of them).

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Draws the six Islamiyat folio plates as hand-tinted pencil drawings (SVG with paper,
 watercolour and wobbly-ink filters), renders them with headless Chrome and saves WebP files
-to v5/assets/img/folio/. Run from the repo root: python3 tools/v5/plates.py"""
+to assets/folio/img/folio/. Run from the repo root: python3 tools/folio/plates.py"""
 import asyncio, pathlib
 from playwright.async_api import async_playwright
 from PIL import Image
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-OUT = ROOT / 'v5' / 'assets' / 'img' / 'folio'
+OUT = ROOT / 'assets' / 'folio' / 'img' / 'folio'
 OUT.mkdir(parents=True, exist_ok=True)
 
 INK = '#2b2a26'

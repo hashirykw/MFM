@@ -49,7 +49,7 @@
 .where li{display:flex;gap:10px;font-weight:600;line-height:1.4}
 .where li::before{content:"";flex:none;width:8px;height:8px;margin-top:.5em;transform:rotate(45deg);background:var(--saffron)}
 @media (max-width:560px){.where{grid-template-columns:minmax(0,1fr)}}
-.lapis .fine{color:var(--text-3)}
+.s-lapis .fine{color:var(--text-3)}
 
 /* photo wall */
 .wall{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,32px);margin-top:clamp(40px,6vw,64px)}
@@ -70,8 +70,8 @@
 .foot-big{font-size:clamp(2.1rem,7.6vw,7rem)}
 
 /* ink and lapis: emerald-tinted ink with a faint khatam (eight-point star) lattice */
-.ink{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23f3ecdc' stroke-opacity='.05' stroke-width='1'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3Cpath d='M0 42h12M72 42h12M42 0v12M42 72v12'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(oklch(22% .05 163 / .62),oklch(14% .035 163 / .7)),url(/v5/assets/img/paper/paper-dark.webp);background-size:84px 84px,100% 100%,1024px 1024px}
-.lapis{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23f3ecdc' stroke-opacity='.06' stroke-width='1'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3Cpath d='M0 42h12M72 42h12M42 0v12M42 72v12'/%3E%3C/g%3E%3C/svg%3E"),radial-gradient(120% 80% at 80% 0%,oklch(40% 0.096 163),transparent 60%);background-size:84px 84px,100% 100%}
+.s-ink{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23f3ecdc' stroke-opacity='.05' stroke-width='1'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3Cpath d='M0 42h12M72 42h12M42 0v12M42 72v12'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(oklch(22% .05 163 / .62),oklch(14% .035 163 / .7)),url(/assets/folio/img/paper/paper-dark.webp);background-size:84px 84px,100% 100%,1024px 1024px}
+.s-lapis{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23f3ecdc' stroke-opacity='.06' stroke-width='1'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3Cpath d='M0 42h12M72 42h12M42 0v12M42 72v12'/%3E%3C/g%3E%3C/svg%3E"),radial-gradient(120% 80% at 80% 0%,oklch(40% 0.096 163),transparent 60%);background-size:84px 84px,100% 100%}
 .sheet h4{padding-right:84px}
 .course .code .lbl{text-align:right}
 @media (max-width:560px){
@@ -97,7 +97,7 @@
 .sheet>.lbl{display:block;padding-right:84px}
 @media (max-width:560px){.app-body .w:not(.w4):not(.w6){grid-column:span 1}.sheet .verdict{width:60px;height:60px;font-size:1.1rem}}
 .wall .hand{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;right:12px}
-[data-theme="dark"] .paper{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(20% .045 163 / .55),oklch(16% .035 163 / .6)),var(--sheet);background-size:28px 28px,28px 28px,100% 100%,1024px 1024px}
+[data-theme="dark"] .s-paper{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(20% .045 163 / .55),oklch(16% .035 163 / .6)),var(--sheet);background-size:28px 28px,28px 28px,100% 100%,1024px 1024px}
 
 /* MFM card as a mihrab arch */
 .mfm-card{position:relative;border-radius:999px 999px 22px 22px;padding:clamp(56px,7vw,84px) clamp(28px,4vw,48px) clamp(32px,4vw,44px);background:oklch(97% .012 85) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%230f5a43' stroke-opacity='.08' stroke-width='1.2'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3C/g%3E%3C/svg%3E");color:oklch(22% .05 163);max-width:420px;margin-inline:auto;width:100%;box-shadow:0 0 0 10px oklch(80% .145 80 / .22),0 40px 70px -36px oklch(0% 0 0 / .7)}
