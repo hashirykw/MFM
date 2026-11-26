@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sir Fazil Maniya · O Level &amp; IGCSE Islamiyat, Karachi</title>
+<meta name="description" content="Sir Mohammad Fazil Maniya teaches Cambridge O Level 2058 and IGCSE 0493 Islamiyat in Karachi and live online: the Qur'an, the Seerah and the Hadiths, taught for the top band.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://mohammadfazilmaniya.com/">
+<meta name="theme-color" content="#07100D">
+<link rel="icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/v3/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Inter';src:url(/v3/fonts/inter.woff2) format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Amiri';src:url(/fonts/amiri-700.woff2) format('woff2');font-weight:700;font-display:swap}
+
+:root{
+  --bg:#07100D;--bg-2:#09130F;--panel:#0F1A16;--panel-2:#14221D;
+  --line:rgba(255,255,255,.08);--line-2:rgba(255,255,255,.14);
+  --text:#EEF3EF;--mute:#86948E;--dim:#5A6661;
+  --em:#21B582;--em-2:#3DDC97;--em-d:#0E6349;--em-dd:#073A2C;--gold:#E8B547;--gold-2:#F7D88A;
+  --r-lg:24px;--r-md:18px;--r-sm:12px;
+  --wrap:1200px;--ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;font-size:16px;line-height:1.6;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-feature-settings:"cv11","ss01"}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.04em;line-height:1.04;text-wrap:balance}
+p{margin:0}
+.wrap{width:min(var(--wrap),100% - 48px);margin-inline:auto}
+.skip{position:fixed;left:12px;top:-60px;z-index:200;background:var(--text);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:600}
+.skip:focus{top:12px}
+:focus-visible{outline:2px solid var(--em-2);outline-offset:3px;border-radius:8px}
+::selection{background:var(--em);color:var(--bg)}
+
+/* ---------- type ---------- */
+.g{color:var(--mute)}
+.gold{color:var(--gold)}
+.h2{font-size:clamp(34px,4.6vw,60px)}
+.lead{font-size:clamp(16.5px,1.3vw,18.5px);color:var(--mute);max-width:56ch;line-height:1.6}
+.state{font-size:clamp(24px,3vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.2;max-width:24em;margin-inline:auto;text-align:center;text-wrap:balance}
+.state .g{color:var(--dim)}
+.sec{padding:clamp(80px,10vw,140px) 0;position:relative}
+.sec-h{display:grid;gap:16px;margin-bottom:clamp(36px,5vw,60px)}
+.sec-h.c{text-align:center;justify-items:center}
+.chip{display:inline-flex;align-items:center;gap:9px;height:34px;padding:0 14px;border-radius:99px;border:1px solid var(--line-2);background:rgba(15,26,22,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:13.5px;color:var(--mute);font-weight:500}
+.chip i{width:7px;height:7px;border-radius:50%;background:var(--em-2);box-shadow:0 0 10px var(--em-2)}
+.ar{font-family:'Amiri',serif;font-weight:700}
+
+/* ---------- keycap ---------- */
+.k{--kb:var(--panel);display:inline-grid;place-items:center;min-width:44px;height:44px;padding:0 14px;border-radius:12px;font-weight:600;font-size:15px;color:var(--text);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--kb),#fff 9%),var(--kb));border:1px solid var(--line-2);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -2px 0 rgba(0,0,0,.35),0 4px 0 #020504,0 14px 24px -8px rgba(0,0,0,.7);
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease);user-select:none}
+.k:is(button,a):hover,.k.dn{transform:translateY(3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.35),0 1px 0 #020504,0 6px 12px -6px rgba(0,0,0,.7)}
+.k.gl{color:var(--gold)}
+.k.em{--kb:#0d3a2c;color:var(--em-2)}
+kbd.mini{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:7px;font:600 12px/1 'Inter';background:rgba(0,0,0,.12);border:1px solid rgba(0,0,0,.14);box-shadow:inset 0 -1px 0 rgba(0,0,0,.2)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 18px;border-radius:13px;font-weight:600;font-size:15px;white-space:nowrap;
+  background:var(--text);color:var(--bg);box-shadow:inset 0 1px 0 #fff,inset 0 -2px 0 rgba(0,0,0,.12),0 10px 24px -12px rgba(0,0,0,.8);transition:transform .25s var(--ease),background .25s,box-shadow .25s}
+.btn:hover{background:#fff;transform:translateY(-1px)}
+.btn svg{width:16px;height:16px}
+.btn.dark{background:var(--panel);color:var(--text);border:1px solid var(--line-2);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 10px 24px -14px rgba(0,0,0,.8)}
+.btn.dark:hover{background:var(--panel-2)}
+.btn.dark kbd.mini{background:rgba(255,255,255,.06);border-color:var(--line-2);color:var(--mute)}
+.btn.gold{background:var(--gold);color:#120d02;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.15),0 12px 28px -12px rgba(232,181,71,.55)}
+.btn.gold:hover{background:var(--gold-2)}
+.tlink{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--text);font-size:15px}
+.tlink svg{width:15px;height:15px;transition:transform .35s var(--ease)}
+.tlink:hover svg{transform:translateX(4px)}
+
+/* ---------- surfaces ---------- */
+.panel{background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 40%),var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);position:relative;overflow:hidden}
+.glass{background:rgba(15,26,22,.55);border:1px solid var(--line-2);border-radius:var(--r-md);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.frame{position:relative;border-radius:28px;border:1px solid var(--line-2);background:var(--panel);box-shadow:0 -30px 80px -40px rgba(33,181,130,.55),0 40px 80px -40px rgba(0,0,0,.9)}
+.frame::before{content:"";position:absolute;left:10%;right:10%;top:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--em-2),var(--gold),transparent)}
+.beams{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.beams i{position:absolute;top:-40%;width:110px;height:180%;transform:rotate(38deg);background:linear-gradient(180deg,transparent,var(--em) 45%,transparent);filter:blur(14px);opacity:.55}
+.beams i:nth-child(3n){background:linear-gradient(180deg,transparent,var(--gold) 50%,transparent);opacity:.35}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.16;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hair{height:1px;background:linear-gradient(90deg,transparent,var(--line-2),transparent)}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:90;width:min(1200px,100% - 28px);height:62px;display:flex;align-items:center;gap:8px;padding:0 8px 0 10px;border-radius:18px;border:1px solid var(--line);background:rgba(9,16,13,.55);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);transition:background .4s,border-color .4s}
+.nav.solid{background:rgba(9,16,13,.86);border-color:var(--line-2)}
+.brand{display:flex;align-items:center;gap:11px;padding-right:10px;flex:none}
+.brand img{width:38px;height:38px;border-radius:11px;box-shadow:0 0 0 1px var(--line-2)}
+.brand b{display:block;font-weight:600;font-size:15px;letter-spacing:-.01em;line-height:1.15}
+.brand small{display:block;font-size:12px;color:var(--mute)}
+.nav-l{display:flex;gap:2px;margin:0 auto}
+.nav-l a{padding:8px 12px;border-radius:10px;font-size:14.5px;color:var(--mute);transition:color .25s,background .25s}
+.nav-l a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-l a[aria-current]{color:var(--text)}
+.nav .btn{height:42px;font-size:14.5px;border-radius:11px;padding:0 14px}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-2);place-items:center;margin-left:auto}
+.burger i{display:block;width:18px;height:1.6px;background:currentColor;border-radius:2px;position:relative;transition:background .3s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:18px;height:1.6px;background:currentColor;border-radius:2px;transition:transform .4s var(--ease)}
+.burger i::before{top:-6px}.burger i::after{top:6px}
+.menu-open .burger i{background:transparent}
+.menu-open .burger i::before{transform:translateY(6px) rotate(45deg)}
+.menu-open .burger i::after{transform:translateY(-6px) rotate(-45deg)}
+.sheet{position:fixed;inset:0;z-index:80;background:rgba(7,16,13,.96);backdrop-filter:blur(20px);padding:96px 22px 30px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
+.menu-open .sheet{opacity:1;visibility:visible}
+.sheet a:not(.btn){font-weight:600;font-size:26px;letter-spacing:-.03em;padding:12px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.sheet a small{font-size:13px;font-weight:500;color:var(--dim)}
+.sheet .btn{margin-top:22px;height:54px}
+@media (max-width:1060px){.nav-l{display:none}.burger{display:grid}.nav>.btn{display:none}}
+
+/* ---------- reveal ---------- */
+.js [data-rv]{opacity:0;transform:translateY(24px);filter:blur(6px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease)}
+.js [data-rv].in{opacity:1;transform:none;filter:none}
+.js [data-rv="2"]{transition-delay:.08s}.js [data-rv="3"]{transition-delay:.16s}.js [data-rv="4"]{transition-delay:.24s}
+
+/* ---------- footer (compact) ---------- */
+.ft{border-top:1px solid var(--line);padding:64px 0 26px;background:var(--bg)}
+.ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
+.ft h4{font-size:13px;font-weight:600;letter-spacing:0;color:var(--text);margin-bottom:14px}
+.ft ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:14.5px}
+.ft ul a{color:var(--mute);transition:color .25s}
+.ft ul a:hover{color:var(--text)}
+.ft-b .brand{padding:0;margin-bottom:14px}
+.ft-b p{color:var(--mute);max-width:32ch;font-size:14.5px}
+.ft-b .ar{font-size:22px;color:var(--gold);margin-top:16px;direction:rtl;text-align:left}
+.soc{display:flex;gap:8px;margin-top:18px}
+.soc a{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;border:1px solid var(--line-2);color:var(--mute);transition:color .25s,border-color .25s,transform .3s var(--ease)}
+.soc a:hover{color:var(--text);border-color:var(--em);transform:translateY(-2px)}
+.soc svg{width:18px;height:18px}
+.nx{margin-top:48px;display:flex;align-items:center;gap:14px;padding:14px 14px 14px 18px;border-radius:18px;background:linear-gradient(100deg,#04121a,#06202c);border:1px solid rgba(1,212,255,.22);box-shadow:0 20px 50px -24px rgba(1,194,244,.3)}
+.nx-mk svg{height:36px;width:auto;display:block}
+.nx-t small{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+.nx-t b{font-weight:700;color:#01D4FF;font-size:16px}
+.nx-mid{margin-left:auto;font-size:13.5px;opacity:.55}
+.nx-go{display:inline-flex;align-items:center;gap:8px;background:#01D4FF;color:#03141b;font-weight:700;padding:10px 15px;border-radius:11px;font-size:14px}
+.nx-go svg{width:16px;height:16px}
+.ft-meta{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:20px;font-size:13px;color:var(--dim)}
+@media (max-width:900px){.ft-top{grid-template-columns:1fr 1fr}.ft-b{grid-column:1/-1}.nx-mid{display:none}}
+@media (max-width:520px){.nx{flex-wrap:wrap}.nx-go{margin-left:auto}}
+
+/* ---------- version switch + WhatsApp ---------- */
+.vsw{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:95;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 5px;border-radius:0 14px 14px 0;background:rgba(9,16,13,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-2);border-left:0;font-size:13px;font-weight:600}
+.vsw span{writing-mode:vertical-rl;transform:rotate(180deg);padding:4px 0 6px;color:var(--dim);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase}
+.vsw a{width:36px;height:34px;display:grid;place-items:center;border-radius:10px;color:var(--mute)}
+.vsw a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.vsw a[aria-current]{background:var(--text);color:var(--bg)}
+.wa{position:fixed;right:18px;bottom:18px;z-index:95;display:flex;align-items:center;gap:11px;padding:7px 16px 7px 7px;border-radius:16px;background:rgba(15,26,22,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-2);box-shadow:0 20px 40px -18px rgba(0,0,0,.8);transition:transform .35s var(--ease)}
+.wa:hover{transform:translateY(-2px)}
+.wa i{width:40px;height:40px;border-radius:12px;background:#25D366;display:grid;place-items:center}
+.wa i svg{width:21px;height:21px;color:#fff}
+.wa b{display:block;font-size:14px;line-height:1.2;font-weight:600}
+.wa small{display:block;font-size:12px;color:var(--mute)}
+@media (max-width:640px){.wa{padding:7px}.wa span{display:none}.vsw{top:auto;bottom:18px;left:14px;transform:none;flex-direction:row;padding:5px;border-radius:14px;border-left:1px solid var(--line-2)}.vsw span{display:none}.vsw a{width:40px;height:36px}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js [data-rv]{opacity:1;transform:none;filter:none}}
+
+/* ================= HOME ================= */
+/* hero */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;padding:120px 0 90px;overflow:hidden;isolation:isolate}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-2;opacity:0;transition:opacity 1.6s var(--ease)}
+.hero canvas.on{opacity:1}
+.hero canvas.on~.beams{opacity:0}
+.hero .beams{z-index:-3;transition:opacity 1.2s}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(48% 42% at 50% 52%,rgba(7,16,13,.86),rgba(7,16,13,.55) 55%,transparent 80%),linear-gradient(180deg,rgba(7,16,13,.4),transparent 25%,transparent 70%,var(--bg))}
+.hero .grain{z-index:0}
+.hero-c{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center}
+.h1{font-size:clamp(54px,9vw,128px);letter-spacing:-.055em;line-height:.94;margin:26px 0 22px}
+.h1 .g{color:#6f7d77}
+.js .h1>span{display:inline-block;opacity:0;transform:translateY(30px);filter:blur(10px);animation:rise 1.2s var(--ease) forwards}
+.js .h1>span:nth-child(2){animation-delay:.1s}.js .h1>span:nth-child(4){animation-delay:.2s}
+@keyframes rise{to{opacity:1;transform:none;filter:none}}
+.hero-p{font-size:clamp(16.5px,1.4vw,19px);color:var(--mute);max-width:36em;margin-bottom:30px}
+.hero-p b{color:var(--text);font-weight:600}
+.keys{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center}
+.keys .k{height:50px;font-size:16px}
+.keys .k small{font-size:12px;color:var(--mute);font-weight:500;margin-left:8px}
+.keys .sep{width:1px;height:30px;background:var(--line-2);margin:0 6px}
+.hero-ft{position:absolute;left:0;right:0;bottom:26px;z-index:2;display:flex;justify-content:center;gap:22px;font-size:13px;color:var(--dim)}
+.hero-ft span{display:flex;align-items:center;gap:8px}
+.hero-ft i{width:5px;height:5px;border-radius:50%;background:var(--em)}
+
+/* intro + teacher window */
+.intro{padding-top:40px}
+.win{margin-top:clamp(50px,7vw,80px);overflow:hidden}
+.win-bar{display:flex;align-items:center;gap:8px;height:46px;padding:0 18px;border-bottom:1px solid var(--line);font-size:13px;color:var(--dim)}
+.win-bar i{width:11px;height:11px;border-radius:50%;background:#28332f}
+.win-bar span{margin:0 auto}
+.win-g{display:grid;grid-template-columns:.85fr 1.15fr}
+.win-ph{position:relative;min-height:440px;background:radial-gradient(70% 60% at 50% 35%,#13805D,#0A3F2F 55%,#06231A);overflow:hidden;border-right:1px solid var(--line)}
+.win-ph img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:94%;width:auto;max-width:none;filter:drop-shadow(0 24px 30px rgba(0,0,0,.5))}
+.win-ph::after{content:"";position:absolute;inset:auto 0 0;height:30%;background:linear-gradient(transparent,rgba(6,35,26,.9))}
+.win-ph .tag{position:absolute;left:18px;bottom:18px;z-index:2;display:flex;gap:8px;flex-wrap:wrap}
+.win-ph .tag span{font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:9px;background:rgba(7,16,13,.6);border:1px solid var(--line-2);backdrop-filter:blur(8px)}
+.win-b{padding:34px 36px}
+.win-b h3{font-size:30px}
+.win-b>p{color:var(--mute);margin:8px 0 22px;max-width:44ch}
+.dl{margin:0;display:grid}
+.dl div{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:13px 0;border-top:1px solid var(--line);font-size:15px}
+.dl dt{color:var(--dim)}
+.dl dd{margin:0}
+.win-b .tlink{margin-top:22px}
+
+/* numbers */
+.nums{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.nk{--kb:var(--panel);display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;width:230px;height:150px;padding:20px 22px;border-radius:22px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--kb),#fff 7%),var(--kb));border:1px solid var(--line-2);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1),inset 0 -3px 0 rgba(0,0,0,.35),0 8px 0 #020504,0 30px 40px -18px rgba(0,0,0,.8);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.nk:hover{transform:translateY(6px);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),inset 0 -1px 0 rgba(0,0,0,.35),0 2px 0 #020504,0 14px 20px -12px rgba(0,0,0,.8)}
+.nk b{font-size:50px;font-weight:600;letter-spacing:-.05em;line-height:1}
+.nk b sup{font-size:.5em;color:var(--mute);vertical-align:.8em;margin-left:2px}
+.nk>span{font-size:14px;color:var(--mute)}
+.nk.gl b{color:var(--gold)}
+
+/* logos */
+.lgrid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.lgrid::before{content:"";position:absolute;left:15%;right:15%;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--em-2),transparent);z-index:2}
+.lc{position:relative;height:130px;display:grid;place-items:center;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:background .4s var(--ease)}
+.lc:nth-child(4n){border-right:0}
+.lc:nth-last-child(-n+4){border-bottom:0}
+.lc img{max-height:52px;max-width:62%;width:auto;filter:brightness(0) invert(1);opacity:.5;transition:filter .4s,opacity .4s}
+.lc .duo{display:flex;gap:12px;align-items:center}.lc .duo img{max-height:44px}
+.lc em{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-style:normal;font-size:12px;color:var(--dim);transition:color .4s}
+.lc b{font-size:22px;letter-spacing:-.03em;color:var(--mute);font-weight:600;transition:color .4s}
+.lc:hover{background:#EEF3EF}
+.lc:hover img{filter:none;opacity:1}
+.lc:hover em{color:#5a6661}.lc:hover b{color:#0E6349}
+.prev{margin-top:22px;color:var(--dim);font-size:14.5px;text-align:center;max-width:70ch;margin-inline:auto}
+.prev b{color:var(--mute);font-weight:500}
+
+/* courses bento */
+.cb{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cc{padding:28px;display:flex;flex-direction:column;min-height:380px;transition:border-color .4s,transform .5s var(--ease)}
+.cc:hover{border-color:var(--line-2);transform:translateY(-4px)}
+.cc .k{align-self:flex-start;height:56px;font-size:22px;padding:0 18px;border-radius:14px}
+.cc h3{font-size:24px;margin:28px 0 6px}
+.cc>p{color:var(--mute);font-size:15px}
+.cc ul{list-style:none;padding:0;margin:18px 0 24px;display:grid;gap:9px;font-size:14.5px;color:var(--mute)}
+.cc li{display:flex;gap:10px}
+.cc li::before{content:"";flex:none;width:5px;height:5px;margin-top:9px;border-radius:50%;background:var(--em)}
+.cc .tlink{margin-top:auto}
+.cw{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:30px;padding:34px 36px;min-height:0}
+.cw .beams{left:50%}
+.cw .beams i{opacity:.4}
+.ab{position:relative;display:flex;align-items:center;gap:14px;justify-content:center}
+.ab .k{height:72px;font-size:20px;padding:0 22px;border-radius:16px}
+.ab .plus{color:var(--dim);font-size:22px}
+.cw h3{font-size:26px;margin:0 0 8px}
+.cw p{color:var(--mute);font-size:15.5px;max-width:46ch}
+
+/* ladder */
+.lad{display:grid;grid-template-columns:.9fr 1.1fr;gap:16px;align-items:stretch}
+.q{padding:30px;background:radial-gradient(90% 80% at 0% 0%,rgba(33,181,130,.18),transparent 60%),var(--panel)}
+.q small{color:var(--gold);font-weight:600;font-size:13px}
+.q h3{font-size:28px;margin:10px 0 14px}
+.q p{color:var(--mute);font-size:15.5px;line-height:1.75}
+.q mark{background:rgba(255,255,255,.05);color:var(--text);padding:2px 6px;border-radius:6px;border:1px solid var(--line);transition:background .5s,color .5s,border-color .5s}
+.q mark.on{background:var(--gold);color:#120d02;border-color:var(--gold)}
+.qs{display:grid;gap:8px;margin-top:20px}
+.qs div{display:flex;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);font-size:14.5px}
+.qs b{color:var(--gold)}
+.ans-w{display:flex;flex-direction:column;gap:12px}
+.rungs{display:flex;gap:10px;flex-wrap:wrap}
+.rungs .k{height:44px;font-size:14.5px;gap:8px;display:inline-flex}
+.rungs .k i{font-style:normal;color:var(--dim);font-size:12px}
+.rungs .k[aria-selected=true]{--kb:#0d3a2c;color:var(--em-2);transform:translateY(3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.35),0 1px 0 #020504,0 6px 12px -6px rgba(0,0,0,.7)}
+.ans{flex:1;padding:28px;display:grid;grid-template-columns:1fr 56px;gap:24px;min-height:320px}
+.ans .lv{font-size:13px;color:var(--em-2);font-weight:600}
+.ans h4{font-size:26px;margin:8px 0 12px}
+.ans .txt{font-size:17px;line-height:1.7}
+.ans .txt u{text-decoration:none;color:var(--gold);font-weight:600}
+.ans .why{margin-top:18px;padding-left:14px;border-left:2px solid var(--em);color:var(--mute);font-size:15px}
+.meter{position:relative;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);display:flex;flex-direction:column-reverse;overflow:hidden}
+.meter i{display:block;width:100%;background:linear-gradient(0deg,var(--em-d),var(--em),var(--gold));transition:height 1s var(--ease)}
+.meter b{position:absolute;top:10px;left:0;right:0;text-align:center;font-size:13px;color:var(--text)}
+.swap{animation:sw .55s var(--ease)}
+@keyframes sw{from{opacity:0;transform:translateY(10px);filter:blur(4px)}}
+
+/* tools bento */
+.tb{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tc{padding:24px;display:flex;flex-direction:column;min-height:230px}
+.tc h3{font-size:19px;letter-spacing:-.02em}
+.tc>p{color:var(--mute);font-size:14.5px;margin-top:4px;max-width:40ch}
+.tc .tlink{margin-top:auto;padding-top:18px;font-size:14.5px}
+.t-crash{grid-column:1/-1;flex-direction:row;align-items:center;gap:22px;min-height:0;padding:22px 26px}
+.t-crash .beams{left:55%}
+.t-crash h3{font-size:24px}
+.t-crash .tlink{margin:0 0 0 auto;padding:0;position:relative}
+.cal{flex:none;width:74px;border-radius:14px;overflow:hidden;text-align:center;background:var(--text);color:var(--bg);box-shadow:0 12px 20px -10px rgba(0,0,0,.8)}
+.cal b{display:block;background:var(--gold);font-size:10.5px;letter-spacing:.12em;padding:4px 0;color:#120d02}
+.cal span{display:block;font-weight:700;font-size:18px;padding:8px 0 10px;letter-spacing:-.02em}
+.t-ai{grid-row:span 2;grid-column:span 2}
+.t-ai .beams{left:60%}
+.mkd{position:relative;margin-top:20px;padding:20px;border-radius:16px;background:rgba(7,16,13,.6);border:1px solid var(--line-2);font-size:16px;line-height:1.85;backdrop-filter:blur(8px)}
+.mkd u{text-decoration:underline wavy var(--gold);text-underline-offset:6px;text-decoration-thickness:1.5px}
+.mkd .c{display:block;margin-top:10px;font-size:13.5px;color:var(--mute);padding-left:12px;border-left:2px solid var(--gold)}
+.scores{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.scores .k{height:40px;font-size:14px}
+.clock{display:flex;gap:8px;align-items:center;margin-top:18px}
+.clock .k{height:56px;min-width:58px;font-size:24px;font-variant-numeric:tabular-nums;border-radius:14px}
+.clock i{font-style:normal;color:var(--dim);font-size:22px}
+.srch{margin-top:16px;display:flex;align-items:center;gap:10px;height:44px;padding:0 14px;border-radius:12px;background:rgba(7,16,13,.6);border:1px solid var(--line-2);font-size:15px}
+.srch svg{width:16px;height:16px;color:var(--dim)}
+.srch .cur{display:inline-block;width:1.5px;height:18px;background:var(--em-2);margin-left:1px;animation:blink 1s steps(1) infinite;vertical-align:-3px}
+@keyframes blink{50%{opacity:0}}
+.res{margin-top:8px;display:grid;gap:4px;font-size:13.5px}
+.res div{display:flex;justify-content:space-between;padding:8px 12px;border-radius:9px;color:var(--mute)}
+.res div:first-child{background:rgba(255,255,255,.05);color:var(--text)}
+.rows{display:grid;gap:6px;margin-top:16px;font-size:14px}
+.rows div{display:flex;justify-content:space-between;padding:9px 12px;border-radius:10px;border:1px solid var(--line)}
+.rows small{color:var(--dim)}
+.bars{display:flex;gap:5px;align-items:flex-end;height:66px;margin-top:18px}
+.bars i{flex:1;border-radius:5px 5px 2px 2px;background:linear-gradient(0deg,var(--em-d),var(--em))}
+.bars i.no{background:#3a2f17}
+.zk{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-top:18px;max-width:240px}
+.zk i{aspect-ratio:1;border-radius:3px;background:rgba(255,255,255,.07)}
+.zk i:first-child{background:var(--gold);box-shadow:0 0 12px rgba(232,181,71,.6)}
+
+/* study pack */
+.pk{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+.pk-3d{position:relative;height:min(620px,74svh);min-height:460px}
+.pk-3d canvas{position:absolute;inset:0;width:100%;height:100%}
+.pk-3d::before{content:"";position:absolute;left:50%;top:50%;width:70%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(33,181,130,.22),transparent)}
+.pl{position:absolute;left:0;top:0;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;will-change:transform}
+.pl::before{content:"";width:34px;height:1px;background:var(--line-2)}
+.pl span{padding:6px 10px;border-radius:9px;background:rgba(7,16,13,.75);border:1px solid var(--line-2);backdrop-filter:blur(6px)}
+.pk ul{list-style:none;padding:0;margin:24px 0 28px;display:grid;gap:10px}
+.pk li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:14px 16px;border-radius:14px;border:1px solid var(--line)}
+.pk li .k{height:36px;min-width:36px;font-size:13px;padding:0 10px}
+.pk li b{display:block;font-size:15.5px;font-weight:600}
+.pk li small{color:var(--mute);font-size:13.5px}
+.ed{display:inline-flex;margin-top:14px;font-size:13px;color:var(--gold);font-weight:600}
+
+/* reviews */
+.rv{text-align:center;display:flex;flex-direction:column;align-items:center}
+.faces{display:flex;justify-content:center;margin-bottom:30px}
+.face{width:64px;height:64px;border-radius:50%;margin-left:-12px;display:grid;place-items:center;font-weight:600;font-size:20px;border:3px solid var(--bg);background:var(--panel-2);color:var(--text);transition:transform .4s var(--ease),box-shadow .4s}
+.face:first-child{margin-left:0}
+.face[aria-pressed=true]{transform:scale(1.18);z-index:2;box-shadow:0 0 0 2px var(--gold)}
+.face.ph{border:1.5px dashed var(--line-2);background:transparent;color:var(--dim);margin-left:10px}
+.rq{font-size:clamp(22px,2.6vw,32px);font-weight:500;letter-spacing:-.02em;line-height:1.35;max-width:30em}
+.rmeta{margin-top:18px;color:var(--mute);font-size:14.5px}
+.rv .btn{margin-top:28px}
+
+/* fan */
+.fan{position:relative;height:clamp(380px,42vw,540px);margin-top:10px}
+.fan figure{position:absolute;margin:0;top:50%;left:50%;width:clamp(190px,23vw,320px);aspect-ratio:3/4;border-radius:20px;overflow:hidden;border:1px solid var(--line-2);box-shadow:0 40px 60px -30px rgba(0,0,0,.95);transition:transform .8s var(--ease),filter .5s;cursor:pointer;filter:saturate(.85) brightness(.85)}
+.fan figure img{width:100%;height:100%;object-fit:cover}
+.fan figure:hover{filter:none;z-index:9!important}
+.fan figcaption{position:absolute;left:10px;right:10px;bottom:10px;padding:8px 12px;border-radius:11px;font-size:13px;font-weight:600;background:rgba(7,16,13,.7);backdrop-filter:blur(8px);opacity:0;transform:translateY(6px);transition:all .45s var(--ease)}
+.fan figure:hover figcaption{opacity:1;transform:none}
+.yt{display:flex;justify-content:center;margin-top:16px}
+
+/* enrol */
+.en{position:relative;overflow:hidden;text-align:center;isolation:isolate}
+.en .beams{z-index:-1;opacity:.6}
+.en .beams i{opacity:.45}
+.en::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(50% 60% at 50% 45%,var(--bg) 30%,transparent 80%)}
+.en h2{font-size:clamp(46px,7vw,96px);letter-spacing:-.055em;line-height:.95}
+.press{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:34px;color:var(--mute);font-size:16px}
+.press .k{height:64px;padding:0 24px;font-size:18px;border-radius:16px;color:var(--gold);gap:10px;display:inline-flex}
+.alt{margin-top:18px;font-size:14px;color:var(--dim)}
+.alt a{color:var(--mute);text-decoration:underline;text-underline-offset:3px}
+.form{display:grid;grid-template-rows:0fr;transition:grid-template-rows .7s var(--ease),opacity .5s;opacity:0;margin:0 auto;max-width:720px;text-align:left}
+.form.open{grid-template-rows:1fr;opacity:1}
+.form>div{overflow:hidden}
+.fbox{margin-top:36px;padding:26px;border-radius:24px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f{display:grid;gap:6px}.f.full{grid-column:1/-1}
+.f label{font-size:13px;font-weight:600;color:var(--mute)}
+.f input,.f select{height:50px;border-radius:12px;border:1px solid var(--line-2);background:rgba(7,16,13,.7);color:var(--text);padding:0 14px;font:inherit;font-size:16px;outline:none;transition:border-color .3s}
+.f select option{background:#0F1A16}
+.f input:focus,.f select:focus{border-color:var(--em)}
+.f input::placeholder{color:var(--dim)}
+.seg{display:flex;gap:6px;padding:5px;border-radius:13px;background:rgba(7,16,13,.7);border:1px solid var(--line-2)}
+.seg label{flex:1;text-align:center;padding:9px 6px;border-radius:9px;font-size:14.5px;font-weight:600;cursor:pointer;color:var(--mute);transition:all .3s}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){background:var(--text);color:var(--bg)}
+.fsub{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;flex-wrap:wrap}
+.fsub p{font-size:13.5px;color:var(--dim)}
+.ferr{min-height:20px;font-size:14px;color:var(--gold);margin-top:8px}
+
+@media (max-width:1000px){
+  .win-g,.lad,.pk{grid-template-columns:1fr}
+  .win-ph{min-height:380px;border-right:0;border-bottom:1px solid var(--line)}
+  .cb{grid-template-columns:1fr 1fr}.cw{grid-template-columns:1fr}
+  .tb{grid-template-columns:1fr 1fr}.t-ai{grid-column:1/-1;grid-row:auto}
+  .lgrid{grid-template-columns:repeat(3,1fr)}
+  .lc:nth-child(4n){border-right:1px solid var(--line)}.lc:nth-child(3n){border-right:0}
+  .lc:nth-last-child(-n+4){border-bottom:1px solid var(--line)}
+}
+@media (max-width:640px){
+  .wrap{width:calc(100% - 32px)}
+  .hero{padding-top:110px}
+  .keys .sep{display:none}
+  .keys .btn{width:100%}
+  .hero-ft{display:none}
+  .win-b{padding:24px}.dl div{grid-template-columns:1fr;gap:2px}
+  .nk{width:calc(50% - 9px);height:128px;padding:16px}.nk b{font-size:38px}
+  .lgrid{grid-template-columns:1fr 1fr}.lc{height:110px}
+  .lc:nth-child(3n){border-right:1px solid var(--line)}.lc:nth-child(2n){border-right:0}
+  .cb,.tb{grid-template-columns:1fr}
+  .t-crash{flex-wrap:wrap}.t-crash .tlink{margin:0}
+  .ans{grid-template-columns:1fr;padding:22px}.meter{height:12px;flex-direction:row}.meter i{height:100%!important;transition:width 1s var(--ease)}.meter b{display:none}
+  .ab .k{height:58px;font-size:16px;padding:0 14px}
+  .fg{grid-template-columns:1fr}
+  .press{flex-wrap:wrap}
+  .pk-3d{min-height:380px}
+  .pl{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="/v3" aria-label="Sir Fazil Maniya, home">
+    <img src="/mfm-logo.webp" alt="" width="38" height="38">
+    <span><b>Sir Fazil Maniya</b><small>O Level &amp; IGCSE Islamiyat</small></span>
+  </a>
+  <nav class="nav-l" aria-label="Main">
+    <a href="/v3" data-k="home" aria-current="page">Home</a>
+    <a href="/v3/about" data-k="about">About</a>
+    <a href="/v3/courses" data-k="courses">Courses</a>
+    <a href="/ai-checker">AI Checker</a>
+    <a href="/portal">Portal</a>
+    <a href="/past-papers">Past papers</a>
+    <a href="/notes">Notes</a>
+    <a href="/crash-course">Crash course</a>
+  </nav>
+  <a class="btn" href="/v3#enrol">Register <kbd class="mini">↵</kbd></a>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="sheet"><i></i></button>
+</header>
+<div class="sheet" id="sheet" aria-label="Menu">
+  <a href="/v3">Home <small>Start</small></a>
+  <a href="/v3/about">About Sir Fazil <small>Profile</small></a>
+  <a href="/v3/courses">Courses <small>2058 · 0493</small></a>
+  <a href="/ai-checker">AI Checker <small>Marking</small></a>
+  <a href="/portal">Student portal <small>Login</small></a>
+  <a href="/past-papers">Past papers <small>2020–26</small></a>
+  <a href="/notes">Notes <small>Store</small></a>
+  <a href="/parent">Parents <small>Progress</small></a>
+  <a class="btn" href="/v3#enrol">Register for the portal <kbd class="mini">↵</kbd></a>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO (H1 light beams) ============ -->
+<section class="hero" aria-labelledby="h1">
+  <canvas id="beams" aria-hidden="true"></canvas>
+  <div class="beams" aria-hidden="true"><i style="left:4%"></i><i style="left:18%"></i><i style="left:32%"></i><i style="left:58%"></i><i style="left:72%"></i><i style="left:86%"></i></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="wrap hero-c">
+    <span class="chip"><i></i>O Level 2058 · IGCSE 0493 · Karachi &amp; online</span>
+    <h1 class="h1" id="h1"><span>Know it.</span> <span>Quote it.</span><br><span class="g">Score it.</span></h1>
+    <p class="hero-p"><b>Sir Fazil Maniya</b> teaches Islamiyat for the top band: the Qur'an, the Seerah and the Hadiths, with the references the mark scheme rewards.</p>
+    <div class="keys">
+      <span class="k">2058<small>O Level</small></span>
+      <span class="k">0493<small>IGCSE</small></span>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="btn" href="#enrol">Register for the portal <kbd class="mini">↵</kbd></a>
+      <a class="btn dark" href="/ai-checker">How AI checking works</a>
+    </div>
+  </div>
+  <div class="hero-ft" aria-hidden="true"><span><i></i>15+ years teaching</span><span><i></i>7,000+ students</span><span><i></i>IBA gold medalist</span></div>
+</section>
+
+<!-- ============ INTRO (I1) + teacher window ============ -->
+<section class="sec intro">
+  <div class="wrap">
+    <p class="state" data-rv>Know the evidence. <span class="g">Learn every passage by theme, every battle by date, and the verse that proves your point. Then say why it matters today.</span></p>
+    <div class="frame win" data-rv>
+      <div class="win-bar" aria-hidden="true"><i></i><i></i><i></i><span>Teacher profile</span></div>
+      <div class="win-g">
+        <div class="win-ph"><img src="/fazil-cutout-1100.webp" alt="Sir Fazil Maniya" loading="lazy" width="820" height="1242"><div class="tag"><span>2058</span><span>0493</span><span>Karachi &amp; online</span></div></div>
+        <div class="win-b">
+          <h3>Sir Mohammad Fazil Maniya</h3>
+          <p>Cambridge-certified Islamiyat teacher. His aim: to revive the love of Allah, His Prophet ﷺ and Islam in young people, and get them the grade.</p>
+          <dl class="dl">
+            <div><dt>Teaching since</dt><dd>2012, starting with Teach For Pakistan in Gizri</dd></div>
+            <div><dt>Students</dt><dd>7,000+ mentored · 1,200 this session</dd></div>
+            <div><dt>Education</dt><dd>Gold medalist, BSCS (IBA Karachi) · Master's in Computer Science and in Islamic Studies</dd></div>
+            <div><dt>Training</dt><dd>CAIE Face-to-Face Extension Training for O Level Islamiyat</dd></div>
+            <div><dt>Off the clock</dt><dd>National Tenpin Bowling Champion of Pakistan, 2023</dd></div>
+          </dl>
+          <a class="tlink" href="/v3/about">Full profile <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NUMBERS (S1) ============ -->
+<section class="sec" style="padding-top:20px" aria-label="Sir Fazil in numbers">
+  <div class="wrap">
+    <div class="nums" data-rv>
+      <div class="nk"><b><span data-count="15">15</span><sup>+</sup></b><span>Years teaching Islamiyat</span></div>
+      <div class="nk gl"><b><span data-count="7000">7,000</span><sup>+</sup></b><span>Students mentored</span></div>
+      <div class="nk"><b><span data-count="20">20</span><sup>+</sup></b><span>Schools and academies</span></div>
+      <div class="nk"><b><span data-count="54">54</span><sup>h</sup></b><span>Recorded topical course</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHERE (L1) ============ -->
+<section class="sec" id="where" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-h c" data-rv><h2 class="h2">Taught at 20+ schools and academies. <span class="g">Mornings, evenings, online.</span></h2></div>
+    <div class="lgrid" data-rv>
+      <div class="lc"><img src="/logos/hss.webp" alt="Head Start School System" loading="lazy"><em>Mornings</em></div>
+      <div class="lc"><img src="/logos/fec.webp" alt="Froebel’s Education Centre" loading="lazy"><em>Mornings</em></div>
+      <div class="lc"><img src="/logos/credo.webp" alt="Credo School" loading="lazy"><em>Mornings</em></div>
+      <div class="lc"><img src="/logos/academy.webp" alt="The Academy" loading="lazy"><em>Mornings</em></div>
+      <div class="lc"><img src="/logos/tpc.webp" alt="TP Core" loading="lazy"><em>Jauhar · Gulshan · Defence</em></div>
+      <div class="lc"><span class="duo"><img src="/logos/tpc.webp" alt="TP Core" loading="lazy"><img src="/logos/tcr.webp" alt="The Classroom" loading="lazy"></span><em>North Nazimabad</em></div>
+      <div class="lc"><b>Maniya’s</b><em>Bahadurabad</em></div>
+      <div class="lc"><img src="/logos/learnedguys.webp" alt="LearnedGuys" loading="lazy"><em>Recorded course</em></div>
+      <div class="lc"><img src="/logos/forte.webp" alt="Forte Institute" loading="lazy"><em>Online</em></div>
+      <div class="lc"><img src="/logos/gives.webp" alt="Gives" loading="lazy"><em>Online</em></div>
+      <div class="lc"><img src="/logos/max.webp" alt="Max Academy" loading="lazy"><em>Online</em></div>
+      <div class="lc"><img src="/logos/cedar.webp" alt="The Cedar School" loading="lazy"><em>Taught before</em></div>
+    </div>
+    <p class="prev" data-rv><b>Also taught at</b> The City School (PAF Chapter), Beaconhouse, The Patriots School, Hexis College, Highbrow College, Falconhouse Grammar, Yen Academy and Huffaz Exclusive Academy.</p>
+  </div>
+</section>
+
+<!-- ============ COURSES (C1) ============ -->
+<section class="sec" aria-labelledby="crs-h">
+  <div class="wrap">
+    <div class="sec-h" data-rv><h2 class="h2" id="crs-h">Two codes, one mentor. <span class="g">Same papers, same content; your school picks the code.</span></h2></div>
+    <div class="cb">
+      <article class="panel cc" data-rv><span class="k">2058</span><h3>O Level Islamiyat</h3><p>Two papers of 1h 30m, 100 marks, graded A* to E.</p><ul><li>All 15 passages and 20 Hadiths</li><li>The Seerah and the Caliphs, in order</li><li>Part (a) and part (b) technique</li></ul><a class="tlink" href="/v3/courses#ol">View the course <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+      <article class="panel cc" data-rv="2"><span class="k">0493</span><h3>IGCSE Islamiyat</h3><p>The same two papers and content, graded A* to G.</p><ul><li>Same classes, same notes</li><li>The same exam technique</li><li>Karachi batches and live online</li></ul><a class="tlink" href="/v3/courses#ig">View the course <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+      <article class="panel cc" data-rv="3"><span class="k gl">54h</span><h3>Recorded course</h3><p>Topical lectures in Urdu on LearnedGuys, at your own pace.</p><ul><li>Every Paper 1 and Paper 2 topic</li><li>For students outside Karachi</li><li>Revise one topic at a time</li></ul><a class="tlink" href="/v3/courses#rec">View the course <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+      <article class="panel cc cw" data-rv>
+        <div class="beams" aria-hidden="true"><i style="left:20%"></i><i style="left:45%"></i><i style="left:70%"></i></div>
+        <div style="position:relative"><h3>Every 14-mark question has two halves.</h3><p>Part (a) is 10 marks for what you know: accurate, detailed, in order. Part (b) is 4 marks for why it matters to Muslims today. Most lost marks come from answering (b) with more history.</p></div>
+        <div class="ab"><span class="k">Part (a)<small style="color:var(--dim);margin-left:8px;font-size:13px">10</small></span><span class="plus">+</span><span class="k em">Part (b)<small style="color:var(--dim);margin-left:8px;font-size:13px">4</small></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METHOD (M3 mark ladder) ============ -->
+<section class="sec" aria-labelledby="lad-h">
+  <div class="wrap">
+    <div class="sec-h" data-rv><h2 class="h2" id="lad-h">Knowing the story is the first rung. <span class="g">Pick a rung and watch the answer climb.</span></h2></div>
+    <div class="lad">
+      <div class="panel q" data-rv>
+        <small>Example · Paper 1 style</small>
+        <h3>The Battle of Badr</h3>
+        <p>Fought on <mark data-f="1">17 Ramadan, 2 AH</mark> near the wells of Badr. About <mark data-f="1">313 Muslims</mark> faced about <mark data-f="1">1,000 Makkans</mark>. Allah promised help with <mark data-f="2">a thousand angels (8:9)</mark>. Prisoners earned their freedom by <mark data-f="2">teaching ten Muslims to read</mark>. The lesson: <mark data-f="3">faith and obedience count for more than numbers</mark>.</p>
+        <div class="qs"><div>(a) Write an account of the Battle of Badr. <b>[10]</b></div><div>(b) What can Muslims today learn from it? <b>[4]</b></div></div>
+      </div>
+      <div class="ans-w" data-rv="2">
+        <div class="rungs" role="tablist" aria-label="Answer level">
+          <button class="k" role="tab" aria-selected="true" data-i="0"><i>1</i>Recall</button>
+          <button class="k" role="tab" aria-selected="false" data-i="1"><i>2</i>Detail</button>
+          <button class="k" role="tab" aria-selected="false" data-i="2"><i>3</i>Evidence</button>
+          <button class="k" role="tab" aria-selected="false" data-i="3"><i>4</i>Significance</button>
+        </div>
+        <div class="panel ans" role="tabpanel" aria-live="polite"><div id="ansBody"></div><div class="meter" aria-hidden="true"><i id="meter"></i><b id="meterT"></b></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOOLS (B1) ============ -->
+<section class="sec" aria-labelledby="bt-h">
+  <div class="wrap">
+    <div class="sec-h" data-rv><h2 class="h2" id="bt-h">Everything between classes. <span class="g">Mark it, time it, read it, track it.</span></h2></div>
+    <div class="tb">
+      <a class="panel tc t-crash" href="/crash-course" data-rv><div class="beams" aria-hidden="true"><i style="left:20%"></i><i style="left:50%"></i></div><span class="cal"><b>NEXT</b><span>Soon</span></span><div style="position:relative"><h3>Crash course <span class="g">· dates announced soon</span></h3><p class="g" style="font-size:14.5px">The last weeks before the exam: passages, Hadiths, the Seerah and full mocks, in Karachi and online.</p></div><span class="tlink">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="panel tc t-ai" href="/ai-checker" data-rv>
+        <div class="beams" aria-hidden="true"><i style="left:30%"></i><i style="left:60%"></i></div>
+        <div style="position:relative"><h3>AI checker</h3><p>Type your answer or photograph the page. It comes back marked against the levels, with feedback and a model answer, then Sir Fazil approves it.</p>
+        <div class="mkd">The Prophet <u>prayed through the night</u> before the battle, and Allah promised help with <u>a thousand angels (8:9)</u>. After the victory, prisoners who could read were freed for teaching ten Muslims.<span class="c">Good use of evidence. Add the date to reach Level 3 sooner.</span></div>
+        <div class="scores"><span class="k">Part (a) · 8/10</span><span class="k">Part (b) · 3/4</span><span class="k gl">Approved by Sir Fazil</span></div></div>
+        <span class="tlink" style="position:relative">How AI checking works <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="panel tc" href="/past-papers" data-rv="2"><h3>Past papers, on the clock</h3><p>2058 and 0493, 2020 to 2026, mark schemes side by side.</p><div class="clock" id="clock" aria-label="Exam timer"><span class="k">1</span><i>:</i><span class="k">30</span><i>:</i><span class="k gl">00</span></div><span class="tlink">Find a paper <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="panel tc" href="/notes" data-rv="3"><h3>Notes</h3><div class="srch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span><span id="typed"></span><span class="cur"></span></span></div><div class="res" id="res"></div><span class="tlink">Browse notes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="panel tc" href="/portal" data-rv><h3>Student portal</h3><p>One login for everything he shares.</p><div class="rows"><div>Notes and lectures<small>Read</small></div><div>Marks and rank<small>Live</small></div><div>Fees and receipts<small>Pay</small></div></div><span class="tlink">Sign in <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="panel tc" href="/parent" data-rv="2"><h3>Parents</h3><p>Marks, position, attendance and fees, read-only.</p><div class="bars" aria-hidden="true"><i style="height:55%"></i><i style="height:68%"></i><i style="height:62%"></i><i class="no" style="height:16%"></i><i style="height:76%"></i><i style="height:84%"></i><i style="height:93%"></i></div><span class="tlink">Parent access <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="panel tc" href="/lab" data-rv="3"><h3>Islamiyat Lab</h3><p>Zakat with real figures, the Seerah in order, flashcards for passages and Hadiths.</p><div class="zk" aria-label="One square in forty: zakat is 2.5 percent"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="tlink">Open the Lab <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STUDY PACK (K2 exploded) ============ -->
+<section class="sec" id="pack" aria-labelledby="pack-h">
+  <div class="wrap pk">
+    <div class="pk-3d" data-rv>
+      <canvas id="packc" aria-label="3D view of the MFM study pack lifting apart into its four parts"></canvas>
+      <span class="pl"><span>Notes booklets</span></span><span class="pl"><span>Paper 2 workbook</span></span><span class="pl"><span>Paper 1 workbook</span></span><span class="pl"><span>Cover · 2026–27 edition</span></span>
+    </div>
+    <div data-rv="2">
+      <h2 class="h2" id="pack-h">Every topic. <span class="g">One pack.</span></h2>
+      <span class="ed">New edition · 2026–2027</span>
+      <p class="lead" style="margin-top:14px">Sir Fazil's own workbooks and notes, written around the 2058 and 0493 syllabus, with marking schemes to check every answer.</p>
+      <ul>
+        <li><span class="k">P1</span><span><b>Paper 1 workbook</b><small>The Qur'an, the Prophet's life, the first community</small></span></li>
+        <li><span class="k">P2</span><span><b>Paper 2 workbook</b><small>The Hadiths, the Caliphs, faith and the pillars</small></span></li>
+        <li><span class="k gl">N</span><span><b>Notes booklets</b><small>Key points, key terms and key dates for both papers</small></span></li>
+      </ul>
+      <a class="btn" href="/notes">See the notes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS (R3) ============ -->
+<section class="sec" aria-labelledby="rv-h">
+  <div class="wrap rv" id="rv" data-rv>
+    <h2 class="sr" id="rv-h" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Student reviews</h2>
+    <div class="faces" id="faces"></div>
+    <p class="rq" id="rq"></p>
+    <p class="rmeta" id="rmeta"></p>
+    <a class="btn dark" href="/reviews">Write a review</a>
+  </div>
+</section>
+
+<!-- ============ PHOTOS (V2 fan) ============ -->
+<section class="sec" aria-labelledby="gal-h">
+  <div class="wrap">
+    <div class="sec-h c" data-rv><h2 class="h2" id="gal-h">The room, when Sir Fazil teaches. <span class="g">Full halls, every session.</span></h2></div>
+    <div class="fan" id="fan" data-rv>
+      <figure><img src="/photos/crash-course.webp" alt="A packed hall at a crash course" loading="lazy"><figcaption>Crash course</figcaption></figure>
+      <figure><img src="/photos/in-class.webp" alt="Sir Fazil teaching a seminar" loading="lazy"><figcaption>Seminar, Karachi</figcaption></figure>
+      <figure><img src="/fazil-desk-1280.webp" alt="Sir Fazil at his desk" loading="lazy"><figcaption>At his desk</figcaption></figure>
+      <figure><img src="/photos/sir-fazil-event.webp" alt="Sir Fazil at an event" loading="lazy"><figcaption>At an event</figcaption></figure>
+      <figure><img src="/photos/sir-fazil-formal.webp" alt="Sir Fazil Maniya" loading="lazy"><figcaption>Sir Fazil Maniya</figcaption></figure>
+    </div>
+    <div class="yt" data-rv><a class="btn dark" href="https://www.youtube.com/@mohammadfazilmaniya" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#ff3355"><path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.6 2.6 0 0 0 2.4 7.2 27 27 0 0 0 2 12a27 27 0 0 0 .4 4.8 2.6 2.6 0 0 0 1.8 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8A27 27 0 0 0 22 12a27 27 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>Free lessons on YouTube</a></div>
+  </div>
+</section>
+
+<!-- ============ REGISTER (E1) ============ -->
+<section class="sec en" id="enrol" aria-labelledby="en-h">
+  <div class="beams" aria-hidden="true"><i style="left:2%"></i><i style="left:14%"></i><i style="left:80%"></i><i style="left:92%"></i></div>
+  <div class="wrap">
+    <h2 id="en-h" data-rv>Ready when<br><span class="g">you are.</span></h2>
+    <div class="press" data-rv><span>Press</span><button class="k" type="button" id="enterKey" aria-controls="enrolForm" aria-expanded="false">↵ Enter</button><span>to register for the portal</span></div>
+    <p class="alt" data-rv>or <a href="https://wa.me/923332488819" target="_blank" rel="noopener">message Sir Fazil's team on WhatsApp</a></p>
+    <div class="form" id="enrolWrap"><div>
+      <form class="glass fbox" id="enrolForm" novalidate>
+        <div class="fg">
+          <div class="f"><label for="eName">Student's name</label><input id="eName" autocomplete="name" placeholder="Ayesha Khan" required></div>
+          <div class="f"><label for="ePhone">WhatsApp number</label><input id="ePhone" inputmode="tel" autocomplete="tel" placeholder="03xx xxxxxxx" required></div>
+          <div class="f full"><label>Course</label><div class="seg"><label><input type="radio" name="eCourse" value="O Level 2058" checked>2058</label><label><input type="radio" name="eCourse" value="IGCSE 0493">0493</label><label><input type="radio" name="eCourse" value="Recorded course">Recorded</label></div></div>
+          <div class="f"><label for="eMode">How you'll study</label><select id="eMode"><option>Evening class in Karachi</option><option>At my school</option><option>Live online</option><option>Recorded course</option></select></div>
+          <div class="f"><label for="eArea">Area or school</label><input id="eArea" placeholder="Gulshan, Credo School"></div>
+          <div class="f full"><label for="eYear">Exam session</label><select id="eYear"><option>May/June 2027</option><option>Oct/Nov 2027</option><option>May/June 2028</option></select></div>
+        </div>
+        <div class="fsub"><p>Sends a ready message to Sir Fazil's team on WhatsApp.</p><button class="btn gold" type="submit">Send to Sir Fazil's team <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+        <p class="ferr" id="eErr" role="alert"></p>
+      </form>
+    </div></div>
+  </div>
+</section>
+
+</main>
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-b">
+        <a class="brand" href="/v3"><img src="/mfm-logo.webp" alt="" width="38" height="38"><span><b>Sir Fazil Maniya</b><small>O Level 2058 · IGCSE 0493 Islamiyat</small></span></a>
+        <p>Islamiyat for the top band, in classrooms across Karachi and live online.</p>
+        <p class="ar" lang="ar">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+        <div class="soc">
+          <a href="https://www.instagram.com/mohammadfazilmaniya" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor"/></svg></a>
+          <a href="https://www.youtube.com/@mohammadfazilmaniya" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.6 2.6 0 0 0 2.4 7.2 27 27 0 0 0 2 12a27 27 0 0 0 .4 4.8 2.6 2.6 0 0 0 1.8 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8A27 27 0 0 0 22 12a27 27 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+          <a href="https://wa.me/923332488819" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.14 6.44 2.14 11.9c0 1.75.46 3.45 1.32 4.95L2.05 22l5.28-1.38a9.86 9.86 0 0 0 4.71 1.2c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2zm5.8 14.06c-.24.68-1.4 1.3-1.94 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.17-4.95-4.37-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.58-.36.77-.36l.55.01c.18.01.42-.07.65.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.09.2-.14.32-.28.49l-.42.49c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.23 2.23 1.37.28.15.44.12.6-.07.17-.2.7-.81.88-1.09.19-.29.37-.24.63-.14.25.09 1.62.76 1.9.9.28.15.46.22.53.34.07.12.07.68-.17 1.34z"/></svg></a>
+          <a href="https://whatsapp.com/channel/0029VbC5v7R5EjxrJij3JH2V" target="_blank" rel="noopener" aria-label="WhatsApp channel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 11a8 8 0 0 1 16 0M7.5 11a4.5 4.5 0 0 1 9 0"/><circle cx="12" cy="11" r="1.4" fill="currentColor"/><path d="M12 13v7"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Learn</h4><ul><li><a href="/v3/courses">Courses</a></li><li><a href="/syllabus">Syllabus</a></li><li><a href="/crash-course">Crash course</a></li><li><a href="/lab">Islamiyat Lab</a></li><li><a href="/notes">Notes</a></li></ul></div>
+      <div><h4>Practise</h4><ul><li><a href="/ai-checker">AI Checker</a></li><li><a href="/past-papers">Past papers</a></li><li><a href="/portal">Student portal</a></li><li><a href="/parent">Parents</a></li></ul></div>
+      <div><h4>Sir Fazil</h4><ul><li><a href="/v3/about">About</a></li><li><a href="/reviews">Reviews</a></li><li><a href="/v3#enrol">Register</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    </div>
+    <div class="nx">
+      <span class="nx-mk" aria-hidden="true"><svg viewBox="0 0 631 1011" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" role="img" aria-label="Nexlyr Solutions logo"><defs><linearGradient id="nxbLogoG" gradientUnits="userSpaceOnUse" x1="277.4" y1="43.9" x2="724.3" y2="114.7"><stop offset="0" stop-color="#01C2F4"/><stop offset="1" stop-color="#0169B3"/></linearGradient></defs><g fill="url(#nxbLogoG)"><rect x="2.5" y="1" width="27.2" height="6.8"/><rect x="70.5" y="1" width="27.2" height="6.8"/><rect x="124.9" y="1" width="88.4" height="6.8"/><rect x="233.7" y="1" width="27.2" height="6.8"/><rect x="294.9" y="1" width="27.2" height="6.8"/><rect x="342.5" y="1" width="27.2" height="6.8"/><rect x="430.9" y="1" width="27.2" height="6.8"/><rect x="492.1" y="1" width="27.2" height="6.8"/><rect x="539.7" y="1" width="74.8" height="6.8"/><rect x="2.5" y="7.8" width="34" height="6.8"/><rect x="70.5" y="7.8" width="27.2" height="6.8"/><rect x="124.9" y="7.8" width="88.4" height="6.8"/><rect x="233.7" y="7.8" width="27.2" height="6.8"/><rect x="294.9" y="7.8" width="27.2" height="6.8"/><rect x="342.5" y="7.8" width="27.2" height="6.8"/><rect x="430.9" y="7.8" width="27.2" height="6.8"/><rect x="492.1" y="7.8" width="27.2" height="6.8"/><rect x="539.7" y="7.8" width="81.6" height="6.8"/><rect x="2.5" y="14.6" width="34" height="6.8"/><rect x="70.5" y="14.6" width="27.2" height="6.8"/><rect x="124.9" y="14.6" width="27.2" height="6.8"/><rect x="233.7" y="14.6" width="34" height="6.8"/><rect x="288.1" y="14.6" width="34" height="6.8"/><rect x="342.5" y="14.6" width="27.2" height="6.8"/><rect x="430.9" y="14.6" width="27.2" height="6.8"/><rect x="492.1" y="14.6" width="27.2" height="6.8"/><rect x="539.7" y="14.6" width="27.2" height="6.8"/><rect x="600.9" y="14.6" width="27.2" height="6.8"/><rect x="2.5" y="21.4" width="40.8" height="6.8"/><rect x="70.5" y="21.4" width="27.2" height="6.8"/><rect x="124.9" y="21.4" width="27.2" height="6.8"/><rect x="240.5" y="21.4" width="34" height="6.8"/><rect x="281.3" y="21.4" width="34" height="6.8"/><rect x="342.5" y="21.4" width="27.2" height="6.8"/><rect x="430.9" y="21.4" width="27.2" height="6.8"/><rect x="492.1" y="21.4" width="27.2" height="6.8"/><rect x="539.7" y="21.4" width="27.2" height="6.8"/><rect x="600.9" y="21.4" width="27.2" height="6.8"/><rect x="2.5" y="28.2" width="47.6" height="6.8"/><rect x="70.5" y="28.2" width="27.2" height="6.8"/><rect x="124.9" y="28.2" width="27.2" height="6.8"/><rect x="247.3" y="28.2" width="61.2" height="6.8"/><rect x="342.5" y="28.2" width="27.2" height="6.8"/><rect x="437.7" y="28.2" width="27.2" height="6.8"/><rect x="485.3" y="28.2" width="27.2" height="6.8"/><rect x="539.7" y="28.2" width="27.2" height="6.8"/><rect x="600.9" y="28.2" width="27.2" height="6.8"/><rect x="2.5" y="35" width="54.4" height="6.8"/><rect x="70.5" y="35" width="27.2" height="6.8"/><rect x="124.9" y="35" width="27.2" height="6.8"/><rect x="254.1" y="35" width="47.6" height="6.8"/><rect x="342.5" y="35" width="27.2" height="6.8"/><rect x="444.5" y="35" width="27.2" height="6.8"/><rect x="478.5" y="35" width="27.2" height="6.8"/><rect x="539.7" y="35" width="27.2" height="6.8"/><rect x="600.9" y="35" width="27.2" height="6.8"/><rect x="2.5" y="41.8" width="27.2" height="6.8"/><rect x="36.5" y="41.8" width="27.2" height="6.8"/><rect x="70.5" y="41.8" width="27.2" height="6.8"/><rect x="124.9" y="41.8" width="81.6" height="6.8"/><rect x="260.9" y="41.8" width="34" height="6.8"/><rect x="342.5" y="41.8" width="27.2" height="6.8"/><rect x="451.3" y="41.8" width="47.6" height="6.8"/><rect x="539.7" y="41.8" width="27.2" height="6.8"/><rect x="600.9" y="41.8" width="27.2" height="6.8"/><rect x="2.5" y="48.6" width="27.2" height="6.8"/><rect x="36.5" y="48.6" width="27.2" height="6.8"/><rect x="70.5" y="48.6" width="27.2" height="6.8"/><rect x="124.9" y="48.6" width="81.6" height="6.8"/><rect x="260.9" y="48.6" width="34" height="6.8"/><rect x="342.5" y="48.6" width="27.2" height="6.8"/><rect x="458.1" y="48.6" width="34" height="6.8"/><rect x="539.7" y="48.6" width="27.2" height="6.8"/><rect x="600.9" y="48.6" width="27.2" height="6.8"/><rect x="2.5" y="55.4" width="27.2" height="6.8"/><rect x="43.3" y="55.4" width="54.4" height="6.8"/><rect x="124.9" y="55.4" width="27.2" height="6.8"/><rect x="254.1" y="55.4" width="47.6" height="6.8"/><rect x="342.5" y="55.4" width="27.2" height="6.8"/><rect x="464.9" y="55.4" width="27.2" height="6.8"/><rect x="539.7" y="55.4" width="81.6" height="6.8"/><rect x="2.5" y="62.2" width="27.2" height="6.8"/><rect x="43.3" y="62.2" width="54.4" height="6.8"/><rect x="124.9" y="62.2" width="27.2" height="6.8"/><rect x="247.3" y="62.2" width="61.2" height="6.8"/><rect x="342.5" y="62.2" width="27.2" height="6.8"/><rect x="464.9" y="62.2" width="27.2" height="6.8"/><rect x="539.7" y="62.2" width="74.8" height="6.8"/><rect x="2.5" y="69" width="27.2" height="6.8"/><rect x="50.1" y="69" width="47.6" height="6.8"/><rect x="124.9" y="69" width="27.2" height="6.8"/><rect x="240.5" y="69" width="34" height="6.8"/><rect x="281.3" y="69" width="34" height="6.8"/><rect x="342.5" y="69" width="27.2" height="6.8"/><rect x="464.9" y="69" width="27.2" height="6.8"/><rect x="539.7" y="69" width="27.2" height="6.8"/><rect x="580.5" y="69" width="34" height="6.8"/><rect x="2.5" y="75.8" width="27.2" height="6.8"/><rect x="56.9" y="75.8" width="40.8" height="6.8"/><rect x="124.9" y="75.8" width="27.2" height="6.8"/><rect x="233.7" y="75.8" width="34" height="6.8"/><rect x="288.1" y="75.8" width="34" height="6.8"/><rect x="342.5" y="75.8" width="27.2" height="6.8"/><rect x="464.9" y="75.8" width="27.2" height="6.8"/><rect x="539.7" y="75.8" width="27.2" height="6.8"/><rect x="587.3" y="75.8" width="34" height="6.8"/><rect x="2.5" y="82.6" width="27.2" height="6.8"/><rect x="63.7" y="82.6" width="34" height="6.8"/><rect x="124.9" y="82.6" width="88.4" height="6.8"/><rect x="233.7" y="82.6" width="27.2" height="6.8"/><rect x="294.9" y="82.6" width="27.2" height="6.8"/><rect x="342.5" y="82.6" width="88.4" height="6.8"/><rect x="464.9" y="82.6" width="27.2" height="6.8"/><rect x="539.7" y="82.6" width="27.2" height="6.8"/><rect x="594.1" y="82.6" width="34" height="6.8"/><rect x="2.5" y="89.4" width="27.2" height="6.8"/><rect x="70.5" y="89.4" width="27.2" height="6.8"/><rect x="124.9" y="89.4" width="88.4" height="6.8"/><rect x="233.7" y="89.4" width="27.2" height="6.8"/><rect x="294.9" y="89.4" width="27.2" height="6.8"/><rect x="342.5" y="89.4" width="88.4" height="6.8"/><rect x="464.9" y="89.4" width="27.2" height="6.8"/><rect x="539.7" y="89.4" width="27.2" height="6.8"/><rect x="600.9" y="89.4" width="27.2" height="6.8"/><rect x="0" y="128" width="98.5" height="883"/><rect x="133.25" y="128" width="98.5" height="883"/><rect x="266.5" y="128" width="98.5" height="883"/><rect x="399.75" y="128" width="98.5" height="630"/><rect x="533" y="128" width="98.5" height="630"/></g></svg></span>
+      <a class="nx-t" href="https://nexlyr.solutions/" target="_blank" rel="noopener"><small>Designed &amp; built by</small><b>Nexlyr Solutions</b></a>
+      <span class="nx-mid">Websites · Apps · Student portals</span>
+      <a class="nx-go" href="https://wa.me/923053687680?text=Hi%20Nexlyr%21%20I%20saw%20Sir%20Fazil%20Maniya%27s%20website%20and%20I%27d%20like%20a%20site%20like%20it." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.14 6.44 2.14 11.9c0 1.75.46 3.45 1.32 4.95L2.05 22l5.28-1.38a9.86 9.86 0 0 0 4.71 1.2c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2zm5.8 14.06c-.24.68-1.4 1.3-1.94 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.17-4.95-4.37-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.58-.36.77-.36l.55.01c.18.01.42-.07.65.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.09.2-.14.32-.28.49l-.42.49c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.23 2.23 1.37.28.15.44.12.6-.07.17-.2.7-.81.88-1.09.19-.29.37-.24.63-.14.25.09 1.62.76 1.9.9.28.15.46.22.53.34.07.12.07.68-.17 1.34z"/></svg><span>Connect</span></a>
+    </div>
+    <div class="ft-meta"><span>© <span data-year>2026</span> Sir Fazil Maniya · Islamiyat</span><span>Syllabus codes and past papers belong to Cambridge University Press &amp; Assessment.</span></div>
+  </div>
+</footer>
+<nav class="vsw" aria-label="Site version"><span>Design</span><a href="/">V1</a><a href="/v2">V2</a><a href="/v3" aria-current="page">V3</a></nav>
+<a class="wa" href="https://wa.me/923332488819?text=Assalam%20o%20Alaikum%20Sir%2C%20I%27d%20like%20to%20ask%20about%20Islamiyat%20classes." target="_blank" rel="noopener" aria-label="Message Sir Fazil on WhatsApp"><i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.14 6.44 2.14 11.9c0 1.75.46 3.45 1.32 4.95L2.05 22l5.28-1.38a9.86 9.86 0 0 0 4.71 1.2c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2zm5.8 14.06c-.24.68-1.4 1.3-1.94 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.17-4.95-4.37-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.58-.36.77-.36l.55.01c.18.01.42-.07.65.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.09.2-.14.32-.28.49l-.42.49c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.23 2.23 1.37.28.15.44.12.6-.07.17-.2.7-.81.88-1.09.19-.29.37-.24.63-.14.25.09 1.62.76 1.9.9.28.15.46.22.53.34.07.12.07.68-.17 1.34z"/></svg></i><span><b>Message Sir Fazil</b><small>Classes, timings, notes</small></span></a>
+
+<script>
+(function(){
+  var d=document,h=d.documentElement;h.classList.add('js');
+  var nav=d.getElementById('nav'),solidAt=+(nav&&nav.dataset.solid||60);
+  function onS(){if(nav)nav.classList.toggle('solid',scrollY>solidAt)}
+  addEventListener('scroll',onS,{passive:true});onS();
+  var bg=d.querySelector('.burger');
+  if(bg)bg.addEventListener('click',function(){var o=!d.body.classList.contains('menu-open');d.body.classList.toggle('menu-open',o);bg.setAttribute('aria-expanded',o)});
+  d.querySelectorAll('.sheet a').forEach(function(a){a.addEventListener('click',function(){d.body.classList.remove('menu-open')})});
+  addEventListener('keydown',function(e){if(e.key==='Escape')d.body.classList.remove('menu-open')});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  d.querySelectorAll('[data-rv]').forEach(function(el){io.observe(el)});
+  d.querySelectorAll('[data-year]').forEach(function(el){el.textContent=new Date().getFullYear()});
+  /* counters */
+  var co=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;co.unobserve(e.target);var el=e.target,to=+el.dataset.count,t0=performance.now(),dur=1400;
+    (function f(t){var p=Math.min(1,(t-t0)/dur),v=Math.round(to*(1-Math.pow(1-p,3)));el.textContent=v.toLocaleString('en-US');if(p<1)requestAnimationFrame(f)})(t0)})},{threshold:.6});
+  d.querySelectorAll('[data-count]').forEach(function(el){co.observe(el)});
+  try{localStorage.setItem('mfm-compare','1')}catch(e){}
+})();
+
+</script>
+<script>
+/* MFM V3 · 3D: glossy light-beam bars (hero) and the exploded study pack. three.js r128, loaded after the page paints. */
+window.MFM3D=(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function envFor(r){
+    var c=document.createElement('canvas');c.width=1024;c.height=512;var x=c.getContext('2d');
+    var g=x.createLinearGradient(0,0,0,512);g.addColorStop(0,'#0b1a15');g.addColorStop(.5,'#050a08');g.addColorStop(1,'#000');x.fillStyle=g;x.fillRect(0,0,1024,512);
+    /* soft light strips for the gloss to catch: emerald, white, gold */
+    function strip(px,py,w,h,col,blur){x.save();x.filter='blur('+blur+'px)';x.fillStyle=col;x.fillRect(px,py,w,h);x.restore()}
+    strip(80,60,260,60,'#21B582',22);strip(440,50,160,26,'#cfe9dc',14);strip(700,90,220,50,'#C8922B',22);strip(300,300,300,30,'#0E6349',28);
+    var t=new THREE.CanvasTexture(c);t.mapping=THREE.EquirectangularReflectionMapping;t.encoding=THREE.sRGBEncoding;
+    var pm=new THREE.PMREMGenerator(r);var env=pm.fromEquirectangular(t).texture;t.dispose();pm.dispose();return env}
+  function setup(canvas,opts){
+    opts=opts||{};
+    var r=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+    r.setPixelRatio(Math.min(devicePixelRatio||1,opts.dpr||2));r.outputEncoding=THREE.sRGBEncoding;r.toneMapping=THREE.ACESFilmicToneMapping;r.toneMappingExposure=opts.exp||1.05;
+    var s=new THREE.Scene();s.environment=envFor(r);
+    var cam=opts.ortho?new THREE.OrthographicCamera(-5,5,5,-5,.1,100):new THREE.PerspectiveCamera(34,1,.1,100);
+    function size(){var w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;r.setSize(w,h,false);
+      if(opts.ortho){var a=w/h,v=opts.view||5;cam.left=-v*a;cam.right=v*a;cam.top=v;cam.bottom=-v}else cam.aspect=w/h;cam.updateProjectionMatrix();if(opts.onSize)opts.onSize(w,h)}
+    size();new ResizeObserver(size).observe(canvas);
+    var vis=true;new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(canvas);
+    return {r:r,s:s,cam:cam,loop:function(fn){var t0=performance.now();(function f(t){requestAnimationFrame(f);if(!vis||document.hidden)return;fn((t-t0)/1000);r.render(s,cam)})(t0)}};
+  }
+  function rounded(w,h,rad){var s=new THREE.Shape(),x=-w/2,y=-h/2;s.moveTo(x+rad,y);s.lineTo(x+w-rad,y);s.quadraticCurveTo(x+w,y,x+w,y+rad);s.lineTo(x+w,y+h-rad);s.quadraticCurveTo(x+w,y+h,x+w-rad,y+h);s.lineTo(x+rad,y+h);s.quadraticCurveTo(x,y+h,x,y+h-rad);s.lineTo(x,y+rad);s.quadraticCurveTo(x,y,x+rad,y);return s}
+
+  /* ---------- hero: diagonal glossy bars lit in emerald and gold ---------- */
+  function beams(canvas){
+    var S=setup(canvas,{dpr:1.75,exp:.9}),s=S.s,cam=S.cam;cam.position.set(0,0,16);
+    s.fog=new THREE.Fog(0x07100D,11,22);
+    var geo=new THREE.ExtrudeGeometry(rounded(1.05,26,.45),{depth:.9,bevelEnabled:true,bevelThickness:.25,bevelSize:.22,bevelSegments:6,curveSegments:10});geo.center();
+    var em=new THREE.MeshPhysicalMaterial({color:0x0B5A42,metalness:.3,roughness:.32,clearcoat:1,clearcoatRoughness:.18,envMapIntensity:.9});
+    var gd=new THREE.MeshPhysicalMaterial({color:0xA7741A,metalness:.7,roughness:.28,clearcoat:1,clearcoatRoughness:.15,envMapIntensity:1});
+    var dk=new THREE.MeshPhysicalMaterial({color:0x07150f,metalness:.2,roughness:.35,clearcoat:1,clearcoatRoughness:.2,envMapIntensity:.7});
+    var g=new THREE.Group();g.rotation.z=-0.66;s.add(g);
+    var bars=[],N=9;
+    for(var i=0;i<N;i++){var m=new THREE.Mesh(geo,i===5?gd:(i%2===1?dk:em));m.position.set((i-(N-1)/2)*2.7,0,-((i*7)%5)*1.4);m.userData={y:(i%2?1:-1)*(1+(i%4)),z:m.position.z,ph:i*1.7};g.add(m);bars.push(m)}
+    var k1=new THREE.PointLight(0x3DDC97,34,30,2);k1.position.set(-4,3,6);s.add(k1);
+    var k2=new THREE.PointLight(0xE8B547,26,26,2);k2.position.set(5,-2,5);s.add(k2);
+    var k3=new THREE.DirectionalLight(0xffffff,.25);k3.position.set(0,6,8);s.add(k3);
+    s.add(new THREE.AmbientLight(0x12241d,.5));
+    var mx=0,my=0,tx=0,ty=0;addEventListener('pointermove',function(e){tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5},{passive:true});
+    S.loop(function(t){
+      var sp=reduce?0:1;mx+=(tx-mx)*.04;my+=(ty-my)*.04;
+      bars.forEach(function(b){var u=b.userData;b.position.y=u.y+Math.sin(t*.35+u.ph)*1.2*sp;b.position.z=u.z+Math.sin(t*.25+u.ph)*.5*sp});
+      k1.position.x=-4+Math.sin(t*.4)*3*sp;k2.position.y=-2+Math.cos(t*.33)*2*sp;
+      cam.position.x=mx*1.6;cam.position.y=-my*1.2;cam.lookAt(0,0,0);
+    });
+    canvas.classList.add('on');
+  }
+
+  /* ---------- study pack: four layers that lift apart as you scroll ---------- */
+  function pageTex(o){
+    var c=document.createElement('canvas');c.width=512;c.height=724;var x=c.getContext('2d');
+    var g=x.createLinearGradient(0,0,512,724);g.addColorStop(0,o.a);g.addColorStop(1,o.b);x.fillStyle=g;x.fillRect(0,0,512,724);
+    if(o.img){x.drawImage(o.img,0,0,512,724)}else{
+      x.strokeStyle=o.line;x.lineWidth=3;x.strokeRect(24,24,464,676);
+      x.fillStyle=o.ink;x.font='600 30px Inter, sans-serif';x.fillText(o.kick,48,96);
+      x.font='700 64px Inter, sans-serif';o.title.forEach(function(l,i){x.fillText(l,48,180+i*70)});
+      x.fillStyle=o.line;for(var i=0;i<9;i++){x.globalAlpha=.55;x.fillRect(48,360+i*34,(i%3===2?260:416),10)}x.globalAlpha=1;
+      x.font='600 26px Inter, sans-serif';x.fillStyle=o.ink;x.fillText(o.foot,48,670)}
+    var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=8;return t}
+  function pack(canvas,o){
+    var img=new Image();img.src=o.cover;img.onload=function(){
+      var S=setup(canvas,{ortho:true,view:6.4}),s=S.s,cam=S.cam;
+      cam.position.set(9+1.4,9,9-1.4);cam.lookAt(1.4,0,-1.4);
+      var defs=[
+        {a:'#E8D9B5',b:'#cdb88a',line:'#7a6431',ink:'#3a2c0c',kick:'Notes booklets',title:['Key points,','terms & dates'],foot:'Paper 1 · Paper 2'},
+        {a:'#13201B',b:'#0a1310',line:'#3DDC97',ink:'#EEF3EF',kick:'Paper 2 workbook',title:['Hadiths, Caliphs,','faith & pillars'],foot:'With marking scheme'},
+        {a:'#0E6349',b:'#073A2C',line:'#E8B547',ink:'#F7F2E4',kick:'Paper 1 workbook',title:['Qur’an, Prophet,','first community'],foot:'With marking scheme'},
+        {img:img,a:'#000',b:'#000'}];
+      var layers=[],W=3.6,D=5.09,H=.12;
+      defs.forEach(function(d,i){
+        var top=new THREE.MeshPhysicalMaterial({map:pageTex(d),roughness:.45,clearcoat:i===3?.8:.2,clearcoatRoughness:.3});
+        var side=new THREE.MeshStandardMaterial({color:i===0?0xd9c79c:(i===3?0x0b3d2d:0xe9e1cc),roughness:.7});
+        var m=new THREE.Mesh(new THREE.BoxGeometry(W,H,D),[side,side,top,side,side,side]);
+        var e=new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry),new THREE.LineBasicMaterial({color:i===3?0xE8B547:0x3DDC97,transparent:true,opacity:.35}));m.add(e);
+        s.add(m);layers.push(m)});
+      var key=new THREE.DirectionalLight(0xffffff,.75);key.position.set(4,10,6);s.add(key);
+      s.add(new THREE.AmbientLight(0xffffff,.4));
+      var rim=new THREE.PointLight(0x3DDC97,14,20,2);rim.position.set(-5,2,-3);s.add(rim);
+      var labels=o.labels||[],v=new THREE.Vector3(),sec=o.section||canvas,prog=0,auto=0;
+      S.loop(function(t){
+        var rc=sec.getBoundingClientRect(),vh=innerHeight;
+        var p=Math.min(1,Math.max(0,(vh-rc.top)/(rc.height*.7)));prog+=(p-prog)*.08;
+        var e=reduce?1:(prog<.5?2*prog*prog:1-Math.pow(-2*prog+2,2)/2),gap=.18+e*1.15;
+        layers.forEach(function(m,i){m.position.y=(i-1.5)*gap;m.rotation.y=reduce?0:Math.sin(t*.3)*.08});
+        layers.forEach(function(m){m.updateMatrixWorld()});
+        labels.forEach(function(l,i){if(!l)return;
+          v.set(W/2,0,-D/2);layers[i].localToWorld(v);v.project(cam);
+          l.style.transform='translate('+((v.x*.5+.5)*canvas.clientWidth)+'px,'+((-v.y*.5+.5)*canvas.clientHeight)+'px)';l.style.opacity=Math.min(1,e*1.6)});
+      });
+    };
+  }
+  return {beams:beams,pack:pack};
+})();
+
+</script>
+<script>
+{
+  /* mark ladder */
+  const R=[
+    {lv:'Low level',t:'Recall',txt:'The Battle of Badr was the first major battle between the Muslims and the Quraysh of Makka. The Muslims were few, but they won.',why:'True, but general. A short story with no detail stays in the low levels.',m:22,s:'L1',f:0},
+    {lv:'Mid level',t:'Detail',txt:'It was fought on <u>17 Ramadan, 2 AH</u>. The Makkans marched to protect Abu Sufyan’s caravan, and <u>about 313 Muslims</u> met an army of <u>about 1,000</u> at the wells of Badr, where Abu Jahl was killed.',why:'Dates, numbers and names move a part (a) answer up the levels.',m:52,s:'L2',f:1},
+    {lv:'Top level',t:'Evidence',txt:'The Prophet prayed through the night, and Allah answered that He would help with <u>a thousand angels (8:9)</u>. After the victory, prisoners who could read were freed for <u>teaching ten Muslims</u>, showing his mercy and his value for knowledge.',why:'A detailed, well-ordered account backed by the Qur’an reaches the top level for 10 marks.',m:82,s:'L3',f:2},
+    {lv:'Part (b)',t:'Significance',txt:'Badr shows that <u>faith and obedience count for more than numbers</u>. A Muslim today who faces a struggle, such as standing up for what is right when friends disagree, prepares fully and then trusts Allah, as the Prophet did.',why:'Part (b) wants a lesson for Muslims now, with an example from life today, not more history.',m:100,s:'4/4',f:3}];
+  const body=document.getElementById('ansBody'),meter=document.getElementById('meter'),mt=document.getElementById('meterT');
+  const tabs=[...document.querySelectorAll('.rungs .k')],marks=[...document.querySelectorAll('.q mark')];
+  const narrow=matchMedia('(max-width:640px)');
+  function show(i){const r=R[i];tabs.forEach((t,j)=>t.setAttribute('aria-selected',j===i));
+    body.innerHTML='<span class="lv">'+r.lv+'</span><h4>'+r.t+'</h4><p class="txt">'+r.txt+'</p><p class="why">'+r.why+'</p>';
+    body.classList.remove('swap');void body.offsetWidth;body.classList.add('swap');
+    meter.style.height=narrow.matches?'':r.m+'%';meter.style.width=narrow.matches?r.m+'%':'';mt.textContent=r.s;
+    marks.forEach(m=>m.classList.toggle('on',+m.dataset.f<=r.f&&r.f>0))}
+  tabs.forEach(t=>t.addEventListener('click',()=>show(+t.dataset.i)));show(0);
+
+  /* fan */
+  const figs=[...document.querySelectorAll('#fan figure')],fan=document.getElementById('fan');
+  function lay(){const n=figs.length,sp=Math.min(170,fan.clientWidth/(n+.6));figs.forEach((f,i)=>{const k=i-(n-1)/2;f.dataset.t='translate(calc(-50% + '+(k*sp)+'px),calc(-50% + '+(Math.abs(k)*16)+'px)) rotate('+(k*6)+'deg)';f.style.transform=f.dataset.t;f.style.zIndex=10-Math.abs(Math.round(k))})}
+  lay();addEventListener('resize',lay);
+  figs.forEach(f=>{f.addEventListener('mouseenter',()=>{f.style.transform=f.dataset.t+' translateY(-24px) scale(1.06)'});f.addEventListener('mouseleave',()=>{f.style.transform=f.dataset.t})});
+
+  /* exam clock */
+  const ck=[...document.querySelectorAll('#clock .k')];let sec=5400,run=false;
+  new IntersectionObserver(e=>{run=e[0].isIntersecting}).observe(document.getElementById('clock'));
+  setInterval(()=>{if(!run)return;sec=sec>0?sec-1:5400;ck[0].textContent=Math.floor(sec/3600);ck[1].textContent=String(Math.floor(sec%3600/60)).padStart(2,'0');ck[2].textContent=String(sec%60).padStart(2,'0');ck[2].classList.add('dn');setTimeout(()=>ck[2].classList.remove('dn'),160)},1000);
+
+  /* notes search, typing on its own */
+  const Q=[['Hadith 12',['Hadith 12 · Paper 2','Hadith 12 · key terms','Hadith 12 · past questions']],['Battle of Uhud',['Uhud · 3 AH · Paper 1','Uhud vs Badr · compare','Uhud · past questions']],['Zakat nisab',['Zakat · the Pillars','Nisab · 87.48 g gold','Zakat · past questions']]];
+  const ty=document.getElementById('typed'),res=document.getElementById('res');let qi=0;
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function typeQ(){const [w,list]=Q[qi%Q.length];let i=0;res.innerHTML='';
+    if(still){ty.textContent=w;res.innerHTML=list.map(x=>'<div><span>'+x+'</span></div>').join('');return}
+    const iv=setInterval(()=>{ty.textContent=w.slice(0,++i);if(i>=w.length){clearInterval(iv);res.innerHTML=list.map(x=>'<div><span>'+x+'</span><span>↵</span></div>').join('');setTimeout(()=>{qi++;typeQ()},2600)}},90)}
+  typeQ();
+
+  /* reviews: real ones from config.js, an honest invitation until then */
+  function reviews(){const C=window.RA_CONFIG||{},L=(C.REVIEWS||[]).filter(r=>r&&r.text),faces=document.getElementById('faces'),q=document.getElementById('rq'),m=document.getElementById('rmeta');
+    const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    if(!L.length){faces.innerHTML='<span class="face ph">+</span><span class="face ph"></span><span class="face ph"></span><span class="face ph"></span>';
+      q.innerHTML='Studied with Sir Fazil? <span class="g">Your words could be the first ones here.</span>';m.textContent='Reviews appear as students send them, word for word.';return}
+    faces.innerHTML=L.slice(0,8).map((r,i)=>'<button class="face" type="button" aria-pressed="false" data-i="'+i+'" aria-label="'+esc(r.name||'Student')+'">'+esc((r.name||'S').trim()[0])+'</button>').join('');
+    const pick=i=>{const r=L[i];q.textContent='“'+r.text+'”';m.textContent=[r.name,r.meta].filter(Boolean).join(' · ');faces.querySelectorAll('.face').forEach((f,j)=>f.setAttribute('aria-pressed',j===i))};
+    faces.addEventListener('click',e=>{const b=e.target.closest('.face');if(b)pick(+b.dataset.i)});pick(0)}
+  document.addEventListener('DOMContentLoaded',reviews);
+
+  /* register: press Enter */
+  const key=document.getElementById('enterKey'),wrapF=document.getElementById('enrolWrap'),fm=document.getElementById('enrolForm'),er=document.getElementById('eErr'),sect=document.getElementById('enrol');
+  let inView=false;new IntersectionObserver(e=>{inView=e[0].isIntersecting},{threshold:.5}).observe(sect);
+  function open(){key.classList.add('dn');setTimeout(()=>key.classList.remove('dn'),180);wrapF.classList.add('open');key.setAttribute('aria-expanded','true');setTimeout(()=>fm.eName.focus({preventScroll:true}),400)}
+  key.addEventListener('click',open);
+  addEventListener('keydown',e=>{if(e.key==='Enter'&&inView&&!e.target.closest('input,select,textarea,button,a')&&!wrapF.classList.contains('open')){e.preventDefault();open()}});
+  if(location.hash==='#enrol')open();
+  document.querySelectorAll('a[href$="#enrol"]').forEach(a=>a.addEventListener('click',()=>setTimeout(open,500)));
+  fm.addEventListener('submit',e=>{e.preventDefault();const n=fm.eName.value.trim(),p=fm.ePhone.value.replace(/\D/g,'');
+    if(n.length<2){er.textContent='Please add the student’s name.';fm.eName.focus();return}
+    if(p.length<10){er.textContent='Please add a WhatsApp number we can reach.';fm.ePhone.focus();return}
+    er.textContent='';const c=fm.querySelector('[name=eCourse]:checked').value;
+    const msg='Assalam o Alaikum Sir, I’d like to register for the portal.\n\nName: '+n+'\nWhatsApp: '+fm.ePhone.value.trim()+'\nCourse: '+c+'\nStudy: '+fm.eMode.value+(fm.eArea.value.trim()?'\nArea / school: '+fm.eArea.value.trim():'')+'\nExam: '+fm.eYear.value;
+    const wa=(window.RA_CONFIG&&RA_CONFIG.waUrl)?RA_CONFIG.waUrl(msg):'https://wa.me/923332488819?text='+encodeURIComponent(msg);window.open(wa,'_blank','noopener')});
+
+  /* 3D after the page is up */
+  function go(){const s=document.createElement('script');s.src='/vendor/three.min.js';s.onload=()=>{
+    try{MFM3D.beams(document.getElementById('beams'))}catch(e){console.warn(e)}
+    try{MFM3D.pack(document.getElementById('packc'),{cover:'/mfm-book.webp',labels:[...document.querySelectorAll('.pl')],section:document.getElementById('pack')})}catch(e){console.warn(e)}};document.body.appendChild(s)}
+  if(document.readyState==='complete')setTimeout(go,60);else addEventListener('load',()=>setTimeout(go,60));
+}
+</script>
+<script src="/config.js?v=5" defer></script>
+</body>
+</html>

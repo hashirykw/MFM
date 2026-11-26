@@ -114,3 +114,10 @@ A second design lives beside the current one so both can be compared on the same
 - Edit the sources in `tools/v2/` (`pages/` for each page, `parts/` for the shared nav, footer, CSS and 3D), then run `python3 tools/v2/build.py` to rebuild `/v2`. `tools/` is not deployed (`.vercelignore`).
 - V2 pages are `noindex` so search engines keep the live design until one is chosen.
 - **V1 / V2 switch.** V2 pages show it on the left edge. V1 pages show it too once someone has opened `/v2`, or add `?compare` to any address. It lives at the end of `config.js`.
+
+## V3 design (Nov 2026): `/v3`
+
+Chosen section by section from the design board: midnight emerald with gold kept for one thing per screen, Inter headings, a 3D light-beam hero, key-cap buttons and numbers, a hairline logo grid, dark bento cards for courses and tools, the mark ladder, a 3D study pack that lifts apart as you scroll, reviews from `REVIEWS` in `config.js` (an honest invitation until there are some), the photo fan, and a register key you can press (Enter works too). Pages: **`/v3`**, **`/v3/about`**, **`/v3/courses`**.
+
+- Sources in `tools/v3/` (same layout as V2); rebuild with `python3 tools/v3/build.py`. Fonts in `v3/fonts/` (Inter, self-hosted).
+- The V1 / V2 / V3 switch sits on the left edge of every V2 and V3 page; V1 shows it once someone has opened V2 or V3, or with `?compare`.

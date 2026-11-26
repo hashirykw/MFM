@@ -104,19 +104,19 @@ window.RA_CONFIG = {
   C.waLabel = C.whatsapp ? 'WhatsApp' : (C.instagram ? 'Instagram' : 'Facebook');
 })();
 
-/* Design versions: the new look lives at /v2. Once someone has opened /v2 (or adds ?compare
+/* Design versions: the new looks live at /v2 and /v3. Once someone has opened /v2 or /v3 (or adds ?compare
    to any address), a small V1 / V2 switch shows here too, so both designs can be compared. */
 (function () {
   try {
     if (/[?&]compare/.test(location.search)) localStorage.setItem('mfm-compare', '1');
-    if (location.pathname.indexOf('/v2') === 0 || localStorage.getItem('mfm-compare') !== '1') return;
+    if (/^\/v\d/.test(location.pathname) || localStorage.getItem('mfm-compare') !== '1') return;
   } catch (e) { return; }
   var p = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
   var v2 = { '/': '/v2', '/index': '/v2', '/about': '/v2/about', '/courses': '/v2/courses' }[p] || '/v2';
   function add() {
     var n = document.createElement('nav');
     n.setAttribute('aria-label', 'Site version');
-    n.innerHTML = '<a aria-current="page">V1</a><a href="' + v2 + '">V2</a>';
+    n.innerHTML = '<a aria-current="page">V1</a><a href="' + v2 + '">V2</a><a href="' + v2.replace('/v2', '/v3') + '">V3</a>';
     n.style.cssText = 'position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:2147483000;display:flex;flex-direction:column;gap:4px;padding:6px 5px;border-radius:0 14px 14px 0;background:rgba(11,17,15,.88);border:1px solid rgba(255,255,255,.14);border-left:0;font:700 13px/1 system-ui,sans-serif;box-shadow:0 14px 30px -14px rgba(0,0,0,.6)';
     [].forEach.call(n.children, function (a, i) { a.style.cssText = 'display:grid;place-items:center;width:36px;height:34px;border-radius:10px;text-decoration:none;' + (i ? 'color:#F8F4EA' : 'background:#E8B547;color:#0B110F'); });
     document.body.appendChild(n);
