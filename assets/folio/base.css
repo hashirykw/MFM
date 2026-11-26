@@ -374,3 +374,13 @@ body.menu-open .chat-fab{transform:translateY(160%)}
 .s-ink{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23f3ecdc' stroke-opacity='.05' stroke-width='1'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3Cpath d='M0 42h12M72 42h12M42 0v12M42 72v12'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(oklch(22% .05 163 / .62),oklch(14% .035 163 / .7)),url(/assets/folio/img/paper/paper-dark.webp);background-size:84px 84px,100% 100%,1024px 1024px}
 .s-lapis{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23f3ecdc' stroke-opacity='.06' stroke-width='1'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3Cpath d='M0 42h12M72 42h12M42 0v12M42 72v12'/%3E%3C/g%3E%3C/svg%3E"),radial-gradient(120% 80% at 80% 0%,oklch(40% 0.096 163),transparent 60%);background-size:84px 84px,100% 100%}
 [data-theme="dark"] .s-paper{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(20% .045 163 / .55),oklch(16% .035 163 / .6)),var(--sheet);background-size:28px 28px,28px 28px,100% 100%,1024px 1024px}
+
+/* ---------- footer extras ---------- */
+.foot-soc{display:flex;gap:8px}
+.foot-soc a{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--rule-2);color:var(--text-2);transition:background-color var(--dur-2),color var(--dur-2),transform var(--dur-2) var(--ease-out)}
+.foot-soc a:hover{background:var(--saffron);color:oklch(19% .03 163);border-color:transparent;transform:translateY(-2px)}
+.foot-soc svg{width:20px;height:20px}
+.foot .foot-links{margin-top:22px;padding-top:18px;border-top:1px solid var(--rule)}
+.foot-row .brand small{color:var(--text-3)}
+.foot.tear-t{margin-top:calc(var(--tear-h) * -1 + 2px)}
+
