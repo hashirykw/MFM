@@ -402,6 +402,38 @@ def fix_links(s):
     return s
 
 
+# ------------------------------------------------------------------ hero panels (no pinned photos)
+ABOUT_FACTS = [('Teaching since', '2012', '15+ years in the classroom'), ('Students mentored', '7,000+', 'Karachi and online'),
+               ('IBA Karachi', 'Gold medal', 'BSCS · Cambridge-trained')]
+
+
+def panel(cap, head, facts):
+    rows = ''.join(f'<div><dt>{a}</dt><dd>{b}<small>{c}</small></dd></div>' for a, b, c in facts)
+    return (f'<aside class="fp-panel s-ink" aria-label="At a glance"><div class="fpp-head"><img src="/mfm-logo.webp" alt="" width="72" height="72">'
+            f'<span class="lbl">{cap}</span><b>{head}</b></div><dl class="fpp-facts">{rows}</dl>'
+            f'<p class="fpp-foot"><span>MFM</span>Islamiyat · 2058 · 0493</p></aside>')
+
+
+def hero_panel(hero):
+    i = hero.find('<div class="phero-art"')
+    if i != -1:
+        j = balanced(hero, i, 'div'); art = hero[i:j]
+        cap = re.search(r'<span class="ph-cap">(.*?)</span>', art, re.S)
+        head = re.search(r'<figcaption[^>]*>.*?<b>(.*?)</b>', art, re.S)
+        facts = []
+        for m in re.finditer(r'<div class="float[^"]*"[^>]*>(.*?)</div>', art, re.S):
+            inner = m.group(1)
+            a = re.search(r'<span>(.*?)</span>', inner, re.S); b = re.search(r'(<b\b[^>]*>.*?</b>)', inner, re.S); c = re.search(r'<small>(.*?)</small>', inner, re.S)
+            b = re.sub(r'\sstyle="[^"]*"', '', b.group(1)) if b else ''
+            facts.append((a.group(1) if a else '', b, c.group(1) if c else ''))
+        return hero[:i] + panel(cap.group(1) if cap else 'At a glance', head.group(1) if head else 'Sir Fazil Maniya', facts) + hero[j:]
+    i = hero.find('<figure class="ab-fig"')
+    if i != -1:
+        j = balanced(hero, i, 'figure')
+        return hero[:i] + panel('The teacher', 'Sir Fazil Maniya', [(a, f'<b>{b}</b>', c) for a, b, c in ABOUT_FACTS]) + hero[j:]
+    return hero
+
+
 # ------------------------------------------------------------------ V1 page → folio page
 def build_v1(slug, v):
     t = (V1 / f'{slug}.html').read_text()
@@ -448,7 +480,7 @@ def build_v1(slug, v):
         if idx == 0:
             # the tape sits right after the hero; plate-less heroes get a folio plate
             end = balanced(main, m.start(), 'section')
-            hero = main[pos:end]
+            hero = hero_panel(main[pos:end])
             if slug in PLATES:
                 img, cap, hand = PLATES[slug]
                 w0 = hero.index('<div class="wrap'); w1 = hero.index('>', w0) + 1
@@ -530,7 +562,7 @@ def build_home(v):
     s = s[:i] + dock('index') + s[j:]
     s = s.replace('<script>\n{{DATA}}\n</script>', f'<script src="/assets/folio/home-data.js?v={v["data"]}"></script>')
     s = s.replace('<script>\n{{JS}}\n</script>', f'<script src="/assets/folio/shell.js?v={v["shell"]}"></script>\n<script src="/assets/folio/home.js?v={v["homejs"]}"></script>')
-    s = s.replace('<script type="module">\n{{MOSQUE}}\n</script>', f'<script type="module" src="/assets/folio/mosque3d.js?v={v["mosque"]}"></script>')
+    s = s.replace('<script type="module">\n{{MOSQUE}}\n</script>', f'<script src="/assets/folio/prayer.js?v={v["prayer"]}"></script>\n<script type="module" src="/assets/folio/mosque3d.js?v={v["mosque"]}"></script>\n<script type="module" src="/assets/folio/prayer3d.js?v={v["prayer3d"]}"></script>')
     s = s.replace('{{NEXLYR}}', '')
     # the home is the front page of a multi-page site: each section opens its full page
     s = s.replace('<a class="btn btn--line" href="#lab">Open the Islamiyat Lab</a>', '<a class="btn btn--line" href="/lab">Open the Islamiyat Lab</a>')
@@ -563,11 +595,13 @@ def main():
     (OUT / 'home.js').write_text(R('home.js'))
     (OUT / 'home-data.js').write_text(R('data.js'))
     (OUT / 'mosque3d.js').write_text(R('mosque3d.js'))
+    (OUT / 'prayer.js').write_text(R('prayer.js'))
+    (OUT / 'prayer3d.js').write_text(R('prayer3d.js'))
     (OUT / 'core.js').write_text(R('core.js'))
     (OUT / 'mfm.js').write_text(R('mfm.js'))
     legacy_css()
     v = {'l1': ver('legacy-1.css'), 'l2': ver('legacy-2.css'), 'base': ver('base.css'), 'bridge': ver('bridge.css'), 'home': ver('home.css'),
-         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('mosque3d.js')}
+         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('prayer3d.js')}
     print('index.html', build_home(v) // 1024, 'KB')
     for slug in PAGES:
         if slug == 'index':

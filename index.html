@@ -12,8 +12,8 @@
 <link rel="preload" href="/assets/folio/fonts/font-archivo-wide-900.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/folio/fonts/font-archivo-400.woff2" as="font" type="font/woff2" crossorigin>
 <script>(function(){var d=document.documentElement,t="light";try{t=(localStorage.getItem("ra-theme")||"light").replace(/"/g,"");}catch(e){}d.dataset.theme=t==="dark"?"dark":"light";})();</script>
-<link rel="stylesheet" href="/assets/folio/base.css?v=1add0b29">
-<link rel="stylesheet" href="/assets/folio/home.css?v=b5199352">
+<link rel="stylesheet" href="/assets/folio/base.css?v=755edadc">
+<link rel="stylesheet" href="/assets/folio/home.css?v=dd5f4d48">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -168,6 +168,44 @@
         <div class="fig"><b>1,200</b><span>students this session</span></div>
         <div class="fig"><b>20+</b><span>schools and academies</span></div>
         <div class="fig"><b>54 h</b><span>recorded lectures</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRAYER CORNER ================= -->
+<section class="sec s-paper" id="salah" aria-labelledby="salah-h">
+  <div class="wrap">
+    <div class="sec-head split">
+      <div>
+        <p class="lbl">The prayer corner</p>
+        <h2 class="h2" id="salah-h" style="margin-top:14px">Five times a day, <span class="mark">on time.</span></h2>
+      </div>
+      <p class="lede">Today&rsquo;s salah times, the Hijri date and the days left until Ramadan, updated every day for Karachi or wherever you study from.</p>
+    </div>
+    <div class="salah">
+      <div class="salah-stage" id="salahStage" aria-label="3D prayer corner: a janamaz facing a mihrab, a wall clock and a salah times board">
+        <div class="salah-bg" aria-hidden="true"></div>
+        <canvas id="salahCanvas" aria-hidden="true"></canvas>
+        <p class="hand salah-note" aria-hidden="true">drag to look around</p>
+      </div>
+      <div class="salah-panel s-ink" aria-live="polite">
+        <div class="sp-top">
+          <div class="sp-date"><span class="lbl">Today</span><b id="spHijri">&mdash;</b><small id="spGreg">Loading today&rsquo;s times&hellip;</small></div>
+          <label class="sp-city"><span class="sr">City</span><select id="spCity" aria-label="City for prayer times"></select></label>
+        </div>
+        <div class="sp-next">
+          <div><span class="lbl">Next prayer</span><b id="spNextName">&mdash;</b><span class="sp-ar" id="spNextAr" lang="ar"></span><small id="spNextAt"></small></div>
+          <div class="sp-count-w"><span class="lbl">Begins in</span><b class="sp-count" id="spCount">--:--:--</b><small>Local time <span id="spClock">--:--</span></small></div>
+        </div>
+        <ol class="sp-list" id="spList"></ol>
+        <div class="sp-ram">
+          <div><span class="lbl" id="spRamL">Ramadan</span><p id="spRamT">Counting the days&hellip;</p></div>
+          <div class="sp-days"><b id="spRamD">&mdash;</b><span id="spRamU">days to go</span></div>
+          <i class="sp-bar" id="spRamBar" aria-hidden="true"></i>
+        </div>
+        <p class="sp-src">Times from AlAdhan: the University of Islamic Sciences, Karachi method in Pakistan, Hanafi Asr. Confirm with your local masjid.</p>
+        <span class="sp-hijri-ar" id="spHijriAr" lang="ar" aria-hidden="true"></span>
       </div>
     </div>
   </div>
@@ -650,6 +688,8 @@
 <script src="/assets/folio/home-data.js?v=fa54afac"></script>
 <script src="/assets/folio/shell.js?v=72e2084b"></script>
 <script src="/assets/folio/home.js?v=06934c2d"></script>
+<script src="/assets/folio/prayer.js?v=2f246ee9"></script>
 <script type="module" src="/assets/folio/mosque3d.js?v=9ec5014d"></script>
+<script type="module" src="/assets/folio/prayer3d.js?v=181c3905"></script>
 </body>
 </html>

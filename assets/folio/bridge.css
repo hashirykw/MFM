@@ -215,7 +215,7 @@ html:root{background:var(--paper)!important}
 /* ---------- page heroes ---------- */
 :root:root:root:root:root body.fp.fp .fp-hero{padding:clamp(118px,12vw,168px) 0 clamp(64px,8vw,112px)!important;min-height:0!important;overflow:visible}
 :root:root:root:root:root body.fp.fp .fp-hero>.wrap{display:block}
-:root:root:root:root:root body.fp.fp .fp-hero>.wrap:has(>.phero-art,>figure,>.card,>form,>.n-stack,>.v2-stage){display:grid!important;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;gap:clamp(32px,5vw,80px)!important;align-items:center!important}
+:root:root:root:root:root body.fp.fp .fp-hero>.wrap:has(>.phero-art,>figure,>.card,>form,>.n-stack,>.v2-stage,>aside){display:grid!important;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;gap:clamp(32px,5vw,80px)!important;align-items:center!important}
 :root:root:root:root:root body.fp.fp .fp-hero .display{margin-top:0}
 :root:root:root:root:root body.fp.fp .fp-hero .lede{margin-top:22px!important}
 :root:root:root:root:root body.fp.fp .fp-hero .lede+.lede{margin-top:14px!important}
@@ -387,7 +387,7 @@ body.menu-open .fab{transform:translateY(160%);opacity:0;pointer-events:none}
 :root:root:root:root:root body.fp.fp .fp-plate figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:14px;align-items:baseline}
 :root:root:root:root:root body.fp.fp .fp-plate figcaption b{font:900 .78rem/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.02em}
 :root:root:root:root:root body.fp.fp .fp-plate figcaption span{font:1.1rem/1.2 var(--f-hand);color:var(--sand);white-space:nowrap}
-@media (max-width:900px){:root:root:root:root:root body.fp.fp .fp-hero>.wrap:has(>.phero-art,>figure,>.card,>form,>.n-stack,>.v2-stage){grid-template-columns:minmax(0,1fr)!important}:root:root:root:root:root body.fp.fp .fp-plate{justify-self:center;width:min(420px,92%);margin-top:28px}}
+@media (max-width:900px){:root:root:root:root:root body.fp.fp .fp-hero>.wrap:has(>.phero-art,>figure,>.card,>form,>.n-stack,>.v2-stage,>aside){grid-template-columns:minmax(0,1fr)!important}:root:root:root:root:root body.fp.fp .fp-plate{justify-self:center;width:min(420px,92%);margin-top:28px}}
 
 /* ---------- forms lose the silver orbs; the card is the paper ---------- */
 :root:root:root:root:root body.fp.fp .v2-orb{display:none!important}
@@ -559,6 +559,28 @@ html.top-away body.fp .c-switch{top:14px!important}
 :root:root:root:root:root body.fp.fp .topicline.tl-units{max-height:none!important;overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important;padding-bottom:0!important}
 :root:root:root:root:root body.fp.fp .mf-act .btn--line{--fb:transparent;--ff:var(--on-dark);box-shadow:inset 0 0 0 1.5px oklch(95% .02 85 / .35)!important}
 :root:root:root:root:root body.fp.fp .mf-act .btn--line:hover{--ff:oklch(19% .03 163)}
+
+/* ---------- hero panel: the mihrab card (replaces the pinned photos) ---------- */
+:root:root:root:root:root body.fp.fp .fp-panel{position:relative;justify-self:end;width:min(430px,100%);display:grid;gap:0;padding:clamp(64px,7vw,88px) clamp(26px,3vw,36px) clamp(24px,3vw,32px);border-radius:999px 999px 28px 28px;overflow:hidden;isolation:isolate;
+  box-shadow:0 2px 0 oklch(19% .03 163 / .06),0 40px 80px -40px oklch(10% .03 163 / .7)}
+:root:root:root:root:root body.fp.fp .fp-panel::before{content:"";position:absolute;inset:12px;border:1.5px solid oklch(80% .145 80 / .5);border-radius:999px 999px 18px 18px;pointer-events:none;z-index:-1}
+:root:root:root:root:root body.fp.fp .fp-panel::after{content:"";position:absolute;left:50%;top:0;width:150%;aspect-ratio:1;transform:translate(-50%,-62%);background:radial-gradient(closest-side,oklch(80% .145 80 / .16),transparent);z-index:-1;pointer-events:none}
+:root:root:root:root:root body.fp.fp .fpp-head{display:grid;justify-items:center;text-align:center;gap:10px;padding-bottom:22px;border-bottom:1px solid var(--rule)}
+:root:root:root:root:root body.fp.fp .fpp-head img{width:72px;height:72px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 5px oklch(80% .145 80 / .3),0 0 0 6px oklch(80% .145 80 / .6)}
+:root:root:root:root:root body.fp.fp .fpp-head .lbl{color:var(--saffron)!important;margin-top:6px}
+:root:root:root:root:root body.fp.fp .fpp-head b{font:900 clamp(1.15rem,1.8vw,1.45rem)/1.08 var(--f-display);text-transform:uppercase;max-width:16ch;color:var(--text)}
+:root:root:root:root:root body.fp.fp .fpp-facts{margin:0;display:grid}
+:root:root:root:root:root body.fp.fp .fpp-facts>div{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule)}
+:root:root:root:root:root body.fp.fp .fpp-facts dt{font:700 .58rem/1.4 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+:root:root:root:root:root body.fp.fp .fpp-facts dd{margin:0;display:grid;gap:3px;text-align:right}
+:root:root:root:root:root body.fp.fp .fpp-facts dd b{font:900 clamp(.86rem,1.25vw,1.1rem)/1.15 var(--f-display)!important;color:var(--text)!important;-webkit-text-fill-color:currentColor!important;background:none!important;overflow-wrap:break-word;letter-spacing:-.01em!important}
+:root:root:root:root:root body.fp.fp .fpp-facts dd small{font:400 1rem/1.15 var(--f-hand);color:var(--saffron)}
+:root:root:root:root:root body.fp.fp .fpp-foot{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:18px;font:700 .58rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+:root:root:root:root:root body.fp.fp .fpp-foot span{padding:5px 8px;border-radius:6px;background:var(--saffron);color:oklch(19% .03 163)}
+@media (max-width:900px){:root:root:root:root:root body.fp.fp .fp-panel{justify-self:stretch;width:100%;max-width:520px;margin:28px auto 0;border-radius:200px 200px 24px 24px}}
+
+/* framed plates sit straight */
+:root:root:root:root:root body.fp.fp .fp-plate{transform:none!important}
 
 @layer fpbridge{
 /* =========================================================================
@@ -695,7 +717,7 @@ html:root{background:var(--paper)!important}
 /* ---------- page heroes ---------- */
 :root:root:root:root:root body.fp.fp .fp-hero{padding:clamp(118px,12vw,168px) 0 clamp(64px,8vw,112px)!important;min-height:0!important;overflow:visible}
 :root:root:root:root:root body.fp.fp .fp-hero>.wrap{display:block}
-:root:root:root:root:root body.fp.fp .fp-hero>.wrap:has(>.phero-art,>figure,>.card,>form,>.n-stack,>.v2-stage){display:grid!important;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;gap:clamp(32px,5vw,80px)!important;align-items:center!important}
+:root:root:root:root:root body.fp.fp .fp-hero>.wrap:has(>.phero-art,>figure,>.card,>form,>.n-stack,>.v2-stage,>aside){display:grid!important;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;gap:clamp(32px,5vw,80px)!important;align-items:center!important}
 :root:root:root:root:root body.fp.fp .fp-hero .display{margin-top:0}
 :root:root:root:root:root body.fp.fp .fp-hero .lede{margin-top:22px!important}
 :root:root:root:root:root body.fp.fp .fp-hero .lede+.lede{margin-top:14px!important}
@@ -867,7 +889,7 @@ body.menu-open .fab{transform:translateY(160%);opacity:0;pointer-events:none}
 :root:root:root:root:root body.fp.fp .fp-plate figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:14px;align-items:baseline}
 :root:root:root:root:root body.fp.fp .fp-plate figcaption b{font:900 .78rem/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.02em}
 :root:root:root:root:root body.fp.fp .fp-plate figcaption span{font:1.1rem/1.2 var(--f-hand);color:var(--sand);white-space:nowrap}
-@media (max-width:900px){:root:root:root:root:root body.fp.fp .fp-hero>.wrap:has(>.phero-art,>figure,>.card,>form,>.n-stack,>.v2-stage){grid-template-columns:minmax(0,1fr)!important}:root:root:root:root:root body.fp.fp .fp-plate{justify-self:center;width:min(420px,92%);margin-top:28px}}
+@media (max-width:900px){:root:root:root:root:root body.fp.fp .fp-hero>.wrap:has(>.phero-art,>figure,>.card,>form,>.n-stack,>.v2-stage,>aside){grid-template-columns:minmax(0,1fr)!important}:root:root:root:root:root body.fp.fp .fp-plate{justify-self:center;width:min(420px,92%);margin-top:28px}}
 
 /* ---------- forms lose the silver orbs; the card is the paper ---------- */
 :root:root:root:root:root body.fp.fp .v2-orb{display:none!important}
@@ -1039,5 +1061,27 @@ html.top-away body.fp .c-switch{top:14px!important}
 :root:root:root:root:root body.fp.fp .topicline.tl-units{max-height:none!important;overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important;padding-bottom:0!important}
 :root:root:root:root:root body.fp.fp .mf-act .btn--line{--fb:transparent;--ff:var(--on-dark);box-shadow:inset 0 0 0 1.5px oklch(95% .02 85 / .35)!important}
 :root:root:root:root:root body.fp.fp .mf-act .btn--line:hover{--ff:oklch(19% .03 163)}
+
+/* ---------- hero panel: the mihrab card (replaces the pinned photos) ---------- */
+:root:root:root:root:root body.fp.fp .fp-panel{position:relative;justify-self:end;width:min(430px,100%);display:grid;gap:0;padding:clamp(64px,7vw,88px) clamp(26px,3vw,36px) clamp(24px,3vw,32px);border-radius:999px 999px 28px 28px;overflow:hidden;isolation:isolate;
+  box-shadow:0 2px 0 oklch(19% .03 163 / .06),0 40px 80px -40px oklch(10% .03 163 / .7)}
+:root:root:root:root:root body.fp.fp .fp-panel::before{content:"";position:absolute;inset:12px;border:1.5px solid oklch(80% .145 80 / .5);border-radius:999px 999px 18px 18px;pointer-events:none;z-index:-1}
+:root:root:root:root:root body.fp.fp .fp-panel::after{content:"";position:absolute;left:50%;top:0;width:150%;aspect-ratio:1;transform:translate(-50%,-62%);background:radial-gradient(closest-side,oklch(80% .145 80 / .16),transparent);z-index:-1;pointer-events:none}
+:root:root:root:root:root body.fp.fp .fpp-head{display:grid;justify-items:center;text-align:center;gap:10px;padding-bottom:22px;border-bottom:1px solid var(--rule)}
+:root:root:root:root:root body.fp.fp .fpp-head img{width:72px;height:72px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 5px oklch(80% .145 80 / .3),0 0 0 6px oklch(80% .145 80 / .6)}
+:root:root:root:root:root body.fp.fp .fpp-head .lbl{color:var(--saffron)!important;margin-top:6px}
+:root:root:root:root:root body.fp.fp .fpp-head b{font:900 clamp(1.15rem,1.8vw,1.45rem)/1.08 var(--f-display);text-transform:uppercase;max-width:16ch;color:var(--text)}
+:root:root:root:root:root body.fp.fp .fpp-facts{margin:0;display:grid}
+:root:root:root:root:root body.fp.fp .fpp-facts>div{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule)}
+:root:root:root:root:root body.fp.fp .fpp-facts dt{font:700 .58rem/1.4 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+:root:root:root:root:root body.fp.fp .fpp-facts dd{margin:0;display:grid;gap:3px;text-align:right}
+:root:root:root:root:root body.fp.fp .fpp-facts dd b{font:900 clamp(.86rem,1.25vw,1.1rem)/1.15 var(--f-display)!important;color:var(--text)!important;-webkit-text-fill-color:currentColor!important;background:none!important;overflow-wrap:break-word;letter-spacing:-.01em!important}
+:root:root:root:root:root body.fp.fp .fpp-facts dd small{font:400 1rem/1.15 var(--f-hand);color:var(--saffron)}
+:root:root:root:root:root body.fp.fp .fpp-foot{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:18px;font:700 .58rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+:root:root:root:root:root body.fp.fp .fpp-foot span{padding:5px 8px;border-radius:6px;background:var(--saffron);color:oklch(19% .03 163)}
+@media (max-width:900px){:root:root:root:root:root body.fp.fp .fp-panel{justify-self:stretch;width:100%;max-width:520px;margin:28px auto 0;border-radius:200px 200px 24px 24px}}
+
+/* framed plates sit straight */
+:root:root:root:root:root body.fp.fp .fp-plate{transform:none!important}
 
 }
