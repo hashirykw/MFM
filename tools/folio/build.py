@@ -60,11 +60,9 @@ PLATES = {  # heroes without a picture get one of the hand-drawn folio plates
     'reviews': ('mihrab.webp', 'Plate V · the mihrab', 'in their own words'),
     '404': ('hira.webp', 'Plate II · Jabal al-Nur', 'start again at Hira'),
 }
-# The folio is built twice while the designs are compared:
-#   V3 at /v3 in the V2 colours (emerald, metallic gold, cream, a touch of orange)
-#   V4 at /v4 in its own paper-and-ink folio, with the greens lifted to #0A503C (palette/v4-base.css)
-# Set a prefix to '' to serve that build at /.
-VARIANTS = [('/v3', 'v2', 'folio'), ('/v4', 'v4', 'folio/v4')]
+# V4 is the only design (Nov 2026): the paper-and-ink folio with the greens lifted to #0A503C
+# (palette/v4-base.css), served at /. The old /v2 /v3 /v4 /v5 links redirect to / (vercel.json).
+VARIANTS = [('', 'v4', 'folio')]
 PREFIX, PAL, CSSDIR = VARIANTS[0]
 DEST = ROOT / PREFIX.strip('/')
 CSSOUT = ROOT / 'assets' / CSSDIR

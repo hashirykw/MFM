@@ -2,6 +2,10 @@
 
 A multi-page site for Sir Mohammad Fazil Maniya (MFM): Cambridge O Level Islamiyat 2058 and IGCSE Islamiyat 0493, Karachi and online. Settings live in `config.js`.
 
+## One design: V4 (28 Nov 2026)
+
+V4 is now the whole site, served at `/`: the paper-and-ink folio with the greens lifted to Hashir's sample #0A503C, and the paper textures as they were. The other versions (`/v2`, `/v3`, the old root design, and the separate `/v4` copy) are deleted. Old `/v2`, `/v3`, `/v4` and `/v5` links redirect to the same page at `/`. The v2/v3 notes further down are history only.
+
 ## The live design: the folio (Nov 2026)
 
 The whole site now uses the paper-and-ink **folio** design (formerly `/v5`, in the style of the Hamza Polani, Hashir portfolio and Clarus sites): crumpled paper and emerald-ink bands with torn edges, Archivo Wide caps with a handwritten accent, the Paper / Ink theme switch, the contents menu and the bottom dock. `/v5` now redirects to `/`.

@@ -47,7 +47,7 @@ async def main():
             doc = TPL.replace('{a}', html.escape(a)).replace('{b}', html.escape(bb)).replace('{c}', html.escape(c)).replace('{img}', img)
             (ROOT / '_og.html').write_text(doc)
             await pg.goto('http://127.0.0.1:8812/_og.html?' + slug, wait_until='load'); await pg.wait_for_timeout(250)
-            await pg.screenshot(path=str(ROOT / 'og' / 'v3' / f'{slug}.jpg'), type='jpeg', quality=86)
+            await pg.screenshot(path=str(ROOT / 'og' / f'{slug}.jpg'), type='jpeg', quality=86)
         (ROOT / '_og.html').unlink()
         await b.close()
 asyncio.run(main())
