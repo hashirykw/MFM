@@ -674,6 +674,31 @@ html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradie
 :root:root:root:root:root body.fp.fp .fp-plate-mat img{background:transparent!important}
 :root:root:root:root:root[data-theme="dark"] body.fp.fp .fp-plate-mat.fp-plate-mat{background:oklch(18% .012 158)!important;border-color:oklch(93.5% .006 240 / .12)!important}
 
+/* ---------- hover fill fix: buttons whose old fill was cream now fill deep green, so the label stays readable ---------- */
+:root:root:root:root:root body.fp.fp .btn--gold::after,:root:root:root:root:root body.fp.fp .s-lapis .btn:not(.btn-ghost):not(.btn--line)::after,:root:root:root:root:root body.fp.fp .s-sandstone .btn:not(.btn-ghost):not(.btn--line)::after,:root:root:root:root:root body.fp.fp .s-ink .btn:not(.btn-ghost):not(.btn--line)::after{background:var(--g-900)!important}
+:root:root:root:root:root body.fp.fp :is(.s-ink,.s-lapis,.s-sandstone) .btn:not(.btn-ghost):not(.btn--line):hover{color:oklch(97% .004 100)!important}
+
+/* ---------- AI checker sign-in gate: a clean paper card over a quietly locked workspace ---------- */
+:root:root:root:root:root body.fp.fp .ws:not(.on){filter:blur(2.5px) saturate(.6)!important;opacity:.2!important}
+:root:root:root:root:root body.fp.fp .gate{--text:oklch(16.5% .012 158);--text-2:oklch(32% .014 158);--paper:oklch(99% .003 100);--fb:var(--g-700);--ff:oklch(97% .004 100);
+  background-color:oklch(99% .003 100)!important;background-image:linear-gradient(oklch(16.5% .012 158 / .05) 1px,transparent 1px),linear-gradient(90deg,oklch(16.5% .012 158 / .05) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp)!important;
+  background-size:22px 22px,22px 22px,1024px 1024px!important;background-blend-mode:normal,normal,multiply!important;
+  border:1px solid oklch(72% .008 240 / .7)!important;border-radius:20px!important;color:var(--text)!important;
+  box-shadow:0 0 0 6px oklch(100% 0 0 / .06),0 40px 80px -30px oklch(0% 0 0 / .6)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;gap:14px!important;padding:36px 32px!important}
+:root:root:root:root:root body.fp.fp .gate .h3{color:oklch(16.5% .012 158)!important;-webkit-text-fill-color:currentColor!important;font:900 1.25rem/1.05 var(--f-display)!important;text-transform:uppercase}
+:root:root:root:root:root body.fp.fp .gate p{color:oklch(32% .014 158)!important}
+:root:root:root:root:root body.fp.fp .gate .btn:not(.btn-ghost):not(.btn--line){--fb:var(--g-700)!important;background-color:var(--g-700)!important;color:oklch(97% .004 100)!important}
+:root:root:root:root:root body.fp.fp .gate .btn:not(.btn-ghost):not(.btn--line)::after{background:var(--g-900)!important}
+:root:root:root:root:root body.fp.fp .gate :is(.btn-ghost,.btn--line){background:linear-gradient(oklch(99% .003 100),oklch(99% .003 100)) padding-box,var(--silver-metal) border-box!important;color:oklch(16.5% .012 158)!important}
+:root:root:root:root:root body.fp.fp .gate :is(.btn-ghost,.btn--line)::after{background:var(--g-700)!important}
+:root:root:root:root:root body.fp.fp .gate :is(.btn-ghost,.btn--line):hover{color:oklch(97% .004 100)!important}
+:root:root:root:root:root body.fp.fp .gate .gate-seal{box-shadow:0 0 0 3px oklch(77% .1 82 / .6)!important}
+:root:root:root:root:root[data-theme="dark"] body.fp.fp .gate.gate{--text:oklch(93.5% .006 240);--text-2:oklch(93.5% .006 240 / .74);--paper:oklch(17.5% .014 158);
+  background-color:oklch(17.5% .014 158)!important;background-image:linear-gradient(oklch(100% 0 0 / .04) 1px,transparent 1px),linear-gradient(90deg,oklch(100% 0 0 / .04) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp)!important;border-color:oklch(80% .006 240 / .25)!important}
+:root:root:root:root:root[data-theme="dark"] body.fp.fp .gate.gate :is(.h3,p){color:var(--text)!important}
+:root:root:root:root:root[data-theme="dark"] body.fp.fp .gate.gate :is(.btn-ghost,.btn--line){background:linear-gradient(oklch(17.5% .014 158),oklch(17.5% .014 158)) padding-box,linear-gradient(160deg,oklch(92% .004 240 / .5),oklch(75% .008 240 / .35)) border-box!important;color:var(--text)!important}
+:root:root:root:root:root body.fp.fp .gate{left:0!important;right:0!important;top:clamp(40px,8vw,96px)!important;margin-inline:auto!important;transform:none!important;translate:none!important}
+
 @layer fpbridge{
 /* =========================================================================
    BRIDGE · the V1 pages (all their tools and data) dressed in the folio design.
@@ -1212,5 +1237,30 @@ html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradie
 :root:root:root:root:root body.fp.fp .fp-plate-mat::before{border-color:oklch(72% .008 240 / .7)!important;outline:1px solid oklch(74% .09 82 / .55)!important;outline-offset:4px!important}
 :root:root:root:root:root body.fp.fp .fp-plate-mat img{background:transparent!important}
 :root:root:root:root:root[data-theme="dark"] body.fp.fp .fp-plate-mat.fp-plate-mat{background:oklch(18% .012 158)!important;border-color:oklch(93.5% .006 240 / .12)!important}
+
+/* ---------- hover fill fix: buttons whose old fill was cream now fill deep green, so the label stays readable ---------- */
+:root:root:root:root:root body.fp.fp .btn--gold::after,:root:root:root:root:root body.fp.fp .s-lapis .btn:not(.btn-ghost):not(.btn--line)::after,:root:root:root:root:root body.fp.fp .s-sandstone .btn:not(.btn-ghost):not(.btn--line)::after,:root:root:root:root:root body.fp.fp .s-ink .btn:not(.btn-ghost):not(.btn--line)::after{background:var(--g-900)!important}
+:root:root:root:root:root body.fp.fp :is(.s-ink,.s-lapis,.s-sandstone) .btn:not(.btn-ghost):not(.btn--line):hover{color:oklch(97% .004 100)!important}
+
+/* ---------- AI checker sign-in gate: a clean paper card over a quietly locked workspace ---------- */
+:root:root:root:root:root body.fp.fp .ws:not(.on){filter:blur(2.5px) saturate(.6)!important;opacity:.2!important}
+:root:root:root:root:root body.fp.fp .gate{--text:oklch(16.5% .012 158);--text-2:oklch(32% .014 158);--paper:oklch(99% .003 100);--fb:var(--g-700);--ff:oklch(97% .004 100);
+  background-color:oklch(99% .003 100)!important;background-image:linear-gradient(oklch(16.5% .012 158 / .05) 1px,transparent 1px),linear-gradient(90deg,oklch(16.5% .012 158 / .05) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp)!important;
+  background-size:22px 22px,22px 22px,1024px 1024px!important;background-blend-mode:normal,normal,multiply!important;
+  border:1px solid oklch(72% .008 240 / .7)!important;border-radius:20px!important;color:var(--text)!important;
+  box-shadow:0 0 0 6px oklch(100% 0 0 / .06),0 40px 80px -30px oklch(0% 0 0 / .6)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;gap:14px!important;padding:36px 32px!important}
+:root:root:root:root:root body.fp.fp .gate .h3{color:oklch(16.5% .012 158)!important;-webkit-text-fill-color:currentColor!important;font:900 1.25rem/1.05 var(--f-display)!important;text-transform:uppercase}
+:root:root:root:root:root body.fp.fp .gate p{color:oklch(32% .014 158)!important}
+:root:root:root:root:root body.fp.fp .gate .btn:not(.btn-ghost):not(.btn--line){--fb:var(--g-700)!important;background-color:var(--g-700)!important;color:oklch(97% .004 100)!important}
+:root:root:root:root:root body.fp.fp .gate .btn:not(.btn-ghost):not(.btn--line)::after{background:var(--g-900)!important}
+:root:root:root:root:root body.fp.fp .gate :is(.btn-ghost,.btn--line){background:linear-gradient(oklch(99% .003 100),oklch(99% .003 100)) padding-box,var(--silver-metal) border-box!important;color:oklch(16.5% .012 158)!important}
+:root:root:root:root:root body.fp.fp .gate :is(.btn-ghost,.btn--line)::after{background:var(--g-700)!important}
+:root:root:root:root:root body.fp.fp .gate :is(.btn-ghost,.btn--line):hover{color:oklch(97% .004 100)!important}
+:root:root:root:root:root body.fp.fp .gate .gate-seal{box-shadow:0 0 0 3px oklch(77% .1 82 / .6)!important}
+:root:root:root:root:root[data-theme="dark"] body.fp.fp .gate.gate{--text:oklch(93.5% .006 240);--text-2:oklch(93.5% .006 240 / .74);--paper:oklch(17.5% .014 158);
+  background-color:oklch(17.5% .014 158)!important;background-image:linear-gradient(oklch(100% 0 0 / .04) 1px,transparent 1px),linear-gradient(90deg,oklch(100% 0 0 / .04) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp)!important;border-color:oklch(80% .006 240 / .25)!important}
+:root:root:root:root:root[data-theme="dark"] body.fp.fp .gate.gate :is(.h3,p){color:var(--text)!important}
+:root:root:root:root:root[data-theme="dark"] body.fp.fp .gate.gate :is(.btn-ghost,.btn--line){background:linear-gradient(oklch(17.5% .014 158),oklch(17.5% .014 158)) padding-box,linear-gradient(160deg,oklch(92% .004 240 / .5),oklch(75% .008 240 / .35)) border-box!important;color:var(--text)!important}
+:root:root:root:root:root body.fp.fp .gate{left:0!important;right:0!important;top:clamp(40px,8vw,96px)!important;margin-inline:auto!important;transform:none!important;translate:none!important}
 
 }
