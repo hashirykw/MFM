@@ -413,6 +413,18 @@
   setInterval(() => doc.querySelectorAll('.lx-sel>select').forEach(s => s._lx && label(s, s._lx)), 700);
   window.MFMSelects = enhanceSelects;
 
-  function start() { watch(); mountSwitch(); cookieBar(); wireCards(); enhanceSelects(); new MutationObserver(ms => { if (ms.some(m => [...m.addedNodes].some(n => n.nodeType === 1 && (n.tagName === 'SELECT' || n.querySelector && n.querySelector('select'))))) enhanceSelects(); }).observe(doc.body, { childList: true, subtree: true }); }
+  /* any row of buttons with no gap gets one (catches rows the page CSS never spaced) */
+  function gapRows() {
+    const seen = new Set();
+    doc.querySelectorAll('.btn + .btn, .btn + .btn-link, .btn-link + .btn').forEach(b => {
+      const p = b.parentElement; if (!p || seen.has(p)) return; seen.add(p);
+      const c = getComputedStyle(p), g = parseFloat(c.columnGap) || 0, lay = /flex|grid/.test(c.display);
+      if (lay && g >= 6) return;
+      if (c.display === 'grid' || c.display === 'inline-grid') { p.style.columnGap = '10px'; p.style.rowGap = '10px'; }
+      else p.classList.add('lx-gap');
+    });
+  }
+
+  function start() { gapRows(); setTimeout(gapRows, 1500); watch(); mountSwitch(); cookieBar(); wireCards(); enhanceSelects(); new MutationObserver(ms => { if (ms.some(m => [...m.addedNodes].some(n => n.nodeType === 1 && (n.tagName === 'SELECT' || n.querySelector && n.querySelector('select'))))) enhanceSelects(); }).observe(doc.body, { childList: true, subtree: true }); }
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', start); else start();
 })();

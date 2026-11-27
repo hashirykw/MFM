@@ -960,3 +960,15 @@ ol.lx-pop-dates b{font:900 .9rem/1.3 var(--f-display);color:var(--saffron)}
 :root:root:root:root:root:root:root:root body .fc-ctrls .mono{flex:1;text-align:center}
 :root:root:root:root:root:root:root:root body [data-fc="prev"]{flex-direction:row-reverse!important}
 @media (max-width:520px){ :root:root:root:root:root:root:root:root body .fc-ctrls{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px!important} :root:root:root:root:root:root:root:root body .fc-ctrls .btn{padding:0 8px!important;font-size:.58rem!important;letter-spacing:.08em!important} :root:root:root:root:root:root:root:root body .fc-ctrls .btn .btn-i{display:none!important} :root:root:root:root:root:root:root:root body .fc-ctrls .mono{grid-column:1/-1;order:-1} :root:root:root:root:root:root:root:root body .fc-ctrls .ctrls{display:contents!important} :root:root:root:root:root:root:root:root body .fc-ctrls .btn{width:100%!important;justify-content:center!important} }
+
+/* ---------- button rows: never touching, wrap cleanly ---------- */
+:root:root:root:root:root:root:root:root body :is(.hero-cta,.cta-row,.btn-row,.btns,.ctas,.actions,.soc,.lx-pop-a){display:flex!important;align-items:center;gap:10px!important;flex-wrap:wrap}
+:root:root:root:root:root:root:root:root body .lab-next .hero-cta,:root:root:root:root:root:root:root:root body .center .hero-cta,:root:root:root:root:root:root:root:root body .hero-cta.center{justify-content:center!important}
+:root:root:root:root:root:root:root:root body .lx-gap{display:flex!important;flex-wrap:wrap!important;gap:10px!important;align-items:center}
+/* the menu's two buttons fit on a phone */
+:root:root:root:root:root:root:root:root body .menu-feat .mf-act .btn{padding:0 10px!important;letter-spacing:.08em!important;font-size:.6rem!important;gap:6px!important}
+/* header: the Join button gives way before the tools get crowded */
+@media (max-width:900px){ :root:root:root:root:root:root:root:root body .top .top-cta{display:none!important} }
+
+:root:root:root:root:root:root:root:root body .top-r .btn,:root:root:root:root:root:root:root:root body .fpp-head .btn{flex:none}
+:root:root:root:root:root:root:root:root body main :is(.card,.panel) .btn{width:max-content!important;max-width:100%!important;flex-shrink:0;letter-spacing:.08em!important;padding-inline:16px!important}
