@@ -63,6 +63,43 @@ const Lbx = (() => {
   plates.forEach((p, k) => p.addEventListener('click', () => Lbx.open(list, k)));
 })();
 
+/* ---------- folio: thin topic strips, each opens "how it works" ---------- */
+(() => {
+  const box = $('#topics'), T = D.TOPICS || []; if (!box || !T.length) return;
+  const IMG = n => `/assets/folio/img/topics/${n}.webp`;
+  const ARR = '<svg class="arr" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  let n = 0;
+  [1, 2].forEach(pp => {
+    $(`.tp-col[data-p="${pp}"] .tp-list`, box).innerHTML = T.filter(t => t[1] === pp).map(t => {
+      n++;
+      return `<button class="tp" type="button" data-id="${t[0]}" style="--i:${n}"><span class="tp-bg" aria-hidden="true"><img src="${IMG(t[4])}" alt="" loading="lazy" decoding="async"></span>`
+        + `<span class="tp-n">${String(n).padStart(2, '0')}</span><span class="tp-t"><b>${esc(t[2])}</b><small>${esc(t[3])}</small></span>`
+        + `<span class="tp-go"><span>See how it works</span>${ARR}</span></button>`;
+    }).join('');
+  });
+  // phones show one paper at a time
+  const tabs = $('.tp-tabs', box);
+  tabs.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    $$('button', tabs).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    box.dataset.p = b.dataset.v;
+  });
+  box.dataset.p = '1';
+  box.addEventListener('click', e => {
+    const b = e.target.closest('.tp'); if (!b || !window.MFMPop) return;
+    const t = T.find(x => x[0] === b.dataset.id); if (!t) return;
+    const [id, pp, title, meta, img, intro, steps, exam] = t;
+    const html = `<figure class="tp-pop-img"><img src="${IMG(img)}" alt=""></figure><p class="lx-pop-lead">${esc(intro)}</p>`
+      + `<h4>How it works</h4><ol class="tp-steps">${steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol>`
+      + `<h4>In the exam</h4><p>${esc(exam)}</p>`;
+    const mk = (href, label, cls, ext) => { const a = document.createElement('a'); a.href = href; a.className = 'btn btn--sm ' + (cls || ''); if (ext) { a.target = '_blank'; a.rel = 'noopener'; } a.innerHTML = esc(label) + ' ' + ARR; return a; };
+    window.MFMPop.open(title, html, { kicker: `Paper ${pp} · ${meta}`, from: b, actions: [
+      mk('/syllabus', 'Track it in the syllabus'),
+      mk(`https://wa.me/${WA}?text=${encodeURIComponent('Assalam o Alaikum Sir Fazil! A question about: ' + title)}`, 'Ask Sir Fazil', 'btn--line', true),
+    ] });
+  });
+})();
+
 /* ---------- life gallery ---------- */
 (() => {
   const g = $('#lifeGrid'); if (!g) return;

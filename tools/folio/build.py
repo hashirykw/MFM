@@ -687,7 +687,8 @@ def build_home(v):
     s = s[:i] + dock('index') + s[j:]
     s = s.replace('<script>\n{{DATA}}\n</script>', f'<script src="/assets/folio/home-data.js?v={v["data"]}"></script>')
     s = s.replace('<script>\n{{JS}}\n</script>', f'<script src="/assets/folio/luxe.js?v={v["luxe"]}"></script>\n<script src="/assets/folio/shell.js?v={v["shell"]}"></script>\n<script src="/assets/folio/home.js?v={v["homejs"]}"></script>')
-    s = s.replace('<script type="module">\n{{MOSQUE}}\n</script>', f'<script src="/assets/folio/prayer.js?v={v["prayer"]}"></script>\n<script src="/assets/folio/qibla.js?v={v["qibla"]}"></script>\n<script type="module" src="/assets/folio/3d/mosque3d.js?v={v["mosque"]}"></script>\n<script type="module" src="/assets/folio/3d/scene3d.js?v={v["scene3d"]}"></script>\n<script type="module" src="/assets/folio/3d/prayer3d.js?v={v["prayer3d"]}"></script>')
+    SCENE3D = f'\n<script type="module" src="/assets/folio/3d/scene3d.js?v={v["scene3d"]}"></script>' if 'data-model=' in s else ''
+    s = s.replace('<script type="module">\n{{MOSQUE}}\n</script>', f'<script src="/assets/folio/prayer.js?v={v["prayer"]}"></script>\n<script src="/assets/folio/qibla.js?v={v["qibla"]}"></script>\n<script type="module" src="/assets/folio/3d/mosque3d.js?v={v["mosque"]}"></script>{SCENE3D}\n<script type="module" src="/assets/folio/3d/prayer3d.js?v={v["prayer3d"]}"></script>')
     s = s.replace('{{NEXLYR}}', '')
     # the home is the front page of a multi-page site: each section opens its full page
     s = s.replace('<a class="btn btn--line" href="#lab">Open the Islamiyat Lab</a>', '<a class="btn btn--line" href="/lab">Open the Islamiyat Lab</a>')
