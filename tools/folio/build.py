@@ -627,7 +627,7 @@ def build_v1(slug, v):
 <link rel="stylesheet" href="{CSSURL}/legacy-2.css?v={v['l2']}">
 <link rel="stylesheet" href="{CSSURL}/base.css?v={v['base']}">
 <link rel="stylesheet" href="{CSSURL}/bridge.css?v={v['bridge']}">
-{PRELOAD3D if ('fpp-orb' in main or 'data-model=' in main) else ''}
+{PRELOAD3D if 'data-model=' in main else ''}
 </head>
 <body data-page="{slug}" class="fp fp-{slug}">
 <a class="skip" href="#main">Skip to content</a>
@@ -647,7 +647,6 @@ def build_v1(slug, v):
 <script src="/assets/folio/core.js?v={v['core']}"></script>
 <script src="/assets/folio/shell.js?v={v['shell']}"></script>
 {''.join('<script>' + s + '</script>' for s in inline)}
-{f'<script type="module" src="/assets/folio/3d/ornament3d.js?v={v["orn"]}"></script>' if 'fpp-orb' in main else ''}
 {f'<script type="module" src="/assets/folio/3d/scene3d.js?v={v["scene3d"]}"></script>' if 'data-model=' in main else ''}
 </body>
 </html>
@@ -742,7 +741,7 @@ def main():
     (OUT / 'mfm.js').write_text(root_assets(R('mfm.js')))
     legacy_css()
     v = {'l1': ver('legacy-1.css'), 'l2': ver('legacy-2.css'), 'base': ver('base.css'), 'bridge': ver('bridge.css'), 'home': ver('home.css'),
-         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('3d/mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('3d/prayer3d.js'), 'orn': ver('3d/ornament3d.js'), 'luxe': ver('luxe.js'), 'scene3d': ver('3d/scene3d.js'), 'qibla': ver('qibla.js')}
+         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('3d/mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('3d/prayer3d.js'), 'luxe': ver('luxe.js'), 'scene3d': ver('3d/scene3d.js'), 'qibla': ver('qibla.js')}
     print('index.html', build_home(v) // 1024, 'KB')
     for slug in PAGES:
         if slug == 'index':
