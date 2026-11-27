@@ -546,7 +546,7 @@ RA.toast = function (msg, ms) {
 RA.modal = function (html) {
   const m = $('#modal'); if (!m) return;
   $('#modalBody').innerHTML = html; m.classList.add('open'); m.setAttribute('aria-hidden', 'false'); RA.lock(true); Snd.open();
-  const f = $('input,select,textarea,button:not(.xbtn)', $('#modalBody')); setTimeout(() => f && f.focus(), 60);
+  const f = $('input,select,textarea', $('#modalBody')) || $('.xbtn', m), bx = $('.modal-box', m); if (bx) bx.scrollTop = 0; setTimeout(() => { f && f.focus({ preventScroll: true }); if (bx) bx.scrollTop = 0; }, 60);
 };
 RA.closeModal = function () {
   const m = $('#modal'); if (!m || !m.classList.contains('open')) return;

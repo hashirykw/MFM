@@ -142,3 +142,18 @@
 %P% .menu .mi.here{border-color:var(--saffron)!important}
 %P% .menu-feat .btn--line{color:var(--text)!important;border-color:var(--rule-2)!important;background:transparent!important}
 %P% .menu .mi-t small.mi-you{white-space:normal!important;overflow:visible!important}
+
+/* ---------- the topic pop-ups on the inner pages (syllabus, lab, notes…) ---------- */
+%P% .modal-box{position:relative!important;padding:clamp(24px,3vw,32px)!important;padding-top:clamp(26px,3vw,34px)!important;border-radius:22px!important}
+%P% .modal-box>.xbtn{position:absolute!important;top:14px!important;right:14px!important;width:38px!important;height:38px!important;min-height:0!important;z-index:2}
+%P% #modalBody>.lbl{display:block;padding-right:52px;font-size:.6rem!important;line-height:1.5!important}
+%P% #modalBody #mTitle,%P% #modalBody>h2{font-size:clamp(1.3rem,2.5vw,1.8rem)!important;line-height:1.05!important;margin:8px 52px 12px 0!important}
+%P% #modalBody .sub-list{margin:14px 0!important}
+%P% #modalBody .sub-list li{font-size:.95rem!important;line-height:1.5!important}
+%P% #modalBody .def-box{margin-top:12px!important;padding:14px 16px!important;border-radius:14px!important}
+%P% #modalBody .hero-cta{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px!important;align-items:stretch!important}
+%P% #modalBody .hero-cta>.btn{width:100%!important;min-height:46px!important;justify-content:center!important;padding:0 14px!important}
+%P% #modalBody .hero-cta>.btn-link{grid-column:1/-1;display:flex!important;align-items:center;justify-content:center;gap:8px;min-height:46px!important;padding:0 16px!important;border-radius:12px;border:1px solid var(--rule-2)!important;
+  text-decoration:none!important;font:700 .64rem/1 var(--f-display)!important;letter-spacing:.12em!important;text-transform:uppercase;color:var(--text)!important;transition:background-color .3s,color .3s,border-color .3s}
+%P% #modalBody .hero-cta>.btn-link:hover{background:var(--saffron)!important;color:oklch(19% .03 163)!important;border-color:transparent!important}
+%P% #modalBody .pill{white-space:normal!important;max-width:100%!important;height:auto!important;min-height:0!important;display:inline-block!important;line-height:1.35!important;padding:6px 12px!important}
