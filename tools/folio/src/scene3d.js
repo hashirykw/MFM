@@ -1,6 +1,6 @@
 /* Live dioramas, frameless: every element with data-model="…" becomes a window onto its own 3D
    scene, all drawn by ONE transparent renderer on a fixed canvas over the page (so any number of
-   models cost one WebGL context). Drag to turn any of them a full 360° either way (orbit3d.js); they turn slowly on their own; lighting
+   models cost one WebGL context). Drag sideways to turn any of them all the way round, upright like a turntable (orbit3d.js); they turn slowly on their own; lighting
    follows the theme. The still render inside the element shows until its model is ready. */
 import * as THREE from '/assets/folio/js/three.module.min.js';
 import { makeScene } from './stage3d.js';

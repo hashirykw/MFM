@@ -34,7 +34,7 @@ function build(host) {
 
   let px = 0, py = 0, tx = 0, ty = 0;
   canvas.style.pointerEvents = 'auto';
-  const o = orbit(canvas, { auto: 0, scroll: true, upright: 4 });
+  const o = orbit(canvas, { auto: 0, scroll: true });
   const card = host.closest('.fp-panel') || host;
   card.addEventListener('pointermove', e => { const r = card.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width - .5; ty = (e.clientY - r.top) / r.height - .5; });
   card.addEventListener('pointerleave', () => { tx = ty = 0; });

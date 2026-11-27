@@ -208,8 +208,8 @@ function init() {
 
   /* ---------- interaction ---------- */
   mat.rotation.x = .12;
-  // turns a full 360° either way; let go and it settles toward the Ka'ba
-  const o = orbit(canvas, { yaw: -1.8, auto: 0, scroll: false, upright: 3 });
+  // turns all the way round on its upright axis; let go and it settles toward the Ka'ba
+  const o = orbit(canvas, { yaw: -1.8, auto: 0, scroll: false });
   o.ty = -.6;
   const look = new THREE.Vector3(), dir = new THREE.Vector3(); let dist = 1;
   function size() {
