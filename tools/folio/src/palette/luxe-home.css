@@ -32,3 +32,7 @@
 
 .sp-city select option{background:oklch(98.4% .003 100);color:oklch(16.5% .012 158)}
 [data-theme="dark"] .sp-city select option{background:oklch(17.5% .014 158);color:oklch(93.5% .006 240)}
+
+/* the "where he teaches" arch card: plain paper and grid, no lattice */
+.mfm-card{background:oklch(99% .003 100);background-image:linear-gradient(oklch(16.5% .012 158 / .05) 1px,transparent 1px),linear-gradient(90deg,oklch(16.5% .012 158 / .05) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp);background-size:22px 22px,22px 22px,1024px 1024px;background-blend-mode:normal,normal,multiply}
+[data-theme="dark"] .mfm-card{background-color:oklch(18% .012 158)}

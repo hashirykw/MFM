@@ -210,3 +210,11 @@ html{scrollbar-color:oklch(41% .082 158) oklch(95.6% .005 100)}
 
 /* the WhatsApp send button in the book green, not the app's bright green */
 .btn--wa{--b:var(--btn-ink,var(--g-600));--f:oklch(97% .004 100)}
+
+/* ---------- bands: plain paper and the grid, no lattice pattern (Nov 2026) ----------
+   The crumpled sheet is multiplied into the band colour, so green and black bands read as
+   the same notebook paper as the white pages. */
+.s-ink,.s-lapis,.s-sandstone{
+  background-image:linear-gradient(oklch(100% 0 0 / .055) 1px,transparent 1px),linear-gradient(90deg,oklch(100% 0 0 / .055) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp);
+  background-size:28px 28px,28px 28px,1024px 1024px;background-blend-mode:normal,normal,multiply}
+[data-theme="dark"] :is(.s-ink,.s-lapis,.s-sandstone){background-image:linear-gradient(oklch(100% 0 0 / .04) 1px,transparent 1px),linear-gradient(90deg,oklch(100% 0 0 / .04) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp)}
