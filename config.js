@@ -105,18 +105,19 @@ window.RA_CONFIG = {
 })();
 
 /* Design versions, side by side for the final choice: V1 is the site at /, V2 lives at /v2 (home, about,
-   courses) and V3 (the folio in the V2 colours) at /v3 with every page. A small switch on the left edge
+   courses), V3 (the folio in the V2 colours) at /v3 and V4 (the folio in its own paper-and-ink colours) at /v4,
+   both with every page. A small switch on the left edge
    jumps to the same page in the other designs. To hide it after the decision, set SHOW = false. */
 (function () {
   var SHOW = true;
   if (!SHOW) return;
   var path = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
   if (/^\/v2(\/|$)/.test(path)) return; /* V2 has its own switch */
-  var cur = /^\/v3(\/|$)/.test(path) ? 3 : 1;
-  var page = path.replace(/^\/v3/, '') || '/';
+  var m = path.match(/^\/v([34])(\/|$)/), cur = m ? +m[1] : 1;
+  var page = path.replace(/^\/v[34]/, '') || '/';
   if (page === '/index') page = '/';
   var V2 = { '/about': '/v2/about', '/courses': '/v2/courses' };
-  var href = [page, V2[page] || '/v2', '/v3' + (page === '/' ? '' : page)];
+  var href = [page, V2[page] || '/v2', '/v3' + (page === '/' ? '' : page), '/v4' + (page === '/' ? '' : page)];
   function add() {
     if (document.querySelector('nav.mfm-vsw')) return;
     var n = document.createElement('nav');
