@@ -339,7 +339,7 @@ const Snd = RA.Snd;
 /* ---------------------------------------------------------------- theme */
 RA.theme = function (t) {
   root.dataset.theme = t; RA.store.set('ra-theme', t);
-  $$('meta[name="theme-color"]').forEach(m => m.content = t === 'light' ? '#fafaf8' : '#0c1311');
+  $$('meta[name="theme-color"]').forEach(m => m.content = t === 'light' ? '#fafaf8' : '#163d2a');
   $$('[data-theme-btn]').forEach(b => b.setAttribute('aria-pressed', String(t === 'light')));
   if (RA.BG) RA.BG.theme(t);
   document.dispatchEvent(new CustomEvent('ra:theme', { detail: t }));

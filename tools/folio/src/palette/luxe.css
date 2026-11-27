@@ -218,3 +218,19 @@ html{scrollbar-color:oklch(41% .082 158) oklch(95.6% .005 100)}
   background-image:linear-gradient(oklch(100% 0 0 / .055) 1px,transparent 1px),linear-gradient(90deg,oklch(100% 0 0 / .055) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp);
   background-size:28px 28px,28px 28px,1024px 1024px;background-blend-mode:normal,normal,multiply}
 [data-theme="dark"] :is(.s-ink,.s-lapis,.s-sandstone){background-image:linear-gradient(oklch(100% 0 0 / .04) 1px,transparent 1px),linear-gradient(90deg,oklch(100% 0 0 / .04) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp)}
+
+/* ---------- Ink theme, Nov 2026: green is the page, black is the accent band ----------
+   The hero and most sections are deep book green; the bands that used to be green
+   (and the study-pack band) are near-black, so the two still alternate. */
+[data-theme="dark"]{
+  --paper:oklch(27% .06 158);
+  --paper-2:oklch(31% .066 158);
+  --paper-3:oklch(35% .072 158);
+  --grid-c:oklch(97% .004 100 / .05);
+  --rule:oklch(93.5% .006 240 / .14);
+  --rule-2:oklch(93.5% .006 240 / .28);
+}
+[data-theme="dark"] .s-paper{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp);background-size:28px 28px,28px 28px,1024px 1024px;background-blend-mode:normal,normal,multiply}
+[data-theme="dark"] .s-ink{--paper:oklch(14.5% .012 158);--paper-2:oklch(19% .016 158);--paper-3:oklch(23% .02 158)}
+[data-theme="dark"] .s-lapis{--paper:oklch(16% .014 158);--paper-2:oklch(20.5% .018 158);--paper-3:oklch(25% .022 158)}
+[data-theme="dark"] .s-sandstone{--paper:oklch(12.5% .01 158)}

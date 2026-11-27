@@ -527,7 +527,7 @@ html.top-away body.fp .c-switch{top:14px!important}
 .fp .tdock,.fp .dock [data-sound-btn]{display:none!important}
 /* page paper: white in Paper, near-black in Ink (was cream / green) */
 html:root:root:root body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(99.5% .002 100 / .42),oklch(99.5% .002 100 / .42)),var(--sheet)!important;background-size:28px 28px,28px 28px,100% 100%,1024px 1024px!important}
-html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(12% .01 168 / .8),oklch(10% .008 168 / .84)),var(--sheet)!important}
+html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp)!important;background-blend-mode:normal,normal,multiply!important}
 /* the old engine's glow behind highlighted headline words: gone */
 :root:root[data-theme="dark"] :is(.title,.title-sm,.h3,h1,h2,h3) em,:root:root[data-theme="dark"] [data-split-done] em{filter:none!important}
 /* inner-page hero plates: white mat, silver rule, matte gold line (was cream and orange) */

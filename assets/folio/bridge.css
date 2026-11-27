@@ -114,6 +114,13 @@
   --edge:inset 0 0 0 1px oklch(93.5% .006 240 / .1),inset 0 1px 0 oklch(100% 0 0 / .06);
   --shadow:0 1px 0 oklch(0% 0 0 / .4),0 20px 44px -22px oklch(0% 0 0 / .85);
   --shadow-lg:0 2px 0 oklch(0% 0 0 / .4),0 40px 70px -30px oklch(0% 0 0 / .9);
+
+  --paper:oklch(27% .06 158);
+  --paper-2:oklch(31% .066 158);
+  --paper-3:oklch(35% .072 158);
+  --grid-c:oklch(97% .004 100 / .05);
+  --rule:oklch(93.5% .006 240 / .14);
+  --rule-2:oklch(93.5% .006 240 / .28);
 }
 :root:root:root{--acc-rgb:25 87 57;--card:oklch(99.6% .002 100);--field:oklch(100% 0 0);}
 :root:root:root[data-theme="dark"]{--acc-rgb:232 181 71;--card:oklch(18.5% .014 168);--field:oklch(15% .01 168);}
@@ -665,7 +672,7 @@ html.top-away body.fp .c-switch{top:14px!important}
 :root:root:root:root:root body.fp.fp .tdock,:root:root:root:root:root body.fp.fp .dock [data-sound-btn]{display:none!important}
 /* page paper: white in Paper, near-black in Ink (was cream / green) */
 html:root:root:root body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(99.5% .002 100 / .42),oklch(99.5% .002 100 / .42)),var(--sheet)!important;background-size:28px 28px,28px 28px,100% 100%,1024px 1024px!important}
-html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(12% .01 168 / .8),oklch(10% .008 168 / .84)),var(--sheet)!important}
+html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp)!important;background-blend-mode:normal,normal,multiply!important}
 /* the old engine's glow behind highlighted headline words: gone */
 :root:root[data-theme="dark"] :is(.title,.title-sm,.h3,h1,h2,h3) em,:root:root[data-theme="dark"] [data-split-done] em{filter:none!important}
 /* inner-page hero plates: white mat, silver rule, matte gold line (was cream and orange) */
@@ -1229,7 +1236,7 @@ html.top-away body.fp .c-switch{top:14px!important}
 :root:root:root:root:root body.fp.fp .tdock,:root:root:root:root:root body.fp.fp .dock [data-sound-btn]{display:none!important}
 /* page paper: white in Paper, near-black in Ink (was cream / green) */
 html:root:root:root body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(99.5% .002 100 / .42),oklch(99.5% .002 100 / .42)),var(--sheet)!important;background-size:28px 28px,28px 28px,100% 100%,1024px 1024px!important}
-html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(12% .01 168 / .8),oklch(10% .008 168 / .84)),var(--sheet)!important}
+html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp)!important;background-blend-mode:normal,normal,multiply!important}
 /* the old engine's glow behind highlighted headline words: gone */
 :root:root[data-theme="dark"] :is(.title,.title-sm,.h3,h1,h2,h3) em,:root:root[data-theme="dark"] [data-split-done] em{filter:none!important}
 /* inner-page hero plates: white mat, silver rule, matte gold line (was cream and orange) */
