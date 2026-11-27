@@ -681,3 +681,109 @@
 /* the "where he teaches" arch card: plain paper and grid, no lattice */
 .mfm-card{background:oklch(99% .003 100);background-image:linear-gradient(oklch(16.5% .012 158 / .05) 1px,transparent 1px),linear-gradient(90deg,oklch(16.5% .012 158 / .05) 1px,transparent 1px),url(/assets/folio/img/paper/paper-light.webp);background-size:22px 22px,22px 22px,1024px 1024px;background-blend-mode:normal,normal,multiply}
 [data-theme="dark"] .mfm-card{background-color:oklch(18% .012 158)}
+
+/* where he teaches: logos only, on white cards with a silver edge (logos need a light ground in both themes) */
+.trust .trust-row .tile{aspect-ratio:5/4;padding:16px;gap:0;background:oklch(99.4% .002 100);border:1px solid transparent;border-radius:14px;
+  background:linear-gradient(oklch(99.4% .002 100),oklch(99.4% .002 100)) padding-box,var(--silver-metal) border-box;box-shadow:0 10px 22px -18px oklch(16.5% .012 158 / .45)}
+.trust .trust-row .tile:hover{transform:translateY(-4px);box-shadow:0 18px 30px -18px oklch(16.5% .012 158 / .5)}
+.trust .trust-row .tile img{width:82%;max-height:76px;object-fit:contain}
+[data-theme="dark"] .tile{box-shadow:0 14px 28px -16px oklch(0% 0 0 / .7)}
+
+/* folio plates: no mat, no frame; the model floats over the paper with its caption under it */
+.plate-mat{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
+.plate-mat::before,.plate-mat::after,.plate .corner{display:none!important}
+.plate:hover .plate-mat{transform:none;box-shadow:none}
+.plate-mat img{background:transparent}
+.plate.w12{grid-column:1/-1}
+.plate.w12 .plate-mat img{aspect-ratio:2.1/1}
+.plate figcaption{border-top:1px solid var(--rule);padding-top:12px}
+
+/* =========================================================================
+   Prayer corner, redone: a clean panel with a silver edge, a clear next-prayer
+   block, a timetable with hairlines (past prayers quiet, the next one marked in
+   gold), a themed city picker, and the qibla bar under the janamaz.
+   ========================================================================= */
+@font-face{font-family:"Amiri";src:url(/fonts/amiri-400.woff2) format("woff2");font-weight:400;font-display:swap}
+.salah-panel{border-radius:22px;gap:20px;border:1px solid oklch(85% .006 240 / .28);box-shadow:inset 0 1px 0 oklch(100% 0 0 / .08),0 40px 70px -36px oklch(10% .02 158 / .7)}
+.sp-top{align-items:center}
+.sp-date b{font-size:1.25rem;letter-spacing:.01em}
+.sp-city select{border-radius:10px;height:42px;min-width:150px;padding:0 38px 0 14px;font:700 .7rem/1 var(--f-display);letter-spacing:.12em;text-transform:uppercase;color:var(--text);
+  background-color:oklch(100% 0 0 / .06);border:1px solid oklch(100% 0 0 / .22);transition:border-color .3s,background-color .3s;cursor:pointer}
+.sp-city select:hover{border-color:var(--saffron);background-color:oklch(100% 0 0 / .1)}
+.sp-next{padding:20px 0;gap:20px}
+.sp-next b#spNextName{letter-spacing:-.01em}
+.sp-ar,.sp-n small{font-family:"Amiri","Noto Naskh Arabic","Geeza Pro","Traditional Arabic",serif}
+.sp-count-w{padding:12px 14px;border-radius:14px;background:oklch(0% 0 0 / .18);border:1px solid oklch(100% 0 0 / .1)}
+.sp-count{color:var(--saffron)}
+.sp-list{gap:0;border-radius:14px;overflow:hidden;border:1px solid oklch(100% 0 0 / .1)}
+.sp-list li{border-radius:0;padding:12px 16px;border-bottom:1px solid oklch(100% 0 0 / .08);position:relative}
+.sp-list li:last-child{border-bottom:0}
+.sp-list li:has(~ li.now),.sp-list li.now:not(.next){color:oklch(97% .004 100 / .55)}
+.sp-list li.now{background:oklch(100% 0 0 / .04)}
+.sp-list li.next{background:oklch(100% 0 0 / .1);color:var(--text)}
+.sp-list li.next::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--saffron)}
+.sp-list li.next b{color:var(--saffron)}
+.sp-list li.next small{color:var(--text-2)}
+.sp-list li.next .sp-n::after{content:"next";margin-left:8px;padding:3px 6px;border-radius:5px;font:700 .5rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;background:var(--saffron);color:oklch(16.5% .012 158)}
+.sp-ram{border-radius:14px;background:oklch(0% 0 0 / .14);border-color:oklch(100% 0 0 / .1)}
+.sp-bar::after{background:linear-gradient(90deg,var(--saffron),oklch(80% .06 150))}
+.sp-hijri-ar{font-family:"Amiri",serif;color:oklch(100% 0 0 / .05)}
+#salah.local .sp-src{color:var(--text-2)}
+
+/* the qibla bar under the janamaz */
+.salah-stage{margin-bottom:0}
+.qibla-bar{grid-column:1;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:14px 18px;margin-top:-6px;padding:16px 18px;border-radius:16px;
+  background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--silver-metal) border-box;border:1px solid transparent;box-shadow:0 18px 36px -24px oklch(16.5% .012 158 / .45)}
+[data-theme="dark"] .qibla-bar{background:linear-gradient(var(--paper-2),var(--paper-2)) padding-box,linear-gradient(160deg,oklch(80% .006 240 / .45),oklch(55% .008 240 / .3)) border-box}
+.qb-dial{width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:var(--btn-ink,var(--g-800));color:var(--saffron);transition:box-shadow .5s}
+.qb-dial svg{width:44px;height:44px}
+.qb-dial circle{fill:none;stroke:currentColor;stroke-opacity:.5;stroke-width:1.5}
+.qb-dial .qb-n{stroke:oklch(97% .004 100);stroke-width:2;stroke-linecap:round}
+.qb-needle{transform-origin:24px 24px;transition:transform .9s var(--ease-out)}
+.qb-needle path{fill:currentColor}
+.qb-needle rect{fill:#141615;stroke:currentColor;stroke-width:.8}
+.qb-t{display:grid;gap:3px;min-width:0}
+.qb-t .lbl{color:var(--royal)}
+.qb-t b{font:900 1.25rem/1 var(--f-display);letter-spacing:.01em}
+.qb-pt{font-size:.8rem;color:var(--text-3);letter-spacing:.1em}
+.qb-from{font-size:.84rem;color:var(--text-2)}
+.qb-act{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.qb-info{grid-column:1/-1;justify-self:start}
+.qb-note{grid-column:1/-1;margin:0;font-size:.74rem;line-height:1.5;color:var(--text-3)}
+.salah-stage.facing ~ .qibla-bar .qb-dial{box-shadow:0 0 0 4px oklch(77% .1 82 / .35)}
+.salah-stage.facing .salah-note::after{content:" · facing the qibla";color:var(--royal)}
+.salah{align-items:start}
+.salah>.salah-panel{grid-row:1 / span 2;grid-column:2}
+@media (max-width:860px){.salah>.salah-panel{grid-row:auto;grid-column:auto}.qibla-bar{grid-column:auto}}
+
+/* folio: plates show the model and the title; the story opens in the plate sheet */
+.plate p{display:none}
+.plate figcaption b::after{content:"";display:inline-block;width:.62em;height:.62em;margin-left:.45em;vertical-align:.05em;border:1.5px solid currentColor;border-left:0;border-bottom:0;transform:rotate(45deg) translate(-1px,1px);opacity:.55}
+
+/* the plate sheet (was a dark image viewer) */
+.lbx{background:oklch(14% .02 158 / .55)!important;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.lbx-card{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(18px,3vw,36px);align-items:center;width:min(1080px,calc(100vw - 32px));max-height:calc(100svh - 48px);padding:clamp(20px,3vw,36px);border-radius:22px;
+  background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--silver-metal) border-box;border:1px solid transparent;
+  background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(var(--paper),var(--paper)),var(--silver-metal);background-size:24px 24px,24px 24px,auto,auto;background-origin:padding-box,padding-box,padding-box,border-box;background-clip:padding-box,padding-box,padding-box,border-box;
+  box-shadow:0 50px 100px -40px oklch(0% 0 0 / .65);transform:translateY(16px) scale(.98);opacity:0;transition:transform .55s var(--ease-out),opacity .4s var(--ease-out)}
+.lbx.open .lbx-card{transform:none;opacity:1}
+.lbx-card img,#lbxImg{width:100%;max-height:min(62svh,560px);object-fit:contain;background:none!important;box-shadow:none!important;border:0!important}
+.lbx-t{display:grid;gap:10px;align-content:center}
+.lbx-t b{font:900 clamp(1.3rem,2.4vw,1.9rem)/1.02 var(--f-display);text-transform:uppercase;color:var(--text)}
+.lbx-t i{font:1.25rem/1.1 var(--f-hand);font-style:normal;color:var(--sand)}
+.lbx-t p{margin:6px 0 0;font-size:1rem;line-height:1.65;color:var(--text-2);max-width:42ch}
+.lbx .c{color:oklch(97% .004 100 / .8)!important;font:700 .66rem/1 var(--f-display)!important;letter-spacing:.16em}
+.lbx .iconbtn{background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--silver-metal) border-box!important;border:1px solid transparent!important;color:var(--text)!important;border-radius:12px!important}
+@media (max-width:760px){.lbx-card{grid-template-columns:minmax(0,1fr);overflow:auto}.lbx-card img,#lbxImg{max-height:38svh}}
+
+/* the join form card: white paper with a silver edge in Paper, deep paper in Ink; its own tokens so
+   fields, the toggle, errors and the button read correctly on either */
+.form-card{--paper:oklch(99.4% .002 100);--paper-2:oklch(96.4% .004 100);--text:oklch(16.5% .012 158);--text-2:oklch(32% .014 158);--text-3:oklch(46% .012 158);--rule:oklch(16.5% .012 158 / .13);--rule-2:oklch(16.5% .012 158 / .26);--royal:oklch(41% .082 158);--royal-soft:oklch(41% .082 158 / .1);--danger:oklch(50% .16 28);--danger-soft:oklch(50% .16 28 / .08);--btn-ink:oklch(41% .082 158);
+  color:var(--text);border:1px solid transparent;
+  background-image:linear-gradient(var(--grid-c,oklch(16.5% .012 158 / .05)) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c,oklch(16.5% .012 158 / .05)) 1px,transparent 1px),linear-gradient(var(--paper),var(--paper)),var(--silver-metal);
+  background-size:24px 24px,24px 24px,auto,auto;background-origin:padding-box,padding-box,padding-box,border-box;background-clip:padding-box,padding-box,padding-box,border-box;--grid-c:oklch(16.5% .012 158 / .045)}
+[data-theme="dark"] .form-card{--paper:oklch(18% .014 158);--paper-2:oklch(22% .018 158);--text:oklch(93.5% .006 240);--text-2:oklch(93.5% .006 240 / .74);--text-3:oklch(93.5% .006 240 / .56);--rule:oklch(93.5% .006 240 / .13);--rule-2:oklch(93.5% .006 240 / .26);--royal:oklch(80% .06 150);--royal-soft:oklch(80% .06 150 / .12);--danger:oklch(78% 0.12 78);--danger-soft:oklch(78% 0.12 78 / .1);--btn-ink:oklch(48% .088 158);--grid-c:oklch(100% 0 0 / .035);
+  background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(var(--paper),var(--paper)),linear-gradient(160deg,oklch(80% .006 240 / .45),oklch(55% .008 240 / .3))}
+.form-card .input,.form-card .select,.form-card .textarea{background-color:var(--paper);color:var(--text);border-color:var(--rule-2)}
+.form-card .select option{background:var(--paper);color:var(--text)}
+@media (max-width:520px){.salah-note{font-size:.95rem}}

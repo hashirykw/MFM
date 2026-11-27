@@ -42,7 +42,9 @@ const segVal = el => { const b = $('button[aria-pressed="true"]', el); return b 
 /* ---------- lightbox ---------- */
 const Lbx = (() => {
   const el = $('#lbx'), img = $('#lbxImg'), cap = $('#lbxC'); let list = [], i = 0, last = null;
-  const show = () => { img.src = list[i].src; img.alt = list[i].alt; cap.textContent = `${list[i].alt} · ${i + 1} / ${list.length}`; };
+  const tx = $('#lbxT'), esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const show = () => { const it = list[i]; img.src = it.src; img.alt = it.alt; cap.textContent = `${i + 1} / ${list.length}`;
+    if (tx) tx.innerHTML = `<b>${esc(it.alt)}</b>${it.hand ? `<i>${esc(it.hand)}</i>` : ''}${it.text ? `<p>${esc(it.text)}</p>` : ''}`; };
   const open = (l, k) => { list = l; i = k; last = document.activeElement; show(); el.classList.add('open'); $('#lbxX').focus({ preventScroll: true }); };
   const close = () => { el.classList.remove('open'); last && last.focus && last.focus({ preventScroll: true }); };
   const step = d => { i = (i + d + list.length) % list.length; show(); };
@@ -57,7 +59,7 @@ const Lbx = (() => {
 /* ---------- folio ---------- */
 (() => {
   const plates = $$('#folio-grid .plate');
-  const list = plates.map(p => { const im = $('img', p); return { src: im.getAttribute('src'), alt: $('figcaption b', p).textContent }; });
+  const list = plates.map(p => { const im = $('img', p), hd = $('figcaption span', p), tx = $('p', p); return { src: im.getAttribute('src'), alt: $('figcaption b', p).textContent, hand: hd ? hd.textContent : '', text: tx ? tx.textContent : '' }; });
   plates.forEach((p, k) => p.addEventListener('click', () => Lbx.open(list, k)));
 })();
 

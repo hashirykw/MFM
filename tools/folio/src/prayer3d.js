@@ -102,7 +102,7 @@ function init() {
 
   /* ---------- rehal with an open Qur'an at the head of the mat ---------- */
   const wood = new THREE.MeshStandardMaterial({ color: 0x7a4a26, roughness: .55, metalness: .05 });
-  const goldM = new THREE.MeshStandardMaterial({ color: 0xe8b24a, metalness: .85, roughness: .28, emissive: 0x3a2400, emissiveIntensity: .35 });
+  const goldM = new THREE.MeshStandardMaterial({ color: 0xc9a24f, metalness: .7, roughness: .45, emissive: 0x2a1a00, emissiveIntensity: .2 });
   const rehal = new THREE.Group(); rehal.position.set(0, .02, -L / 2 + 1.0); mat.add(rehal);
   const pageT = tex(256, 320, (x, w, h) => {
     x.fillStyle = '#fbf3df'; x.fillRect(0, 0, w, h);
@@ -173,9 +173,38 @@ function init() {
   const shadow = new THREE.Mesh(new THREE.PlaneGeometry(5.4, 5.4), new THREE.MeshBasicMaterial({ map: sh, transparent: true, depthWrite: false }));
   shadow.rotation.x = -Math.PI / 2; shadow.position.y = -1.05; scene.add(shadow);
 
+  /* ---------- the compass ring and the qibla (Nov 2026) ----------
+     North is away from the viewer (-z), east to the right (+x). The janamaz's head is its -z end,
+     so turning it by -bearing points it at the Ka'ba; on phones with the live compass the whole
+     ring turns with the device so north stays true. */
+  const compass = new THREE.Group(); compass.position.y = -.98; scene.add(compass);
+  const dialT = tex(1024, 1024, (x, w) => {
+    const c = w / 2; x.clearRect(0, 0, w, w);
+    x.strokeStyle = 'rgba(201,162,79,.95)'; x.lineWidth = 4; x.beginPath(); x.arc(c, c, 500, 0, Math.PI * 2); x.stroke();
+    x.lineWidth = 2; x.beginPath(); x.arc(c, c, 420, 0, Math.PI * 2); x.stroke();
+    for (let d = 0; d < 360; d += 5) { const a = (d - 90) * Math.PI / 180, r1 = d % 30 === 0 ? 440 : 470; x.lineWidth = d % 30 === 0 ? 4 : 2; x.beginPath(); x.moveTo(c + Math.cos(a) * r1, c + Math.sin(a) * r1); x.lineTo(c + Math.cos(a) * 496, c + Math.sin(a) * 496); x.stroke(); }
+    x.fillStyle = 'rgba(201,162,79,1)'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.font = '900 46px "Archivo Wide","Arial Black",sans-serif';
+    [['N', 0], ['E', 90], ['S', 180], ['W', 270]].forEach(([t, d]) => { const a = (d - 90) * Math.PI / 180; x.save(); x.translate(c + Math.cos(a) * 382, c + Math.sin(a) * 382); x.rotate(a + Math.PI / 2); x.fillText(t, 0, 0); x.restore(); });
+    x.font = '700 22px "Archivo",Arial,sans-serif';
+    for (let d = 30; d < 360; d += 30) { if (d % 90 === 0) continue; const a = (d - 90) * Math.PI / 180; x.save(); x.translate(c + Math.cos(a) * 395, c + Math.sin(a) * 395); x.rotate(a + Math.PI / 2); x.fillText(String(d), 0, 0); x.restore(); }
+  });
+  const dial = new THREE.Mesh(new THREE.CircleGeometry(2.5, 96), new THREE.MeshBasicMaterial({ map: dialT, transparent: true, depthWrite: false }));
+  dial.rotation.x = -Math.PI / 2; compass.add(dial);
+  const qib = new THREE.Group(); compass.add(qib);
+  const line = new THREE.Mesh(new THREE.PlaneGeometry(.03, 2.1), new THREE.MeshBasicMaterial({ color: 0xc9a24f, transparent: true, opacity: .85, depthWrite: false }));
+  line.rotation.x = -Math.PI / 2; line.position.set(0, .004, -1.05); qib.add(line);
+  const kb = new THREE.Group(); kb.position.set(0, .14, -2.28); qib.add(kb);
+  const kbody = new THREE.Mesh(new THREE.BoxGeometry(.24, .26, .26), new THREE.MeshStandardMaterial({ color: 0x141615, roughness: .85 })); kb.add(kbody);
+  const kband = new THREE.Mesh(new THREE.BoxGeometry(.245, .03, .265), goldM); kband.position.y = .07; kb.add(kband);
+  let qibla = 0, heading = 0, facing = false;
+  const setQ = d => { if (!d) return; qibla = d.bearing * Math.PI / 180; heading = d.heading == null ? 0 : d.heading * Math.PI / 180; qib.rotation.y = -qibla; compass.rotation.y = heading; };
+  document.addEventListener('mfm:qibla', e => setQ(e.detail)); setQ(window.MFMQibla);
+  const qYaw = () => heading - qibla;
+  const nearest = (a, ref) => a + Math.round((ref - a) / (Math.PI * 2)) * Math.PI * 2;
+
   /* ---------- interaction ---------- */
   mat.rotation.x = .12;
-  let target = -.6, cur = -.6, drag = false, lastX = 0, idle = 9, tiltT = 0, tilt = 0;
+  let target = -.6, cur = -1.8, drag = false, lastX = 0, idle = 9, tiltT = 0, tilt = 0;
   canvas.style.touchAction = 'pan-y'; canvas.style.cursor = 'grab';
   canvas.addEventListener('pointerdown', e => { drag = true; lastX = e.clientX; canvas.setPointerCapture(e.pointerId); canvas.style.cursor = 'grabbing'; });
   canvas.addEventListener('pointermove', e => {
@@ -189,7 +218,7 @@ function init() {
     const r = stage.getBoundingClientRect(), w = Math.max(1, r.width), h = Math.max(1, r.height);
     renderer.setSize(w, h, false); camera.aspect = w / h;
     const k = (w / h < .95 ? 1.15 : 1) * (w < 480 ? .86 : 1);
-    camera.position.set(0, 5.1 * k, 9.7 * k); camera.lookAt(0, w < 480 ? 1.05 : .8, 0); camera.updateProjectionMatrix();
+    camera.position.set(0, 5.6 * k, 10.4 * k); camera.lookAt(0, w < 480 ? .8 : .5, 0); camera.updateProjectionMatrix();
   }
   size(); new ResizeObserver(size).observe(stage);
   const theme = () => {
@@ -206,8 +235,11 @@ function init() {
     requestAnimationFrame(frame); if (!vis || document.hidden) return;
     now = now || performance.now(); const dt = Math.min(.05, (now - last) / 1000); last = now;
     const t = reduced ? 0 : (now - t0) / 1000; idle += dt;
-    if (!drag && !reduced && idle > 1.2) target += dt * .42;       // a steady, visible turn
-    cur += (target - cur) * .08; root.rotation.y = cur;
+    if (!drag && idle > .55) target = nearest(qYaw(), cur);          // let go: it settles toward the Ka'ba
+    cur += (target - cur) * (drag ? .12 : .05); root.rotation.y = cur;
+    const off = Math.abs(nearest(qYaw(), cur) - cur), on = !drag && off < .012;
+    if (on && !facing) { facing = true; stage.classList.add('facing'); if (window.MFMSound && idle > .8) window.MFMSound.chime(); }
+    else if (!on && facing && off > .05) { facing = false; stage.classList.remove('facing'); }
     tilt += (tiltT - tilt) * .06; root.rotation.x = tilt;
     if (!reduced) {
       ripple(t);

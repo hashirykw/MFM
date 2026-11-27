@@ -560,3 +560,7 @@ html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradie
 :root:root:root:root:root[data-theme="dark"] body.fp.fp .gate.gate :is(.h3,p){color:var(--text)!important}
 :root:root:root:root:root[data-theme="dark"] body.fp.fp .gate.gate :is(.btn-ghost,.btn--line){background:linear-gradient(oklch(17.5% .014 158),oklch(17.5% .014 158)) padding-box,linear-gradient(160deg,oklch(92% .004 240 / .5),oklch(75% .008 240 / .35)) border-box!important;color:var(--text)!important}
 .fp .gate{left:0!important;right:0!important;top:clamp(40px,8vw,96px)!important;margin-inline:auto!important;transform:none!important;translate:none!important}
+/* inner-page hero models: frameless too */
+.fp .fp-plate-mat{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
+.fp .fp-plate-mat::before,.fp .fp-plate-mat::after{display:none!important}
+:root:root:root:root:root[data-theme="dark"] body.fp.fp .fp-plate-mat.fp-plate-mat{background:none!important;border:0!important}

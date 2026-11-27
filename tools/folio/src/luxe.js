@@ -179,6 +179,31 @@
     });
   }
 
+  /* ------------------------------------------------------------ pop-up for notes and longer text (themed) */
+  const Pop = window.MFMPop = (() => {
+    let el = null, last = null;
+    const build = () => {
+      el = doc.createElement('div'); el.className = 'lx-pop'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.hidden = true;
+      el.innerHTML = '<div class="lx-pop-card"><button type="button" class="lx-pop-x" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button><span class="lx-pop-k" aria-hidden="true"></span><b class="lx-pop-t"></b><div class="lx-pop-b"></div></div>';
+      doc.body.appendChild(el);
+      el.addEventListener('click', e => { if (e.target === el || e.target.closest('.lx-pop-x')) close(); });
+      addEventListener('keydown', e => { if (e.key === 'Escape' && el && !el.hidden) close(); });
+    };
+    function open(title, html) {
+      if (!el) build(); last = doc.activeElement;
+      el.querySelector('.lx-pop-t').textContent = title || ''; el.querySelector('.lx-pop-b').innerHTML = html || '';
+      el.setAttribute('aria-label', title || 'Details'); el.hidden = false;
+      requestAnimationFrame(() => el.classList.add('in')); el.querySelector('.lx-pop-x').focus({ preventScroll: true }); S.soft();
+    }
+    function close() { if (!el) return; el.classList.remove('in'); setTimeout(() => { el.hidden = true; }, 320); last && last.focus && last.focus({ preventScroll: true }); }
+    return { open, close };
+  })();
+  doc.addEventListener('click', e => {
+    const b = e.target.closest('[data-pop-from],[data-pop-text]'); if (!b) return;
+    const src = b.dataset.popFrom ? doc.querySelector(b.dataset.popFrom) : null;
+    Pop.open(b.dataset.popTitle, src ? '<p>' + src.innerHTML + '</p>' : '<p>' + (b.dataset.popText || '') + '</p>');
+  });
+
   function start() { watch(); mountSwitch(); cookieBar(); }
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', start); else start();
 })();

@@ -70,8 +70,29 @@ export function kit(THREE) {
     add(p, new THREE.CylinderGeometry(r, r, .5, 128), topMat, 0, -.25, 0).castShadow = false;
     const bead = add(p, new THREE.TorusGeometry(r + .02, .05, 8, 160), mat.gold, 0, -.02, 0); bead.rotation.x = Math.PI / 2;
     add(p, new THREE.CylinderGeometry(r + .06, r + .06, .16, 128), mat.gold, 0, -.58, 0);
-    add(p, new THREE.CylinderGeometry(r + .02, r - .5, 1.4, 128), mat.greenDk, 0, -1.36, 0);
+    const band = tex(2048, 128, (x, w, h) => { x.fillStyle = '#0b462b'; x.fillRect(0, 0, w, h); x.strokeStyle = 'rgba(201,162,79,.85)'; x.lineWidth = 3; x.beginPath(); x.moveTo(0, 22); x.lineTo(w, 22); x.moveTo(0, h - 22); x.lineTo(w, h - 22); x.stroke(); x.fillStyle = 'rgba(201,162,79,.85)'; for (let i = 16; i < w; i += 64) { x.beginPath(); x.moveTo(i, h / 2 - 9); x.lineTo(i + 9, h / 2); x.lineTo(i, h / 2 + 9); x.lineTo(i - 9, h / 2); x.closePath(); x.fill(); } x.lineWidth = 1.5; x.strokeStyle = 'rgba(201,162,79,.45)'; for (let i = 48; i < w; i += 64) { x.beginPath(); x.moveTo(i - 14, h / 2); x.lineTo(i + 14, h / 2); x.stroke(); } });
+    band.wrapS = THREE.RepeatWrapping; band.repeat.set(Math.round(r / 2), 1);
+    add(p, new THREE.CylinderGeometry(r + .02, r - .5, 1.4, 128, 1, true), new THREE.MeshStandardMaterial({ map: band, roughness: .55, envMapIntensity: .5 }), 0, -1.36, 0);
+    add(p, new THREE.CircleGeometry(r - .5, 96), mat.greenDk, 0, -2.06, 0).rotation.x = Math.PI / 2;
     const foot = add(p, new THREE.TorusGeometry(r - .48, .06, 8, 160), mat.gold, 0, -2.04, 0); foot.rotation.x = Math.PI / 2;
+  }
+  /* soft contact shadow under a building (fakes ambient occlusion where it meets the ground) */
+  let aoTex = null;
+  function ao(p, x, z, w, d, k = .5, y = .012) {
+    aoTex = aoTex || tex(256, 256, (c, W) => { const gr = c.createRadialGradient(W / 2, W / 2, W * .18, W / 2, W / 2, W / 2); gr.addColorStop(0, 'rgba(0,0,0,1)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = gr; c.fillRect(0, 0, W, W); });
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), new THREE.MeshBasicMaterial({ map: aoTex, transparent: true, opacity: k, depthWrite: false }));
+    m.rotation.x = -Math.PI / 2; m.position.set(x, y, z); m.renderOrder = 1; p.add(m); return m;
+  }
+  function cypress(p, x, z, h = 2) {
+    cyl(p, .05, .07, .35, mat.trunk, x, .18, z, 6);
+    for (let i = 0; i < 4; i++) { const r = .36 - i * .07, c = add(p, new THREE.ConeGeometry(r, h * .42, 10), i % 2 ? mat.leaf : mat.leaf2, x, .35 + h * (.2 + i * .2), z); }
+  }
+  function olive(p, x, z, s = 1) {
+    const g = new THREE.Group(); g.position.set(x, 0, z); g.scale.setScalar(s); p.add(g);
+    const t = cyl(g, .07, .13, .7, mat.trunk, 0, .35, 0, 7); t.rotation.z = .12;
+    const om = new THREE.MeshStandardMaterial({ color: 0x80946a, roughness: .9, flatShading: true });
+    for (const [dx, dy, dz, r] of [[0, 1.05, 0, .55], [.4, .95, .2, .4], [-.35, .98, -.2, .42], [.1, 1.3, -.15, .38]]) add(g, new THREE.IcosahedronGeometry(r, 1), om, dx, dy, dz).scale.set(1.15, .8, 1.15);
+    return g;
   }
   /* a ring of pointed arches on columns (a riwaq), used round the Haram and the plazas */
   function arcade(p, r, n, h, opts = {}) {
@@ -87,7 +108,7 @@ export function kit(THREE) {
     const ring = add(g, new THREE.TorusGeometry(r, .16, 6, 96, a1 - a0), mat.marble2, 0, h + 1.0, 0); ring.rotation.x = Math.PI / 2; ring.rotation.z = a0;
     return g;
   }
-  return { THREE, mat, M, F, add, box, rbox, rboxGeo, cyl, archGeo, archShape, domeGeo, finial, palm, rand, tex, plinth, arcade };
+  return { THREE, mat, M, F, add, box, rbox, rboxGeo, cyl, archGeo, archShape, domeGeo, finial, palm, rand, tex, plinth, arcade, ao, cypress, olive };
 }
 
 /* ------------------------------------------------------------------ the Ka'ba in the mataf */
@@ -195,12 +216,23 @@ function kaaba(K) {
   // Zamzam: a small marble kiosk with a green dome
   rbox(g, 1.3, .95, .95, mat.marble2, 6.4, .48, -4.6, .06);
   add(g, K.domeGeo(.55, .75, 24, false), mat.green, 6.4, .95, -4.6);
+  K.ao(g, 0, 0, 9, 9.6, .55); K.ao(g, W * .1, D / 2 + 3.1, 2, 2, .4); K.ao(g, 0, -D / 2 - 1.5, 6.6, 3.6, .25);
+  // lamps on the Hijr wall
+  for (let k = 0; k < 5; k++) { const a = Math.PI * (k + .5) / 5, x = Math.cos(a) * 2.86, z = -D / 2 - .05 - Math.sin(a) * 2.86; cyl(g, .025, .03, .5, mat.gold, x, .98, z, 6); add(g, new THREE.SphereGeometry(.08, 10, 8), mat.lamp, x, 1.27, z); }
+  // the clock tower beyond the Haram (Abraj al-Bait), far behind and in scale with the arcade
+  const ct = new THREE.Group(); ct.position.set(-5.4, 0, -10.4); g.add(ct);
+  K.rbox(ct, 2.6, 6, 2.6, mat.marble2, 0, 3, 0, .08);
+  K.rbox(ct, 2.1, 4.5, 2.1, mat.marble, 0, 8.2, 0, .06);
+  for (const r2 of [0, Math.PI / 2, Math.PI, -Math.PI / 2]) { const cf = new THREE.Group(); cf.rotation.y = r2; ct.add(cf); add(cf, new THREE.CircleGeometry(.78, 48), new THREE.MeshStandardMaterial({ color: 0xf7f3e8, emissive: 0xfff1c8, emissiveIntensity: .25 }), 0, 9.0, 1.06); const rim = add(cf, new THREE.TorusGeometry(.8, .06, 8, 48), mat.green, 0, 9.0, 1.07); for (const [hx, hy, hr] of [[0, .3, 0], [.2, -.05, .9]]) { const h2 = box(cf, .05, .5, .02, mat.greenDk, 0, 9.0 + hy, 1.1); h2.rotation.z = hr; } }
+  add(ct, K.domeGeo(.95, 1.6, 32, false), mat.green, 0, 10.45, 0);
+  cyl(ct, .08, .14, 2.2, mat.gold, 0, 13.1, 0, 12); K.finial(ct, 0, 14.0, 0, 1.0);
+  for (const sx of [-1.8, 1.8]) K.rbox(ct, 1.4, 4.4, 1.6, mat.marble3, sx, 2.2, .2, .06);
   return { group: g, cam: { pos: [15, 11.5, 17], look: [0, 2.2, 0], fov: 30 }, spin: true };
 }
 
 /* ------------------------------------------------------------------ Jabal al-Nur and the cave of Hira */
 function hira(K) {
-  const { THREE, mat, add, box, rand, plinth } = K, g = new THREE.Group();
+  const { THREE, mat, add, box, cyl, rand, plinth } = K, g = new THREE.Group();
   plinth(g, 9, mat.sand);
   const R = rand(610);
   function peak(r, h, x, z, m, seed, seg = 9) {
@@ -241,6 +273,14 @@ function hira(K) {
   // stones edging the path, scree below the cave, a small ledge where the cave opens
   for (let i = 0; i < 70; i++) { const t = i / 70, y = .3 + t * 6.2, ang = .5 + Math.sin(t * 9) * .34 + (i % 2 ? .1 : -.1), rad = 5.2 * (1 - y / 9.6) + .6; add(g, new THREE.DodecahedronGeometry(.08 + R() * .06, 0), mat.rockDk, Math.sin(ang) * rad, y + .08, -1 + Math.cos(ang) * rad); }
   for (let i = 0; i < 24; i++) { const a = .2 + R() * 1.2, y = 5.6 + R() * 1.2, rad = 5.2 * (1 - y / 9.6) + .3; add(g, new THREE.DodecahedronGeometry(.12 + R() * .18, 0), R() > .5 ? mat.rock2 : mat.rockDk, Math.sin(a) * rad, y, -1 + Math.cos(a) * rad).rotation.set(R() * 3, R() * 3, 0); }
+  K.ao(g, 0, -1, 12, 12, .35);
+  const nur = K.tex(128, 128, (x, w) => { const gr = x.createRadialGradient(w / 2, w / 2, 0, w / 2, w / 2, w / 2); gr.addColorStop(0, 'rgba(255,240,200,.95)'); gr.addColorStop(.4, 'rgba(255,214,140,.45)'); gr.addColorStop(1, 'rgba(255,214,140,0)'); x.fillStyle = gr; x.fillRect(0, 0, w, w); });
+  const light = new THREE.Sprite(new THREE.SpriteMaterial({ map: nur, transparent: true, depthWrite: false })); light.position.set(.85, 7.05, 1.35); light.scale.set(1.4, 1.4, 1); g.add(light);
+  for (let i = 0; i < 18; i++) { const t = i / 18, y = .3 + t * 6.0, ang = .5 + Math.sin(t * 9) * .34 + .16, rad = 5.2 * (1 - y / 9.6) + .72; cyl(g, .025, .03, .34, mat.wood, Math.sin(ang) * rad, y + .17, -1 + Math.cos(ang) * rad, 5); }
+  // a small shaded rest stop at the foot of the path
+  const rest = new THREE.Group(); rest.position.set(4.6, 0, 4.4); rest.rotation.y = -.6; g.add(rest);
+  for (const [x, z] of [[-.6, -.4], [.6, -.4], [-.6, .4], [.6, .4]]) cyl(rest, .04, .05, 1.1, mat.wood, x, .55, z, 6);
+  box(rest, 1.5, .06, 1.1, mat.sandLt, 0, 1.12, 0); box(rest, 1.1, .2, .3, mat.wood2, 0, .2, 0);
   return { group: g, cam: { pos: [14, 9, 18], look: [0, 4, 0], fov: 32 }, spin: true, sun };
 }
 
@@ -316,6 +356,15 @@ function quran(K) {
   const fl = K.tex(128, 128, (x, w) => { const gr = x.createRadialGradient(w / 2, w / 2, 0, w / 2, w / 2, w / 2); gr.addColorStop(0, 'rgba(255,230,160,.9)'); gr.addColorStop(1, 'rgba(255,190,90,0)'); x.fillStyle = gr; x.fillRect(0, 0, w, w); });
   const glowS = new THREE.Sprite(new THREE.SpriteMaterial({ map: fl, transparent: true, depthWrite: false })); glowS.position.set(1.18, .9, 0); glowS.scale.set(.9, .9, 1); lampG.add(glowS);
   box(g, 1.4, .6, 1.0, mat.wood2, -4.2, .3, 2.8); box(g, 1.46, .08, 1.06, mat.gold, -4.2, .62, 2.8);
+  K.ao(g, 0, 0, 7, 6, .45); K.ao(g, 4.2, 2.6, 2.2, 1.6, .3); K.ao(g, -4.2, 2.8, 2, 1.6, .3);
+  // a stack of bound books and a small lantern
+  const stk = new THREE.Group(); stk.position.set(-4.4, 0, -1.8); stk.rotation.y = .4; g.add(stk);
+  [[0x195739, 0], [0x7a2a26, .32], [0x0b462b, .64]].forEach(([c2, y], i) => { K.rbox(stk, 1.7 - i * .12, .3, 1.2 - i * .08, new THREE.MeshStandardMaterial({ color: c2, roughness: .6 }), (i % 2) * .08, .15 + y, 0, .04); box(stk, 1.6 - i * .12, .22, .02, mat.page, (i % 2) * .08, .15 + y, .6 - i * .04); box(stk, .04, .3, 1.22 - i * .08, mat.gold, -.85 + i * .06 + (i % 2) * .08, .15 + y, 0); });
+  const ln = new THREE.Group(); ln.position.set(4.6, 0, -2.2); g.add(ln);
+  cyl(ln, .35, .4, .14, mat.gold, 0, .07, 0, 8); cyl(ln, .28, .28, .8, mat.glass, 0, .54, 0, 8);
+  for (let k = 0; k < 8; k++) { const a = k / 8 * Math.PI * 2; cyl(ln, .018, .018, .8, mat.gold, Math.cos(a) * .29, .54, Math.sin(a) * .29, 4); }
+  add(ln, new THREE.ConeGeometry(.38, .4, 8), mat.gold, 0, 1.14, 0); add(ln, new THREE.TorusGeometry(.1, .025, 6, 16), mat.gold, 0, 1.42, 0);
+  cyl(ln, .06, .06, .24, mat.lamp, 0, .3, 0, 10);
   return { group: g, cam: { pos: [6, 15, 11], look: [0, 3.4, 0], fov: 30 }, spin: true };
 }
 
@@ -360,12 +409,18 @@ function badr(K) {
   for (const [x, z, r] of [[5.6, -4.4, .4], [3.4, -5.8, -.3]]) { const t = add(g, new THREE.ConeGeometry(1.5, 1.6, 4, 1, true), tentM, x, .8, z); t.rotation.y = Math.PI / 4 + r; t.scale.set(1.3, 1, .9); cyl(g, .04, .04, 1.9, mat.trunk, x, .95, z, 6); }
   // a water trough by the first well
   box(g, 2.2, .35, .6, mat.rock2, -2.2, .4, 1.4); box(g, 2.0, .05, .4, mat.water, -2.2, .56, 1.4);
+  for (const [x, z] of [[-2.4, -.6], [2.6, -1.8], [.6, 3.0]]) K.ao(g, x, z, 3.4, 3.4, .4, .5);
+  // the cistern dug by the wells (filled from them before the battle)
+  const cs = new THREE.Group(); cs.position.set(1.2, .35, .4); cs.rotation.y = .3; g.add(cs);
+  for (const [w, d, x, z] of [[3.4, .3, 0, -.95], [3.4, .3, 0, .95], [.3, 2.2, -1.55, 0], [.3, 2.2, 1.55, 0]]) K.rbox(cs, w, .45, d, mat.rock2, x, .1, z, .06);
+  box(cs, 2.9, .06, 1.7, mat.water, 0, .18, 0);
+  K.ao(g, 1.2, .4, 4.6, 3.2, .35, .5);
   return { group: g, cam: { pos: [14, 10.5, 16], look: [0, 1.4, 0], fov: 30 }, spin: true };
 }
 
 /* ------------------------------------------------------------------ a mihrab, the minbar and the lamps */
 function mihrab(K) {
-  const { THREE, mat, add, box, cyl, tex, archShape, domeGeo, plinth } = K, g = new THREE.Group();
+  const { THREE, mat, add, box, cyl, tex, archShape, archGeo, domeGeo, plinth } = K, g = new THREE.Group();
   const floorT = tex(1024, 1024, (x, w) => { x.fillStyle = '#efebe3'; x.fillRect(0, 0, w, w); x.strokeStyle = 'rgba(140,125,100,.25)'; x.lineWidth = 2; for (let i = 0; i <= w; i += 64) { x.beginPath(); x.moveTo(i, 0); x.lineTo(i, w); x.stroke(); x.beginPath(); x.moveTo(0, i); x.lineTo(w, i); x.stroke(); } x.fillStyle = 'rgba(25,87,57,.2)'; for (let i = 0; i < w; i += 128) for (let j = 0; j < w; j += 128) { x.save(); x.translate(i + 64, j + 64); x.rotate(Math.PI / 4); x.fillRect(-12, -12, 24, 24); x.restore(); } });
   plinth(g, 8.5, new THREE.MeshStandardMaterial({ map: floorT, roughness: .3, envMapIntensity: .6 }));
   const tiles = tex(512, 512, (x, w) => {
@@ -438,6 +493,15 @@ function mihrab(K) {
   for (let k = 0; k < 8; k++) { const a = k / 8 * Math.PI * 2; cyl(ch, .1, .07, .24, mat.lamp, Math.cos(a) * .9, .14, Math.sin(a) * .9, 10); }
   for (let k = 0; k < 3; k++) { const a = k / 3 * Math.PI * 2; const c = cyl(ch, .008, .008, 2.1, mat.goldDk, Math.cos(a) * .45, 1.0, Math.sin(a) * .45, 4); c.rotation.z = Math.cos(a) * .2; c.rotation.x = -Math.sin(a) * .2; }
   add(ch, new THREE.SphereGeometry(.2, 16, 10), mat.gold, 0, -.15, 0);
+  K.ao(g, 0, -2.6, 15, 3, .45); K.ao(g, 4.3, .8, 2.2, 6, .35);
+  for (const sx of [-1, 1]) for (let k = 0; k < 3; k++) {
+    const x = sx * (5.6 - k * 0), z = -1.2 + k * 2.4;
+    cyl(g, .18, .2, 4.4, mat.marble2, sx * 6.6, 2.2, z, 16); cyl(g, .3, .2, .3, mat.gold, sx * 6.6, 4.5, z, 16); cyl(g, .3, .3, .2, mat.marble3, sx * 6.6, .1, z, 16);
+    if (k < 2) { const ar = add(g, archGeo(2.2, 1.3, .3), mat.marble, sx * 6.6, 4.6, z + 1.2); ar.rotation.y = Math.PI / 2; }
+  }
+  const rh = new THREE.Group(); rh.position.set(-2.6, 0, 1.6); rh.rotation.y = .5; g.add(rh);
+  for (const sd of [-1, 1]) { const b2 = box(rh, .7, .9, .05, mat.wood2, 0, .38, 0); b2.rotation.x = sd * .7; }
+  for (const sd of [-1, 1]) { const pg2 = box(rh, .62, .03, .4, mat.page, 0, .72, sd * .18); pg2.rotation.x = -sd * .6; }
   return { group: g, cam: { pos: [10.5, 8.5, 17], look: [0, 3.2, -1], fov: 32 }, spin: false };
 }
 
@@ -511,10 +575,142 @@ function nabawi(K) {
   // a riwaq round the back
   K.arcade(g, 11.2, 26, 1.7, { from: Math.PI * 1.08, to: Math.PI * 1.92 });
   [[-10.2, 1.2, .9], [10.2, 0, .85], [-9.6, -4.2, .8], [9.8, -4.4, .8]].forEach(p => palm(g, ...p));
+  K.ao(g, 0, -2.2, 17, 12, .5);
+  for (const sx of [-1, 1]) { cyl(hall, .5, .5, .5, mat.marble, sx * .8, 4.85, D / 2 + .2, 16); add(hall, domeGeo(.48, .6, 24, false), mat.silver, sx * .8, 5.1, D / 2 + .2); }
+  [[-11, 4.6, .8], [11, 4.2, .75], [-6.4, 10.4, .7], [6.2, 10.6, .7]].forEach(q => palm(g, ...q));
   return { group: g, cam: { pos: [21, 15, 24], look: [0, 3.2, -.8], fov: 30 }, spin: true };
 }
 
-export const MODELS = { kaaba, hira, quran, badr, mihrab, nabawi };
+
+/* ------------------------------------------------------------------ Masjid al-Aqsa: the Haram al-Sharif, Jerusalem
+   Scale ~1 unit = 5 m. The Dome of the Rock: a regular octagon of 20.6 m sides (circumradius 26.9 m),
+   walls ~11.5 m, tiled above a marble dado, four porches on the cardinal faces; a 16-window drum of
+   20.4 m and the gold dome, about 35 m to the finial. Al-Qibli mosque to the south with its lead dome. */
+function aqsa(K) {
+  const { THREE, mat, add, box, rbox, cyl, tex, plinth, archGeo, domeGeo, finial } = K, g = new THREE.Group();
+  const stone = tex(1024, 1024, (x, w) => { x.fillStyle = '#e8dfcf'; x.fillRect(0, 0, w, w); x.strokeStyle = 'rgba(150,130,100,.22)'; x.lineWidth = 2; for (let j = 0; j < w; j += 48) { x.beginPath(); x.moveTo(0, j); x.lineTo(w, j); x.stroke(); for (let i = (j / 48 % 2) * 40; i < w; i += 80) { x.beginPath(); x.moveTo(i, j); x.lineTo(i, j + 48); x.stroke(); } } });
+  stone.wrapS = stone.wrapT = THREE.RepeatWrapping; stone.repeat.set(3, 3);
+  plinth(g, 13, new THREE.MeshStandardMaterial({ map: stone, roughness: .6, envMapIntensity: .4 }));
+  const pav = M2 => new THREE.MeshStandardMaterial({ color: M2, roughness: .55, envMapIntensity: .45 });
+  // the raised platform of the Dome of the Rock, with steps and the qanatir (arcades) at the top of the stairs
+  const PH = .55, plat = new THREE.Group(); plat.position.set(0, 0, 1.6); g.add(plat);
+  rbox(plat, 15.5, PH, 13, pav(0xe9e1d2), 0, PH / 2, 0, .06);
+  rbox(plat, 15.7, .08, 13.2, mat.marble3, 0, PH + .02, 0, .03);
+  for (const [x, z, ry] of [[0, 6.5, 0], [-7.75, 0, Math.PI / 2], [7.75, -2, Math.PI / 2]]) {
+    const st = new THREE.Group(); st.position.set(x, 0, z); st.rotation.y = ry; plat.add(st);
+    for (let i = 0; i < 4; i++) box(st, 3.2, PH * (i + 1) / 4, .26, mat.marble2, 0, PH * (i + 1) / 8, .9 - i * .26);
+    for (let k = 0; k < 4; k++) { const xx = -1.35 + k * .9; cyl(st, .07, .08, 1.25, mat.marble, xx, PH + .62, 0, 10); cyl(st, .12, .09, .09, mat.goldDk, xx, PH + 1.28, 0, 10); }
+    for (let k = 0; k < 3; k++) add(st, archGeo(.78, .55, .12), mat.marble, -.9 + k * .9, PH + 1.28, -.06);
+    box(st, 3.0, .16, .2, mat.marble2, 0, PH + 1.9, 0);
+  }
+  // ---- the Dome of the Rock
+  const D = new THREE.Group(); D.position.set(0, PH + .04, 1.6); g.add(D);
+  const Rc = 5.38, side = 2 * Rc * Math.sin(Math.PI / 8), apo = Rc * Math.cos(Math.PI / 8), WH = 2.3;
+  const face = tex(1024, 576, (x, w, h) => {
+    const dado = h * .46;
+    // upper register: blue and turquoise tiles
+    x.fillStyle = '#1f5e93'; x.fillRect(0, 0, w, dado);
+    for (let i = 0; i < w; i += 32) for (let j = 0; j < dado; j += 32) { x.fillStyle = ((i + j) / 32) % 2 ? '#2a6fa8' : '#1c568a'; x.fillRect(i + 1, j + 1, 30, 30); x.fillStyle = 'rgba(255,255,255,.18)'; x.beginPath(); x.arc(i + 16, j + 16, 5, 0, Math.PI * 2); x.fill(); }
+    // the calligraphy band under the parapet (abstract strokes, not real text)
+    x.fillStyle = '#123f6b'; x.fillRect(0, 10, w, 52); x.strokeStyle = '#f2f0e6'; x.lineWidth = 4; x.lineCap = 'round';
+    for (let i = 0; i < 52; i++) { const cx = 10 + i * 19.5; x.beginPath(); x.moveTo(cx, 54); x.bezierCurveTo(cx + 2, 20, cx + 9, 16, cx + 12, 32); if (i % 2) { x.moveTo(cx - 4, 55); x.lineTo(cx + 14, 55); } x.stroke(); }
+    x.strokeStyle = '#d6b36a'; x.lineWidth = 3; x.strokeRect(-2, 10, w + 4, 52);
+    // seven arched panels, five of them windows with grilles
+    const n = 7, pw = w / n;
+    for (let k = 0; k < n; k++) {
+      const cx = pw * (k + .5), top = 92, bot = dado - 22, aw = pw * .56, win = k % 3 !== 0 || k === 3;
+      x.fillStyle = '#e9ddb8'; x.beginPath(); x.moveTo(cx - aw / 2 - 8, bot + 8); x.lineTo(cx - aw / 2 - 8, top + 40); x.quadraticCurveTo(cx - aw / 2 - 8, top - 8, cx, top - 18); x.quadraticCurveTo(cx + aw / 2 + 8, top - 8, cx + aw / 2 + 8, top + 40); x.lineTo(cx + aw / 2 + 8, bot + 8); x.closePath(); x.fill();
+      x.fillStyle = win ? '#0d2236' : '#2f79b0'; x.beginPath(); x.moveTo(cx - aw / 2, bot); x.lineTo(cx - aw / 2, top + 40); x.quadraticCurveTo(cx - aw / 2, top, cx, top - 10); x.quadraticCurveTo(cx + aw / 2, top, cx + aw / 2, top + 40); x.lineTo(cx + aw / 2, bot); x.closePath(); x.fill();
+      if (win) { x.strokeStyle = 'rgba(214,179,106,.75)'; x.lineWidth = 2; for (let q = top + 20; q < bot; q += 18) { x.beginPath(); x.moveTo(cx - aw / 2, q); x.lineTo(cx + aw / 2, q); x.stroke(); } for (let q = cx - aw / 2 + 12; q < cx + aw / 2; q += 14) { x.beginPath(); x.moveTo(q, top + 6); x.lineTo(q, bot); x.stroke(); } }
+    }
+    // the marble dado below, with framed panels
+    x.fillStyle = '#ece6da'; x.fillRect(0, dado, w, h - dado);
+    x.fillStyle = '#d6b36a'; x.fillRect(0, dado - 4, w, 6);
+    for (let k = 0; k < 7; k++) { const px = k * pw + 14; x.strokeStyle = 'rgba(120,110,95,.45)'; x.lineWidth = 3; x.strokeRect(px, dado + 26, pw - 28, h - dado - 52); x.strokeStyle = 'rgba(150,140,125,.25)'; x.lineWidth = 1; for (let v = 0; v < 6; v++) { x.beginPath(); x.moveTo(px + Math.random() * pw, dado + 30); x.bezierCurveTo(px + Math.random() * pw, dado + 120, px + Math.random() * pw, dado + 180, px + Math.random() * pw, h - 30); x.stroke(); } }
+  });
+  const faceMat = new THREE.MeshStandardMaterial({ map: face, roughness: .45, envMapIntensity: .55 });
+  for (let k = 0; k < 8; k++) {
+    const a = k / 8 * Math.PI * 2 + Math.PI / 8, w = add(D, new THREE.BoxGeometry(side + .02, WH, .22), [mat.marble2, mat.marble2, mat.marble, mat.marble, faceMat, mat.marble2], Math.sin(a) * apo, WH / 2, Math.cos(a) * apo);
+    w.rotation.y = a;
+    const cap = box(D, side + .06, .16, .32, mat.marble, Math.sin(a) * apo, WH + .08, Math.cos(a) * apo); cap.rotation.y = a;
+    for (let m = 0; m < 14; m++) { const t = (m + .5) / 14 - .5, mm = box(D, .12, .14, .1, mat.marble, Math.sin(a) * (apo + .1) + Math.cos(a) * t * side, WH + .23, Math.cos(a) * (apo + .1) - Math.sin(a) * t * side); mm.rotation.y = a; }
+  }
+  // the four porches on the cardinal faces (north, south, east, west)
+  for (let k = 0; k < 4; k++) {
+    const a = k / 4 * Math.PI * 2, pr = new THREE.Group(); pr.position.set(Math.sin(a) * (apo + .38), 0, Math.cos(a) * (apo + .38)); pr.rotation.y = a; D.add(pr);
+    rbox(pr, 1.55, 1.25, .75, mat.marble, 0, .62, 0, .04);
+    add(pr, archGeo(.8, 1.0, .06), new THREE.MeshStandardMaterial({ color: 0x3a2a1c, roughness: .6 }), 0, .02, .36);
+    box(pr, 1.62, .1, .82, mat.goldDk, 0, 1.3, 0);
+    for (const s2 of [-1, 1]) cyl(pr, .06, .06, 1.2, mat.marble2, s2 * .65, .6, .4, 10);
+  }
+  // the roof, the drum with 16 windows and its tile band, the gold dome
+  add(D, new THREE.CylinderGeometry(Rc * .98, Rc * .98, .14, 8, 1, false, Math.PI / 8), mat.marble3, 0, WH + .1, 0);
+  add(D, new THREE.CylinderGeometry(2.4, Rc * .94, .45, 8, 1, false, Math.PI / 8), new THREE.MeshStandardMaterial({ color: 0x9aa1a6, roughness: .5, metalness: .4, envMapIntensity: .7 }), 0, WH + .38, 0);
+  const drumT = tex(1024, 256, (x, w, h) => {
+    x.fillStyle = '#1f5e93'; x.fillRect(0, 0, w, h);
+    for (let i = 0; i < w; i += 24) for (let j = 0; j < h; j += 24) { x.fillStyle = ((i + j) / 24) % 2 ? '#2a6fa8' : '#1c568a'; x.fillRect(i + 1, j + 1, 22, 22); }
+    x.fillStyle = '#123f6b'; x.fillRect(0, 8, w, 40); x.strokeStyle = '#f2f0e6'; x.lineWidth = 3; for (let i = 0; i < 70; i++) { const cx = 6 + i * 14.6; x.beginPath(); x.moveTo(cx, 42); x.bezierCurveTo(cx + 2, 16, cx + 7, 14, cx + 9, 26); x.stroke(); }
+    for (let k = 0; k < 16; k++) { const cx = (k + .5) * w / 16, aw = 26, top = 80, bot = 220; x.fillStyle = '#e9ddb8'; x.fillRect(cx - aw / 2 - 5, top - 2, aw + 10, bot - top + 6); x.fillStyle = '#0d2236'; x.beginPath(); x.moveTo(cx - aw / 2, bot); x.lineTo(cx - aw / 2, top + 22); x.quadraticCurveTo(cx - aw / 2, top, cx, top - 8); x.quadraticCurveTo(cx + aw / 2, top, cx + aw / 2, top + 22); x.lineTo(cx + aw / 2, bot); x.fill(); }
+  });
+  const drumY = WH + .6, DR = 2.04, DH = 1.75;
+  add(D, new THREE.CylinderGeometry(DR, DR, DH, 64, 1, true), new THREE.MeshStandardMaterial({ map: drumT, roughness: .45, envMapIntensity: .55 }), 0, drumY + DH / 2, 0);
+  add(D, new THREE.CylinderGeometry(DR * .98, DR * .98, DH, 32), mat.marble3, 0, drumY + DH / 2, 0);
+  const ring = add(D, new THREE.TorusGeometry(DR + .02, .06, 10, 96), mat.gold, 0, drumY + DH + .02, 0); ring.rotation.x = Math.PI / 2;
+  const goldDome = M => new THREE.MeshStandardMaterial({ color: 0xd8ac4c, metalness: .85, roughness: .3, envMapIntensity: 1 });
+  const prof = [[1, 0], [1.01, .08], [.99, .3], [.92, .52], [.77, .72], [.53, .88], [.25, .975], [.04, 1]];
+  const pts = new THREE.SplineCurve(prof.map(([px, py]) => new THREE.Vector2(px * DR * 1.02, py * 2.25))).getPoints(48); pts.push(new THREE.Vector2(.001, 2.25));
+  add(D, new THREE.LatheGeometry(pts, 96), goldDome(), 0, drumY + DH + .04, 0);
+  finial(D, 0, drumY + DH + 2.25, 0, .8);
+  // the Dome of the Chain: an open eleven-columned kiosk to the east
+  const ch = new THREE.Group(); ch.position.set(7.6, PH + .04, -.4); g.add(ch);
+  for (let k = 0; k < 11; k++) { const a = k / 11 * Math.PI * 2; cyl(ch, .06, .07, 1.0, mat.marble, Math.cos(a) * .85, .5, Math.sin(a) * .85, 10); }
+  for (let k = 0; k < 6; k++) { const a = k / 6 * Math.PI * 2; cyl(ch, .05, .06, .9, mat.marble2, Math.cos(a) * .42, .45, Math.sin(a) * .42, 10); }
+  add(ch, new THREE.CylinderGeometry(.98, .98, .14, 11), mat.marble2, 0, 1.06, 0);
+  add(ch, new THREE.CylinderGeometry(.5, .52, .34, 16), faceMat, 0, 1.3, 0);
+  add(ch, domeGeo(.52, .55, 32, false), new THREE.MeshStandardMaterial({ color: 0x9aa1a6, metalness: .45, roughness: .45 }), 0, 1.47, 0);
+  // ---- al-Qibli mosque to the south: a pillared hall with a gabled nave, a lead dome, a seven-arch porch
+  const Q = new THREE.Group(); Q.position.set(-.6, 0, -9.0); Q.scale.setScalar(.72); g.add(Q);
+  rbox(Q, 15, 3, 9, pav(0xe6dccb), 0, 1.5, 0, .05);
+  for (let x2 = -6.3; x2 <= 6.35; x2 += 1.8) { add(Q, archGeo(.9, 1.7, .08), mat.arch, x2, .5, 4.52); }
+  const lead = new THREE.MeshStandardMaterial({ color: 0x8e969c, metalness: .5, roughness: .45, envMapIntensity: .8 });
+  const gs = new THREE.Shape(); gs.moveTo(-4.6, 0); gs.lineTo(0, 1.5); gs.lineTo(4.6, 0); gs.lineTo(-4.6, 0);
+  const gable = add(Q, new THREE.ExtrudeGeometry(gs, { depth: 15, bevelEnabled: false }), lead, -7.5, 3.0, 0); gable.rotation.y = Math.PI / 2;
+  for (let z2 = -3.6; z2 <= 3.7; z2 += 1.2) for (const sx of [-1, 1]) add(Q, archGeo(.6, 1.4, .06), mat.arch, sx * 7.52, .9, z2).rotation.y = sx * Math.PI / 2;
+  const porch = new THREE.Group(); porch.position.set(0, 0, 5.4); Q.add(porch);
+  rbox(porch, 11.6, 2.6, 1.6, mat.marble, 0, 1.3, 0, .05);
+  for (let k = 0; k < 7; k++) add(porch, archGeo(1.15, 1.85, .1), mat.arch, -4.8 + k * 1.6, .1, .78);
+  box(porch, 11.8, .18, 1.8, mat.marble2, 0, 2.66, 0);
+  for (let k = 0; k < 24; k++) box(porch, .22, .2, .12, mat.marble2, -5.75 + k * .5, 2.85, .86);
+  cyl(Q, 1.75, 1.85, 1.0, mat.marble, -.2, 3.4, -2.0, 32);
+  add(Q, domeGeo(1.65, 2.2, 64, false), new THREE.MeshStandardMaterial({ color: 0x8e969c, metalness: .55, roughness: .38, envMapIntensity: .9 }), -.2, 3.9, -2.0);
+  finial(Q, -.2, 6.1, -2.0, .9);
+  // al-Kas, the ablution fountain between them, and trees: cypresses and olives
+  const kas = new THREE.Group(); kas.position.set(-1.4, 0, -4.2); g.add(kas);
+  cyl(kas, 1.0, 1.1, .3, mat.marble2, 0, .15, 0, 48); cyl(kas, .86, .86, .05, mat.water, 0, .31, 0, 48); cyl(kas, .12, .16, .55, mat.marble, 0, .5, 0, 16);
+  for (let k = 0; k < 10; k++) { const a = k / 10 * Math.PI * 2; box(kas, .18, .2, .18, mat.marble3, Math.cos(a) * 1.4, .1, Math.sin(a) * 1.4); }
+  [[-10.4, 2.4, 2.4], [-10.6, 4.4, 2.0], [10.4, 3.6, 2.3], [10.2, 6.0, 1.9], [-8.6, -5.6, 2.2], [8.8, -6.4, 2.4], [5.2, 9.6, 1.8], [-5.6, 9.8, 1.9], [11.2, -.6, 2.1]].forEach(q => K.cypress(g, ...q));
+  [[-9.4, -1.2, 1], [9.6, -2.8, .9], [-3.6, 10.6, .85], [3.4, 10.8, .9], [-11.2, -3.4, .8], [7.4, 8.2, .8]].forEach(q => K.olive(g, ...q));
+  // square Mamluk minarets: Bab al-Silsila to the west and al-Fakhriyya by al-Qibli
+  const sqMin = (x2, z2, h) => {
+    const m = new THREE.Group(); m.position.set(x2, 0, z2); g.add(m);
+    K.rbox(m, 1.1, h, 1.1, mat.marble2, 0, h / 2, 0, .04);
+    for (const y2 of [h * .35, h * .7]) box(m, 1.16, .08, 1.16, mat.marble3, 0, y2, 0);
+    for (const r2 of [0, Math.PI / 2, Math.PI, -Math.PI / 2]) { const w2 = add(m, archGeo(.3, .7, .04), mat.arch, Math.sin(r2) * .56, h * .78, Math.cos(r2) * .56); w2.rotation.y = r2; }
+    box(m, 1.5, .14, 1.5, mat.marble, 0, h + .07, 0);
+    for (let k = 0; k < 16; k++) { const a = k / 16 * Math.PI * 2; cyl(m, .02, .02, .3, mat.marble3, Math.cos(a) * .68, h + .29, Math.sin(a) * .68, 4); }
+    add(m, new THREE.CylinderGeometry(.42, .44, .9, 8), mat.marble, 0, h + .6, 0);
+    add(m, domeGeo(.42, .55, 24, false), lead, 0, h + 1.05, 0); finial(m, 0, h + 1.6, 0, .5);
+  };
+  sqMin(-11.2, -6.2, 5.8); sqMin(6.8, -10.4, 5.2);
+  // the Haram's western wall along the back, crenellated
+  for (let k = 0; k < 22; k++) { const a = Math.PI * 1.08 + k / 21 * Math.PI * .84, r2 = 12.3; const wseg = box(g, 1.9, 1.1, .5, pav(0xe2d7c3), Math.cos(a) * r2, .55, Math.sin(a) * r2); wseg.lookAt(0, .55, 0); box(g, .4, .3, .5, pav(0xe2d7c3), Math.cos(a) * r2, 1.25, Math.sin(a) * r2).lookAt(0, 1.25, 0); }
+  // gold grilles over the drum windows, contact shadows
+  for (let k = 0; k < 16; k++) { const a = (k + .5) / 16 * Math.PI * 2; const gr2 = box(D, .2, .02, .02, mat.gold, Math.sin(a) * (DR + .01), drumY + DH * .62, Math.cos(a) * (DR + .01)); gr2.rotation.y = a; }
+  K.ao(g, 0, 1.6, 17, 15, .4); K.ao(g, 0, 1.6, 12, 12, .45, PH + .06); K.ao(g, -.6, -9.0, 13, 10, .45);
+  return { group: g, cam: { pos: [15, 11, 19], look: [0, 2.6, -1.5], fov: 30 }, spin: true };
+}
+
+export const MODELS = { kaaba, hira, quran, badr, mihrab, nabawi, aqsa };
 
 /* Lights shared by the renders and the live scenes. `dark` gives the Ink theme's warm night. */
 export function light(THREE, scene, dark) {

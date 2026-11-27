@@ -8,7 +8,9 @@ A multi-page site for Sir Mohammad Fazil Maniya (MFM): Cambridge O Level Islamiy
 - **Buttons**: matte; a deeper green rises on hover, a small lift, a firm press.
 - **Sound** (`tools/folio/src/luxe.js`): classical effects made in the browser (plucked harp, soft bells, a page turn). The switch sits in the top bar on every page and is remembered. The inner pages' older sound calls go through the same engine.
 - **Cookie bar, toasts, pop-ups, dropdowns, scrollbar**: all in theme. The cookie bar says what the site stores (theme, sound, notes cart) because there is no tracking.
-- **3D**: `tools/folio/src/models3d.js` builds six dioramas (the Ka'ba, Jabal al-Nur and Hira, the Qur'an on a rehal, the wells of Badr, a mihrab and minbar, Masjid an-Nabawi). `python3 tools/folio/render/render.py` renders them into the folio plates (`assets/folio/img/folio/*.webp`). The same models run live and can be turned: the Ka'ba by Courses, the Qur'an by the Lab, the Nabawi by the FAQ, and the hero plates on the Lab, Reviews and 404 pages (`scene3d.js`).
+- **Qibla** (`tools/folio/src/qibla.js`): great-circle bearing and distance to the Ka'ba from the prayer-corner city or the visitor's location, with a live device compass on phones. The janamaz sits on a compass ring and settles to face the qibla when let go.
+- **Prayer times fallback**: if AlAdhan can't be reached, `prayer.js` works the times out on the device (Karachi-method angles, Hanafi Asr) with the Umm al-Qura Hijri date.
+- **3D**: `tools/folio/src/models3d.js` builds seven dioramas (now including Masjid al-Aqsa), all drawn frameless by one shared canvas (`scene3d.js`) and free to turn; (the Ka'ba, Jabal al-Nur and Hira, the Qur'an on a rehal, the wells of Badr, a mihrab and minbar, Masjid an-Nabawi). `python3 tools/folio/render/render.py` renders them into the folio plates (`assets/folio/img/folio/*.webp`). The same models run live and can be turned: the Ka'ba by Courses, the Qur'an by the Lab, the Nabawi by the FAQ, and the hero plates on the Lab, Reviews and 404 pages (`scene3d.js`).
 
 ## One design: V4 (28 Nov 2026)
 

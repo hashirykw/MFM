@@ -682,7 +682,7 @@ def build_home(v):
     s = s[:i] + dock('index') + s[j:]
     s = s.replace('<script>\n{{DATA}}\n</script>', f'<script src="/assets/folio/home-data.js?v={v["data"]}"></script>')
     s = s.replace('<script>\n{{JS}}\n</script>', f'<script src="/assets/folio/luxe.js?v={v["luxe"]}"></script>\n<script src="/assets/folio/shell.js?v={v["shell"]}"></script>\n<script src="/assets/folio/home.js?v={v["homejs"]}"></script>')
-    s = s.replace('<script type="module">\n{{MOSQUE}}\n</script>', f'<script src="/assets/folio/prayer.js?v={v["prayer"]}"></script>\n<script type="module" src="/assets/folio/scene3d.js?v={v["scene3d"]}"></script>\n<script type="module" src="/assets/folio/mosque3d.js?v={v["mosque"]}"></script>\n<script type="module" src="/assets/folio/prayer3d.js?v={v["prayer3d"]}"></script>')
+    s = s.replace('<script type="module">\n{{MOSQUE}}\n</script>', f'<script src="/assets/folio/prayer.js?v={v["prayer"]}"></script>\n<script src="/assets/folio/qibla.js?v={v["qibla"]}"></script>\n<script type="module" src="/assets/folio/scene3d.js?v={v["scene3d"]}"></script>\n<script type="module" src="/assets/folio/mosque3d.js?v={v["mosque"]}"></script>\n<script type="module" src="/assets/folio/prayer3d.js?v={v["prayer3d"]}"></script>')
     s = s.replace('{{NEXLYR}}', '')
     # the home is the front page of a multi-page site: each section opens its full page
     s = s.replace('<a class="btn btn--line" href="#lab">Open the Islamiyat Lab</a>', '<a class="btn btn--line" href="/lab">Open the Islamiyat Lab</a>')
@@ -721,14 +721,14 @@ def main():
     (OUT / 'prayer.js').write_text(R('prayer.js'))
     (OUT / 'prayer3d.js').write_text(R('prayer3d.js'))
     (OUT / 'ornament3d.js').write_text(R('ornament3d.js'))
-    for n in ('models3d.js', 'stage3d.js', 'scene3d.js'):
+    for n in ('models3d.js', 'stage3d.js', 'scene3d.js', 'qibla.js'):
         (OUT / n).write_text(R(n))
     (OUT / 'luxe.js').write_text(R('luxe.js'))
     (OUT / 'core.js').write_text(root_assets(R('core.js')))
     (OUT / 'mfm.js').write_text(root_assets(R('mfm.js')))
     legacy_css()
     v = {'l1': ver('legacy-1.css'), 'l2': ver('legacy-2.css'), 'base': ver('base.css'), 'bridge': ver('bridge.css'), 'home': ver('home.css'),
-         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('prayer3d.js'), 'orn': ver('ornament3d.js'), 'luxe': ver('luxe.js'), 'scene3d': ver('scene3d.js')}
+         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('prayer3d.js'), 'orn': ver('ornament3d.js'), 'luxe': ver('luxe.js'), 'scene3d': ver('scene3d.js'), 'qibla': ver('qibla.js')}
     print('index.html', build_home(v) // 1024, 'KB')
     for slug in PAGES:
         if slug == 'index':

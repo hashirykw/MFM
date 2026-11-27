@@ -134,14 +134,14 @@
   <div class="wrap">
     <h2 class="lbl" id="trust-h">Teaches at · mornings, evenings and online</h2>
     <div class="trust-row">
-      <div class="tile"><img src="/logos/hss.webp" alt="" width="139" height="110" loading="lazy"><small>Head Start</small></div>
-      <div class="tile"><img src="/logos/fec.webp" alt="" width="154" height="110" loading="lazy"><small>Froebel's</small></div>
-      <div class="tile"><img src="/logos/credo.webp" alt="" width="70" height="110" loading="lazy"><small>Credo School</small></div>
-      <div class="tile"><img src="/logos/academy.webp" alt="" width="163" height="110" loading="lazy"><small>The Academy</small></div>
-      <div class="tile"><img src="/logos/tpc.webp" alt="" width="114" height="110" loading="lazy"><small>TP Core</small></div>
-      <div class="tile"><img src="/logos/tcr.webp" alt="" width="98" height="110" loading="lazy"><small>TCR</small></div>
-      <div class="tile"><img src="/logos/forte.webp" alt="" width="266" height="110" loading="lazy"><small>Forte · online</small></div>
-      <div class="tile"><img src="/logos/gives.webp" alt="" width="252" height="110" loading="lazy"><small>Gives · online</small></div>
+      <div class="tile" title="Head Start School System"><img src="/logos/hss.webp" alt="Head Start School System" width="139" height="110" loading="lazy"></div>
+      <div class="tile" title="Froebel's Education Centre"><img src="/logos/fec.webp" alt="Froebel's Education Centre" width="154" height="110" loading="lazy"></div>
+      <div class="tile" title="Credo School"><img src="/logos/credo.webp" alt="Credo School" width="70" height="110" loading="lazy"></div>
+      <div class="tile" title="The Academy"><img src="/logos/academy.webp" alt="The Academy" width="163" height="110" loading="lazy"></div>
+      <div class="tile" title="TP Core"><img src="/logos/tpc.webp" alt="TP Core" width="114" height="110" loading="lazy"></div>
+      <div class="tile" title="The Classroom (TCR)"><img src="/logos/tcr.webp" alt="The Classroom (TCR)" width="98" height="110" loading="lazy"></div>
+      <div class="tile" title="Forte Institute, online"><img src="/logos/forte.webp" alt="Forte Institute, online" width="266" height="110" loading="lazy"></div>
+      <div class="tile" title="Gives, online"><img src="/logos/gives.webp" alt="Gives, online" width="252" height="110" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -191,7 +191,7 @@
     <div class="salah">
       <div class="salah-stage" id="salahStage" aria-label="A janamaz in 3D">
                 <canvas id="salahCanvas" aria-hidden="true"></canvas>
-        <p class="hand salah-note" aria-hidden="true">drag to turn the janamaz</p>
+        <p class="hand salah-note" aria-hidden="true">let go, it turns to the qibla</p>
       </div>
       <div class="salah-panel s-ink" aria-live="polite">
         <div class="sp-top">
@@ -208,7 +208,8 @@
           <div class="sp-days"><b id="spRamD">&mdash;</b><span id="spRamU">days to go</span></div>
           <i class="sp-bar" id="spRamBar" aria-hidden="true"></i>
         </div>
-        <p class="sp-src">Times from AlAdhan: the University of Islamic Sciences, Karachi method in Pakistan, Hanafi Asr. Confirm with your local masjid.</p>
+        <button type="button" class="lx-info" data-pop-title="About these times" data-pop-from="#salah .sp-src"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.01"/></svg>About these times</button>
+        <p class="sp-src" hidden>Times from AlAdhan: the University of Islamic Sciences, Karachi method in Pakistan, Hanafi Asr. Confirm with your local masjid.</p>
         <span class="sp-hijri-ar" id="spHijriAr" lang="ar" aria-hidden="true"></span>
       </div>
     </div>
@@ -227,40 +228,45 @@
     </div>
     <div class="folio-grid" id="folio-grid">
       <button class="plate w8" type="button" data-k="0">
-        <div class="plate-mat"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
+        <div class="plate-mat" data-model="kaaba" data-turn="0.1" data-fill=".86"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
           <img class="rv-img" src="/assets/folio/img/folio/kaaba.webp" alt="3D model of the Ka'ba in the mataf, with the Hijr Isma'il and the Maqam Ibrahim" width="1170" height="832" loading="lazy" style="--ar:1170/832"></div>
         <figcaption><b>Plate I · The Ka'ba</b><span>Makka</span></figcaption>
         <p>Rebuilt in 605, when the young Muhammad settled the dispute over the Black Stone. Where the Seerah begins.</p>
       </button>
       <button class="plate" type="button" data-k="1">
-        <div class="plate-mat"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
+        <div class="plate-mat" data-model="hira" data-turn="0" data-fill=".86"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
           <img class="rv-img" src="/assets/folio/img/folio/hira.webp" alt="3D model of Jabal al-Nur with the path up to the Cave of Hira" width="832" height="1118" loading="lazy" style="--ar:832/1118"></div>
         <figcaption><b>Plate II · The first revelation</b><span>Hira, 610</span></figcaption>
         <p>“Read in the name of your Lord” (96:1–5). The history of the Qur'an starts here.</p>
       </button>
       <button class="plate w8" type="button" data-k="2">
-        <div class="plate-mat"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
+        <div class="plate-mat" data-model="quran" data-turn="-1.0" data-fill=".86"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
           <img class="rv-img" src="/assets/folio/img/folio/quran.webp" alt="3D model of an open Qur'an on a carved wooden rehal, with a brass oil lamp" width="988" height="806" loading="lazy" style="--ar:988/806"></div>
         <figcaption><b>Plate III · The passages</b><span>fifteen of them</span></figcaption>
         <p>The 15 set passages, learnt by theme, with their importance for Muslims: Question 1 of Paper 1.</p>
       </button>
       <button class="plate" type="button" data-k="3">
-        <div class="plate-mat"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
+        <div class="plate-mat" data-model="badr" data-turn="0" data-fill=".86"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
           <img class="rv-img" src="/assets/folio/img/folio/badr.webp" alt="3D model of the wells of Badr among dunes and date palms" width="910" height="1118" loading="lazy" style="--ar:910/1118"></div>
         <figcaption><b>Plate IV · Badr</b><span>17 Ramadan, 2 AH</span></figcaption>
         <p>313 against about 1,000. Dates, numbers and names: the detail that earns marks.</p>
       </button>
       <button class="plate" type="button" data-k="4">
-        <div class="plate-mat"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
+        <div class="plate-mat" data-model="mihrab" data-turn="0" data-fill=".86"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
           <img class="rv-img" src="/assets/folio/img/folio/mihrab.webp" alt="3D model of a mihrab and minbar with hanging lamps and prayer mats" width="832" height="1066" loading="lazy" style="--ar:832/1066"></div>
         <figcaption><b>Plate V · The Pillars</b><span>the mihrab</span></figcaption>
         <p>Salat, zakat, sawm and Hajj, with the Articles of Faith: the heart of Paper 2.</p>
       </button>
       <button class="plate w8" type="button" data-k="5">
-        <div class="plate-mat"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
+        <div class="plate-mat" data-model="nabawi" data-turn="-0.08" data-fill=".86"><svg class="corner tl"><use href="#i-corner"/></svg><svg class="corner tr"><use href="#i-corner"/></svg><svg class="corner bl"><use href="#i-corner"/></svg><svg class="corner br"><use href="#i-corner"/></svg>
           <img class="rv-img" src="/assets/folio/img/folio/nabawi.webp" alt="3D model of Masjid an-Nabawi with the Green Dome, minarets and the plaza umbrellas" width="1170" height="832" loading="lazy" style="--ar:1170/832"></div>
         <figcaption><b>Plate VI · Masjid an-Nabawi</b><span>Madina, 622</span></figcaption>
         <p>Built after the Hijra: the first community, the brotherhood of the Ansar and Muhajirun, and the Caliphs who followed.</p>
+      </button>
+      <button class="plate w12" type="button" data-k="6">
+        <div class="plate-mat" data-model="aqsa" data-turn="0" data-fill=".86"><img class="rv-img" src="/assets/folio/img/folio/aqsa.webp" alt="3D model of Masjid al-Aqsa: the Dome of the Rock on its platform, al-Qibli mosque, the Dome of the Chain and the minarets" width="1170" height="832" loading="lazy" style="--ar:1170/832"></div>
+        <figcaption><b>Plate VII · Masjid al-Aqsa</b><span>the first qibla</span></figcaption>
+        <p>The Night Journey brought the Prophet here from Makka (17:1). Muslims prayed towards it until the qibla turned to the Ka'ba in 2 AH (2:144).</p>
       </button>
     </div>
   </div>
@@ -686,7 +692,7 @@
 <div class="lbx" id="lbx" role="dialog" aria-modal="true" aria-label="Image viewer">
   <button class="iconbtn x" type="button" id="lbxX" aria-label="Close"><svg><use href="#i-x"/></svg></button>
   <button class="iconbtn p" type="button" id="lbxP" aria-label="Previous"><svg><use href="#i-left"/></svg></button>
-  <img id="lbxImg" alt="">
+  <div class="lbx-card"><img id="lbxImg" alt=""><div class="lbx-t" id="lbxT"></div></div>
   <button class="iconbtn n" type="button" id="lbxN" aria-label="Next"><svg><use href="#i-right"/></svg></button>
   <span class="c" id="lbxC"></span>
 </div>

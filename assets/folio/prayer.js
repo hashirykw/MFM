@@ -42,6 +42,47 @@ async function get(url, key) {
 }
 const timings = (c, d) => get(`${API}/timingsByCity/${d}?city=${encodeURIComponent(c.n)}&country=${encodeURIComponent(c.c)}&method=${c.m}&school=1`, `mfm-salah:${c.id}:${d}`);
 
+
+/* ---------- on-device fallback (Nov 2026): if the times service can't be reached, work the times
+   out here with the same method (standard solar formulas; Karachi/MWL-style angles, Hanafi Asr) and
+   take the Hijri date from the browser's Umm al-Qura calendar, so the corner never shows a dead end. */
+const GEO = { khi: [24.8607, 67.0011, 'Asia/Karachi', 18, 18], lhr: [31.5204, 74.3587, 'Asia/Karachi', 18, 18], isb: [33.6844, 73.0479, 'Asia/Karachi', 18, 18],
+  dxb: [25.2048, 55.2708, 'Asia/Dubai', 18.2, 18.2], ruh: [24.7136, 46.6753, 'Asia/Riyadh', 18.5, '90'], doh: [25.2854, 51.531, 'Asia/Qatar', 18, '90'],
+  lon: [51.5074, -0.1278, 'Europe/London', 18, 17], tor: [43.6532, -79.3832, 'America/Toronto', 15, 15] };
+const HM_EN = ['Muharram', 'Safar', 'Rabi al-Awwal', 'Rabi al-Thani', 'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', "Sha'ban", 'Ramadan', 'Shawwal', "Dhu al-Qa'dah", 'Dhu al-Hijjah'];
+const HM_AR = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'];
+const DR = Math.PI / 180, fix = (a, b) => ((a % b) + b) % b;
+function tzOffset(tz, d) { try { const p = new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: 'shortOffset' }).formatToParts(d).find(x => x.type === 'timeZoneName').value; const m = p.match(/GMT([+-]\d+)(?::(\d+))?/); return m ? +m[1] + (m[2] ? Math.sign(+m[1]) * m[2] / 60 : 0) : 0; } catch (e) { return 5; } }
+function hijri(d) { try { const p = Object.fromEntries(new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', { day: 'numeric', month: 'numeric', year: 'numeric', timeZone: 'UTC' }).formatToParts(d).map(x => [x.type, x.value])); return { day: +p.day, month: +p.month, year: parseInt(p.year) }; } catch (e) { return null; } }
+function solar(y, m, d, lat, lng, tz, fa, ia) {
+  const A = Math.floor((14 - m) / 12), Y = y + 4800 - A, Mo = m + 12 * A - 3;
+  const jd = d + Math.floor((153 * Mo + 2) / 5) + 365 * Y + Math.floor(Y / 4) - Math.floor(Y / 100) + Math.floor(Y / 400) - 32045 - .5 - lng / 360;
+  const D = jd - 2451545, g = fix(357.529 + .98560028 * D, 360), q = fix(280.459 + .98564736 * D, 360);
+  const L = fix(q + 1.915 * Math.sin(g * DR) + .02 * Math.sin(2 * g * DR), 360), e = 23.439 - .00000036 * D;
+  const ra = fix(Math.atan2(Math.cos(e * DR) * Math.sin(L * DR), Math.cos(L * DR)) / DR / 15, 24), dec = Math.asin(Math.sin(e * DR) * Math.sin(L * DR)) / DR;
+  const eqt = q / 15 - ra, noon = fix(12 - eqt - lng / 15 + tz, 24);
+  const T = a => Math.acos((-Math.sin(a * DR) - Math.sin(dec * DR) * Math.sin(lat * DR)) / (Math.cos(dec * DR) * Math.cos(lat * DR))) / DR / 15;
+  const asrA = -Math.atan(1 / (2 + Math.tan(Math.abs(lat - dec) * DR))) / DR;   // Hanafi: shadow twice the height
+  const rise = noon - T(.833), set = noon + T(.833), night = 24 - (set - rise);
+  let fajr = noon - T(fa); if (isNaN(fajr)) fajr = rise - night / 7;
+  let isha = typeof ia === 'string' ? set + (+ia) / 60 : noon + T(ia); if (isNaN(isha)) isha = set + night / 7;
+  const f = h => { h = fix(h + .5 / 60, 24); return pad(Math.floor(h)) + ':' + pad(Math.floor(h % 1 * 60)); };
+  return { Fajr: f(fajr), Sunrise: f(rise), Dhuhr: f(noon + 1 / 60), Asr: f(noon + T(asrA)), Maghrib: f(set + 1 / 60), Isha: f(isha) };
+}
+function localDay(c, offsetDays) {
+  const [lat, lng, tz, fa, ia] = GEO[c.id] || GEO.khi;
+  const n = cityNow(tz).date.split('-').map(Number), base = new Date(Date.UTC(n[2], n[1] - 1, n[0] + offsetDays, 12));
+  const y = base.getUTCFullYear(), m = base.getUTCMonth() + 1, d = base.getUTCDate(), hj = hijri(base) || { day: 1, month: 1, year: 1448 };
+  return { timings: solar(y, m, d, lat, lng, tzOffset(tz, base), fa, ia), meta: { timezone: tz },
+    date: { hijri: { day: String(hj.day), month: { en: HM_EN[hj.month - 1], ar: HM_AR[hj.month - 1], number: hj.month }, year: String(hj.year) },
+            gregorian: { date: pad(d) + '-' + pad(m) + '-' + y, day: String(d), weekday: { en: base.toLocaleDateString('en-GB', { weekday: 'long', timeZone: 'UTC' }) }, month: { en: base.toLocaleDateString('en-GB', { month: 'long', timeZone: 'UTC' }) }, year: String(y) } } };
+}
+function localRamadan(today) {
+  const h = today.date.hijri, now = +h.month.number === 9, want = now ? [10, 1] : [9, 1];
+  const t0 = new Date(); for (let i = 1; i < 400; i++) { const d = new Date(Date.UTC(t0.getUTCFullYear(), t0.getUTCMonth(), t0.getUTCDate() + i, 12)), hj = hijri(d); if (hj && hj.month === want[0] && hj.day === want[1]) { const s = pad(d.getUTCDate()) + '-' + pad(d.getUTCMonth() + 1) + '-' + d.getUTCFullYear(); return now ? { now: true, day: +h.day, y: +h.year, eid: s } : { now: false, y: hj.year, start: s }; } }
+  return null;
+}
+
 async function load() {
   box.classList.add('loading');
   try {
@@ -56,9 +97,14 @@ async function load() {
     await ramadan();
     box.classList.remove('loading', 'offline');
   } catch (e) {
-    box.classList.remove('loading'); box.classList.add('offline');
-    $('#spNextName').textContent = 'Offline';
-    $('#spNextAt').textContent = 'Times will show once you are back online.';
+    try {
+      S.city = city; S.today = localDay(city, 0); S.tomorrow = localDay(city, 1); S.tz = S.today.meta.timezone; S.ramadan = localRamadan(S.today);
+      box.classList.remove('loading', 'offline'); box.classList.add('local');
+      const src = box.querySelector('.sp-src'); if (src) src.textContent = 'Worked out on this device (the times service could not be reached): Karachi-method angles, Hanafi Asr. Confirm with your local masjid.';
+    } catch (e2) {
+      box.classList.remove('loading'); box.classList.add('offline');
+      $('#spNextName').textContent = '—'; $('#spNextAt').textContent = 'Times will show once you are back online.';
+    }
   }
   paint(); document.dispatchEvent(new CustomEvent('mfm:salah'));
 }
