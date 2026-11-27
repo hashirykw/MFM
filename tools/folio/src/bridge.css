@@ -15,7 +15,7 @@ html:root{background:var(--paper)!important}
 
 /* ---------- type ---------- */
 .fp :is(.display,.title,.title-sm,main h1,main h2){font-family:var(--f-display)!important;font-weight:900!important;font-style:normal!important;text-transform:uppercase!important;letter-spacing:-.008em!important;color:var(--text);-webkit-text-fill-color:currentColor;background:none}
-.fp .display{font-size:clamp(2.3rem,5.6vw,5.2rem)!important;line-height:.94!important;max-width:16ch;overflow-wrap:anywhere}
+.fp .display{font-size:clamp(2rem,3.9vw,3.6rem)!important;line-height:.96!important;max-width:18ch;overflow-wrap:anywhere}
 .fp .title{font-size:clamp(1.85rem,4.2vw,3.5rem)!important;line-height:.98!important;max-width:19ch}
 .fp .title-sm{font-size:clamp(1.4rem,2.8vw,2.2rem)!important;line-height:1!important}
 .fp :is(.display,.title,.title-sm,.h3,.h4,main h1,main h2,main h3) em{font-family:inherit!important;font-style:normal!important;font-weight:inherit!important;letter-spacing:inherit!important;color:var(--royal)!important;-webkit-text-fill-color:currentColor!important;background:none!important}
@@ -402,7 +402,7 @@ html:root body.fp.fp{padding:0!important;margin:0!important;min-height:0!importa
 @media (max-width:560px){
   .fp :is(.hero-cta,.cta-row,.pp-cta,.spec-cta,.mbk-cta,.phero-meta){display:flex!important;flex-wrap:wrap!important}
   .fp :is(.hero-cta,.cta-row,.spec-cta,.mbk-cta)>.btn{flex:1 1 100%!important;width:100%!important}
-  .fp .display{font-size:clamp(2rem,10.5vw,3rem)!important}
+  .fp .display{font-size:clamp(1.8rem,8.6vw,2.5rem)!important}
   .fp .title{font-size:clamp(1.6rem,8.4vw,2.3rem)!important}
   .fp .fp-hero{padding-top:104px!important}
   .fp .phero-art .f-a{left:-4%!important}.fp .phero-art .f-b{right:-3%!important}
