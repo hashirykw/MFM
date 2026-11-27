@@ -2,6 +2,14 @@
 
 A multi-page site for Sir Mohammad Fazil Maniya (MFM): Cambridge O Level Islamiyat 2058 and IGCSE Islamiyat 0493, Karachi and online. Settings live in `config.js`.
 
+## Nov 2026 finish: palette, sound, 3D
+
+- **Palette** (`tools/folio/src/palette/luxe.css`, home parts in `luxe-home.css`): Paper is white, black type, Sir Fazil's book green (#0B462B; main shade #195739) and matte gold, with silver hairlines. Ink is near-black with deep book-green bands, silver type and matte gold. No terracotta anywhere (the build turns any left-over clay colour gold).
+- **Buttons**: matte; a deeper green rises on hover, a small lift, a firm press.
+- **Sound** (`tools/folio/src/luxe.js`): classical effects made in the browser (plucked harp, soft bells, a page turn). The switch sits in the top bar on every page and is remembered. The inner pages' older sound calls go through the same engine.
+- **Cookie bar, toasts, pop-ups, dropdowns, scrollbar**: all in theme. The cookie bar says what the site stores (theme, sound, notes cart) because there is no tracking.
+- **3D**: `tools/folio/src/models3d.js` builds six dioramas (the Ka'ba, Jabal al-Nur and Hira, the Qur'an on a rehal, the wells of Badr, a mihrab and minbar, Masjid an-Nabawi). `python3 tools/folio/render/render.py` renders them into the folio plates (`assets/folio/img/folio/*.webp`). The same models run live and can be turned: the Ka'ba by Courses, the Qur'an by the Lab, the Nabawi by the FAQ, and the hero plates on the Lab, Reviews and 404 pages (`scene3d.js`).
+
 ## One design: V4 (28 Nov 2026)
 
 V4 is now the whole site, served at `/`: the paper-and-ink folio with the greens lifted to Hashir's sample #0A503C, and the paper textures as they were. The other versions (`/v2`, `/v3`, the old root design, and the separate `/v4` copy) are deleted. Old `/v2`, `/v3`, `/v4` and `/v5` links redirect to the same page at `/`. The v2/v3 notes further down are history only.

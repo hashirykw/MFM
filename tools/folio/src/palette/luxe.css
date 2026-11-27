@@ -89,36 +89,6 @@
 [data-theme="dark"] .chip{background:linear-gradient(var(--paper-2),var(--paper-2)) padding-box,linear-gradient(160deg,oklch(75% .006 240 / .5),oklch(50% .008 240 / .4)) border-box}
 .s-ink .chip,.s-lapis .chip,.s-sandstone .chip{background:linear-gradient(var(--paper-2),var(--paper-2)) padding-box,linear-gradient(135deg,oklch(95% .004 240 / .55),oklch(70% .01 240 / .25),oklch(90% .006 240 / .5)) border-box;color:var(--text-2)}
 
-/* the hero's "editor selection" box around WAY read as a stray tool mark: gone */
-.hero h1 .boxed::before,.hero h1 .boxed i{display:none}
-.hero h1 .boxed{padding:0}
-
-/* headline underline and stat rule in gold / silver */
-.stats{border-top:0;position:relative}
-.stats::before{content:"";position:absolute;inset:0 0 auto;height:1.5px;background:linear-gradient(90deg,var(--text),var(--text) 40%,oklch(72% .01 240) 70%,transparent)}
-[data-theme="dark"] .stats::before{background:linear-gradient(90deg,oklch(80% .14 82),oklch(80% .01 240) 50%,transparent)}
-.stat b{background:linear-gradient(180deg,var(--text) 55%,color-mix(in oklab,var(--text) 60%,var(--royal)));-webkit-background-clip:text;background-clip:text;color:transparent}
-[data-theme="dark"] .stat b{background:linear-gradient(180deg,oklch(97% .004 240) 30%,oklch(76% .01 240));-webkit-background-clip:text;background-clip:text}
-
-/* course cards: silver hairline, green / gold / silver caps instead of the orange one */
-.course{background:linear-gradient(var(--paper),var(--paper)) padding-box,linear-gradient(160deg,oklch(90% .005 240),oklch(76% .01 240) 30%,oklch(96% .003 240) 55%,oklch(78% .01 240)) border-box;border:1px solid transparent;box-shadow:var(--shadow)}
-[data-theme="dark"] .course{background:linear-gradient(var(--paper-2),var(--paper-2)) padding-box,linear-gradient(160deg,oklch(60% .01 240 / .6),oklch(30% .01 240 / .5) 40%,oklch(75% .008 240 / .55) 60%,oklch(35% .01 240 / .5)) border-box}
-.course.c2{--c:var(--sand)}
-.course::before{height:5px;background:var(--c);box-shadow:0 1px 0 oklch(100% 0 0 / .35) inset}
-.course.c2::before{background:var(--saffron)}
-.course.c3{--c:var(--royal)}
-.course.c3::before{background:var(--silver-metal)}
-.course:hover{box-shadow:var(--shadow-lg)}
-
-/* plate frames: a quiet double rule in silver with a gold inner line (was orange) */
-.plate-mat{background:oklch(99% .003 100);border:1px solid oklch(16.5% .012 158 / .14);box-shadow:var(--shadow)}
-.plate-mat::before{border:1px solid oklch(72% .008 240 / .7);outline:1px solid oklch(74% .09 82 / .55);outline-offset:4px}
-.plate-mat::after{display:none}
-.plate-mat img{background:transparent}
-.plate:hover .plate-mat{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
-[data-theme="dark"] .plate-mat{background:oklch(18% .012 158);border-color:oklch(93.5% .006 240 / .12)}
-[data-theme="dark"] .plate-mat::before{border-color:oklch(70% .01 240 / .45);outline-color:oklch(80% .14 82 / .55)}
-
 /* the dark theme's top bar, menu and cards pick up the black + silver */
 [data-theme="dark"] .mi:not(.here){background:oklch(19% .016 158);box-shadow:inset 0 0 0 1px oklch(93.5% .006 240 / .1)}
 
@@ -165,7 +135,7 @@ body.menu-open .menu-btn{background:var(--btn-ink,var(--text));border-color:tran
 .snd-btn:active{transform:scale(.94)}
 .snd-btn:focus-visible,.menu-btn:focus-visible{outline:2px solid var(--saffron);outline-offset:3px}
 @media (max-width:560px){.snd-btn{width:40px;height:40px}}
-@media (max-width:440px){.top .snd-btn{display:none}}
+@media (max-width:440px){.top .snd-btn{width:38px;height:38px;border-radius:10px}.top .snd-btn svg{width:19px;height:19px}}
 
 /* =========================================================================
    Pop-ups, toasts, the cookie bar, dropdowns and the scrollbar, in theme
@@ -203,8 +173,6 @@ body.menu-open .menu-btn{background:var(--btn-ink,var(--text));border-color:tran
 /* native dropdowns follow the theme */
 select,.select,.input,.textarea{accent-color:var(--royal)}
 select option{background:var(--paper);color:var(--text)}
-.sp-city select option{background:oklch(98.4% .003 100);color:oklch(16.5% .012 158)}
-[data-theme="dark"] .sp-city select option{background:oklch(17.5% .014 158);color:oklch(93.5% .006 240)}
 .select{background-image:linear-gradient(45deg,transparent 50%,var(--sand) 50%),linear-gradient(135deg,var(--sand) 50%,transparent 50%)}
 .input:focus,.select:focus,.textarea:focus{border-color:var(--royal);box-shadow:0 0 0 4px var(--royal-soft)}
 input[type="checkbox"],input[type="radio"]{accent-color:var(--btn-ink,var(--royal))}
@@ -225,3 +193,20 @@ html{scrollbar-color:oklch(41% .082 158) oklch(95.6% .005 100)}
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background:oklch(74% .1 82)}
 
 @media (prefers-reduced-motion:reduce){.btn,.btn::after,.lx-cookie,.lx-toast,.mi{transition:none!important}.snd-btn .w2{animation:none}}
+
+/* ---------- live 3D models beside the section headings (Nov 2026) ---------- */
+.m3d-side{display:grid;gap:18px;align-content:end}
+.m3d{position:relative;margin:0;aspect-ratio:4/3;max-height:400px;width:100%;justify-self:end;cursor:grab}
+.m3d.grab{cursor:grabbing}
+.m3d canvas{position:absolute;inset:0;width:100%!important;height:100%!important;opacity:0;transition:opacity .9s var(--ease-out)}
+.m3d img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .9s var(--ease-out)}
+.m3d.ready canvas{opacity:1}
+.m3d.ready img{opacity:0}
+.m3d figcaption{position:absolute;right:0;bottom:-6px;font-size:1.05rem;color:var(--royal);pointer-events:none}
+@media (max-width:860px){.m3d{max-height:280px}}
+.fp-plate-mat.m3d{aspect-ratio:auto;max-height:none;cursor:grab}
+.fp-plate-mat.m3d img{position:relative;inset:auto;height:auto}
+.fp-plate-mat.m3d canvas{inset:clamp(14px,2vw,24px);width:calc(100% - 2*clamp(14px,2vw,24px))!important;height:calc(100% - 2*clamp(14px,2vw,24px))!important}
+
+/* the WhatsApp send button in the book green, not the app's bright green */
+.btn--wa{--b:var(--btn-ink,var(--g-600));--f:oklch(97% .004 100)}

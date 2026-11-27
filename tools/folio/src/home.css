@@ -639,3 +639,6 @@
 .era-pin.on .era-rail{will-change:transform}
 .era-pin.on .era:hover{transform:translateY(-6px)}
 #timeline:has(.era-pin.on){padding:var(--tear-h) 0 0}
+
+.m3d-faq{margin-top:28px;max-width:420px;justify-self:start}
+.m3d-faq figcaption{right:auto;left:0}
