@@ -1,0 +1,10 @@
+/* =========================================================================
+   V4 palette · the folio's paper and ink, with the greens lifted to #0A503C
+   (oklch 38.5% .074 168). build.py shifts every inline green; these are the
+   few rules that need a hand-set value. The paper textures stay untouched.
+   ========================================================================= */
+.s-ink{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23E8B547' stroke-opacity='.08' stroke-width='1'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3Cpath d='M0 42h12M72 42h12M42 0v12M42 72v12'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(oklch(41.5% .08 167 / .9),oklch(39% .075 168 / .9)),url(/assets/folio/img/paper/paper-dark.webp);background-size:84px 84px,100% 100%,1024px 1024px}
+/* Paper mode: the solid buttons are the sample green instead of near-black ink. On ink bands and in
+   the Ink theme they fall back to var(--text) (cream), as before. */
+:root{--btn-ink:oklch(38.5% .074 168)}
+[data-theme="dark"],.s-ink,.s-lapis,.s-sandstone{--btn-ink:initial}

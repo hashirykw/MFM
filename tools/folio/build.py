@@ -62,9 +62,9 @@ PLATES = {  # heroes without a picture get one of the hand-drawn folio plates
 }
 # The folio is built twice while the designs are compared:
 #   V3 at /v3 in the V2 colours (emerald, metallic gold, cream, a touch of orange)
-#   V4 at /v4 in its own paper-and-ink colours (the Hamza Polani / portfolio style)
+#   V4 at /v4 in its own paper-and-ink folio, with the greens lifted to #0A503C (palette/v4-base.css)
 # Set a prefix to '' to serve that build at /.
-VARIANTS = [('/v3', 'v2', 'folio'), ('/v4', 'folio', 'folio/v4')]
+VARIANTS = [('/v3', 'v2', 'folio'), ('/v4', 'v4', 'folio/v4')]
 PREFIX, PAL, CSSDIR = VARIANTS[0]
 DEST = ROOT / PREFIX.strip('/')
 CSSOUT = ROOT / 'assets' / CSSDIR
@@ -338,14 +338,56 @@ def base_src():
         for k, v in _json.loads(R('palette/v2-tokens.json')).items():
             b = b.replace(k, v)
         b += '\n' + R('palette/v2-base.css')
+    if PAL == 'v4':
+        b = b.replace('.btn{--b:var(--text);', '.btn{--b:var(--btn-ink,var(--text));', 1)
+        b += '\n' + R('palette/v4-base.css')
     return b
 
 
 def bridge_src():
-    return R('bridge.css') + ('\n' + R('palette/v2-bridge.css') if PAL == 'v2' else '')
+    b = R('bridge.css')
+    if PAL == 'v4':  # V1 solid buttons take the paper-mode green too (see palette/v4-base.css)
+        b = b.replace('.fp .btn.btn-pri,.fp .btn.btn-green{--fb:var(--text);', '.fp .btn.btn-pri,.fp .btn.btn-green{--fb:var(--btn-ink,var(--text));', 1)
+    return b + ('\n' + R('palette/v2-bridge.css') if PAL == 'v2' else '')
+
+
+# V4 greens (Nov 2026): Hashir's sample #0A503C = oklch(38.5% .074 168). The near-black inks move up
+# to it; the paper textures underneath stay exactly as they were.
+V4_HEX = [
+    (r'#020f0f\b', '#073d2e'),
+    (r'#051f20\b', '#0a503c'),
+    (r'#(?:082420|0a2722|0b201a|0b2a1f|0b2b22|0b2b26)\b', '#0c5a43'),
+    (r'#(?:0f332b|163832)\b', '#11634a'),
+    (r'#235347\b', '#1b7056'),
+    (r'rgba?\(\s*5[ ,]+31[ ,]+32(?=\s*[/,)])', 'rgb(10 80 60'),
+]
+
+
+def palette_v4(css):
+    def f(m):
+        L, C, H, rest = float(m.group(1)), float(m.group(2)), float(m.group(3)), m.group(4)
+        if not 160 <= H <= 164:
+            return m.group(0)
+        L0, H = L, 168
+        if 12 <= L <= 33 and (C >= .035 or (L <= 17 and C >= .03)):
+            L, C = round(37 + (L - 16) * .55, 1), round(min(.1, .074 + (C - .035) * .6), 3)
+            a = re.match(r'\s*/\s*(0?\.\d+)', rest)
+            if a and L0 <= 24 and float(a.group(1)) >= .5:  # tints over the dark paper sheet
+                rest = re.sub(r'0?\.\d+', '.88', rest, 1)
+        return f'oklch({L:g}% {C:g} {H:g}{rest}'
+    css = re.sub(r'oklch\((\d+(?:\.\d+)?)%\s+(0?\.\d+)\s+(\d+(?:\.\d+)?)(\s*(?:/[^)]*)?\))', f, css)
+
+    def bg(m):
+        v = m.group(2)
+        for pat, rep in V4_HEX:
+            v = re.sub(pat, rep, v, flags=re.I)
+        return m.group(1) + v
+    return re.sub(r'(background(?:-color|-image)?\s*:\s*)([^;}]+)', bg, css)
 
 
 def palette(css):
+    if PAL == 'v4':
+        return palette_v4(css)
     if PAL != 'v2':
         return css
     """V3 palette shift for colours written inline: the near-black greens become V2's deep emerald,
@@ -671,7 +713,7 @@ def main():
     # V1 wraps mfm-1.css and each page's own CSS in @layer base, and !important inside a layer beats
     # unlayered !important. So the bridge is written twice: in a layer ordered before base (its
     # !important rules win) and unlayered (its normal rules win).
-    (CSSOUT / 'bridge.css').write_text(bridge_tokens() + br + '\n@layer fpbridge{\n' + br + '\n}\n')
+    (CSSOUT / 'bridge.css').write_text((palette_v4(bridge_tokens()) if PAL == 'v4' else bridge_tokens()) + br + '\n@layer fpbridge{\n' + br + '\n}\n')
     (OUT / 'shell.js').write_text(R('shell.js'))
     (OUT / 'home.js').write_text(R('home.js'))
     (OUT / 'home-data.js').write_text(R('data.js'))
