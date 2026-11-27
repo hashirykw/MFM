@@ -716,7 +716,7 @@ export const MODELS = { kaaba, hira, quran, badr, mihrab, nabawi, aqsa };
 export function light(THREE, scene, dark) {
   const hemi = new THREE.HemisphereLight(dark ? 0x9fb2c8 : 0xfff4e2, dark ? 0x0b2416 : 0x52705c, dark ? .65 : 1.15);
   const sun = new THREE.DirectionalLight(dark ? 0xc9d4ff : 0xffe7c0, dark ? 1.25 : 2.5);
-  sun.position.set(12, 20, 10); sun.castShadow = true; sun.shadow.mapSize.set(4096, 4096); sun.shadow.radius = 4;
+  sun.position.set(12, 20, 10); sun.castShadow = true; sun.shadow.mapSize.set(1536, 1536); // the models draw at ~600px, so a 4096 map only cost memory and load time sun.shadow.radius = 4;
   Object.assign(sun.shadow.camera, { left: -16, right: 16, top: 16, bottom: -16, near: 1, far: 70 }); sun.shadow.bias = -.0005; sun.shadow.normalBias = .02;
   const fill = new THREE.DirectionalLight(dark ? 0xffc77a : 0xdfeee6, dark ? .55 : .5); fill.position.set(-14, 6, -6);
   scene.add(hemi, sun, fill);

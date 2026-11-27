@@ -1,6 +1,7 @@
 /* A gold khatam (eight-point star) medallion in 3D, carrying the MFM seal, at the top of each
    page's mihrab card. Built in code with Three.js r187 (local file); starts after the page is idle. */
 import * as THREE from '/assets/folio/js/three.module.min.js';
+import { orbit } from './orbit3d.js';
 
 const hosts = [...document.querySelectorAll('.fpp-orb')];
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -32,6 +33,8 @@ function build(host) {
   const back = disc.clone(); back.rotation.y = Math.PI; back.position.z = -.3; g.add(back);
 
   let px = 0, py = 0, tx = 0, ty = 0;
+  canvas.style.pointerEvents = 'auto';
+  const o = orbit(canvas, { auto: 0, scroll: true, upright: 4 });
   const card = host.closest('.fp-panel') || host;
   card.addEventListener('pointermove', e => { const r = card.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width - .5; ty = (e.clientY - r.top) / r.height - .5; });
   card.addEventListener('pointerleave', () => { tx = ty = 0; });
@@ -44,8 +47,9 @@ function build(host) {
     requestAnimationFrame(frame); if (!vis || document.hidden) return;
     const t = (performance.now() - t0) / 1000;
     px += (tx - px) * .08; py += (ty - py) * .08;
-    g.rotation.y = (reduced ? 0 : Math.sin(t * .7) * .55) + px * .9;
-    g.rotation.x = py * -.6 + (reduced ? 0 : Math.sin(t * .5) * .08);
+    o.step();
+    g.rotation.y = (reduced ? 0 : Math.sin(t * .7) * .55) + px * .9 + o.yaw;
+    g.rotation.x = py * -.6 + (reduced ? 0 : Math.sin(t * .5) * .08) + o.pitch;
     g.rotation.z = reduced ? 0 : t * .05;
     disc.rotation.z = back.rotation.z = -g.rotation.z;
     renderer.render(scene, camera);

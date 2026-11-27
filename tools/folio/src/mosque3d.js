@@ -2,6 +2,7 @@
    Green dome, two minarets, a courtyard with a fountain and an arcade, date palms,
    and a rehal holding an open Qur'an. Drag to turn; lamps glow in the ink theme. */
 import * as THREE from '/assets/folio/js/three.module.min.js';
+import { orbit, aim } from './orbit3d.js';
 
 const stage = document.getElementById('stage');
 const canvas = document.getElementById('mosque');
@@ -10,7 +11,7 @@ if (stage && canvas) { try { init(); } catch (e) { console.warn(e); } }
 
 function init() {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 1.5 : 2));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -196,18 +197,16 @@ function init() {
   root.position.y = -1.6;
 
   /* ---------- interaction ---------- */
-  let target = -.42, cur = -.42, drag = false, lastX = 0, idle = 0;
-  canvas.style.touchAction = 'pan-y'; canvas.style.cursor = 'grab'; canvas.style.pointerEvents = 'auto';
-  canvas.addEventListener('pointerdown', e => { drag = true; lastX = e.clientX; canvas.setPointerCapture(e.pointerId); canvas.style.cursor = 'grabbing'; });
-  canvas.addEventListener('pointermove', e => { if (!drag) return; target += (e.clientX - lastX) * .008; lastX = e.clientX; idle = 0; });
-  const up = () => { drag = false; canvas.style.cursor = 'grab'; };
-  canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
-
+  canvas.style.pointerEvents = 'auto';
+  const o = orbit(canvas, { yaw: -.42, auto: reduced ? 0 : .0016 });
+  const look = new THREE.Vector3(), dir = new THREE.Vector3(); let dist = 1;
   function size() {
     const r = stage.getBoundingClientRect(); const w = Math.max(1, r.width), h = Math.max(1, r.height);
     renderer.setSize(w, h, false); camera.aspect = w / h;
-    camera.position.set(18, 13, 22).multiplyScalar((w / h > 1.05 ? 1.6 : 1.82) * (w < 520 ? .98 : 1));
-    w < 520 ? camera.lookAt(-1.6, 1.6, 1.3) : camera.lookAt(-.9, 1.9, .7); camera.updateProjectionMatrix();
+    const p = new THREE.Vector3(18, 13, 22).multiplyScalar((w / h > 1.05 ? 1.6 : 1.82) * (w < 520 ? .98 : 1));
+    w < 520 ? look.set(-1.6, 1.6, 1.3) : look.set(-.9, 1.9, .7);
+    dir.copy(p).sub(look); dist = dir.length(); dir.normalize();
+    aim(THREE, camera, look, dir, dist, o.pitch);
   }
   size(); new ResizeObserver(size).observe(stage);
 
@@ -227,10 +226,8 @@ function init() {
     requestAnimationFrame(frame);
     if (!visible || document.hidden) return;
     const t = (performance.now() - t0) / 1000;
-    idle += 1 / 60;
-    if (!drag && !reduced && idle > 2) target += .0016;
-    cur += (target - cur) * .08;
-    root.rotation.y = cur;
+    o.step(); root.rotation.y = o.yaw;
+    aim(THREE, camera, look, dir, dist, o.pitch);
     if (!reduced) {
       star.rotation.y = t * .8; star.position.y = 9.4 + Math.sin(t * 1.2) * .25;
       spray.scale.setScalar(1 + Math.sin(t * 6) * .12); water.rotation.y = t * .2;

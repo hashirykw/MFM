@@ -2,18 +2,22 @@
    Qur'an at its head, a tasbih, a glowing lantern above and gold eight-point stars orbiting.
    Drag to turn it. Built in code with Three.js r187 (local file); starts only when near. */
 import * as THREE from '/assets/folio/js/three.module.min.js';
+import { orbit, aim } from './orbit3d.js';
 
 const stage = document.getElementById('salahStage');
 const canvas = document.getElementById('salahCanvas');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (stage && canvas) {
-  const io = new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { o.disconnect(); try { init(); } catch (e) { console.warn(e); } } }, { rootMargin: '300px' });
+  let started = false;
+  const go = () => { if (started) return; started = true; io.disconnect(); try { init(); } catch (e) { console.warn(e); } };
+  const io = new IntersectionObserver(es => { if (es[0].isIntersecting) go(); }, { rootMargin: '900px' });
+  ('requestIdleCallback' in window ? requestIdleCallback : (f => setTimeout(f, 600)))(go, { timeout: 2500 });
   io.observe(stage);
 }
 
 function init() {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 1.5 : 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
   const scene = new THREE.Scene();
@@ -76,7 +80,7 @@ function init() {
   const geo = new THREE.PlaneGeometry(W, L, SX, SZ); geo.rotateX(-Math.PI / 2);
   const pos = geo.attributes.position, base = Float32Array.from(pos.array);
   const velvet = new THREE.MeshPhysicalMaterial({ map: rugT, roughness: .86, sheen: .35, sheenRoughness: .6, sheenColor: new THREE.Color(0x8a5a2a), envMapIntensity: .25, side: THREE.FrontSide });
-  const back = new THREE.MeshStandardMaterial({ color: 0x5a1c18, roughness: 1, side: THREE.BackSide });
+  const back = new THREE.MeshStandardMaterial({ color: 0xb04a3a, emissive: 0x3a120c, emissiveIntensity: .8, roughness: .95, side: THREE.BackSide }); // the woven underside, lit enough to read when turned over
   const root = new THREE.Group(); scene.add(root);
   const mat = new THREE.Group(); root.add(mat);
   const face = new THREE.Mesh(geo, velvet); mat.add(face);
@@ -204,21 +208,16 @@ function init() {
 
   /* ---------- interaction ---------- */
   mat.rotation.x = .12;
-  let target = -.6, cur = -1.8, drag = false, lastX = 0, idle = 9, tiltT = 0, tilt = 0;
-  canvas.style.touchAction = 'pan-y'; canvas.style.cursor = 'grab';
-  canvas.addEventListener('pointerdown', e => { drag = true; lastX = e.clientX; canvas.setPointerCapture(e.pointerId); canvas.style.cursor = 'grabbing'; });
-  canvas.addEventListener('pointermove', e => {
-    const r = canvas.getBoundingClientRect(); tiltT = ((e.clientY - r.top) / r.height - .5) * .3;
-    if (!drag) return; target += (e.clientX - lastX) * .012; lastX = e.clientX; idle = 0;
-  });
-  const up = () => { drag = false; canvas.style.cursor = 'grab'; };
-  canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up); canvas.addEventListener('pointerleave', () => { tiltT = 0; });
-
+  // turns a full 360° either way; let go and it settles toward the Ka'ba
+  const o = orbit(canvas, { yaw: -1.8, auto: 0, scroll: false, upright: 3 });
+  o.ty = -.6;
+  const look = new THREE.Vector3(), dir = new THREE.Vector3(); let dist = 1;
   function size() {
     const r = stage.getBoundingClientRect(), w = Math.max(1, r.width), h = Math.max(1, r.height);
     renderer.setSize(w, h, false); camera.aspect = w / h;
     const k = (w / h < .95 ? 1.15 : 1) * (w < 480 ? .86 : 1);
-    camera.position.set(0, 5.6 * k, 10.4 * k); camera.lookAt(0, w < 480 ? .8 : .5, 0); camera.updateProjectionMatrix();
+    look.set(0, w < 480 ? .8 : .5, 0); dir.set(0, 5.6 * k, 10.4 * k).sub(look); dist = dir.length(); dir.normalize();
+    aim(THREE, camera, look, dir, dist, o.pitch);
   }
   size(); new ResizeObserver(size).observe(stage);
   const theme = () => {
@@ -234,13 +233,12 @@ function init() {
   (function frame(now) {
     requestAnimationFrame(frame); if (!vis || document.hidden) return;
     now = now || performance.now(); const dt = Math.min(.05, (now - last) / 1000); last = now;
-    const t = reduced ? 0 : (now - t0) / 1000; idle += dt;
-    if (!drag && idle > .55) target = nearest(qYaw(), cur);          // let go: it settles toward the Ka'ba
-    cur += (target - cur) * (drag ? .12 : .05); root.rotation.y = cur;
-    const off = Math.abs(nearest(qYaw(), cur) - cur), on = !drag && off < .012;
-    if (on && !facing) { facing = true; stage.classList.add('facing'); if (window.MFMSound && idle > .8) window.MFMSound.chime(); }
+    const t = reduced ? 0 : (now - t0) / 1000;
+    if (!o.drag && o.idle > .9) o.ty += (nearest(qYaw(), o.ty) - o.ty) * .06;   // let go: it settles toward the Ka'ba
+    o.step(dt); root.rotation.y = o.yaw; aim(THREE, camera, look, dir, dist, o.pitch);
+    const off = Math.abs(nearest(qYaw(), o.yaw) - o.yaw), on = !o.drag && off < .012;
+    if (on && !facing) { facing = true; stage.classList.add('facing'); if (window.MFMSound && o.idle > .8) window.MFMSound.chime(); }
     else if (!on && facing && off > .05) { facing = false; stage.classList.remove('facing'); }
-    tilt += (tiltT - tilt) * .06; root.rotation.x = tilt;
     if (!reduced) {
       ripple(t);
       root.position.y = Math.sin(t * 1.1) * .12;

@@ -1,0 +1,10 @@
+{
+  "name": "mfm-folio-3d",
+  "private": true,
+  "description": "Bundles the site's 3D scripts (tree-shaken three.js, one shared chunk). Run: npm ci && node bundle3d.mjs",
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "three": "0.187.0"
+  }
+}

@@ -627,6 +627,7 @@ def build_v1(slug, v):
 <link rel="stylesheet" href="{CSSURL}/legacy-2.css?v={v['l2']}">
 <link rel="stylesheet" href="{CSSURL}/base.css?v={v['base']}">
 <link rel="stylesheet" href="{CSSURL}/bridge.css?v={v['bridge']}">
+{PRELOAD3D if ('fpp-orb' in main or 'data-model=' in main) else ''}
 </head>
 <body data-page="{slug}" class="fp fp-{slug}">
 <a class="skip" href="#main">Skip to content</a>
@@ -646,8 +647,8 @@ def build_v1(slug, v):
 <script src="/assets/folio/core.js?v={v['core']}"></script>
 <script src="/assets/folio/shell.js?v={v['shell']}"></script>
 {''.join('<script>' + s + '</script>' for s in inline)}
-{f'<script type="module" src="/assets/folio/ornament3d.js?v={v["orn"]}"></script>' if 'fpp-orb' in main else ''}
-{f'<script type="module" src="/assets/folio/scene3d.js?v={v["scene3d"]}"></script>' if 'data-model=' in main else ''}
+{f'<script type="module" src="/assets/folio/3d/ornament3d.js?v={v["orn"]}"></script>' if 'fpp-orb' in main else ''}
+{f'<script type="module" src="/assets/folio/3d/scene3d.js?v={v["scene3d"]}"></script>' if 'data-model=' in main else ''}
 </body>
 </html>
 '''
@@ -666,7 +667,7 @@ def build_home(v):
           '<meta property="og:image" content="https://mohammadfazilmaniya.com/og/index.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
           '<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://mohammadfazilmaniya.com/og/index.jpg">'
           '<link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.webmanifest">'
-          '<link rel="modulepreload" href="/assets/folio/js/three.module.min.js">')
+          + PRELOAD3D)
     s = s.replace('<link rel="canonical"', og + '\n<link rel="canonical"', 1)
     s = re.sub(r'<title>(.*?) · V5</title>', r'<title>\1</title>', s)
     s = s.replace("<script>try{var t=localStorage.getItem('mfmTheme5');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>", THEME)
@@ -682,7 +683,7 @@ def build_home(v):
     s = s[:i] + dock('index') + s[j:]
     s = s.replace('<script>\n{{DATA}}\n</script>', f'<script src="/assets/folio/home-data.js?v={v["data"]}"></script>')
     s = s.replace('<script>\n{{JS}}\n</script>', f'<script src="/assets/folio/luxe.js?v={v["luxe"]}"></script>\n<script src="/assets/folio/shell.js?v={v["shell"]}"></script>\n<script src="/assets/folio/home.js?v={v["homejs"]}"></script>')
-    s = s.replace('<script type="module">\n{{MOSQUE}}\n</script>', f'<script src="/assets/folio/prayer.js?v={v["prayer"]}"></script>\n<script src="/assets/folio/qibla.js?v={v["qibla"]}"></script>\n<script type="module" src="/assets/folio/scene3d.js?v={v["scene3d"]}"></script>\n<script type="module" src="/assets/folio/mosque3d.js?v={v["mosque"]}"></script>\n<script type="module" src="/assets/folio/prayer3d.js?v={v["prayer3d"]}"></script>')
+    s = s.replace('<script type="module">\n{{MOSQUE}}\n</script>', f'<script src="/assets/folio/prayer.js?v={v["prayer"]}"></script>\n<script src="/assets/folio/qibla.js?v={v["qibla"]}"></script>\n<script type="module" src="/assets/folio/3d/mosque3d.js?v={v["mosque"]}"></script>\n<script type="module" src="/assets/folio/3d/scene3d.js?v={v["scene3d"]}"></script>\n<script type="module" src="/assets/folio/3d/prayer3d.js?v={v["prayer3d"]}"></script>')
     s = s.replace('{{NEXLYR}}', '')
     # the home is the front page of a multi-page site: each section opens its full page
     s = s.replace('<a class="btn btn--line" href="#lab">Open the Islamiyat Lab</a>', '<a class="btn btn--line" href="/lab">Open the Islamiyat Lab</a>')
@@ -704,6 +705,22 @@ def build_home(v):
     return len(s)
 
 
+def bundle3d():
+    """The 3D scripts are bundled by esbuild (tools/folio/bundle3d.mjs): small entry files plus one
+    shared, content-hashed three.js chunk, so a page makes two requests for its 3D, not five."""
+    global PRELOAD3D
+    import subprocess
+    here = ROOT / 'tools' / 'folio'
+    if not (here / 'node_modules' / 'esbuild').exists():
+        subprocess.run(['npm', 'ci', '--silent'], cwd=here, check=True)
+    subprocess.run(['node', 'bundle3d.mjs'], cwd=here, check=True, stdout=subprocess.DEVNULL)
+    chunks = sorted(p.name for p in (OUT / '3d').glob('c-*.js'))
+    PRELOAD3D = ''.join(f'<link rel="modulepreload" href="/assets/folio/3d/{c}">' for c in chunks)
+
+
+PRELOAD3D = ''
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     CSSOUT.mkdir(parents=True, exist_ok=True)
@@ -717,18 +734,15 @@ def main():
     (OUT / 'shell.js').write_text(R('shell.js'))
     (OUT / 'home.js').write_text(R('home.js'))
     (OUT / 'home-data.js').write_text(R('data.js'))
-    (OUT / 'mosque3d.js').write_text(R('mosque3d.js'))
     (OUT / 'prayer.js').write_text(R('prayer.js'))
-    (OUT / 'prayer3d.js').write_text(R('prayer3d.js'))
-    (OUT / 'ornament3d.js').write_text(R('ornament3d.js'))
-    for n in ('models3d.js', 'stage3d.js', 'scene3d.js', 'qibla.js'):
-        (OUT / n).write_text(R(n))
+    (OUT / 'qibla.js').write_text(R('qibla.js'))
+    bundle3d()
     (OUT / 'luxe.js').write_text(R('luxe.js'))
     (OUT / 'core.js').write_text(root_assets(R('core.js')))
     (OUT / 'mfm.js').write_text(root_assets(R('mfm.js')))
     legacy_css()
     v = {'l1': ver('legacy-1.css'), 'l2': ver('legacy-2.css'), 'base': ver('base.css'), 'bridge': ver('bridge.css'), 'home': ver('home.css'),
-         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('prayer3d.js'), 'orn': ver('ornament3d.js'), 'luxe': ver('luxe.js'), 'scene3d': ver('scene3d.js'), 'qibla': ver('qibla.js')}
+         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('3d/mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('3d/prayer3d.js'), 'orn': ver('3d/ornament3d.js'), 'luxe': ver('luxe.js'), 'scene3d': ver('3d/scene3d.js'), 'qibla': ver('qibla.js')}
     print('index.html', build_home(v) // 1024, 'KB')
     for slug in PAGES:
         if slug == 'index':
