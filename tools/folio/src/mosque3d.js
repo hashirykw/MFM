@@ -33,7 +33,7 @@ function init() {
   const M = (c, o = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: .82, metalness: 0, flatShading: true, ...o });
   const mat = {
     marble: M(0xf4ede0), marble2: M(0xe8dcc6), sand: M(0xd7b98a), sandDk: M(0xb98f5e),
-    emerald: M(0x0f6a4c, { roughness: .42, metalness: .15 }), emeraldDk: M(0x0b3d2e),
+    emerald: M(0x1d6b43, { roughness: .5, metalness: .08 }), emeraldDk: M(0x0b462b),
     gold: M(0xe2b04a, { metalness: .55, roughness: .35 }), arch: M(0x163a31, { emissive: 0x000000 }),
     lamp: M(0xffe3a0, { emissive: 0xffc35a, emissiveIntensity: 0 }), water: M(0x7fc6c2, { roughness: .2, metalness: .1 }),
     grass: M(0x88a96c), leaf: M(0x4b7d47), leaf2: M(0x63924f), trunk: M(0x8a6340), rug: M(0x8e2f2a), rug2: M(0x1c5a46), wood: M(0x6f4a2c), page: M(0xfbf6ea)

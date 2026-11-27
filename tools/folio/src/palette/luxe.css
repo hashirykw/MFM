@@ -1,0 +1,227 @@
+/* =========================================================================
+   MFM final palette (Nov 2026), on top of the V4 folio. The notebook paper,
+   torn edges and grid stay; only colour, finish and light change.
+     Paper (light): white paper, black ink, #0A503C green bands, gold for the
+                    things that matter, a touch of silver on edges and rules.
+     Ink (dark):    black paper, deep green bands, silver text, gold accents.
+   Greens are Sir Fazil's book green (#0B462B, hue 158), the main one a shade lighter (#195739).
+   ========================================================================= */
+:root{
+  --paper:oklch(98.4% .003 100);
+  --paper-2:oklch(95.6% .005 100);
+  --paper-3:oklch(92.4% .007 100);
+  --text:oklch(16.5% .012 158);
+  --text-2:oklch(32% .014 158);
+  --text-3:oklch(46% .012 158);
+  --rule:oklch(16.5% .012 158 / .13);
+  --rule-2:oklch(16.5% .012 158 / .28);
+  --royal:oklch(41% .082 158);
+  --royal-soft:oklch(41% .082 158 / .1);
+  --emerald:oklch(44% .09 158);
+  --emerald-soft:oklch(44% .09 158 / .12);
+  --navy:oklch(30% .065 158);
+  --navy-2:oklch(36% .074 158);
+  --sand:oklch(56% .115 76);           /* was terracotta: now a deep gold */
+  --sand-soft:oklch(56% .115 76 / .13);
+  --saffron:oklch(77% .105 82);
+  --saffron-2:oklch(69% .105 78);
+  --on-dark:oklch(97% .004 100);
+  --on-dark-2:oklch(97% .004 100 / .74);
+  --on-dark-rule:oklch(97% .004 100 / .16);
+  --grid-c:oklch(16.5% .012 158 / .05);
+  --focus:oklch(70% .1 82);
+  --btn-ink:oklch(41% .082 158);
+  --silver:oklch(80% .008 240);
+  --silver-2:oklch(68% .01 240);
+  --silver-line:linear-gradient(90deg,oklch(86% .006 240 / 0),oklch(74% .01 240),oklch(93% .004 240),oklch(70% .01 240),oklch(86% .006 240 / 0));
+  --silver-metal:linear-gradient(160deg,oklch(88% .005 240),oklch(79% .007 240));
+  --gold-metal:linear-gradient(180deg,oklch(78% .1 82),oklch(74% .1 80));
+  /* greens: forest, the #0A503C sample, emerald, sage, mist */
+  --g-900:oklch(28% .062 158);--g-800:oklch(35% .075 158);--g-700:oklch(41% .082 158);--g-600:oklch(48% .088 158);--g-300:oklch(80% .06 150);--g-100:oklch(95% .02 150);
+  --edge:inset 0 0 0 1px oklch(16.5% .012 158 / .1),inset 0 1px 0 oklch(100% 0 0 / .9);
+  --shadow:0 1px 0 oklch(16.5% .012 158 / .05),0 16px 36px -20px oklch(16.5% .012 158 / .32);
+  --shadow-lg:0 2px 0 oklch(16.5% .012 158 / .04),0 34px 60px -30px oklch(16.5% .012 158 / .42);
+}
+[data-theme="dark"]{
+  --paper:oklch(13.5% .01 158);
+  --paper-2:oklch(17.5% .014 158);
+  --paper-3:oklch(21.5% .018 158);
+  --text:oklch(93.5% .006 240);
+  --text-2:oklch(93.5% .006 240 / .74);
+  --text-3:oklch(93.5% .006 240 / .56);
+  --rule:oklch(93.5% .006 240 / .12);
+  --rule-2:oklch(93.5% .006 240 / .26);
+  --royal:oklch(80% .06 150);
+  --royal-soft:oklch(80% .06 150 / .12);
+  --emerald:oklch(74% .07 152);
+  --emerald-soft:oklch(70% .1 158 / .15);
+  --navy:oklch(10% .01 158);
+  --navy-2:oklch(22% .04 158);
+  --sand:oklch(77% .1 82);
+  --sand-soft:oklch(77% .1 82 / .14);
+  --grid-c:oklch(93.5% .006 240 / .035);
+  --btn-ink:initial;
+  --edge:inset 0 0 0 1px oklch(93.5% .006 240 / .1),inset 0 1px 0 oklch(100% 0 0 / .06);
+  --shadow:0 1px 0 oklch(0% 0 0 / .4),0 20px 44px -22px oklch(0% 0 0 / .85);
+  --shadow-lg:0 2px 0 oklch(0% 0 0 / .4),0 40px 70px -30px oklch(0% 0 0 / .9);
+}
+
+/* ---------- paper: whiter in Paper, near-black in Ink; same crumpled sheet and grid ---------- */
+.s-paper{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(99.5% .002 100 / .42),oklch(99.5% .002 100 / .42)),var(--sheet);background-size:28px 28px,28px 28px,100% 100%,1024px 1024px}
+[data-theme="dark"] .s-paper{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(12% .01 158 / .8),oklch(10% .008 158 / .84)),var(--sheet);background-size:28px 28px,28px 28px,100% 100%,1024px 1024px}
+
+/* ---------- ink bands: the green ---------- */
+.s-ink,.s-lapis{--on-dark:oklch(97% .004 100);--text:var(--on-dark);--text-2:oklch(97% .004 100 / .76);--text-3:oklch(97% .004 100 / .56);--rule:oklch(97% .004 100 / .14);--rule-2:oklch(97% .004 100 / .28);--sand:var(--saffron);--royal:oklch(82% .06 150)}
+.s-ink{--paper:oklch(41% .082 158);--paper-2:oklch(45% .085 158);--paper-3:oklch(49% .087 158);background-color:var(--paper)}
+.s-lapis{--paper:oklch(35% .075 158);--paper-2:oklch(39% .08 158);--paper-3:oklch(43% .083 158);--royal:oklch(82% .06 150);background-color:var(--paper)}
+[data-theme="dark"] .s-ink{--paper:oklch(27% .062 158);--paper-2:oklch(31% .068 158);--paper-3:oklch(35% .074 158);--text:oklch(94% .006 240);--text-2:oklch(94% .006 240 / .74);--royal:oklch(82% .06 150)}
+[data-theme="dark"] .s-lapis{--paper:oklch(24% .058 158);--paper-2:oklch(28% .064 158);--paper-3:oklch(32% .07 158);--text:oklch(94% .006 240);--text-2:oklch(94% .006 240 / .74)}
+.s-ink,.s-lapis{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23E8B547' stroke-opacity='.09' stroke-width='1'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3Cpath d='M0 42h12M72 42h12M42 0v12M42 72v12'/%3E%3C/g%3E%3C/svg%3E"),radial-gradient(110% 70% at 85% 0%,oklch(100% 0 0 / .07),transparent 60%),radial-gradient(90% 60% at 0% 100%,oklch(0% 0 0 / .16),transparent 60%);background-size:84px 84px,100% 100%,100% 100%}
+
+/* ---------- the study-pack band: was terracotta, now obsidian with a gold lattice ---------- */
+.s-sandstone{--paper:oklch(16% .008 158);--paper-2:oklch(21% .01 158);--paper-3:oklch(26% .012 158);--text:oklch(96% .004 100);--text-2:oklch(96% .004 100 / .72);--text-3:oklch(96% .004 100 / .54);--rule:oklch(96% .004 100 / .13);--rule-2:oklch(96% .004 100 / .28);--royal:var(--saffron);--sand:var(--saffron);
+  background-color:var(--paper);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23E8B547' stroke-opacity='.11' stroke-width='1'%3E%3Crect x='27' y='27' width='30' height='30'/%3E%3Crect x='27' y='27' width='30' height='30' transform='rotate(45 42 42)'/%3E%3Ccircle cx='42' cy='42' r='6'/%3E%3C/g%3E%3C/svg%3E"),radial-gradient(80% 90% at 20% 30%,oklch(41% .082 158 / .38),transparent 65%),radial-gradient(70% 70% at 100% 100%,oklch(80% .14 82 / .08),transparent 60%);background-size:84px 84px,100% 100%,100% 100%}
+[data-theme="dark"] .s-sandstone{--paper:oklch(18.5% .012 158)}
+
+/* ---------- gold where it matters, silver on edges ---------- */
+::selection{background:oklch(80% .06 150 / .5);color:inherit}
+.chip{border-color:transparent;background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--silver-metal) border-box;border:1px solid transparent;color:var(--text-2);box-shadow:0 4px 10px -8px oklch(16.5% .012 158 / .35)}
+[data-theme="dark"] .chip{background:linear-gradient(var(--paper-2),var(--paper-2)) padding-box,linear-gradient(160deg,oklch(75% .006 240 / .5),oklch(50% .008 240 / .4)) border-box}
+.s-ink .chip,.s-lapis .chip,.s-sandstone .chip{background:linear-gradient(var(--paper-2),var(--paper-2)) padding-box,linear-gradient(135deg,oklch(95% .004 240 / .55),oklch(70% .01 240 / .25),oklch(90% .006 240 / .5)) border-box;color:var(--text-2)}
+
+/* the hero's "editor selection" box around WAY read as a stray tool mark: gone */
+.hero h1 .boxed::before,.hero h1 .boxed i{display:none}
+.hero h1 .boxed{padding:0}
+
+/* headline underline and stat rule in gold / silver */
+.stats{border-top:0;position:relative}
+.stats::before{content:"";position:absolute;inset:0 0 auto;height:1.5px;background:linear-gradient(90deg,var(--text),var(--text) 40%,oklch(72% .01 240) 70%,transparent)}
+[data-theme="dark"] .stats::before{background:linear-gradient(90deg,oklch(80% .14 82),oklch(80% .01 240) 50%,transparent)}
+.stat b{background:linear-gradient(180deg,var(--text) 55%,color-mix(in oklab,var(--text) 60%,var(--royal)));-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="dark"] .stat b{background:linear-gradient(180deg,oklch(97% .004 240) 30%,oklch(76% .01 240));-webkit-background-clip:text;background-clip:text}
+
+/* course cards: silver hairline, green / gold / silver caps instead of the orange one */
+.course{background:linear-gradient(var(--paper),var(--paper)) padding-box,linear-gradient(160deg,oklch(90% .005 240),oklch(76% .01 240) 30%,oklch(96% .003 240) 55%,oklch(78% .01 240)) border-box;border:1px solid transparent;box-shadow:var(--shadow)}
+[data-theme="dark"] .course{background:linear-gradient(var(--paper-2),var(--paper-2)) padding-box,linear-gradient(160deg,oklch(60% .01 240 / .6),oklch(30% .01 240 / .5) 40%,oklch(75% .008 240 / .55) 60%,oklch(35% .01 240 / .5)) border-box}
+.course.c2{--c:var(--sand)}
+.course::before{height:5px;background:var(--c);box-shadow:0 1px 0 oklch(100% 0 0 / .35) inset}
+.course.c2::before{background:var(--saffron)}
+.course.c3{--c:var(--royal)}
+.course.c3::before{background:var(--silver-metal)}
+.course:hover{box-shadow:var(--shadow-lg)}
+
+/* plate frames: a quiet double rule in silver with a gold inner line (was orange) */
+.plate-mat{background:oklch(99% .003 100);border:1px solid oklch(16.5% .012 158 / .14);box-shadow:var(--shadow)}
+.plate-mat::before{border:1px solid oklch(72% .008 240 / .7);outline:1px solid oklch(74% .09 82 / .55);outline-offset:4px}
+.plate-mat::after{display:none}
+.plate-mat img{background:transparent}
+.plate:hover .plate-mat{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+[data-theme="dark"] .plate-mat{background:oklch(18% .012 158);border-color:oklch(93.5% .006 240 / .12)}
+[data-theme="dark"] .plate-mat::before{border-color:oklch(70% .01 240 / .45);outline-color:oklch(80% .14 82 / .55)}
+
+/* the dark theme's top bar, menu and cards pick up the black + silver */
+[data-theme="dark"] .mi:not(.here){background:oklch(19% .016 158);box-shadow:inset 0 0 0 1px oklch(93.5% .006 240 / .1)}
+
+/* =========================================================================
+   Buttons: matte. A flat colour with a fine edge; on hover a deeper green
+   rises from below (gold only on the gold buttons), a small lift, a firm press.
+   ========================================================================= */
+.btn{box-shadow:inset 0 0 0 1px oklch(0% 0 0 / .06),0 10px 22px -16px oklch(16.5% .012 158 / .5);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out),color .35s var(--ease-out),letter-spacing .5s var(--ease-out)}
+.btn::after{background:var(--g-900);transition:transform .6s var(--ease-out)}
+.btn:hover{transform:translateY(-2px);letter-spacing:.115em;color:var(--on-dark);box-shadow:inset 0 0 0 1px oklch(0% 0 0 / .08),0 16px 28px -16px oklch(16.5% .012 158 / .6)}
+.btn:active{transform:translateY(1px) scale(.975);transition-duration:.12s}
+.btn:focus-visible{outline:2px solid var(--saffron);outline-offset:3px}
+.btn--gold{--b:var(--saffron);--f:oklch(16.5% .012 158)}
+.btn--gold::after{background:var(--g-900)}
+.btn--gold:hover{color:var(--on-dark)}
+.s-ink .btn::after,.s-lapis .btn::after,.s-sandstone .btn::after,[data-theme="dark"] .btn::after{background:var(--g-600)}
+.btn--line{box-shadow:none;background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--silver-metal) border-box;border:1.5px solid transparent}
+.s-ink .btn--line,.s-lapis .btn--line,.s-sandstone .btn--line,[data-theme="dark"] .btn--line{background:linear-gradient(var(--paper),var(--paper)) padding-box,linear-gradient(160deg,oklch(92% .004 240 / .5),oklch(75% .008 240 / .35)) border-box}
+.btn--line:hover{color:var(--on-dark)}
+.btn .arr{transition:transform .5s var(--ease-out)}
+.btn:hover .arr{transform:translate(3px,-3px)}
+
+/* top bar controls share the same finish */
+.menu-btn,.snd-btn{transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out),background-color .35s,color .35s}
+.menu-btn{background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--silver-metal) border-box;border:1px solid transparent;box-shadow:0 8px 18px -14px oklch(16.5% .012 158 / .5)}
+[data-theme="dark"] .menu-btn{background:linear-gradient(var(--paper-2),var(--paper-2)) padding-box,linear-gradient(160deg,oklch(80% .006 240 / .45),oklch(55% .008 240 / .35)) border-box}
+.menu-btn:hover{transform:translateY(-1px);box-shadow:0 12px 22px -14px oklch(16.5% .012 158 / .45),0 0 0 1px oklch(41% .078 158 / .35)}
+body.menu-open .menu-btn{background:var(--btn-ink,var(--text));border-color:transparent}
+
+/* the sound switch */
+.snd-btn{position:relative;display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:12px;color:var(--text);cursor:pointer;
+  background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--silver-metal) border-box;border:1px solid transparent;box-shadow:0 8px 18px -14px oklch(16.5% .012 158 / .5)}
+[data-theme="dark"] .snd-btn{background:linear-gradient(var(--paper-2),var(--paper-2)) padding-box,linear-gradient(160deg,oklch(80% .006 240 / .45),oklch(55% .008 240 / .35)) border-box}
+.snd-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.snd-btn .sp{fill:currentColor;fill-opacity:.16}
+.snd-btn .w1,.snd-btn .w2{transform-origin:12px 12px;transition:opacity .3s,transform .4s var(--ease-out)}
+.snd-btn .x{opacity:0;transition:opacity .25s;stroke:var(--sand)}
+.snd-btn.off .w1,.snd-btn.off .w2{opacity:0;transform:scale(.6)}
+.snd-btn.off .x{opacity:1}
+.snd-btn:not(.off) .w2{animation:lxWave 2.6s var(--ease-in-out) infinite}
+@keyframes lxWave{0%,100%{opacity:1}50%{opacity:.35}}
+.snd-btn:hover{transform:translateY(-1px);box-shadow:0 12px 22px -14px oklch(16.5% .012 158 / .45),0 0 0 1px oklch(41% .078 158 / .35)}
+.snd-btn:active{transform:scale(.94)}
+.snd-btn:focus-visible,.menu-btn:focus-visible{outline:2px solid var(--saffron);outline-offset:3px}
+@media (max-width:560px){.snd-btn{width:40px;height:40px}}
+@media (max-width:440px){.top .snd-btn{display:none}}
+
+/* =========================================================================
+   Pop-ups, toasts, the cookie bar, dropdowns and the scrollbar, in theme
+   ========================================================================= */
+.lx-toasts{position:fixed;left:50%;bottom:calc(var(--dock-h,72px) + 36px);transform:translateX(-50%);z-index:90;display:grid;gap:8px;pointer-events:none}
+.lx-toast{padding:12px 18px;border-radius:12px;font:700 .66rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark);
+  background:var(--g-900);border:1px solid oklch(77% .1 82 / .35);box-shadow:0 18px 40px -18px oklch(0% 0 0 / .6);
+  opacity:0;transform:translateY(10px) scale(.97);transition:opacity .35s var(--ease-out),transform .45s var(--ease-out)}
+.lx-toast.in{opacity:1;transform:none}
+
+.lx-cookie{position:fixed;z-index:85;left:50%;bottom:calc(var(--dock-h,72px) + 30px);width:min(760px,calc(100vw - 24px));transform:translate(-50%,30px);opacity:0;pointer-events:none;
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;padding:16px 18px;border-radius:18px;
+  background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--silver-metal) border-box;border:1px solid transparent;
+  background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(var(--paper),var(--paper)),var(--silver-metal);
+  background-size:22px 22px,22px 22px,auto,auto;background-origin:padding-box,padding-box,padding-box,border-box;background-clip:padding-box,padding-box,padding-box,border-box;
+  box-shadow:0 30px 60px -28px oklch(16.5% .012 158 / .55);transition:opacity .5s var(--ease-out),transform .7s var(--ease-out)}
+.lx-cookie.in{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+[data-theme="dark"] .lx-cookie{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(var(--paper-2),var(--paper-2)),linear-gradient(135deg,oklch(80% .008 240 / .7),oklch(40% .01 240 / .4),oklch(85% .006 240 / .6));box-shadow:0 30px 60px -28px oklch(0% 0 0 / .8)}
+.lx-cookie-seal{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:var(--btn-ink,oklch(27% .062 158));color:var(--saffron)}
+[data-theme="dark"] .lx-cookie-seal{background:oklch(27% .062 158)}
+.lx-cookie-seal svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round}
+.lx-cookie-t b{display:block;font:900 .78rem/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.04em;color:var(--text)}
+.lx-cookie-t p{margin:4px 0 0;font-size:.86rem;line-height:1.45;color:var(--text-2)}
+.lx-cookie-a{display:flex;gap:8px}
+@media (max-width:640px){.lx-cookie{grid-template-columns:auto minmax(0,1fr);bottom:calc(var(--dock-h,72px) + 22px)}.lx-cookie-a{grid-column:1/-1}.lx-cookie-a .btn{flex:1}}
+
+/* the menu panel: a silver hairline and a deeper, softer shadow */
+.menu-in{box-shadow:0 0 0 1px oklch(72% .01 240 / .55),0 50px 90px -40px oklch(16.5% .012 158 / .55)}
+[data-theme="dark"] .menu-in{box-shadow:0 0 0 1px oklch(80% .008 240 / .2),0 50px 90px -40px oklch(0% 0 0 / .9)}
+.menu-scrim{background:oklch(14% .02 158 / .42)}
+.mi{transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out),opacity .5s var(--ease-out)}
+.mi:hover{transform:translateY(-2px)}
+.mi::before{background:var(--btn-ink,var(--text))}
+
+/* native dropdowns follow the theme */
+select,.select,.input,.textarea{accent-color:var(--royal)}
+select option{background:var(--paper);color:var(--text)}
+.sp-city select option{background:oklch(98.4% .003 100);color:oklch(16.5% .012 158)}
+[data-theme="dark"] .sp-city select option{background:oklch(17.5% .014 158);color:oklch(93.5% .006 240)}
+.select{background-image:linear-gradient(45deg,transparent 50%,var(--sand) 50%),linear-gradient(135deg,var(--sand) 50%,transparent 50%)}
+.input:focus,.select:focus,.textarea:focus{border-color:var(--royal);box-shadow:0 0 0 4px var(--royal-soft)}
+input[type="checkbox"],input[type="radio"]{accent-color:var(--btn-ink,var(--royal))}
+
+/* FAQ (details) opens smoothly */
+details>summary{transition:color .3s}
+details[open]>summary{color:var(--royal)}
+
+/* scrollbar: green on white in Paper, gold on black in Ink, a silver track edge */
+html{scrollbar-color:oklch(41% .082 158) oklch(95.6% .005 100)}
+[data-theme="dark"]{scrollbar-color:oklch(48% .088 158) oklch(12% .01 158)}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:oklch(95.6% .005 100);border-left:1px solid oklch(72% .01 240 / .4)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,oklch(45% .085 158),oklch(37% .077 158));border-radius:10px;border:3px solid oklch(95.6% .005 100)}
+::-webkit-scrollbar-thumb:hover{background:var(--g-600)}
+[data-theme="dark"] ::-webkit-scrollbar-track{background:oklch(12% .01 158);border-left-color:oklch(80% .008 240 / .12)}
+[data-theme="dark"] ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,oklch(48% .088 158),oklch(41% .082 158));border-color:oklch(12% .01 158)}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background:oklch(74% .1 82)}
+
+@media (prefers-reduced-motion:reduce){.btn,.btn::after,.lx-cookie,.lx-toast,.mi{transition:none!important}.snd-btn .w2{animation:none}}

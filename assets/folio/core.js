@@ -322,71 +322,24 @@ const Q = RA._q = RA._q || [];
 RA.page = fn => Q.push(fn);
 
 /* ---------------------------------------------------------------- sound */
+/* Nov 2026: every sound comes from the site-wide classical engine in luxe.js (window.MFMSound),
+   so the inner pages and the home page sound the same and share one on/off switch. */
 RA.Snd = (function () {
-  let ctx = null, master = null, on = RA.store.get('ra-sound', true), last = 0;
-  function ensure() {
-    if (!on) return null;
-    if (!ctx) {
-      try {
-        /* v2: a warmer chain — soft low-pass, a little glassy air (short echo) and a gentle limiter */
-        ctx = new (window.AudioContext || window.webkitAudioContext)(); master = ctx.createGain(); master.gain.value = 0.2;
-        const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 5200; lp.Q.value = 0.3;
-        const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 3;
-        const dl = ctx.createDelay(0.5), fb = ctx.createGain(), wet = ctx.createGain(), hp = ctx.createBiquadFilter();
-        dl.delayTime.value = 0.13; fb.gain.value = 0.28; wet.gain.value = 0.22; hp.type = 'highpass'; hp.frequency.value = 700;
-        master.connect(lp); lp.connect(comp); comp.connect(ctx.destination);
-        lp.connect(hp); hp.connect(dl); dl.connect(fb); fb.connect(dl); dl.connect(wet); wet.connect(comp);
-      }
-      catch (e) { return null; }
-    }
-    if (ctx.state === 'suspended') ctx.resume();
-    return ctx;
-  }
-  function tone(f, dur, type, vol, when, slide) {
-    const c = ensure(); if (!c) return;
-    /* v2: each note is a soft bell — the tone plus quiet upper partials, slightly longer tail; harsh waves become triangles */
-    const t = c.currentTime + (when || 0), g = c.createGain(), d = dur * 1.35;
-    const wave = (type === 'square' || type === 'sawtooth') ? 'triangle' : (type || 'sine');
-    [[1, 1, wave], [2.0, .22, 'sine'], [3.01, .07, 'sine']].forEach(([m, a, w]) => {
-      const o = c.createOscillator(), og = c.createGain(); o.type = w; o.frequency.setValueAtTime(f * m, t);
-      if (slide) o.frequency.exponentialRampToValueAtTime(f * m * slide, t + d);
-      o.detune.value = m === 1 ? 0 : 4; og.gain.value = a; o.connect(og); og.connect(g); o.start(t); o.stop(t + d + 0.05);
-    });
-    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t + d);
-    g.connect(master);
-  }
-  function noise(dur, vol, freq) {
-    const c = ensure(); if (!c) return;
-    const len = Math.floor(c.sampleRate * dur), buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
-    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
-    const s = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
-    s.buffer = buf; f.type = 'bandpass'; f.frequency.value = freq || 1200; f.Q.value = 0.8; g.gain.value = vol || 0.2;
-    s.connect(f); f.connect(g); g.connect(master); s.start();
-  }
-  const api = {
-    get on() { return on; },
-    set(v) { on = !!v; RA.store.set('ra-sound', on); if (on) api.chime(); },
-    unlock() { if (on) ensure(); },
-    tick() { const n = performance.now(); if (n - last < 70) return; last = n; tone(2100, 0.035, 'sine', 0.035); },
-    click() { tone(880, 0.06, 'triangle', 0.16); },
-    soft() { tone(640, 0.09, 'sine', 0.12); },
-    open() { tone(480, 0.14, 'sine', 0.14, 0, 1.6); },
-    close() { tone(760, 0.12, 'sine', 0.12, 0, 0.6); },
-    chime() { tone(880, 0.35, 'sine', 0.16); tone(1318.5, 0.5, 'sine', 0.12, 0.07); },
-    coin() { tone(1568, 0.07, 'square', 0.04); tone(2093, 0.3, 'sine', 0.12, 0.06); tone(2637, 0.35, 'sine', 0.06, 0.12); },
-    stamp() { noise(0.12, 0.3, 500); tone(96, 0.18, 'sine', 0.35); },
-    err() { tone(220, 0.16, 'sawtooth', 0.08); tone(175, 0.22, 'sawtooth', 0.07, 0.09); },
-    whoosh() { noise(0.4, 0.14, 900); },
-    alarm() { [0, 0.24, 0.48].forEach(w => tone(1046.5, 0.16, 'square', 0.06, w)); }
+  const M = () => window.MFMSound;
+  const call = n => (...a) => { const m = M(); if (m && m[n]) m[n](...a); };
+  return {
+    get on() { const m = M(); return m ? m.on : false; },
+    set(v) { const m = M(); if (m) m.set(v); },
+    unlock: call('unlock'), tick: call('tick'), click: call('click'), soft: call('soft'), open: call('open'), close: call('close'),
+    chime: call('chime'), coin: call('coin'), stamp: call('stamp'), err: call('err'), whoosh: call('whoosh'), alarm: call('alarm')
   };
-  return api;
 })();
 const Snd = RA.Snd;
 
 /* ---------------------------------------------------------------- theme */
 RA.theme = function (t) {
   root.dataset.theme = t; RA.store.set('ra-theme', t);
-  $$('meta[name="theme-color"]').forEach(m => m.content = t === 'light' ? '#f3ecdc' : '#0b1914');
+  $$('meta[name="theme-color"]').forEach(m => m.content = t === 'light' ? '#fafaf8' : '#0c1311');
   $$('[data-theme-btn]').forEach(b => b.setAttribute('aria-pressed', String(t === 'light')));
   if (RA.BG) RA.BG.theme(t);
   document.dispatchEvent(new CustomEvent('ra:theme', { detail: t }));
@@ -582,13 +535,7 @@ function cursor() {
   document.addEventListener('mouseleave', () => c.classList.add('gone')); document.addEventListener('mouseenter', () => c.classList.remove('gone'));
   (function f() { rx += (x - rx) * 0.2; ry += (y - ry) * 0.2; dot.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)'; ring.style.transform = 'translate3d(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px,0)'; requestAnimationFrame(f); })();
 }
-function uiSounds() {
-  addEventListener('pointerdown', () => Snd.unlock(), { once: true });
-  if (RA.FINE) document.addEventListener('pointerover', e => {
-    const t = e.target.closest('a,button'); if (!t || (e.relatedTarget && t.contains(e.relatedTarget))) return; Snd.tick();
-  });
-  document.addEventListener('click', e => { if (e.target.closest('a,button:not([data-nosnd])')) Snd.click(); });
-}
+function uiSounds() { /* taps and clicks are voiced by luxe.js for every page */ }
 
 /* ---------------------------------------------------------------- toast + modal */
 RA.toast = function (msg, ms) {

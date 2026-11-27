@@ -37,7 +37,7 @@ $$('[data-year],#yr').forEach(el => { el.textContent = new Date().getFullYear();
   const btn = $('#themeBtn'); if (!btn) return;
   const cur = () => root.dataset.theme === 'dark' ? 'dark' : 'light';
   const metaC = $$('meta[name="theme-color"]');
-  const sync = () => { const d = cur() === 'dark'; btn.setAttribute('aria-checked', String(d)); btn.setAttribute('aria-label', d ? 'Switch to the paper theme' : 'Switch to the ink theme'); metaC.forEach(m => m.setAttribute('content', d ? '#0b1914' : '#f3ecdc')); };
+  const sync = () => { const d = cur() === 'dark'; btn.setAttribute('aria-checked', String(d)); btn.setAttribute('aria-label', d ? 'Switch to the paper theme' : 'Switch to the ink theme'); metaC.forEach(m => m.setAttribute('content', d ? '#0c1311' : '#fafaf8')); };
   sync();
   btn.addEventListener('click', () => {
     const next = cur() === 'dark' ? 'light' : 'dark';

@@ -231,7 +231,7 @@ def tape(slug, more=True):
 FONTS = ('<link rel="preload" href="/assets/folio/fonts/font-archivo-wide-900.woff2" as="font" type="font/woff2" crossorigin>'
          '<link rel="preload" href="/assets/folio/fonts/font-archivo-400.woff2" as="font" type="font/woff2" crossorigin>')
 THEME = '<script>(function(){var d=document.documentElement,t="light";try{t=(localStorage.getItem("ra-theme")||"light").replace(/"/g,"");}catch(e){}d.dataset.theme=t==="dark"?"dark":"light";})();</script>'
-METAS = '<meta name="theme-color" content="#f3ecdc"><meta name="color-scheme" content="light dark">'
+METAS = '<meta name="theme-color" content="#fafaf8"><meta name="color-scheme" content="light dark">'
 
 
 # ------------------------------------------------------------------ legacy CSS (V1 layout, pruned)
@@ -338,6 +338,7 @@ def base_src():
     if PAL == 'v4':
         b = b.replace('.btn{--b:var(--text);', '.btn{--b:var(--btn-ink,var(--text));', 1)
         b += '\n' + R('palette/v4-base.css')
+    b += '\n' + R('palette/luxe.css')
     return b
 
 
@@ -351,13 +352,13 @@ def bridge_src():
 
 # V4 greens (Nov 2026): Hashir's sample #0A503C = oklch(38.5% .074 168). The near-black inks move up
 # to it; the paper textures underneath stay exactly as they were.
-V4_HEX = [
-    (r'#020f0f\b', '#073d2e'),
-    (r'#051f20\b', '#0a503c'),
-    (r'#(?:082420|0a2722|0b201a|0b2a1f|0b2b22|0b2b26)\b', '#0c5a43'),
-    (r'#(?:0f332b|163832)\b', '#11634a'),
-    (r'#235347\b', '#1b7056'),
-    (r'rgba?\(\s*5[ ,]+31[ ,]+32(?=\s*[/,)])', 'rgb(10 80 60'),
+V4_HEX = [   # Nov 2026: Sir Fazil's book green (#0B462B), one shade lighter for the main green
+    (r'#020f0f\b', '#063721'),
+    (r'#051f20\b', '#195739'),
+    (r'#(?:082420|0a2722|0b201a|0b2a1f|0b2b22|0b2b26)\b', '#206040'),
+    (r'#(?:0f332b|163832)\b', '#2a6c4a'),
+    (r'#235347\b', '#357855'),
+    (r'rgba?\(\s*5[ ,]+31[ ,]+32(?=\s*[/,)])', 'rgb(25 87 57'),
 ]
 
 
@@ -366,9 +367,9 @@ def palette_v4(css):
         L, C, H, rest = float(m.group(1)), float(m.group(2)), float(m.group(3)), m.group(4)
         if not 160 <= H <= 164:
             return m.group(0)
-        L0, H = L, 168
+        L0, H = L, 158
         if 12 <= L <= 33 and (C >= .035 or (L <= 17 and C >= .03)):
-            L, C = round(37 + (L - 16) * .55, 1), round(min(.1, .074 + (C - .035) * .6), 3)
+            L, C = round(41 + (L - 16) * .55, 1), round(min(.1, .082 + (C - .035) * .6), 3)
             a = re.match(r'\s*/\s*(0?\.\d+)', rest)
             if a and L0 <= 24 and float(a.group(1)) >= .5:  # tints over the dark paper sheet
                 rest = re.sub(r'0?\.\d+', '.88', rest, 1)
@@ -383,8 +384,19 @@ def palette_v4(css):
     return re.sub(r'(background(?:-color|-image)?\s*:\s*)([^;}]+)', bg, css)
 
 
+def clay_to_gold(css):
+    """Nov 2026 palette: no terracotta. Any clay/orange oklch (hue 30-48, chroma >= .08) becomes gold at a
+    similar lightness, so headings, numbers and hairlines that were orange read gold."""
+    def f(m):
+        L, C, H, rest = float(m.group(1)), float(m.group(2)), float(m.group(3)), m.group(4)
+        if not (30 <= H <= 48 and C >= .08):
+            return m.group(0)
+        return f'oklch({max(L, 54):g}% {min(C, .13):g} 78{rest}'
+    return re.sub(r'oklch\((\d+(?:\.\d+)?)%\s+(0?\.\d+)\s+(\d+(?:\.\d+)?)(\s*(?:/[^)]*)?\))', f, css)
+
+
 def palette(css):
-    return palette_v4(css) if PAL == 'v4' else css
+    return clay_to_gold(palette_v4(css)) if PAL == 'v4' else css
 
 
 def squarer(css):
@@ -430,12 +442,12 @@ ALIAS = '''--v-glow:var(--text);--ink:var(--text);--ink-2:var(--text-2);--ink-3:
   --surf:var(--card);--surf-2:var(--paper-2);--line-2:var(--rule-2);--glow-sm:0 0 0 transparent;--glow-lg:0 0 0 transparent;--brass-ink:var(--paper);
   --margin:oklch(55% .2 27 / .3);--emerald-fill:var(--text);'''
 BAND_TOK = {
-    ':root:root:root': '--acc-rgb:0 111 71;--card:oklch(97.8% .011 85);--field:oklch(99% .006 85);',
-    ':root:root:root[data-theme="dark"]': '--acc-rgb:114 181 150;--card:oklch(21.5% .04 163);--field:oklch(17% .035 163);',
+    ':root:root:root': '--acc-rgb:25 87 57;--card:oklch(99.6% .002 100);--field:oklch(100% 0 0);',
+    ':root:root:root[data-theme="dark"]': '--acc-rgb:232 181 71;--card:oklch(18.5% .014 168);--field:oklch(15% .01 168);',
     '.s-paper': '',
-    '.s-ink': '--acc-rgb:114 181 150;--card:oklch(21% .04 163);--field:oklch(15% .03 163);--danger:oklch(72% .15 30);',
-    '.s-lapis': '--acc-rgb:238 178 61;--card:oklch(35% .084 163);--field:oklch(27% .07 163);--danger:oklch(78% .13 40);',
-    '.s-sandstone': '--acc-rgb:238 178 61;--card:oklch(47% .13 38);--field:oklch(42% .12 36);--danger:oklch(88% .1 60);',
+    '.s-ink': '--acc-rgb:232 181 71;--card:color-mix(in oklab,var(--paper) 88%,#fff 12%);--field:color-mix(in oklab,var(--paper) 82%,#000 18%);--danger:oklch(80% .13 60);',
+    '.s-lapis': '--acc-rgb:232 181 71;--card:color-mix(in oklab,var(--paper) 88%,#fff 12%);--field:color-mix(in oklab,var(--paper) 82%,#000 18%);--danger:oklch(80% .13 60);',
+    '.s-sandstone': '--acc-rgb:232 181 71;--card:oklch(22% .01 168);--field:oklch(19% .01 168);--danger:oklch(80% .13 60);',
 }
 
 
@@ -446,8 +458,9 @@ def boost(css):
 
 def bridge_tokens():
     b = base_src()
-    root = re.search(r'(?ms)^:root\{(.*?)^\}', b).group(1)
-    dark = re.search(r'(?ms)^\[data-theme="dark"\]\{(.*?)^\}', b).group(1)
+    # every :root / dark block, in order, so the Nov 2026 palette (palette/luxe.css) wins on the inner pages too
+    root = '\n'.join(re.findall(r'(?ms)^:root\{\n(.*?)^\}', b))
+    dark = '\n'.join(re.findall(r'(?ms)^\[data-theme="dark"\]\{\n(.*?)^\}', b))
     out = ['/* generated by tools/folio/build.py: the folio tokens win over the V1 ones, and every V1 token points at a folio token */',
            ':root:root:root{' + root + '}', ':root:root:root[data-theme="dark"]{' + dark + '}']
     for sel, extra in BAND_TOK.items():
@@ -626,6 +639,7 @@ def build_v1(slug, v):
 {fab}
 {post.strip()}
 <script src="/config.js?v=9"></script>
+<script src="/assets/folio/luxe.js?v={v['luxe']}"></script>
 <script src="/assets/folio/mfm.js?v={v['mfm']}"></script>
 <script src="/assets/folio/core.js?v={v['core']}"></script>
 <script src="/assets/folio/shell.js?v={v['shell']}"></script>
@@ -664,7 +678,7 @@ def build_home(v):
     i = s.index('<!-- bottom dock'); j = s.index('</nav>', i) + 6
     s = s[:i] + dock('index') + s[j:]
     s = s.replace('<script>\n{{DATA}}\n</script>', f'<script src="/assets/folio/home-data.js?v={v["data"]}"></script>')
-    s = s.replace('<script>\n{{JS}}\n</script>', f'<script src="/assets/folio/shell.js?v={v["shell"]}"></script>\n<script src="/assets/folio/home.js?v={v["homejs"]}"></script>')
+    s = s.replace('<script>\n{{JS}}\n</script>', f'<script src="/assets/folio/luxe.js?v={v["luxe"]}"></script>\n<script src="/assets/folio/shell.js?v={v["shell"]}"></script>\n<script src="/assets/folio/home.js?v={v["homejs"]}"></script>')
     s = s.replace('<script type="module">\n{{MOSQUE}}\n</script>', f'<script src="/assets/folio/prayer.js?v={v["prayer"]}"></script>\n<script type="module" src="/assets/folio/mosque3d.js?v={v["mosque"]}"></script>\n<script type="module" src="/assets/folio/prayer3d.js?v={v["prayer3d"]}"></script>')
     s = s.replace('{{NEXLYR}}', '')
     # the home is the front page of a multi-page site: each section opens its full page
@@ -704,11 +718,12 @@ def main():
     (OUT / 'prayer.js').write_text(R('prayer.js'))
     (OUT / 'prayer3d.js').write_text(R('prayer3d.js'))
     (OUT / 'ornament3d.js').write_text(R('ornament3d.js'))
+    (OUT / 'luxe.js').write_text(R('luxe.js'))
     (OUT / 'core.js').write_text(root_assets(R('core.js')))
     (OUT / 'mfm.js').write_text(root_assets(R('mfm.js')))
     legacy_css()
     v = {'l1': ver('legacy-1.css'), 'l2': ver('legacy-2.css'), 'base': ver('base.css'), 'bridge': ver('bridge.css'), 'home': ver('home.css'),
-         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('prayer3d.js'), 'orn': ver('ornament3d.js')}
+         'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('prayer3d.js'), 'orn': ver('ornament3d.js'), 'luxe': ver('luxe.js')}
     print('index.html', build_home(v) // 1024, 'KB')
     for slug in PAGES:
         if slug == 'index':

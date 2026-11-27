@@ -506,3 +506,27 @@ html.top-away body.fp .c-switch{top:14px!important}
 /* menu open: the top bar takes the panel's width and side padding (see the end of base.css) */
 :root:root:root:root:root body.menu-open.menu-open .top>.wrap.wrap{width:min(calc(var(--wrap) + 64px),calc(100vw - 20px))!important;padding-inline:clamp(16px,2.6vw,32px)!important;box-sizing:border-box!important}
 @media (max-width:640px){:root:root:root:root:root body.menu-open.menu-open .top>.wrap.wrap{width:100vw!important}}
+
+/* ---------- Nov 2026 finish: matte buttons, deeper-green hover, as on the home page ---------- */
+.fp .btn:not(.btn-ghost):not(.btn--line):not(.btn-link){background-image:none!important;box-shadow:inset 0 0 0 1px oklch(0% 0 0 / .06),0 10px 22px -16px oklch(16.5% .012 168 / .5)!important}
+.fp .btn{transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out),color .35s var(--ease-out),letter-spacing .5s var(--ease-out)!important}
+.fp .btn::after{background:var(--g-900)!important;transition:transform .6s var(--ease-out)!important}
+.fp :is(.s-ink,.s-lapis,.s-sandstone) .btn::after,[data-theme="dark"] .fp .btn::after{background:var(--g-600)!important}
+.fp .btn:hover{letter-spacing:.115em!important;color:oklch(97% .004 100)!important;box-shadow:inset 0 0 0 1px oklch(0% 0 0 / .08),0 16px 28px -16px oklch(16.5% .012 168 / .6)!important}
+.fp .btn:active{transform:translateY(1px) scale(.975);transition-duration:.12s!important}
+.fp .btn:focus-visible{outline:2px solid var(--saffron)!important;outline-offset:3px}
+.fp .btn--gold:hover,.fp .s-lapis .btn:not(.btn-ghost):not(.btn--line):hover,.fp .s-sandstone .btn:not(.btn-ghost):not(.btn--line):hover{color:oklch(97% .004 100)!important}
+.fp :is(.btn-ghost,.btn--line){background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--silver-metal) border-box!important;border:1.5px solid transparent!important;box-shadow:none!important}
+.fp :is(.s-ink,.s-lapis,.s-sandstone) :is(.btn-ghost,.btn--line),[data-theme="dark"] .fp :is(.btn-ghost,.btn--line){background:linear-gradient(var(--paper),var(--paper)) padding-box,linear-gradient(160deg,oklch(92% .004 240 / .5),oklch(75% .008 240 / .35)) border-box!important}
+.fp :is(.btn-ghost,.btn--line):hover{color:oklch(97% .004 100)!important}
+.fp .xsel-list li[aria-selected="true"]{background:var(--btn-ink,var(--g-600))!important;color:oklch(97% .004 100)!important}
+.fp .xsel-list{box-shadow:0 0 0 1px oklch(72% .008 240 / .4),0 24px 50px -24px oklch(10% .02 168 / .55)!important}
+.fp :is(.modal-box,.cmdk-box,.cart,.bot){box-shadow:0 0 0 1px oklch(72% .008 240 / .45),0 50px 90px -40px oklch(10% .02 168 / .6)!important}
+.fp .toast{background:var(--g-900)!important;border:1px solid oklch(77% .1 82 / .35)!important;border-radius:12px!important}
+.fp .cmdk-list [aria-selected="true"],.fp .cmdk-list .on,.fp .cmdk-list .act{background:var(--btn-ink,var(--g-600))!important;color:oklch(97% .004 100)!important}
+.fp .tdock,.fp .dock [data-sound-btn]{display:none!important}
+/* page paper: white in Paper, near-black in Ink (was cream / green) */
+html:root:root:root body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(99.5% .002 100 / .42),oklch(99.5% .002 100 / .42)),var(--sheet)!important;background-size:28px 28px,28px 28px,100% 100%,1024px 1024px!important}
+html:root:root:root[data-theme="dark"] body.fp.fp{background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(oklch(12% .01 168 / .8),oklch(10% .008 168 / .84)),var(--sheet)!important}
+/* the old engine's glow behind highlighted headline words: gone */
+:root:root[data-theme="dark"] :is(.title,.title-sm,.h3,h1,h2,h3) em,:root:root[data-theme="dark"] [data-split-done] em{filter:none!important}
