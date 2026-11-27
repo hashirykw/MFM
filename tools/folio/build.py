@@ -158,12 +158,15 @@ def menu(slug):
         here = ' here' if s == slug else ''
         cur = ' aria-current="page"' if s == slug else ''
         items.append(f'<a class="mi{here}" href="{url(s)}"{cur} style="--i:{k}"><span class="mi-n">{k + 1:02d}</span><svg class="mi-ic"><use href="#{ic}"/></svg>'
-                     f'<span class="mi-t"><b>{html.escape(t)}</b><small>{html.escape(sub)}</small></span><svg class="mi-ar"><use href="#i-arr"/></svg></a>')
+                     f'<span class="mi-t"><b>{html.escape(t)}</b>'
+                     + ('<small class="mi-you">You’re on this page</small>' if s == slug else f'<small>{html.escape(sub)}</small>')
+                     + '</span><svg class="mi-ar"><use href="#i-arr"/></svg></a>')
     join = '#register' if slug == 'index' else url('contact') + '#enrol'
+    on = {'index': 'Home', '404': 'Page not found'}.get(slug) or PAGES[slug][0]
     return f'''<div class="menu-scrim" id="menuScrim" aria-hidden="true"></div>
 <div class="menu" id="menu" role="dialog" aria-label="Site menu" aria-hidden="true">
   <div class="menu-in">
-    <div class="menu-head"><span class="lbl">Contents · Islamiyat with Sir Fazil</span><span class="hand">turn to any page</span></div>
+    <div class="menu-head"><span class="lbl">Contents · Islamiyat with Sir Fazil</span><span class="menu-on"><i aria-hidden="true"></i>You’re on <b>{html.escape(on)}</b></span></div>
     <nav class="menu-grid" aria-label="Pages">{"".join(items)}</nav>
     <aside class="menu-feat">
       <div class="mf-plate"><img src="/assets/folio/img/folio/nabawi.webp" alt="" width="1170" height="832" loading="lazy"></div>
@@ -341,8 +344,9 @@ def base_src():
 
 def bridge_src():
     b = R('bridge.css')
-    if PAL == 'v4':  # V1 solid buttons take the paper-mode green too (see palette/v4-base.css)
+    if PAL == 'v4':  # V1 solid buttons take the paper-mode green too, as on the home page (see palette/v4-base.css)
         b = b.replace('.fp .btn.btn-pri,.fp .btn.btn-green{--fb:var(--text);', '.fp .btn.btn-pri,.fp .btn.btn-green{--fb:var(--btn-ink,var(--text));', 1)
+        b = b.replace('.fp .btn{--fb:var(--text);', '.fp .btn{--fb:var(--btn-ink,var(--text));', 1)
     return b
 
 

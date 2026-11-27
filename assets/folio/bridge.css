@@ -136,7 +136,7 @@ html:root{background:var(--paper)!important}
 :root:root:root:root:root body.fp.fp .card.pad{padding:clamp(20px,2.6vw,32px)!important}
 
 /* ---------- buttons ---------- */
-:root:root:root:root:root body.fp.fp .btn{--fb:var(--text);--ff:var(--paper);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px!important;padding:0 22px!important;border:0!important;border-radius:var(--r-ui,10px)!important;background:var(--fb)!important;color:var(--ff)!important;-webkit-text-fill-color:currentColor!important;
+:root:root:root:root:root body.fp.fp .btn{--fb:var(--btn-ink,var(--text));--ff:var(--paper);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px!important;padding:0 22px!important;border:0!important;border-radius:var(--r-ui,10px)!important;background:var(--fb)!important;color:var(--ff)!important;-webkit-text-fill-color:currentColor!important;
   font:700 .72rem/1 var(--f-display)!important;letter-spacing:.1em!important;text-transform:uppercase!important;white-space:nowrap;position:relative;overflow:hidden;isolation:isolate;box-shadow:var(--shadow)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
   transition:transform var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out),color var(--dur-2) var(--ease-out)!important;text-shadow:none!important}
 :root:root:root:root:root body.fp.fp .btn::before,:root:root:root:root:root body.fp.fp .btn .btn-sheen,:root:root:root:root:root body.fp.fp .btn .rip{display:none!important}
@@ -585,6 +585,10 @@ html.top-away body.fp .c-switch{top:14px!important}
 
 /* framed plates sit straight */
 :root:root:root:root:root body.fp.fp .fp-plate{transform:none!important}
+
+/* menu open: the top bar takes the panel's width and side padding (see the end of base.css) */
+:root:root:root:root:root body.menu-open.menu-open .top>.wrap.wrap{width:min(calc(var(--wrap) + 64px),calc(100vw - 20px))!important;padding-inline:clamp(16px,2.6vw,32px)!important;box-sizing:border-box!important}
+@media (max-width:640px){:root:root:root:root:root body.menu-open.menu-open .top>.wrap.wrap{width:100vw!important}}
 
 @layer fpbridge{
 /* =========================================================================
@@ -642,7 +646,7 @@ html:root{background:var(--paper)!important}
 :root:root:root:root:root body.fp.fp .card.pad{padding:clamp(20px,2.6vw,32px)!important}
 
 /* ---------- buttons ---------- */
-:root:root:root:root:root body.fp.fp .btn{--fb:var(--text);--ff:var(--paper);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px!important;padding:0 22px!important;border:0!important;border-radius:var(--r-ui,10px)!important;background:var(--fb)!important;color:var(--ff)!important;-webkit-text-fill-color:currentColor!important;
+:root:root:root:root:root body.fp.fp .btn{--fb:var(--btn-ink,var(--text));--ff:var(--paper);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px!important;padding:0 22px!important;border:0!important;border-radius:var(--r-ui,10px)!important;background:var(--fb)!important;color:var(--ff)!important;-webkit-text-fill-color:currentColor!important;
   font:700 .72rem/1 var(--f-display)!important;letter-spacing:.1em!important;text-transform:uppercase!important;white-space:nowrap;position:relative;overflow:hidden;isolation:isolate;box-shadow:var(--shadow)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
   transition:transform var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out),color var(--dur-2) var(--ease-out)!important;text-shadow:none!important}
 :root:root:root:root:root body.fp.fp .btn::before,:root:root:root:root:root body.fp.fp .btn .btn-sheen,:root:root:root:root:root body.fp.fp .btn .rip{display:none!important}
@@ -1091,5 +1095,9 @@ html.top-away body.fp .c-switch{top:14px!important}
 
 /* framed plates sit straight */
 :root:root:root:root:root body.fp.fp .fp-plate{transform:none!important}
+
+/* menu open: the top bar takes the panel's width and side padding (see the end of base.css) */
+:root:root:root:root:root body.menu-open.menu-open .top>.wrap.wrap{width:min(calc(var(--wrap) + 64px),calc(100vw - 20px))!important;padding-inline:clamp(16px,2.6vw,32px)!important;box-sizing:border-box!important}
+@media (max-width:640px){:root:root:root:root:root body.menu-open.menu-open .top>.wrap.wrap{width:100vw!important}}
 
 }

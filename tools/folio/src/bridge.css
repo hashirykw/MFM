@@ -502,3 +502,7 @@ html.top-away body.fp .c-switch{top:14px!important}
 
 /* framed plates sit straight */
 .fp .fp-plate{transform:none!important}
+
+/* menu open: the top bar takes the panel's width and side padding (see the end of base.css) */
+:root:root:root:root:root body.menu-open.menu-open .top>.wrap.wrap{width:min(calc(var(--wrap) + 64px),calc(100vw - 20px))!important;padding-inline:clamp(16px,2.6vw,32px)!important;box-sizing:border-box!important}
+@media (max-width:640px){:root:root:root:root:root body.menu-open.menu-open .top>.wrap.wrap{width:100vw!important}}

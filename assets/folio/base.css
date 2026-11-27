@@ -442,6 +442,34 @@ html{scrollbar-color:oklch(47% 0.12 168) oklch(91.5% .028 82);scrollbar-width:th
 .btn{letter-spacing:.12em}
 .tilt{transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-3px)!important;transition:transform .25s var(--ease-out)!important}
 
+/* ---------- menu open: the top bar sits inside the panel's head strip (Nov 2026) ----------
+   The panel starts 10px down and its divider is 72px below that, so the 44px row is centred in
+   that strip; the row uses the panel's own width and side padding so the logo lines up with the
+   cards' left edge and Join the class with their right edge. Menu/Close and Join are one height. */
+.top{transition:transform var(--dur-3) var(--ease-out),background-color var(--dur-2),padding var(--dur-3) var(--ease-out)}
+.top .top-r>.menu-btn,.top .top-r>.top-cta{height:44px;min-height:44px;box-sizing:border-box;margin-block:0;align-self:center}
+body.menu-open .top{padding:24px 0 0}
+:root:root:root:root:root body.menu-open.menu-open .top>.wrap.wrap{width:min(calc(var(--wrap) + 64px),calc(100vw - 20px))!important;padding-inline:clamp(16px,2.6vw,32px)!important;box-sizing:border-box}
+@media (max-width:640px){
+  body.menu-open .top{padding:10px 0 0}
+  :root:root:root:root:root body.menu-open.menu-open .top>.wrap.wrap{width:100vw!important}
+}
+
+/* ---------- menu: the page you are on is unmistakable (Nov 2026) ----------
+   Solid green card with a saffron edge, saffron number and icon, and a "You're here" tag in place of
+   the arrow; the head line says which page is open (Home on the front page, which has no card). */
+.mi.here{background:var(--btn-ink,var(--text));color:var(--paper);box-shadow:inset 5px 0 0 var(--saffron)}
+.mi.here::before{background:var(--btn-ink,var(--text))}
+.mi.here .mi-ar{display:none}
+.mi.here:hover .mi-ic{transform:none}
+.mi.here .mi-t small.mi-you{display:flex;align-items:center;gap:7px;color:var(--saffron);font:700 .6rem/1.3 var(--f-display);letter-spacing:.14em;text-transform:uppercase}
+.mi-you::before{content:"";width:7px;height:7px;flex:none;border-radius:50%;background:currentColor}
+.menu-on{display:inline-flex;align-items:center;gap:9px;font:700 .64rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+.menu-on b{color:var(--btn-ink,var(--text));font-weight:900}
+.menu-on i{width:8px;height:8px;border-radius:50%;background:var(--saffron);box-shadow:0 0 0 3px oklch(80% .14 80 / .3)}
+.menu-head{align-items:center}
+body.menu-open .menu-btn{background:var(--btn-ink,var(--text))}
+
 /* =========================================================================
    V4 palette · the folio's paper and ink, with the greens lifted to #0A503C
    (oklch 38.5% .074 168). build.py shifts every inline green; these are the
