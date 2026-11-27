@@ -469,6 +469,8 @@ body.menu-open .top{padding:24px 0 0}
 .menu-on i{width:8px;height:8px;border-radius:50%;background:var(--saffron);box-shadow:0 0 0 3px oklch(80% .14 80 / .3)}
 .menu-head{align-items:center}
 body.menu-open .menu-btn{background:var(--btn-ink,var(--text))}
+/* Ink theme: the open page's card is cream, so its "You're on this page" line goes a deeper gold to stay readable */
+[data-theme="dark"] .mi.here .mi-t small.mi-you{color:oklch(50% .11 65)}
 
 /* =========================================================================
    V4 palette · the folio's paper and ink, with the greens lifted to #0A503C

@@ -143,7 +143,7 @@ def header(slug, legacy):
       <span><b>Sir Fazil Maniya</b><small>Islamiyat · 2058 · 0493</small></span>
     </a>
     <div class="top-r">
-      {tools}
+      {tools}{tsw()}
       <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu"><span class="mb-ico" aria-hidden="true"><i></i><i></i></span><span class="mb-t"><b>Menu</b><b>Close</b></span></button>
       <a class="btn btn--sm top-cta" data-plain href="{cta}">Join the class <svg class="arr"><use href="#i-arr"/></svg></a>
     </div>
@@ -230,9 +230,8 @@ def tape(slug, more=True):
 
 FONTS = ('<link rel="preload" href="/assets/folio/fonts/font-archivo-wide-900.woff2" as="font" type="font/woff2" crossorigin>'
          '<link rel="preload" href="/assets/folio/fonts/font-archivo-400.woff2" as="font" type="font/woff2" crossorigin>')
-# One look only (Nov 2026): Paper, with the #0A503C ink bands. No theme switch; an old saved "dark" choice is cleared.
-THEME = '<script>(function(){document.documentElement.dataset.theme="light";try{localStorage.setItem("ra-theme",JSON.stringify("light"));}catch(e){}})();</script>'
-METAS = '<meta name="theme-color" content="#f3ecdc"><meta name="color-scheme" content="light">'
+THEME = '<script>(function(){var d=document.documentElement,t="light";try{t=(localStorage.getItem("ra-theme")||"light").replace(/"/g,"");}catch(e){}d.dataset.theme=t==="dark"?"dark":"light";})();</script>'
+METAS = '<meta name="theme-color" content="#f3ecdc"><meta name="color-scheme" content="light dark">'
 
 
 # ------------------------------------------------------------------ legacy CSS (V1 layout, pruned)
@@ -644,7 +643,6 @@ def build_v1(slug, v):
 def build_home(v):
     s = R('index.html')
     s = s.replace('<meta name="robots" content="noindex, follow">\n', '')
-    s = s.replace('<meta name="theme-color" content="#0b1914" media="(prefers-color-scheme: dark)">\n', '')
     og = ('<meta property="og:type" content="website"><meta property="og:site_name" content="Sir Fazil Maniya · Islamiyat">'
           '<meta property="og:url" content="https://mohammadfazilmaniya.com/"><meta property="og:title" content="Sir Fazil Maniya · O Level & IGCSE Islamiyat, Karachi & online">'
           '<meta property="og:description" content="Cambridge O Level Islamiyat 2058 and IGCSE 0493 with Sir Mohammad Fazil Maniya: 15+ years, 7,000+ students, an Islamiyat Lab, AI checker and student portal.">'
