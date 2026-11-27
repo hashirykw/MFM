@@ -214,7 +214,7 @@ def footer(torn):
     </div>
     <nav class="foot-links" aria-label="Footer">{links}</nav>
     <div class="foot-meta">
-      <p><small>© <span id="yr">2026</span> Sir Mohammad Fazil Maniya · O Level 2058 &amp; IGCSE 0493 Islamiyat. Syllabus summaries from Cambridge International’s published syllabuses; syllabus codes and past papers belong to Cambridge University Press &amp; Assessment. Not affiliated with Cambridge.</small></p>
+      <p><small>© <span id="yr">2026</span> Sir Mohammad Fazil Maniya · Islamiyat 2058 &amp; 0493. Not affiliated with Cambridge.</small></p>
     </div>
     {nexlyr_strip()}
   </div>
@@ -339,8 +339,13 @@ def base_src():
     if PAL == 'v4':
         b = b.replace('.btn{--b:var(--text);', '.btn{--b:var(--btn-ink,var(--text));', 1)
         b += '\n' + R('palette/v4-base.css')
-    b += '\n' + R('palette/luxe.css')
+    b += '\n' + R('palette/luxe.css') + '\n' + polish()
     return b
+
+
+def polish():
+    """palette/polish.css, last in every stack, with a prefix that out-ranks the V1 theme stacks."""
+    return R('palette/polish.css').replace('%P%', ':root:root:root:root:root:root:root:root body')
 
 
 def bridge_src():
@@ -348,7 +353,7 @@ def bridge_src():
     if PAL == 'v4':  # V1 solid buttons take the paper-mode green too, as on the home page (see palette/v4-base.css)
         b = b.replace('.fp .btn.btn-pri,.fp .btn.btn-green{--fb:var(--text);', '.fp .btn.btn-pri,.fp .btn.btn-green{--fb:var(--btn-ink,var(--text));', 1)
         b = b.replace('.fp .btn{--fb:var(--text);', '.fp .btn{--fb:var(--btn-ink,var(--text));', 1)
-    return b
+    return b + '\n' + polish()
 
 
 # V4 greens (Nov 2026): Hashir's sample #0A503C = oklch(38.5% .074 168). The near-black inks move up

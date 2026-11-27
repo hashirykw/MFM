@@ -254,7 +254,7 @@
   }
   function cardParts(c) {
     const x = c.cloneNode(true);
-    x.querySelectorAll('.lx-more,svg.corner,script,style,img,canvas,video,.era-d').forEach(n => n.remove());
+    x.querySelectorAll('mfm-more,.lx-more,svg.corner,script,style,img,canvas,video,.era-d').forEach(n => n.remove());
     const t = x.querySelector('h2,h3,h4,.h3') || x.querySelector('dd b,b,strong');
     const title = t ? t.textContent.trim() : (c.textContent || '').trim().slice(0, 60);
     let kicker = '';
@@ -302,7 +302,8 @@
       c.classList.add('lx-card');
       if (c.tagName !== 'A' && c.tagName !== 'BUTTON') { c.tabIndex = 0; c.setAttribute('role', 'button'); }
       c.setAttribute('aria-haspopup', 'dialog');
-      const m = doc.createElement('span'); m.className = 'lx-more'; m.setAttribute('aria-hidden', 'true');
+      // its own tag, so no page's span/i/li styles can move or reshape it
+      const m = doc.createElement('mfm-more'); m.setAttribute('aria-hidden', 'true');
       m.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>'; c.appendChild(m);
     });
   }
@@ -325,6 +326,92 @@
     b.appendChild(s); setTimeout(() => s.remove(), 700);
   }, { passive: true });
 
-  function start() { watch(); mountSwitch(); cookieBar(); wireCards(); }
+  /* ------------------------------------------------------------ themed dropdowns: every <select> */
+  // The native list can't be styled (Android draws its own dark sheet), so each select gets a
+  // button and a themed list. The real select stays in the form and gets the value and events.
+  const CHEV = '<svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>';
+  let openSel = null;
+  function closeSel(focus) {
+    if (!openSel) return; const { wrap, list, scrim, btn } = openSel; openSel = null;
+    wrap.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
+    list.classList.remove('in'); scrim && scrim.classList.remove('in');
+    setTimeout(() => { list.remove(); scrim && scrim.remove(); }, 260);
+    if (focus) btn.focus({ preventScroll: true });
+  }
+  function label(sel, btn) {
+    const o = sel.options[sel.selectedIndex], t = o ? o.textContent.trim() : '', ph = !sel.value && o && o.value === '';
+    const s = btn.firstChild; if (s.textContent !== t) s.textContent = t || 'Choose'; s.classList.toggle('ph', !!ph);
+  }
+  function openList(sel, wrap, btn) {
+    if (openSel && openSel.sel === sel) return closeSel(true);
+    closeSel();
+    const list = doc.createElement('div'); list.className = 'lx-sel-list'; list.setAttribute('role', 'listbox');
+    const phone = matchMedia('(max-width:560px)').matches;
+    let html = '';
+    for (const node of sel.children) {
+      if (node.tagName === 'OPTGROUP') { html += '<b>' + ESC(node.label) + '</b>'; for (const o of node.children) html += opt(o); }
+      else html += opt(node);
+    }
+    function opt(o) { return o.hidden ? '' : `<button type="button" role="option" data-i="${o.index}" aria-selected="${o.selected && o.value !== '' ? 'true' : 'false'}"${o.disabled ? ' disabled' : ''}>${ESC(o.textContent.trim())}</button>`; }
+    list.innerHTML = html;
+    let scrim = null;
+    if (phone) { scrim = doc.createElement('div'); scrim.className = 'lx-sel-scrim'; doc.body.appendChild(scrim); scrim.addEventListener('click', () => closeSel(true)); }
+    doc.body.appendChild(list);
+    if (!phone) {
+      const r = btn.getBoundingClientRect(), h = Math.min(list.scrollHeight, 340), below = innerHeight - r.bottom - 12;
+      list.style.minWidth = r.width + 'px'; list.style.left = Math.min(r.left, innerWidth - Math.max(r.width, 180) - 10) + 'px';
+      if (below < h && r.top > below) { list.classList.add('up'); list.style.top = Math.max(10, r.top - h - 6) + 'px'; } else list.style.top = (r.bottom + 6) + 'px';
+    }
+    requestAnimationFrame(() => { list.classList.add('in'); scrim && scrim.classList.add('in'); });
+    wrap.classList.add('open'); btn.setAttribute('aria-expanded', 'true');
+    openSel = { sel, wrap, list, scrim, btn }; selY = scrollY;
+    const cur = list.querySelector('[aria-selected="true"]') || list.querySelector('button:not(:disabled)');
+    if (cur) { cur.classList.add('act'); list.scrollTop = Math.max(0, cur.offsetTop - list.clientHeight / 2); }
+    list.addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (b) pick(+b.dataset.i); });
+    function pick(i) {
+      if (sel.selectedIndex !== i) { sel.selectedIndex = i; sel.dispatchEvent(new Event('input', { bubbles: true })); sel.dispatchEvent(new Event('change', { bubbles: true })); }
+      label(sel, btn); S.soft && S.soft(); closeSel(true);
+    }
+    list._pick = pick;
+  }
+  addEventListener('keydown', e => {
+    if (!openSel) return; const { list } = openSel;
+    const opts = [...list.querySelectorAll('button:not(:disabled)')], k = opts.findIndex(b => b.classList.contains('act'));
+    if (e.key === 'Escape') { e.preventDefault(); closeSel(true); }
+    else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const n = opts[Math.max(0, Math.min(opts.length - 1, k + (e.key === 'ArrowDown' ? 1 : -1)))]; opts.forEach(b => b.classList.remove('act')); if (n) { n.classList.add('act'); if (n.offsetTop < list.scrollTop || n.offsetTop + n.offsetHeight > list.scrollTop + list.clientHeight) list.scrollTop = n.offsetTop - list.clientHeight / 2; } }
+    else if (e.key === 'Enter' || e.key === ' ') { const a = opts[k]; if (a) { e.preventDefault(); list._pick(+a.dataset.i); } }
+    else if (e.key === 'Tab') closeSel();
+  });
+  doc.addEventListener('pointerdown', e => { if (openSel && !e.target.closest('.lx-sel-list,.lx-sel')) closeSel(); }, true);
+  addEventListener('resize', () => closeSel());
+  let selY = 0; addEventListener('scroll', () => { if (openSel && !matchMedia('(max-width:560px)').matches && Math.abs(scrollY - selY) > 40) closeSel(); }, { passive: true });
+  function enhanceSelects(root) {
+    (root || doc).querySelectorAll('select:not([multiple]):not([size]):not([data-native])').forEach(sel => {
+      if (sel.closest('.lx-sel,.xsel,[data-native]')) return;
+      const wrap = doc.createElement('span'); wrap.className = 'lx-sel';
+      const btn = doc.createElement('button'); btn.type = 'button'; btn.className = 'lx-sel-btn';
+      if (sel.offsetHeight && sel.offsetHeight < 44) btn.classList.add('sm');
+      const pw = sel.parentNode.clientWidth, w = sel.offsetWidth;
+      if (w && pw && w < pw - 4) { wrap.style.display = 'inline-block'; wrap.style.width = Math.max(w, 150) + 'px'; }
+      btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false');
+      const lab = sel.id && doc.querySelector(`label[for="${sel.id}"]`), al = sel.getAttribute('aria-label') || (lab && lab.textContent.trim());
+      if (al) btn.setAttribute('aria-label', al);
+      btn.innerHTML = '<span></span>' + CHEV;
+      sel.parentNode.insertBefore(wrap, sel); wrap.appendChild(sel); wrap.appendChild(btn);
+      sel.tabIndex = -1; sel.setAttribute('aria-hidden', 'true');
+      if (sel.style.width) wrap.style.width = sel.style.width;
+      label(sel, btn);
+      btn.addEventListener('click', () => openList(sel, wrap, btn));
+      btn.addEventListener('keydown', e => { if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !(openSel && openSel.sel === sel)) { e.preventDefault(); e.stopPropagation(); openList(sel, wrap, btn); } });
+      sel.addEventListener('change', () => label(sel, btn));
+      new MutationObserver(() => label(sel, btn)).observe(sel, { childList: true, subtree: true, attributes: true, characterData: true });
+      sel._lx = btn;
+    });
+  }
+  // values set by scripts (sel.value = …) fire no event, so the labels are re-read now and then
+  setInterval(() => doc.querySelectorAll('.lx-sel>select').forEach(s => s._lx && label(s, s._lx)), 700);
+  window.MFMSelects = enhanceSelects;
+
+  function start() { watch(); mountSwitch(); cookieBar(); wireCards(); enhanceSelects(); new MutationObserver(ms => { if (ms.some(m => [...m.addedNodes].some(n => n.nodeType === 1 && (n.tagName === 'SELECT' || n.querySelector && n.querySelector('select'))))) enhanceSelects(); }).observe(doc.body, { childList: true, subtree: true }); }
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', start); else start();
 })();

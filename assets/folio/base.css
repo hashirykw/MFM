@@ -791,3 +791,148 @@ ol.lx-pop-dates b{font:900 .9rem/1.3 var(--f-display);color:var(--saffron)}
 .btn,.lab-tab,.seg button,.iconbtn{overflow:hidden}
 .btn:focus-visible{outline:2px solid var(--saffron);outline-offset:3px}
 .lx-pop-b p.lx-pop-facts{display:inline-block;padding:6px 12px;border-radius:var(--r-ui,10px);background:var(--paper-2);border:1px solid var(--rule);font:600 .8rem/1.4 var(--f-body);color:var(--text)}
+
+/* ---------------------------------------------------------------------------------------------
+   Polish (Nov 2026): a compact menu, a compact assistant, a half-height footer, themed dropdowns,
+   tidy card "+" marks, phone header spacing. :root:root:root:root:root:root:root:root body is a high-specificity prefix (build.py) so these
+   win over every earlier stack, on the home page and the inner pages alike.
+   --------------------------------------------------------------------------------------------- */
+
+/* ---------- header: nothing pressed against the edge on phones ---------- */
+@media (max-width:640px){
+  :root:root:root:root:root:root:root:root body .top .top-cta{display:none!important}
+  :root:root:root:root:root:root:root:root body .top .top-r{gap:8px!important}
+}
+@media (max-width:380px){ :root:root:root:root:root:root:root:root body .top .top-ic:not(.top-cart){display:none!important} }
+
+/* ---------- menu: a small panel under the header, not a full screen ---------- */
+:root:root:root:root:root:root:root:root body .menu{left:auto!important;right:max(12px,calc((100vw - min(1240px,100vw - 20px)) / 2 + 12px))!important;top:74px!important;width:min(400px,calc(100vw - 24px))!important;transform:none!important}
+:root:root:root:root:root:root:root:root body .menu-in{grid-template-columns:minmax(0,1fr)!important;gap:8px!important;padding:14px!important;border-radius:22px!important;max-height:min(640px,calc(100svh - 96px - var(--dock-h,0px)))!important;overflow:auto!important;overscroll-behavior:contain;
+  clip-path:none!important;opacity:0;transform:translateY(-10px) scale(.96)!important;transform-origin:top right;transition:opacity .28s var(--ease-out),transform .5s var(--ease-out)!important;box-shadow:0 30px 70px -28px oklch(8% 0.03 158 / .7)!important}
+:root:root:root:root:root:root:root:root body.menu-open .menu-in{opacity:1;transform:none!important}
+:root:root:root:root:root:root:root:root body .menu-in::before{display:none!important}
+:root:root:root:root:root:root:root:root body .menu-head{padding:2px 4px 8px!important;border-bottom:1px solid var(--rule)!important;gap:6px!important}
+:root:root:root:root:root:root:root:root body .menu-head .lbl{font-size:.58rem!important}
+:root:root:root:root:root:root:root:root body .menu-head .hand{display:none!important}
+:root:root:root:root:root:root:root:root body .menu-on{font-size:.6rem!important}
+:root:root:root:root:root:root:root:root body .menu-grid{grid-template-columns:minmax(0,1fr)!important;gap:2px!important}
+:root:root:root:root:root:root:root:root body .menu .mi{grid-template-columns:24px 32px minmax(0,1fr) 16px!important;gap:10px!important;min-height:0!important;padding:8px 10px!important;border-radius:12px!important}
+:root:root:root:root:root:root:root:root body .menu .mi-n{font-size:.62rem!important}
+:root:root:root:root:root:root:root:root body .menu .mi.here .mi-n::after{display:none!important}
+:root:root:root:root:root:root:root:root body .menu .mi-ic{width:32px!important;height:32px!important;padding:7px!important;border-radius:9px!important}
+:root:root:root:root:root:root:root:root body .menu .mi-t b{font-size:.74rem!important}
+:root:root:root:root:root:root:root:root body .menu .mi-t small{font-size:.72rem!important;margin-top:2px!important}
+:root:root:root:root:root:root:root:root body .menu .mi-ar{width:14px!important;height:14px!important}
+:root:root:root:root:root:root:root:root body .menu-feat{display:block!important;padding:10px 0 0!important;margin-top:4px;border-radius:0!important;background:none!important;color:inherit!important;border-top:1px solid var(--rule)!important;grid-template-columns:none!important}
+:root:root:root:root:root:root:root:root body .menu-feat :is(.mf-plate,.mf-h,.mf-body>.lbl,.mf-body>p:not(.mf-tel)){display:none!important}
+:root:root:root:root:root:root:root:root body .menu-feat .mf-body{padding:0!important}
+:root:root:root:root:root:root:root:root body .menu-feat .mf-act{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;margin:0!important}
+:root:root:root:root:root:root:root:root body .menu-feat .mf-act .btn{width:100%!important}
+:root:root:root:root:root:root:root:root body .menu-feat .mf-tel{margin:8px 0 0!important;text-align:center;font-size:.72rem!important;color:var(--text-3)!important}
+:root:root:root:root:root:root:root:root body .menu-scrim{background:oklch(38.8% 0.079 158 / .28)!important;-webkit-backdrop-filter:blur(3px)!important;backdrop-filter:blur(3px)!important}
+:root:root:root:root:root:root:root:root body.menu-open .top{background:var(--paper)!important;box-shadow:0 1px 0 var(--rule)!important}
+@media (max-width:640px){ :root:root:root:root:root:root:root:root body .menu{top:68px!important;right:12px!important} }
+
+/* ---------- footer: about half the height ---------- */
+:root:root:root:root:root:root:root:root body .foot{padding-block:clamp(36px,5vw,60px) calc(var(--dock-h,70px) + 26px + env(safe-area-inset-bottom))!important}
+:root:root:root:root:root:root:root:root body .foot-big{font-size:clamp(1.35rem,3.6vw,3rem)!important;line-height:.98!important;max-width:24ch}
+:root:root:root:root:root:root:root:root body .foot-row{margin-top:18px!important;padding-top:14px!important;gap:12px!important}
+:root:root:root:root:root:root:root:root body .foot-row .brand small{display:none!important}
+:root:root:root:root:root:root:root:root body .foot-soc a{width:36px!important;height:36px!important}
+:root:root:root:root:root:root:root:root body .foot-soc svg{width:17px!important;height:17px!important}
+:root:root:root:root:root:root:root:root body .foot .foot-links{margin-top:12px!important;padding-top:12px!important;gap:0 16px!important}
+:root:root:root:root:root:root:root:root body .foot-links a{padding:7px 0!important;font-size:.58rem!important}
+:root:root:root:root:root:root:root:root body .foot-meta{margin-top:6px!important}
+:root:root:root:root:root:root:root:root body .foot-meta p,:root:root:root:root:root:root:root:root body .foot-meta small{font-size:.7rem!important;line-height:1.5!important}
+:root:root:root:root:root:root:root:root body .foot .nxb{margin-top:14px!important;padding:8px 10px 8px 14px!important;min-height:0!important;border-radius:14px!important}
+:root:root:root:root:root:root:root:root body .foot .nxb :is(svg){max-height:22px}
+@media (max-width:640px){ :root:root:root:root:root:root:root:root body .foot .foot-links{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important} :root:root:root:root:root:root:root:root body .foot-links a{white-space:normal!important;line-height:1.3!important} }
+
+/* ---------- FAQ: the heading never sits on top of the questions on a phone ---------- */
+@media (max-width:960px){ :root:root:root:root:root:root:root:root body .faq-g .sec-head{position:static!important;top:auto!important} }
+
+/* ---------- lab tabs on phones: all five visible, none against the wall ---------- */
+@media (max-width:560px){
+  :root:root:root:root:root:root:root:root body .lab-tabs{display:flex!important;flex-wrap:wrap!important;overflow:visible!important;margin-inline:0!important;padding-inline:0!important;gap:6px!important}
+  :root:root:root:root:root:root:root:root body .lab-tab{flex:1 1 auto!important;justify-content:center!important;min-height:40px!important;padding:0 12px!important;font-size:.6rem!important}
+}
+
+/* ---------- the "+" on cards that open a pop-up ---------- */
+:root:root:root:root:root:root:root:root body .lx-card>mfm-more{position:absolute!important;inset:12px 12px auto auto!important;z-index:3;width:30px!important;height:30px!important;margin:0!important;padding:0!important;display:grid!important;place-items:center!important;border-radius:50%!important;
+  border:1px solid var(--rule-2);background:color-mix(in oklch,var(--paper) 86%,transparent);color:var(--text);pointer-events:none;transition:transform .45s var(--ease-out),background-color .3s,color .3s,border-color .3s}
+:root:root:root:root:root:root:root:root body .lx-card>mfm-more svg{display:block;width:13px!important;height:13px!important;margin:0!important;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+:root:root:root:root:root:root:root:root body .lx-card:is(:hover,:focus-visible)>mfm-more{transform:rotate(90deg);background:var(--saffron);color:oklch(19% 0.03 158);border-color:transparent}
+
+/* ---------- themed dropdowns (every <select>) ---------- */
+.lx-sel{position:relative;display:block;min-width:0}
+.lx-sel>select{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;opacity:0!important;pointer-events:none!important}
+:root:root:root:root:root:root:root:root body .lx-sel-btn{display:flex!important;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:48px;padding:0 14px 0 16px!important;text-align:left;cursor:pointer;
+  border-radius:12px!important;border:1.5px solid var(--rule-2)!important;background:var(--field,var(--paper))!important;color:var(--text)!important;font:500 .95rem/1.2 var(--f-body)!important;letter-spacing:0!important;text-transform:none!important;transition:border-color .25s,box-shadow .25s}
+:root:root:root:root:root:root:root:root body .lx-sel-btn:hover{border-color:var(--text)!important}
+:root:root:root:root:root:root:root:root body .lx-sel-btn:focus-visible,:root:root:root:root:root:root:root:root body .lx-sel.open .lx-sel-btn{border-color:var(--saffron)!important;box-shadow:0 0 0 4px color-mix(in oklch,var(--saffron) 22%,transparent)!important;outline:0}
+:root:root:root:root:root:root:root:root body .lx-sel-btn span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+:root:root:root:root:root:root:root:root body .lx-sel-btn span.ph{color:var(--text-3)}
+:root:root:root:root:root:root:root:root body .lx-sel-btn svg{flex:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s var(--ease-out)}
+:root:root:root:root:root:root:root:root body .lx-sel.open .lx-sel-btn svg{transform:rotate(180deg)}
+:root:root:root:root:root:root:root:root body .lx-sel-btn.sm{min-height:40px;font-size:.8rem!important;font-family:var(--f-display)!important;font-weight:700!important;letter-spacing:.1em!important;text-transform:uppercase!important}
+.lx-sel-list{position:fixed;z-index:130;min-width:180px;max-height:min(340px,60svh);overflow:auto;overscroll-behavior:contain;padding:6px;border-radius:16px;
+  background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px),linear-gradient(var(--paper),var(--paper));background-size:22px 22px,22px 22px,auto;
+  border:1px solid var(--rule-2);color:var(--text);box-shadow:0 24px 60px -24px oklch(8% 0.03 158 / .65);opacity:0;transform:translateY(-6px) scale(.97);transform-origin:top center;transition:opacity .22s var(--ease-out),transform .35s var(--ease-out)}
+.lx-sel-list.in{opacity:1;transform:none}
+.lx-sel-list.up{transform-origin:bottom center}
+.lx-sel-list b{display:block;padding:10px 12px 6px;font:700 .56rem/1 var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+.lx-sel-list button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:11px 12px;border:0;border-radius:10px;background:none;color:inherit;text-align:left;font:500 .92rem/1.25 var(--f-body);cursor:pointer;transition:background-color .2s,color .2s}
+.lx-sel-list button:is(:hover,.act){background:color-mix(in oklch,var(--text) 8%,transparent)}
+.lx-sel-list button[aria-selected="true"]{background:var(--text);color:var(--paper)}
+.lx-sel-list button[aria-selected="true"]::after{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--saffron)}
+.lx-sel-list button:disabled{opacity:.45;cursor:default}
+@media (max-width:560px){
+  .lx-sel-list{left:10px!important;right:10px!important;top:auto!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;width:auto!important;max-height:60svh;border-radius:20px;padding:8px;transform:translateY(24px);transform-origin:bottom center}
+  .lx-sel-list button{padding:14px 14px;font-size:1rem}
+  .lx-sel-scrim{position:fixed;inset:0;z-index:129;background:oklch(38.8% 0.079 158 / .35);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;transition:opacity .25s}
+  .lx-sel-scrim.in{opacity:1}
+}
+
+/* ---------- the assistant: a compact, finished panel ---------- */
+:root:root:root:root:root:root:root:root body .fab{width:50px!important;height:50px!important;right:16px!important;box-shadow:0 14px 30px -12px oklch(10% 0.04 158 / .7),0 0 0 6px color-mix(in oklch,var(--saffron) 18%,transparent)!important}
+:root:root:root:root:root:root:root:root body .fab::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid color-mix(in oklch,var(--saffron) 55%,transparent);animation:lx-fab 2.8s ease-out infinite;pointer-events:none}
+@keyframes lx-fab{0%{transform:scale(.9);opacity:.9}70%,100%{transform:scale(1.35);opacity:0}}
+@media (prefers-reduced-motion:reduce){ :root:root:root:root:root:root:root:root body .fab::before{animation:none} }
+:root:root:root:root:root:root:root:root body .bot{width:min(370px,calc(100vw - 24px))!important;height:min(540px,calc(100svh - var(--dock-h,70px) - 120px))!important;right:16px!important;left:auto!important;bottom:calc(var(--dock-h,70px) + 36px + env(safe-area-inset-bottom))!important;border-radius:22px!important;overflow:hidden!important;
+  transform-origin:bottom right!important;box-shadow:0 40px 80px -30px oklch(8% 0.03 158 / .7)!important}
+:root:root:root:root:root:root:root:root body .bot-h{padding:12px 12px 12px 14px!important;gap:10px!important;min-height:0!important}
+:root:root:root:root:root:root:root:root body .bot-h .bot-av{width:36px!important;height:36px!important}
+:root:root:root:root:root:root:root:root body .bot-h b{font-size:.74rem!important}
+:root:root:root:root:root:root:root:root body .bot-h small{font-size:.66rem!important}
+:root:root:root:root:root:root:root:root body .bot-h .xbtn{width:34px!important;height:34px!important;min-height:0!important}
+:root:root:root:root:root:root:root:root body .bot#bot .bot-log{padding:14px 12px 10px!important;gap:8px!important}
+:root:root:root:root:root:root:root:root body .bot .bot-hi h4{font-size:.95rem!important;margin:0 0 4px!important}
+:root:root:root:root:root:root:root:root body .bot .bot-hi p{font-size:.84rem!important;line-height:1.5!important;margin:0 0 10px!important}
+:root:root:root:root:root:root:root:root body .bot .bot-lv{gap:6px!important;margin-bottom:10px!important}
+:root:root:root:root:root:root:root:root body .bot .bot-lv button{min-height:32px!important;padding:0 12px!important;font-size:.6rem!important;border-radius:var(--r-ui,10px)!important}
+:root:root:root:root:root:root:root:root body .bot .bot-tiles{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important}
+:root:root:root:root:root:root:root:root body .bot .bot-tile{min-height:42px!important;padding:8px 10px!important;gap:8px!important;font-size:.78rem!important;line-height:1.2!important;text-align:left!important;display:flex!important;align-items:center!important}
+:root:root:root:root:root:root:root:root body .bot .bot-tile .ic{width:26px!important;height:26px!important;flex:none;display:grid!important;place-items:center;border-radius:8px;background:color-mix(in oklch,var(--royal) 12%,transparent)}
+:root:root:root:root:root:root:root:root body .bot .bot-tile .ic svg{width:15px!important;height:15px!important}
+:root:root:root:root:root:root:root:root body .bot .msg{font-size:.86rem!important;padding:10px 12px!important;max-width:86%!important}
+:root:root:root:root:root:root:root:root body .bot-f{padding:10px 10px 8px!important;gap:8px!important}
+:root:root:root:root:root:root:root:root body .bot-f input{min-height:44px!important;border-radius:var(--r-ui,10px)!important;padding:0 16px!important;font-size:.9rem!important}
+:root:root:root:root:root:root:root:root body .bot-f button{width:44px!important;height:44px!important;min-height:0!important;border-radius:50%!important;flex:none}
+:root:root:root:root:root:root:root:root body .bot-foot{padding:6px 12px 10px!important;font-size:.72rem!important;justify-content:center}
+:root:root:root:root:root:root:root:root body .bot-chips{padding:0 10px!important;gap:6px!important}
+@media (max-width:560px){
+  :root:root:root:root:root:root:root:root body .bot{right:10px!important;left:10px!important;width:auto!important;height:min(520px,calc(100svh - var(--dock-h,70px) - 110px))!important;bottom:calc(var(--dock-h,70px) + 24px + env(safe-area-inset-bottom))!important}
+  :root:root:root:root:root:root:root:root body .fab{right:12px!important;width:46px!important;height:46px!important}
+}
+:root:root:root:root:root:root:root:root body .lx-sel>select[aria-invalid="true"]~.lx-sel-btn{border-color:var(--danger,oklch(58% .19 25))!important}
+/* the menu as two short columns of tiles, so it stays a small panel */
+:root:root:root:root:root:root:root:root body .menu{width:min(440px,calc(100vw - 24px))!important}
+:root:root:root:root:root:root:root:root body .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}
+:root:root:root:root:root:root:root:root body .menu .mi{grid-template-columns:30px minmax(0,1fr)!important;gap:9px!important;padding:8px!important;border:1px solid var(--rule)!important}
+:root:root:root:root:root:root:root:root body .menu .mi :is(.mi-n,.mi-ar,.mi-t small:not(.mi-you)){display:none!important}
+:root:root:root:root:root:root:root:root body .menu .mi-t small.mi-you{font-size:.56rem!important;color:var(--saffron)!important;text-transform:uppercase;letter-spacing:.12em}
+:root:root:root:root:root:root:root:root body .menu .mi-ic{width:30px!important;height:30px!important;padding:7px!important}
+:root:root:root:root:root:root:root:root body .menu .mi-t b{font-size:.68rem!important;white-space:normal!important;line-height:1.15!important}
+:root:root:root:root:root:root:root:root body .menu .mi.here{border-color:var(--saffron)!important}
+:root:root:root:root:root:root:root:root body .menu-feat .btn--line{color:var(--text)!important;border-color:var(--rule-2)!important;background:transparent!important}
+:root:root:root:root:root:root:root:root body .menu .mi-t small.mi-you{white-space:normal!important;overflow:visible!important}
