@@ -622,7 +622,7 @@ def build_v1(slug, v):
 {dock(slug)}
 {fab}
 {post.strip()}
-<script src="/config.js?v=8"></script>
+<script src="/config.js?v=9"></script>
 <script src="/assets/folio/mfm.js?v={v['mfm']}"></script>
 <script src="/assets/folio/core.js?v={v['core']}"></script>
 <script src="/assets/folio/shell.js?v={v['shell']}"></script>
@@ -679,7 +679,7 @@ def build_home(v):
         s = s[:h] + f'<a class="more-link" href="{href}">{label} <svg class="arr"><use href="#i-arr"/></svg></a>' + s[h:]
     left = re.findall(r'\{\{[A-Z0-9_]+\}\}', s)
     assert not left, f'unfilled {left}'
-    s = s.replace('</body>', '<script src="/config.js?v=8"></script>\n</body>')
+    s = s.replace('</body>', '<script src="/config.js?v=9"></script>\n</body>')
     DEST.mkdir(parents=True, exist_ok=True)
     (DEST / 'index.html').write_text(prefix_links(s))
     return len(s)

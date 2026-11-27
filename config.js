@@ -103,32 +103,3 @@ window.RA_CONFIG = {
   };
   C.waLabel = C.whatsapp ? 'WhatsApp' : (C.instagram ? 'Instagram' : 'Facebook');
 })();
-
-/* Design versions, side by side for the final choice: V1 is the site at /, V2 lives at /v2 (home, about,
-   courses), V3 (the folio in the V2 colours) at /v3 and V4 (the folio in its own paper-and-ink colours) at /v4,
-   both with every page. A small switch on the left edge
-   jumps to the same page in the other designs. To hide it after the decision, set SHOW = false. */
-(function () {
-  var SHOW = true;
-  if (!SHOW) return;
-  var path = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
-  if (/^\/v2(\/|$)/.test(path)) return; /* V2 has its own switch */
-  var m = path.match(/^\/v([34])(\/|$)/), cur = m ? +m[1] : 1;
-  var page = path.replace(/^\/v[34]/, '') || '/';
-  if (page === '/index') page = '/';
-  var V2 = { '/about': '/v2/about', '/courses': '/v2/courses' };
-  var href = [page, V2[page] || '/v2', '/v3' + (page === '/' ? '' : page), '/v4' + (page === '/' ? '' : page)];
-  function add() {
-    if (document.querySelector('nav.mfm-vsw')) return;
-    var n = document.createElement('nav');
-    n.className = 'mfm-vsw'; n.setAttribute('aria-label', 'Design version');
-    n.innerHTML = '<span>Design</span>' + href.map(function (h, i) { return '<a href="' + h + '"' + (i + 1 === cur ? ' aria-current="page"' : '') + '>V' + (i + 1) + '</a>'; }).join('');
-    n.style.cssText = 'position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:2147483000;display:flex;flex-direction:column;gap:4px;padding:8px 5px;border-radius:0 12px 12px 0;background:rgba(5,42,33,.92);border:1px solid rgba(232,181,71,.35);border-left:0;font:700 12px/1 system-ui,sans-serif;box-shadow:0 14px 30px -14px rgba(0,0,0,.6)';
-    [].forEach.call(n.children, function (a, i) {
-      if (!i) { a.style.cssText = 'writing-mode:vertical-rl;transform:rotate(180deg);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(248,244,234,.55);padding:4px 0 6px;align-self:center'; return; }
-      a.style.cssText = 'display:grid;place-items:center;width:36px;height:34px;border-radius:9px;text-decoration:none;' + (i === cur ? 'background:linear-gradient(180deg,#F7D88A,#E8B547 55%,#B8841C);color:#052A21' : 'color:#F8F4EA');
-    });
-    document.body.appendChild(n);
-  }
-  if (document.body) add(); else document.addEventListener('DOMContentLoaded', add);
-})();
