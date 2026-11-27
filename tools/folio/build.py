@@ -60,7 +60,30 @@ PLATES = {  # heroes without a picture get one of the hand-drawn folio plates
     'reviews': ('mihrab.webp', 'Plate V · the mihrab', 'in their own words'),
     '404': ('hira.webp', 'Plate II · Jabal al-Nur', 'start again at Hira'),
 }
-url = lambda slug: '/' if slug == 'index' else '/' + slug
+PREFIX = '/v3'                 # the folio is design V3 while the three designs are compared ('' to serve it at /)
+DEST = ROOT / PREFIX.strip('/') if PREFIX else ROOT
+url = lambda slug: (PREFIX or '/') if slug == 'index' else (PREFIX or '') + '/' + slug
+SLUGS = '|'.join(sorted([k for k in PAGES if k != 'index'], key=len, reverse=True))
+
+
+ASSET_RE = re.compile(r'(?<=[\'"(,\s])(?=(?:photos|logos|icons|papers|notes|vendor|fonts|og)/|(?:mfm-|fazil-|favicon|apple-touch|sir-)[\w.-]*\.(?:webp|png|jpg|jpeg|svg|pdf|gif)\b)')
+
+
+def root_assets(text):
+    """Relative image/file paths written for the root pages become root-absolute, so they also work under /v3."""
+    return ASSET_RE.sub('/', text) if PREFIX else text
+
+
+def prefix_links(doc):
+    """Site links point inside the V3 folder; assets, fonts and images stay shared at the root."""
+    if not PREFIX:
+        return doc
+    doc = root_assets(doc)
+    doc = re.sub(r'(href=\\?["\'])/(?=(?:' + SLUGS + r')(?![\w-])|#|\\?["\'])', lambda m: m.group(1) + PREFIX + ('' if doc[m.end()] in '"\'\\#' else '/'), doc)
+    doc = doc.replace('https://mohammadfazilmaniya.com/og/', 'https://mohammadfazilmaniya.com/og/v3/')
+    doc = re.sub(r'<meta name="robots"[^>]*>\s*', '', doc)
+    doc = doc.replace('<head>', '<head>\n<meta name="robots" content="noindex, follow">', 1)
+    return doc
 
 
 def ver(*names):
@@ -105,7 +128,7 @@ def header(slug, legacy):
     if legacy:
         tools = ('<button class="iconbtn top-ic" type="button" data-cmdk aria-label="Search the site"><svg><use href="#i-search"/></svg></button>'
                  f'<button class="iconbtn top-ic top-cart{" on" if slug == "notes" else ""}" type="button" data-cart-open aria-label="Notes cart"><svg><use href="#i-bag"/></svg><i data-cart-n></i></button>')
-    cta = '#register' if slug == 'index' else '/contact#enrol'
+    cta = '#register' if slug == 'index' else url('contact') + '#enrol'
     return f'''<header class="top" id="top">
   <div class="wrap">
     <a class="brand" href="/" aria-label="Sir Fazil Maniya, home">
@@ -129,7 +152,7 @@ def menu(slug):
         cur = ' aria-current="page"' if s == slug else ''
         items.append(f'<a class="mi{here}" href="{url(s)}"{cur} style="--i:{k}"><span class="mi-n">{k + 1:02d}</span><svg class="mi-ic"><use href="#{ic}"/></svg>'
                      f'<span class="mi-t"><b>{html.escape(t)}</b><small>{html.escape(sub)}</small></span><svg class="mi-ar"><use href="#i-arr"/></svg></a>')
-    join = '#register' if slug == 'index' else '/contact#enrol'
+    join = '#register' if slug == 'index' else url('contact') + '#enrol'
     return f'''<div class="menu-scrim" id="menuScrim" aria-hidden="true"></div>
 <div class="menu" id="menu" role="dialog" aria-label="Site menu" aria-hidden="true">
   <div class="menu-in">
@@ -156,7 +179,7 @@ def dock(slug):
         hide = ' class="dk-hide-m"' if s in ('portal', 'ai-checker') else ''
         a.append(f'<a href="{url(s)}"{hide} aria-current="{cur}"><svg><use href="#{ic}"/></svg>{t}</a>')
     join_cur = 'true' if slug == 'contact' else 'false'
-    join = '#register' if slug == 'index' else '/contact#enrol'
+    join = '#register' if slug == 'index' else url('contact') + '#enrol'
     return f'''<nav class="dock" id="dock" aria-label="Main">
   {"".join(a)}
   <span class="dk-sep" aria-hidden="true"></span>
@@ -299,9 +322,24 @@ def remap_fg(css):
     return re.sub(r'((?<![\w-])color\s*:\s*)([^;}]+)', fix, css)
 
 
+def palette(css):
+    """V3 palette shift for colours written inline: the near-black greens become V2's deep emerald,
+    the old greens move to V2's emerald hue, and the clay accents lean a touch more orange."""
+    def f(m):
+        L, C, H, rest = float(m.group(1)), float(m.group(2)), float(m.group(3)), m.group(4)
+        if 160 <= H <= 164:
+            if L <= 24: L, C, H = L + 6, C + .012, 173
+            elif L <= 56: C, H = C * 1.05, 166
+            else: H = 164
+        elif 36 <= H <= 45 and C >= .1:
+            L, H = L + 5, H + 10
+        return f'oklch({L:g}% {C:.3f} {H:g}{rest}'
+    return re.sub(r'oklch\((\d+(?:\.\d+)?)%\s+(0?\.\d+)\s+(\d+(?:\.\d+)?)(\s*(?:/[^)]*)?\))', f, css)
+
+
 def squarer(css):
     """Pill shapes become crafted rounded rectangles (small dots and circles stay round)."""
-    return re.sub(r'border-radius\s*:\s*(?:999|9999|100|200|500)px(?=\s*[;}!])', 'border-radius:var(--r-ui,10px)', css)
+    return palette(re.sub(r'border-radius\s*:\s*(?:999|9999|100|200|500)px(?=\s*[;}!])', 'border-radius:var(--r-ui,10px)', css))
 
 
 def remap_bg(css):
@@ -537,7 +575,7 @@ def build_v1(slug, v):
 {dock(slug)}
 {fab}
 {post.strip()}
-<script src="/config.js?v=6"></script>
+<script src="/config.js?v=7"></script>
 <script src="/assets/folio/mfm.js?v={v['mfm']}"></script>
 <script src="/assets/folio/core.js?v={v['core']}"></script>
 <script src="/assets/folio/shell.js?v={v['shell']}"></script>
@@ -546,7 +584,8 @@ def build_v1(slug, v):
 </body>
 </html>
 '''
-    (ROOT / f'{slug}.html').write_text(doc)
+    DEST.mkdir(parents=True, exist_ok=True)
+    (DEST / f'{slug}.html').write_text(prefix_links(doc))
     return len(doc)
 
 
@@ -592,7 +631,9 @@ def build_home(v):
         s = s[:h] + f'<a class="more-link" href="{href}">{label} <svg class="arr"><use href="#i-arr"/></svg></a>' + s[h:]
     left = re.findall(r'\{\{[A-Z0-9_]+\}\}', s)
     assert not left, f'unfilled {left}'
-    (ROOT / 'index.html').write_text(s)
+    s = s.replace('</body>', '<script src="/config.js?v=7"></script>\n</body>')
+    DEST.mkdir(parents=True, exist_ok=True)
+    (DEST / 'index.html').write_text(prefix_links(s))
     return len(s)
 
 
@@ -612,8 +653,8 @@ def main():
     (OUT / 'prayer.js').write_text(R('prayer.js'))
     (OUT / 'prayer3d.js').write_text(R('prayer3d.js'))
     (OUT / 'ornament3d.js').write_text(R('ornament3d.js'))
-    (OUT / 'core.js').write_text(R('core.js'))
-    (OUT / 'mfm.js').write_text(R('mfm.js'))
+    (OUT / 'core.js').write_text(root_assets(R('core.js')))
+    (OUT / 'mfm.js').write_text(root_assets(R('mfm.js')))
     legacy_css()
     v = {'l1': ver('legacy-1.css'), 'l2': ver('legacy-2.css'), 'base': ver('base.css'), 'bridge': ver('bridge.css'), 'home': ver('home.css'),
          'core': ver('core.js'), 'mfm': ver('mfm.js'), 'shell': ver('shell.js'), 'homejs': ver('home.js'), 'data': ver('home-data.js'), 'mosque': ver('mosque3d.js'), 'prayer': ver('prayer.js'), 'prayer3d': ver('prayer3d.js'), 'orn': ver('ornament3d.js')}

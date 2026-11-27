@@ -33,28 +33,28 @@ window.RA_CONFIG = {
   recordedCourse: 'https://www.learnedguys.com/home/course/islamiyat-2058-o-level-0493-igcse-topical-recorded-course-by-m-fazil-maniya/45',
 
   /* Where he teaches. Remove a line to hide it.
-     centres: { n: name, a: area, logo: 'logos/file.webp' or [two files] }. No logo = a lettered tile until one is added.
-     Put a logo file in the logos/ folder and write its name here. */
+     centres: { n: name, a: area, logo: '/logos/file.webp' or [two files] }. No logo = a lettered tile until one is added.
+     Put a logo file in the /logos/ folder and write its name here. */
   campuses: [
     { name: 'Evening classes in Karachi', note: 'Evening · 5 areas', text: 'Evening batches at centres in Jauhar, Gulshan, North Nazimabad, Defence and Bahadurabad.', centres: [
-      { n: 'TP Core', a: 'Jauhar & Gulshan', logo: 'logos/tpc.webp' },
-      { n: 'TP Core · TCR', a: 'North Nazimabad', logo: ['logos/tpc.webp', 'logos/tcr.webp'] },
-      { n: 'TP Core · Burraq', a: 'Defence', logo: 'logos/tpc.webp' },
+      { n: 'TP Core', a: 'Jauhar & Gulshan', logo: '/logos/tpc.webp' },
+      { n: 'TP Core · TCR', a: 'North Nazimabad', logo: ['/logos/tpc.webp', '/logos/tcr.webp'] },
+      { n: 'TP Core · Burraq', a: 'Defence', logo: '/logos/tpc.webp' },
       { n: 'Maniya’s', a: 'Bahadurabad' }
     ] },
     { name: 'Live online', note: 'Pakistan & abroad', text: 'Live online batches for students across Pakistan and abroad, through three online academies.', centres: [
-      { n: 'Forte Institute', a: 'Online', logo: 'logos/forte.webp' },
-      { n: 'Gives', a: 'Online', logo: 'logos/gives.webp' },
-      { n: 'Max Academy', a: 'Online', logo: 'logos/max.webp' }
+      { n: 'Forte Institute', a: 'Online', logo: '/logos/forte.webp' },
+      { n: 'Gives', a: 'Online', logo: '/logos/gives.webp' },
+      { n: 'Max Academy', a: 'Online', logo: '/logos/max.webp' }
     ] },
-    { name: 'Recorded course', note: 'LearnedGuys · Urdu', text: 'A 54-hour topical recorded course for 2058 and 0493, to watch at your own pace.', centres: [{ n: 'LearnedGuys', a: 'Recorded', logo: 'logos/learnedguys.webp' }] }
+    { name: 'Recorded course', note: 'LearnedGuys · Urdu', text: 'A 54-hour topical recorded course for 2058 and 0493, to watch at your own pace.', centres: [{ n: 'LearnedGuys', a: 'Recorded', logo: '/logos/learnedguys.webp' }] }
   ],
   /* Morning classes at schools, and schools he has taught at before. */
   morning: [
-    { n: 'Head Start School System', logo: 'logos/hss.webp' }, { n: 'Froebel’s Education Centre', logo: 'logos/fec.webp' }, { n: 'Credo School', logo: 'logos/credo.webp' }, { n: 'The Academy', logo: 'logos/academy.webp' }
+    { n: 'Head Start School System', logo: '/logos/hss.webp' }, { n: 'Froebel’s Education Centre', logo: '/logos/fec.webp' }, { n: 'Credo School', logo: '/logos/credo.webp' }, { n: 'The Academy', logo: '/logos/academy.webp' }
   ],
   previously: [
-    { n: 'The Cedar School', logo: 'logos/cedar.webp' }, { n: 'The City School (PAF Chapter)' }, { n: 'Beaconhouse School System', logo: 'logos/bss.webp' },
+    { n: 'The Cedar School', logo: '/logos/cedar.webp' }, { n: 'The City School (PAF Chapter)' }, { n: 'Beaconhouse School System', logo: '/logos/bss.webp' },
     { n: 'The Patriots School' }, { n: 'Hexis College' }, { n: 'Highbrow College' }, { n: 'Falconhouse Grammar School' },
     { n: 'Yen Academy' }, { n: 'Mama Baby Care School' }, { n: 'Huffaz Exclusive Academy' }
   ],
@@ -68,9 +68,9 @@ window.RA_CONFIG = {
 
   /* Crash courses. { title: 'June 2027 crash course', codes: '2058 · 0493', start: '2027-04-01', where: 'Karachi centres and online', note: '' }
      Past dates drop off on their own. Empty = "dates announced soon". */
-  /* Sir Fazil's logo: put the file in the site folder and write its name here, e.g. 'mfm-logo.png'.
+  /* Sir Fazil's logo: put the file in the site folder and write its name here, e.g. '/mfm-logo.png'.
      It replaces the MF monogram in the nav, footer, loader and bot. */
-  logo: 'mfm-logo.webp',
+  logo: '/mfm-logo.webp',
 
   CRASH: [],
 
@@ -104,22 +104,29 @@ window.RA_CONFIG = {
   C.waLabel = C.whatsapp ? 'WhatsApp' : (C.instagram ? 'Instagram' : 'Facebook');
 })();
 
-/* Design versions: the new looks live at /v2, /v3 and /v4. Once someone has opened any of them (or adds ?compare
-   to any address), a small V1 / V2 switch shows here too, so both designs can be compared. */
+/* Design versions, side by side for the final choice: V1 is the site at /, V2 lives at /v2 (home, about,
+   courses) and V3 (the folio in the V2 colours) at /v3 with every page. A small switch on the left edge
+   jumps to the same page in the other designs. To hide it after the decision, set SHOW = false. */
 (function () {
-  try {
-    /* the folio (V5) is now the whole site: the comparison rail is retired */
-    localStorage.removeItem('mfm-compare');
-    if (!/[?&]compare/.test(location.search) || /^\/v\d/.test(location.pathname)) return;
-  } catch (e) { return; }
-  var p = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
-  var v2 = { '/': '/v2', '/index': '/v2', '/about': '/v2/about', '/courses': '/v2/courses' }[p] || '/v2';
+  var SHOW = true;
+  if (!SHOW) return;
+  var path = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+  if (/^\/v2(\/|$)/.test(path)) return; /* V2 has its own switch */
+  var cur = /^\/v3(\/|$)/.test(path) ? 3 : 1;
+  var page = path.replace(/^\/v3/, '') || '/';
+  if (page === '/index') page = '/';
+  var V2 = { '/about': '/v2/about', '/courses': '/v2/courses' };
+  var href = [page, V2[page] || '/v2', '/v3' + (page === '/' ? '' : page)];
   function add() {
+    if (document.querySelector('nav.mfm-vsw')) return;
     var n = document.createElement('nav');
-    n.setAttribute('aria-label', 'Site version');
-    n.innerHTML = '<a aria-current="page">V1</a><a href="' + v2 + '">V2</a><a href="' + v2.replace('/v2', '/v3') + '">V3</a><a href="' + v2.replace('/v2', '/v4') + '">V4</a><a href="/v5">V5</a>';
-    n.style.cssText = 'position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:2147483000;display:flex;flex-direction:column;gap:4px;padding:6px 5px;border-radius:0 14px 14px 0;background:rgba(11,17,15,.88);border:1px solid rgba(255,255,255,.14);border-left:0;font:700 13px/1 system-ui,sans-serif;box-shadow:0 14px 30px -14px rgba(0,0,0,.6)';
-    [].forEach.call(n.children, function (a, i) { a.style.cssText = 'display:grid;place-items:center;width:36px;height:34px;border-radius:10px;text-decoration:none;' + (i ? 'color:#F8F4EA' : 'background:#E8B547;color:#0B110F'); });
+    n.className = 'mfm-vsw'; n.setAttribute('aria-label', 'Design version');
+    n.innerHTML = '<span>Design</span>' + href.map(function (h, i) { return '<a href="' + h + '"' + (i + 1 === cur ? ' aria-current="page"' : '') + '>V' + (i + 1) + '</a>'; }).join('');
+    n.style.cssText = 'position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:2147483000;display:flex;flex-direction:column;gap:4px;padding:8px 5px;border-radius:0 12px 12px 0;background:rgba(5,42,33,.92);border:1px solid rgba(232,181,71,.35);border-left:0;font:700 12px/1 system-ui,sans-serif;box-shadow:0 14px 30px -14px rgba(0,0,0,.6)';
+    [].forEach.call(n.children, function (a, i) {
+      if (!i) { a.style.cssText = 'writing-mode:vertical-rl;transform:rotate(180deg);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(248,244,234,.55);padding:4px 0 6px;align-self:center'; return; }
+      a.style.cssText = 'display:grid;place-items:center;width:36px;height:34px;border-radius:9px;text-decoration:none;' + (i === cur ? 'background:linear-gradient(180deg,#F7D88A,#E8B547 55%,#B8841C);color:#052A21' : 'color:#F8F4EA');
+    });
     document.body.appendChild(n);
   }
   if (document.body) add(); else document.addEventListener('DOMContentLoaded', add);
