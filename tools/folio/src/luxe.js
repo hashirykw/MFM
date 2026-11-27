@@ -386,6 +386,7 @@
   addEventListener('resize', () => closeSel());
   let selY = 0; addEventListener('scroll', () => { if (openSel && !matchMedia('(max-width:560px)').matches && Math.abs(scrollY - selY) > 40) closeSel(); }, { passive: true });
   function enhanceSelects(root) {
+    if (doc.body.classList.contains('fp')) return;   // the inner pages have their own themed dropdown (mfm.js .xsel)
     (root || doc).querySelectorAll('select:not([multiple]):not([size]):not([data-native])').forEach(sel => {
       if (sel.closest('.lx-sel,.xsel,[data-native]')) return;
       const wrap = doc.createElement('span'); wrap.className = 'lx-sel';

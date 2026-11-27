@@ -157,3 +157,12 @@
   text-decoration:none!important;font:700 .64rem/1 var(--f-display)!important;letter-spacing:.12em!important;text-transform:uppercase;color:var(--text)!important;transition:background-color .3s,color .3s,border-color .3s}
 %P% #modalBody .hero-cta>.btn-link:hover{background:var(--saffron)!important;color:oklch(19% .03 163)!important;border-color:transparent!important}
 %P% #modalBody .pill{white-space:normal!important;max-width:100%!important;height:auto!important;min-height:0!important;display:inline-block!important;line-height:1.35!important;padding:6px 12px!important}
+/* "Previous" points back */
+%P% :is([data-fc="prev"],[data-act="prev"],#slipPrev,.btn-prev) .btn-i svg{transform:scaleX(-1)}
+%P% :is([data-fc="prev"],[data-act="prev"],#slipPrev,.btn-prev):hover .btn-i svg{transform:scaleX(-1)}
+/* flashcard controls: a little air under the card, Previous reads arrow-first */
+%P% .fc-ctrls{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;margin-top:14px!important;flex-wrap:wrap}
+%P% .fc-ctrls .ctrls{display:flex!important;gap:8px!important}
+%P% .fc-ctrls .mono{flex:1;text-align:center}
+%P% [data-fc="prev"]{flex-direction:row-reverse!important}
+@media (max-width:520px){ %P% .fc-ctrls{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px!important} %P% .fc-ctrls .btn{padding:0 8px!important;font-size:.58rem!important;letter-spacing:.08em!important} %P% .fc-ctrls .btn .btn-i{display:none!important} %P% .fc-ctrls .mono{grid-column:1/-1;order:-1} %P% .fc-ctrls .ctrls{display:contents!important} %P% .fc-ctrls .btn{width:100%!important;justify-content:center!important} }
