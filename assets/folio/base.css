@@ -482,3 +482,34 @@ html{scrollbar-color:oklch(47% 0.126 166) oklch(91.5% 0.028 82);scrollbar-width:
 .mi-n{color:var(--sand)}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,oklch(53.4% 0.107 165),oklch(37.2% 0.071 168))}
 ::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,oklch(89% 0.103 89),oklch(64.9% 0.127 79))}
+
+/* =========================================================================
+   V3 · further from V4: V2's own type and a clean cream page
+   - Geist for reading, Instrument Serif italic for the highlighted words (as in V2's "Write the A*.")
+   - no graph paper and no crumpled sheet: warm cream with soft gold and emerald light
+   - headlines in deep emerald, gold hairlines and frames
+   ========================================================================= */
+@font-face{font-family:"V2 Serif";src:url(/fonts/instrument-serif-italic.woff2) format("woff2");font-style:italic;font-weight:400;font-display:swap}
+@font-face{font-family:"Geist";src:url(/fonts/geist.woff2) format("woff2");font-weight:100 900;font-display:swap}
+:root{--f-body:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;--f-accent:"V2 Serif","Instrument Serif",Georgia,serif;--grid-c:transparent;--text:oklch(25.6% 0.045 173)}
+[data-theme="dark"]{--text:oklch(96.8% 0.014 89)}
+html,body{background-color:oklch(96.8% 0.014 89)}
+body{background-image:radial-gradient(60vw 50vh at 100% 0%,oklch(80% 0.137 83 / .16),transparent 70%),radial-gradient(55vw 50vh at 0% 100%,oklch(53.4% 0.107 165 / .09),transparent 70%);background-attachment:fixed}
+.s-paper{background-image:none;background-color:transparent}
+[data-theme="dark"] .s-paper{background-image:radial-gradient(80% 60% at 90% 0%,oklch(44.5% 0.087 166 / .3),transparent 60%);background-color:oklch(22% 0.037 177)}
+[data-theme="dark"] body{background-color:oklch(22% 0.037 177)}
+/* highlighted words: serif italic, sentence case, emerald on cream and gold on emerald */
+:is(.mark,.sand-t,#hero-h .blue,#hero-h .u-line){font-family:var(--f-accent);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;font-size:1.12em;line-height:.9}
+.mark,#hero-h .blue{color:oklch(44.5% 0.095 166);background:none}
+#hero-h .u-line{color:oklch(25.6% 0.045 173);background:linear-gradient(transparent 74%,oklch(80% 0.137 83 / .7) 74% 90%,transparent 90%)}
+.sand-t{color:oklch(62% 0.155 52)}
+.s-ink :is(.mark,.sand-t),.s-lapis :is(.mark,.sand-t){color:oklch(86% 0.120 86)}
+[data-theme="dark"] :is(.mark,#hero-h .blue){color:oklch(86% 0.120 86)}
+#hero-h .boxed i{border-color:oklch(64.9% 0.127 79)!important;background:oklch(96.8% 0.014 89)!important}
+#hero-h .boxed{outline-color:oklch(64.9% 0.127 79)!important;border-color:oklch(64.9% 0.127 79)!important}
+/* top bar and chips with gold hairlines */
+.top.solid{background:oklch(96.8% 0.014 89 / .86);box-shadow:0 1px 0 oklch(80% 0.137 83 / .45)}
+[data-theme="dark"] .top.solid{background:oklch(22% 0.037 177 / .86)}
+.lbl{letter-spacing:.16em}
+.hero-k span,.chip{border-color:oklch(80% 0.137 83 / .6)!important}
+.foot{background-image:radial-gradient(80% 60% at 85% 0%,oklch(53.4% 0.107 165 / .5),transparent 60%),linear-gradient(165deg,oklch(31.2% 0.058 170),oklch(22% 0.037 177))}
