@@ -143,7 +143,7 @@ def header(slug, legacy):
       <span><b>Sir Fazil Maniya</b><small>Islamiyat · 2058 · 0493</small></span>
     </a>
     <div class="top-r">
-      {tools}{tsw()}
+      {tools}
       <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu"><span class="mb-ico" aria-hidden="true"><i></i><i></i></span><span class="mb-t"><b>Menu</b><b>Close</b></span></button>
       <a class="btn btn--sm top-cta" data-plain href="{cta}">Join the class <svg class="arr"><use href="#i-arr"/></svg></a>
     </div>
@@ -227,8 +227,9 @@ def tape(slug, more=True):
 
 FONTS = ('<link rel="preload" href="/assets/folio/fonts/font-archivo-wide-900.woff2" as="font" type="font/woff2" crossorigin>'
          '<link rel="preload" href="/assets/folio/fonts/font-archivo-400.woff2" as="font" type="font/woff2" crossorigin>')
-THEME = '<script>(function(){var d=document.documentElement,t="light";try{t=(localStorage.getItem("ra-theme")||"light").replace(/"/g,"");}catch(e){}d.dataset.theme=t==="dark"?"dark":"light";})();</script>'
-METAS = '<meta name="theme-color" content="#f3ecdc"><meta name="color-scheme" content="light dark">'
+# One look only (Nov 2026): Paper, with the #0A503C ink bands. No theme switch; an old saved "dark" choice is cleared.
+THEME = '<script>(function(){document.documentElement.dataset.theme="light";try{localStorage.setItem("ra-theme",JSON.stringify("light"));}catch(e){}})();</script>'
+METAS = '<meta name="theme-color" content="#f3ecdc"><meta name="color-scheme" content="light">'
 
 
 # ------------------------------------------------------------------ legacy CSS (V1 layout, pruned)
@@ -332,10 +333,6 @@ def remap_fg(css):
 def base_src():
     """base.css in the build's colours."""
     b = R('base.css')
-    if PAL == 'v2':
-        for k, v in _json.loads(R('palette/v2-tokens.json')).items():
-            b = b.replace(k, v)
-        b += '\n' + R('palette/v2-base.css')
     if PAL == 'v4':
         b = b.replace('.btn{--b:var(--text);', '.btn{--b:var(--btn-ink,var(--text));', 1)
         b += '\n' + R('palette/v4-base.css')
@@ -346,7 +343,7 @@ def bridge_src():
     b = R('bridge.css')
     if PAL == 'v4':  # V1 solid buttons take the paper-mode green too (see palette/v4-base.css)
         b = b.replace('.fp .btn.btn-pri,.fp .btn.btn-green{--fb:var(--text);', '.fp .btn.btn-pri,.fp .btn.btn-green{--fb:var(--btn-ink,var(--text));', 1)
-    return b + ('\n' + R('palette/v2-bridge.css') if PAL == 'v2' else '')
+    return b
 
 
 # V4 greens (Nov 2026): Hashir's sample #0A503C = oklch(38.5% .074 168). The near-black inks move up
@@ -384,22 +381,7 @@ def palette_v4(css):
 
 
 def palette(css):
-    if PAL == 'v4':
-        return palette_v4(css)
-    if PAL != 'v2':
-        return css
-    """V3 palette shift for colours written inline: the near-black greens become V2's deep emerald,
-    the old greens move to V2's emerald hue, and the clay accents lean a touch more orange."""
-    def f(m):
-        L, C, H, rest = float(m.group(1)), float(m.group(2)), float(m.group(3)), m.group(4)
-        if 160 <= H <= 164:
-            if L <= 24: L, C, H = L + 6, C + .012, 173
-            elif L <= 56: C, H = C * 1.05, 166
-            else: H = 164
-        elif 36 <= H <= 45 and C >= .1:
-            L, H = L + 5, H + 10
-        return f'oklch({L:g}% {C:.3f} {H:g}{rest}'
-    return re.sub(r'oklch\((\d+(?:\.\d+)?)%\s+(0?\.\d+)\s+(\d+(?:\.\d+)?)(\s*(?:/[^)]*)?\))', f, css)
+    return palette_v4(css) if PAL == 'v4' else css
 
 
 def squarer(css):
@@ -658,6 +640,7 @@ def build_v1(slug, v):
 def build_home(v):
     s = R('index.html')
     s = s.replace('<meta name="robots" content="noindex, follow">\n', '')
+    s = s.replace('<meta name="theme-color" content="#0b1914" media="(prefers-color-scheme: dark)">\n', '')
     og = ('<meta property="og:type" content="website"><meta property="og:site_name" content="Sir Fazil Maniya · Islamiyat">'
           '<meta property="og:url" content="https://mohammadfazilmaniya.com/"><meta property="og:title" content="Sir Fazil Maniya · O Level & IGCSE Islamiyat, Karachi & online">'
           '<meta property="og:description" content="Cambridge O Level Islamiyat 2058 and IGCSE 0493 with Sir Mohammad Fazil Maniya: 15+ years, 7,000+ students, an Islamiyat Lab, AI checker and student portal.">'
